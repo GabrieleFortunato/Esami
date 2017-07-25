@@ -9,6 +9,7 @@ import eccezioni.EsitoTeoriaEccezione;
  *
  */
 public class Candidato {
+	
 
 	private int idCandidato;
 	private static int idProgressivo=0;
