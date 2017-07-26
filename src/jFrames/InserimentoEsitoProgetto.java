@@ -32,7 +32,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 	private JTextField nomecandidato;
 	private JTextField libreria;
 	private JTextField test;
-	private JTextField main;
+	private JTextField votoMain;
 	private JTextField cognomecandidato;
 
 	/**
@@ -103,10 +103,10 @@ public class InserimentoEsitoProgetto extends JFrame {
 		contentPane.add(test);
 		test.setColumns(10);
 		
-		main = new JTextField();
-		main.setBounds(208, 225, 31, 22);
-		contentPane.add(main);
-		main.setColumns(10);
+		votoMain = new JTextField();
+		votoMain.setBounds(208, 225, 31, 22);
+		contentPane.add(votoMain);
+		votoMain.setColumns(10);
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
@@ -116,7 +116,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 					String nome = nomecandidato.getText();
 					int libr = Integer.parseInt(libreria.getText());
 					int text = Integer.parseInt(test.getText());
-					int fmain = Integer.parseInt(main.getText());
+					int fmain = Integer.parseInt(votoMain.getText());
 					Candidato c = new Candidato(nome,cognome);
 					Progetto p = new Progetto(libr,text,fmain);
 					try {
