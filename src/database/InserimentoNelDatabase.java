@@ -3,6 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.logging.Logger;
+
 import candidati.Candidato;
 import candidati.Progetto;
 import utility.Utility;
@@ -15,6 +17,10 @@ import utility.Utility;
  */
 public class InserimentoNelDatabase {
 
+	public InserimentoNelDatabase(){
+		
+	}
+	
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	private final static String dbName = "esamiprogrammazione";
 	private final static String driver = "com.mysql.jdbc.Driver";
@@ -36,7 +42,7 @@ public class InserimentoNelDatabase {
 					+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
 			);
 		} catch (Exception e) {
-			
+			Logger.getLogger("Connessione non riuscita");
 		} 
 	}
 
@@ -53,7 +59,7 @@ public class InserimentoNelDatabase {
 					+c.getNome()+"','"+c.getCognome()+"')"
 			);
 		} catch (Exception e) {
-			
+			Logger.getLogger("Connessione non riuscita");
 		} 
 	}
 	
@@ -73,7 +79,7 @@ public class InserimentoNelDatabase {
 					+"')"
 			);
 		} catch (Exception e) {
-
+			Logger.getLogger("Connessione non riuscita");
 		} 
 	}
 	

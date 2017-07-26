@@ -3,6 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.logging.Logger;
 
 /**
  * Classe InizializzaDatabase
@@ -11,7 +12,11 @@ import java.sql.Statement;
  *
  */
 public class InizializzaDatabase {
-
+	
+	public InizializzaDatabase(){
+		
+	}
+	
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	private final static String dbName = "esamiprogrammazione";
 	private final static String driver = "com.mysql.jdbc.Driver";
@@ -60,7 +65,7 @@ public class InizializzaDatabase {
 					");"
 			);
 		} catch (Exception e) {
-
+			Logger.getLogger("Connessione non riuscita");
 		} 
 	}
 

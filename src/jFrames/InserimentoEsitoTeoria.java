@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 /**
@@ -40,7 +41,7 @@ public class InserimentoEsitoTeoria extends JFrame {
 					InserimentoEsitoTeoria frame = new InserimentoEsitoTeoria();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					
+					Logger.getLogger("Connessione non riuscita");
 				}
 			}
 		});
@@ -95,7 +96,7 @@ public class InserimentoEsitoTeoria extends JFrame {
 					InserimentoNelDatabase.inserisciEsitoTeoria(c);
 					dispose();
 				} catch (EsitoTeoriaEccezione e1) {
-					
+					Logger.getLogger("Connessione non riuscita");
 				}
 			}
 		});

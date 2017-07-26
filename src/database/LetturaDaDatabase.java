@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashSet;
+import java.util.logging.Logger;
+
 import candidati.Candidato;
 import candidati.Progetto;
 
@@ -15,6 +17,10 @@ import candidati.Progetto;
  *
  */
 public class LetturaDaDatabase {
+
+	public LetturaDaDatabase(){
+		
+	}
 	
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	private final static String dbName = "esamiprogrammazione";
@@ -48,7 +54,7 @@ public class LetturaDaDatabase {
 			}
 			conn.close();
 		} catch (Exception e) {
-			
+			Logger.getLogger("Connessione non riuscita");
 		}
 		return list;
 	}
@@ -72,7 +78,7 @@ public class LetturaDaDatabase {
 			}
 			conn.close();
 		} catch (Exception e) {
-			
+			Logger.getLogger("Connessione non riuscita");
 		}
 		return list;
 	}
@@ -96,7 +102,7 @@ public class LetturaDaDatabase {
 			}
 			conn.close();
 		} catch (Exception e) {
-			
+			Logger.getLogger("Connessione non riuscita");
 		}
 		return list;
 	}
@@ -120,7 +126,7 @@ public class LetturaDaDatabase {
 			}
 			conn.close();
 		} catch (Exception e) {
-		
+			Logger.getLogger("Connessione non riuscita");
 		}
 		return list;
 	}

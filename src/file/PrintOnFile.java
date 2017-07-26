@@ -16,6 +16,10 @@ import utility.Utility;
  */
 public class PrintOnFile {
 
+	public PrintOnFile(){
+		
+	}
+	
 	/**
 	 * Stampa su files gli esiti finali dei candidati
 	 * @param iterator
@@ -24,6 +28,7 @@ public class PrintOnFile {
 		try {
 			while (iterator.hasNext()){
 				Candidato candidato = iterator.next();
+				int esito = (int)candidato.getProgetto().esito();
 				PrintStream output = new PrintStream(
 						new File(candidato.getCognome()+" "+candidato.getNome()+".txt")
 				);
@@ -32,7 +37,7 @@ public class PrintOnFile {
 							"Esito teoria: "+candidato.getEsitoTeoria()
 					);
 					output.println(
-							"Esito progetto: "+(int)candidato.getProgetto().esito()
+							"Esito progetto: "+esito
 					);
 					output.println(
 							"Esame superato con 30 e lode"
@@ -42,7 +47,7 @@ public class PrintOnFile {
 							"Esito teoria: "+candidato.getEsitoTeoria()		
 					);
 					output.println(
-							"Esito progetto: "+(int)candidato.getProgetto().esito()
+							"Esito progetto: "+esito
 					);
 					output.println(
 							"Esame non superato"
@@ -52,7 +57,7 @@ public class PrintOnFile {
 							"Esito teoria: "+candidato.getEsitoTeoria()
 					);
 					output.println(
-							"Esito progetto: "+(int)candidato.getProgetto().esito()
+							"Esito progetto: "+esito
 					);
 					output.println(
 							"Esame superato con "+Utility.arrotonda(candidato.esito(), 0)

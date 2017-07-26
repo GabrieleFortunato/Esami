@@ -3,6 +3,8 @@ package jFrames;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,7 +40,7 @@ public class CancellazionePrenotazione extends JFrame {
 					InserimentoPrenotazione frame = new InserimentoPrenotazione();
 					frame.setVisible(true);
 				} catch (Exception e) {
-				
+					Logger.getLogger("Connessione non riuscita");
 				}
 			}
 		});

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 /**
@@ -40,7 +41,7 @@ public class InserimentoPrenotazione extends JFrame {
 					InserimentoPrenotazione frame = new InserimentoPrenotazione();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					
+					Logger.getLogger("Connessione non riuscita");
 				}
 			}
 		});

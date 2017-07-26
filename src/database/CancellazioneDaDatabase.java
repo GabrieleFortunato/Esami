@@ -3,6 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.logging.Logger;
 
 import candidati.Candidato;
 
@@ -13,6 +14,10 @@ import candidati.Candidato;
  *
  */
 public class CancellazioneDaDatabase {
+	
+	public CancellazioneDaDatabase(){
+	
+	}
 	
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	private final static String dbName = "esamiprogrammazione";
@@ -32,7 +37,7 @@ public class CancellazioneDaDatabase {
 					"delete from candidato"
 			);
 		} catch (Exception e) {
-			
+			Logger.getLogger("Connessione non riuscita");
 		} 
 	}
 
@@ -49,7 +54,7 @@ public class CancellazioneDaDatabase {
 			);
 			file.PrintOnFile.cancellaFile(c);
 		} catch (Exception e) {
-			
+			Logger.getLogger("Connessione non riuscita");
 		} 
 	}
 

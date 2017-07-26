@@ -8,6 +8,10 @@ package utility;
  */
 public class Utility {
 	
+	public Utility(){
+		
+	}
+	
 	public static String stringForQuery(String s){
 		int length = s.length();
 		for (int i=0;i<length;i++){
