@@ -23,10 +23,6 @@ import database.Cancellazione;
  */
 public class CancellazionePrenotazione extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField cognome;
 	private JTextField nome;

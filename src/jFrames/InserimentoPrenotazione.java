@@ -24,10 +24,6 @@ import java.awt.event.ActionEvent;
  */
 public class InserimentoPrenotazione extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField cognome;
 	private JTextField nome;
