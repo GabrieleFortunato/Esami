@@ -21,12 +21,12 @@ public class EsitoEsame implements Iterable<Candidato> {
 	
 	/**
 	 * Metodo costruttore
-	 * @throws EsitoTeoriaException 
-	 * @throws VotoNonValidoException 
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws VotoNonValidoException
+	 * @throws EsitoTeoriaException
 	 */
 	public EsitoEsame() 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, 
