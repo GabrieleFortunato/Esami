@@ -31,23 +31,6 @@ public class Candidato {
 				s.equals("quasi ottimo")||s.equals("ottimo")
 		);
 	}
-	
-	/**
-	 * Metodo costruttore
-	 * @param nome
-	 * @param cognome
-	 * @param esitoTeoria
-	 * @param progetto
-	 * @throws EsitoTeoriaEccezione 
-	 */
-	public Candidato(String nome, String cognome, String esitoTeoria, Progetto progetto) 
-			throws EsitoTeoriaEccezione {
-		this.setId(++idProgressivo);
-		this.setNome(nome);
-		this.setCognome(cognome);
-		this.setEsitoTeoria(esitoTeoria);
-		this.setProgetto(progetto);
-	}
 
 	/**
 	 * Metodo costruttore
@@ -72,10 +55,22 @@ public class Candidato {
 	 */
 	public Candidato(String nome, String cognome, String esitoTeoria) 
 			throws EsitoTeoriaEccezione {
-		this.setId(++idProgressivo);
-		this.setNome(nome);
-		this.setCognome(cognome);
+		this(nome, cognome);
 		this.setEsitoTeoria(esitoTeoria);
+	}
+
+	/**
+	 * Metodo costruttore
+	 * @param nome
+	 * @param cognome
+	 * @param esitoTeoria
+	 * @param progetto
+	 * @throws EsitoTeoriaEccezione 
+	 */
+	public Candidato(String nome, String cognome, String esitoTeoria, Progetto progetto) 
+			throws EsitoTeoriaEccezione {
+		this(nome, cognome,esitoTeoria);
+		this.setProgetto(progetto);
 	}
 
 	/**
