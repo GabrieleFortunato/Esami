@@ -13,7 +13,7 @@ public class Utility {
 		for (int i=0;i<length;i++){
 			if (s.charAt(i)=='\''){
 				s=s.substring(0,i+1).concat(s.substring(i));
-				i++;
+				i = i+1;
 			}
 		}
 		return s;
