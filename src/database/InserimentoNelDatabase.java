@@ -2,9 +2,8 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
-
 import candidati.Candidato;
 import candidati.Progetto;
 import utility.Utility;
@@ -27,8 +26,8 @@ public class InserimentoNelDatabase {
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
 	
-	public static void inserisciEsitoProgetto(Candidato c, Progetto p){
-		try {
+	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -41,13 +40,11 @@ public class InserimentoNelDatabase {
 					+"' and cognome='"+Utility.stringForQuery(c.getCognome())
 					+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
 			);
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		} 
+		
 	}
 
-	public static void inserisciPrenotazione(Candidato c){
-		try {
+	public static void inserisciPrenotazione(Candidato c) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -58,13 +55,10 @@ public class InserimentoNelDatabase {
 					"insert ignore into candidato (nome,cognome) values ('"
 					+c.getNome()+"','"+c.getCognome()+"')"
 			);
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		} 
 	}
 	
-	public static void inserisciEsitoTeoria(Candidato c){
-		try {
+	public static void inserisciEsitoTeoria(Candidato c) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -78,9 +72,6 @@ public class InserimentoNelDatabase {
 					+"'),'"+Utility.stringForQuery(c.getEsitoTeoria())
 					+"')"
 			);
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		} 
 	}
 	
 }

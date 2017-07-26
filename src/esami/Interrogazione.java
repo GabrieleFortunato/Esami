@@ -1,5 +1,6 @@
 package esami;
 
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
 import candidati.Candidato;
@@ -25,8 +26,13 @@ public class Interrogazione implements Iterable<Candidato>{
 
 	/**
 	 * Metodo costruttore
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public Interrogazione(){
+	public Interrogazione() 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		this.setDaInterrogare(LetturaDaDatabase.daInterrogare());
 	}
 

@@ -1,10 +1,13 @@
 package esami;
 
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
 
 import candidati.Candidato;
 import database.LetturaDaDatabase;
+import eccezioni.EsitoTeoriaEccezione;
+import eccezioni.VotoNonValidoEccezione;
 
 /**
  * Classe EsitoEsame
@@ -18,8 +21,16 @@ public class EsitoEsame implements Iterable<Candidato> {
 	
 	/**
 	 * Metodo costruttore
+	 * @throws EsitoTeoriaEccezione 
+	 * @throws VotoNonValidoEccezione 
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public EsitoEsame(){
+	public EsitoEsame() 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, 
+			VotoNonValidoEccezione, EsitoTeoriaEccezione{
 		this.setInterrogati(LetturaDaDatabase.interrogati());
 	}
 	

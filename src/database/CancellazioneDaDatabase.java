@@ -2,6 +2,7 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
@@ -25,37 +26,32 @@ public class CancellazioneDaDatabase {
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
 	
-	public static void puliziaDatabase(){
-		try {
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-			);
-			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
-			int res = st.executeUpdate(
-					"delete from candidato"
-			);
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		} 
+	public static void puliziaDatabase() 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		Class.forName(driver).newInstance();
+		Connection conn = DriverManager.getConnection(
+				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+		);
+		Statement st = conn.createStatement();
+		@SuppressWarnings("unused")
+		int res = st.executeUpdate(
+				"delete from candidato"
+		);
 	}
 
-	public static void cancellaCandidato(Candidato c){
-		try {
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-			);
-			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
-			int res = st.executeUpdate(
-					"delete from candidato where (nome='"+c.getNome()+"' and cognome='"+c.getCognome()+"')"
-			);
-			file.PrintOnFile.cancellaFile(c);
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		} 
-	}
-
+	public static void cancellaCandidato(Candidato c)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		Class.forName(driver).newInstance();
+		Connection conn = DriverManager.getConnection(
+				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+		);
+		Statement st = conn.createStatement();
+		@SuppressWarnings("unused")
+		int res = st.executeUpdate(
+				"delete from candidato where (nome='"+c.getNome()+"' and cognome='"+c.getCognome()+"')"
+		);
+		file.PrintOnFile.cancellaFile(c);
+	} 
 }
+
+

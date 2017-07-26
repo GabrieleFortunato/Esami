@@ -2,8 +2,8 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
 
 /**
  * Classe InizializzaDatabase
@@ -23,8 +23,8 @@ public class InizializzaDatabase {
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
 	
-	public static void inizializzaDatabase(){
-		try {
+	public static void inizializzaDatabase() 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -64,9 +64,6 @@ public class InizializzaDatabase {
 					"foreign key constaint (candidato) references candidato(id) on delete cascade"+
 					");"
 			);
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		} 
 	}
 
 }
