@@ -3,12 +3,15 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.logging.Logger;
 
 import candidati.Candidato;
 import candidati.Progetto;
+import eccezioni.EsitoTeoriaEccezione;
+import eccezioni.VotoNonValidoEccezione;
 
 /**
  * Classe LetturaDaDatabase
@@ -28,9 +31,10 @@ public class LetturaDaDatabase {
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
 	
-	public static HashSet<Candidato> interrogati(){
+	public static HashSet<Candidato> interrogati() throws SQLException, VotoNonValidoEccezione, 
+	EsitoTeoriaEccezione, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		HashSet<Candidato> list = new HashSet<>();
-		try {
+		
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -53,15 +57,15 @@ public class LetturaDaDatabase {
 				list.add(candidato);
 			}
 			conn.close();
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		}
+		
+	
 		return list;
 	}
 	
-	public static HashSet<Candidato> perTeoria(){
+	public static HashSet<Candidato> perTeoria() throws SQLException, InstantiationException, 
+	IllegalAccessException, ClassNotFoundException{
 		HashSet<Candidato> list = new HashSet<>();
-		try {
+		
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -77,15 +81,14 @@ public class LetturaDaDatabase {
 				list.add(candidato);
 			}
 			conn.close();
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		}
+		 
 		return list;
 	}
 	
-	public static HashSet<Candidato> daInterrogare(){
+	public static HashSet<Candidato> daInterrogare() throws InstantiationException, IllegalAccessException,
+	ClassNotFoundException, SQLException{
 		HashSet<Candidato> list = new HashSet<>();
-		try {
+		
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -101,15 +104,13 @@ public class LetturaDaDatabase {
 				list.add(candidato);
 			}
 			conn.close();
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		}
+		
 		return list;
 	}
 	
-	public static HashSet<Candidato> candidati(){
+	public static HashSet<Candidato> candidati() throws InstantiationException, IllegalAccessException, 
+	ClassNotFoundException, SQLException{
 		HashSet<Candidato> list = new HashSet<>();
-		try {
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -125,9 +126,6 @@ public class LetturaDaDatabase {
 				list.add(candidato);
 			}
 			conn.close();
-		} catch (Exception e) {
-			Logger.getLogger("Connessione non riuscita");
-		}
 		return list;
 	}
 }
