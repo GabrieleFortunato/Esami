@@ -8,7 +8,7 @@ package utility;
  */
 public class Utility {
 	
-	public Utility(){
+	private Utility(){
 		
 	}
 	

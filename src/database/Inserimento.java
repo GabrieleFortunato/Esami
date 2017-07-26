@@ -16,7 +16,7 @@ import utility.Utility;
  */
 public class Inserimento {
 
-	public Inserimento(){
+	private Inserimento(){
 		
 	}
 	

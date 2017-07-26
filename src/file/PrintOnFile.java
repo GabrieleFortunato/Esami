@@ -16,7 +16,7 @@ import utility.Utility;
  */
 public class PrintOnFile {
 
-	public PrintOnFile(){
+	private PrintOnFile(){
 		
 	}
 	

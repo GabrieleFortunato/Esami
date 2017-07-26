@@ -14,7 +14,8 @@ import candidati.Candidato;
  */
 public class Cancellazione {
 	
-	public Cancellazione(){
+	private
+	Cancellazione(){
 	
 	}
 	

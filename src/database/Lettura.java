@@ -19,7 +19,7 @@ import eccezioni.VotoNonValidoException;
  */
 public class Lettura {
 
-	public Lettura(){
+	private Lettura(){
 		
 	}
 	

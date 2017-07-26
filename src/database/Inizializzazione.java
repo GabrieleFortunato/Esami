@@ -13,7 +13,7 @@ import java.sql.Statement;
  */
 public class Inizializzazione {
 	
-	public Inizializzazione(){
+	private Inizializzazione(){
 		
 	}
 	

@@ -174,6 +174,34 @@ public class Candidato {
 		}
 	}
 	
+	@Override
+	/**
+	 * Genera l'hashcode
+	 */
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idCandidato;
+		return result;
+	}
+
+	@Override
+	/**
+	 * Verifica l'uguaglianza con un altro candidato in base all'id
+	 */
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Candidato other = (Candidato) obj;
+		if (idCandidato != other.idCandidato)
+			return false;
+		return true;
+	}
+
 	/**
 	 * Restituisce l'esito finale del candidato
 	 * @return
@@ -181,17 +209,6 @@ public class Candidato {
 	public double esito(){
 		double esito = ((teoria()+(7/6.0)*progetto.esito())/2.0);
 		return esito;
-	}
-
-	@Override
-	/**
-	 * Genera l'hashCode in base all'id
-	 */
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + idCandidato;
-		return result;
 	}
 
 }
