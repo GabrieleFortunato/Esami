@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
-import java.util.logging.Logger;
-
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaEccezione;
