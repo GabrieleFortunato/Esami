@@ -12,9 +12,9 @@ import candidati.Candidato;
  * @author Gabriele Fortunato
  *
  */
-public class CancellazioneDaDatabase {
+public class Cancellazione {
 	
-	public CancellazioneDaDatabase(){
+	public Cancellazione(){
 	
 	}
 	

@@ -11,9 +11,9 @@ import java.sql.Statement;
  * @author Gabriele Fortunato
  *
  */
-public class InizializzaDatabase {
+public class Inizializzazione {
 	
-	public InizializzaDatabase(){
+	public Inizializzazione(){
 		
 	}
 	

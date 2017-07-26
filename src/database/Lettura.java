@@ -17,9 +17,9 @@ import eccezioni.VotoNonValidoEccezione;
  * @author Gabriele Fortunato
  *
  */
-public class LetturaDaDatabase {
+public class Lettura {
 
-	public LetturaDaDatabase(){
+	public Lettura(){
 		
 	}
 	

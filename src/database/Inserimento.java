@@ -14,9 +14,9 @@ import utility.Utility;
  * @author Gabriele Fortunato
  *
  */
-public class InserimentoNelDatabase {
+public class Inserimento {
 
-	public InserimentoNelDatabase(){
+	public Inserimento(){
 		
 	}
 	

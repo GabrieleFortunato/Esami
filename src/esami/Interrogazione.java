@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
 import candidati.Candidato;
-import database.LetturaDaDatabase;
+import database.Lettura;
 
 /**
  * Classe Interrogazione
@@ -33,7 +33,7 @@ public class Interrogazione implements Iterable<Candidato>{
 	 */
 	public Interrogazione() 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		this.setDaInterrogare(LetturaDaDatabase.daInterrogare());
+		this.setDaInterrogare(Lettura.daInterrogare());
 	}
 
 	@Override

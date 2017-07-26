@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import candidati.Candidato;
-import database.LetturaDaDatabase;
+import database.Lettura;
 import eccezioni.EsitoTeoriaEccezione;
 import eccezioni.VotoNonValidoEccezione;
 
@@ -31,7 +31,7 @@ public class EsitoEsame implements Iterable<Candidato> {
 	public EsitoEsame() 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, 
 			VotoNonValidoEccezione, EsitoTeoriaEccezione{
-		this.setInterrogati(LetturaDaDatabase.interrogati());
+		this.setInterrogati(Lettura.interrogati());
 	}
 	
 	/**

@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
-import database.InserimentoNelDatabase;
+import database.Inserimento;
 import eccezioni.EsitoTeoriaEccezione;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -95,7 +95,7 @@ public class InserimentoEsitoTeoria extends JFrame {
 					String theory = teoria.getText();
 					Candidato c = new Candidato(name,surname,theory);
 					try {
-						InserimentoNelDatabase.inserisciEsitoTeoria(c);
+						Inserimento.inserisciEsitoTeoria(c);
 					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
 							| SQLException e1) {
 						Logger.getLogger("Connessione al database non riuscita");

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
-import database.CancellazioneDaDatabase;
+import database.Cancellazione;
 
 /**
  * Classe CancellazionePrenotazione
@@ -84,7 +84,7 @@ public class CancellazionePrenotazione extends JFrame {
 				String cg = cognome.getText();
 				Candidato c = new Candidato(n,cg);
 				try {
-					CancellazioneDaDatabase.cancellaCandidato(c);
+					Cancellazione.cancellaCandidato(c);
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
 						SQLException e1) {
 					Logger.getLogger("Connessione al database non riuscita");

@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import candidati.Progetto;
-import database.InserimentoNelDatabase;
+import database.Inserimento;
 import eccezioni.VotoNonValidoEccezione;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -120,7 +120,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 					Candidato c = new Candidato(nome,cognome);
 					Progetto p = new Progetto(libr,text,fmain);
 					try {
-						InserimentoNelDatabase.inserisciEsitoProgetto(c,p);
+						Inserimento.inserisciEsitoProgetto(c,p);
 					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
 							| SQLException e) {
 						Logger.getLogger("Connessione al database non riuscita");

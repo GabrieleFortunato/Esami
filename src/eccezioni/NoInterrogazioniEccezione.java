@@ -6,7 +6,7 @@ package eccezioni;
  * @author Gabriele Fortunato
  *
  */
-public class NessunCandidatoDaInterrogareEccezione extends Exception {
+public class NoInterrogazioniEccezione extends Exception {
 
 	/**
 	 * 

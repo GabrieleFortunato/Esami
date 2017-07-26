@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import candidati.Candidato;
-import database.InserimentoNelDatabase;
+import database.Inserimento;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -85,7 +85,7 @@ public class InserimentoPrenotazione extends JFrame {
 				String cg = cognome.getText();
 				Candidato c = new Candidato(n,cg);
 				try {
-					InserimentoNelDatabase.inserisciPrenotazione(c);
+					Inserimento.inserisciPrenotazione(c);
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
 						SQLException e1) {
 					Logger.getLogger("Connessione al database non riuscita");
