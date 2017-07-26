@@ -23,7 +23,7 @@ public class Candidato {
 	 * @param s
 	 * @return
 	 */
-	private boolean esitoTeoriaCorretto(String s){
+	private static boolean esitoTeoriaCorretto(String s){
 		return (
 				s.equals("quasi sufficiente")||s.equals("sufficiente")||
 				s.equals("più che sufficiente")||s.equals("quasi buono")||
