@@ -1,6 +1,12 @@
 package eccezioni;
 
-public class ConnessioneNonRiuscitaEccezione extends Exception {
+/**
+ * Classe Eccezione
+ * 
+ * @author Gabriele Fortunato
+ *
+ */
+public class VotoNonValidoException extends Exception {
 
 	/**
 	 * 

@@ -6,7 +6,7 @@ package eccezioni;
  * @author Gabriele Fortunato
  *
  */
-public class VotoNonValidoEccezione extends Exception {
+public class EsitoTeoriaException extends Exception {
 
 	/**
 	 * 

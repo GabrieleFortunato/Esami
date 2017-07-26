@@ -1,12 +1,6 @@
 package eccezioni;
 
-/**
- * Classe Eccezione
- * 
- * @author Gabriele Fortunato
- *
- */
-public class EsitoTeoriaEccezione extends Exception {
+public class ConnessioneNonRiuscitaException extends Exception {
 
 	/**
 	 * 

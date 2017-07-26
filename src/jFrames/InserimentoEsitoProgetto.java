@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import candidati.Progetto;
 import database.Inserimento;
-import eccezioni.VotoNonValidoEccezione;
+import eccezioni.VotoNonValidoException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -126,7 +126,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 						Logger.getLogger("Connessione al database non riuscita");
 					}
 					dispose();
-				} catch (VotoNonValidoEccezione e) {
+				} catch (VotoNonValidoException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

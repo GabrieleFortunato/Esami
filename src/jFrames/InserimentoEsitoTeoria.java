@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import database.Inserimento;
-import eccezioni.EsitoTeoriaEccezione;
+import eccezioni.EsitoTeoriaException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -101,7 +101,7 @@ public class InserimentoEsitoTeoria extends JFrame {
 						Logger.getLogger("Connessione al database non riuscita");
 					}
 					dispose();
-				} catch (EsitoTeoriaEccezione e1) {
+				} catch (EsitoTeoriaException e1) {
 					Logger.getLogger("Connessione non riuscita");
 				}
 			}

@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.HashSet;
 import candidati.Candidato;
 import candidati.Progetto;
-import eccezioni.EsitoTeoriaEccezione;
-import eccezioni.VotoNonValidoEccezione;
+import eccezioni.EsitoTeoriaException;
+import eccezioni.VotoNonValidoException;
 
 /**
  * Classe LetturaDaDatabase
@@ -29,8 +29,8 @@ public class Lettura {
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
 	
-	public static HashSet<Candidato> interrogati() throws SQLException, VotoNonValidoEccezione, 
-	EsitoTeoriaEccezione, InstantiationException, IllegalAccessException, ClassNotFoundException{
+	public static HashSet<Candidato> interrogati() throws SQLException, VotoNonValidoException, 
+	EsitoTeoriaException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		HashSet<Candidato> list = new HashSet<>();
 		Class.forName(driver).newInstance();
 		Connection conn = DriverManager.getConnection(

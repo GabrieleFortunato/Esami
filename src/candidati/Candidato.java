@@ -1,6 +1,6 @@
 package candidati;
 
-import eccezioni.EsitoTeoriaEccezione;
+import eccezioni.EsitoTeoriaException;
 
 /**
  * Classe Candidato
@@ -51,10 +51,10 @@ public class Candidato {
 	 * @param cognome
 	 * @param esitoTeoria
 	 * @param progetto
-	 * @throws EsitoTeoriaEccezione 
+	 * @throws EsitoTeoriaException 
 	 */
 	public Candidato(String nome, String cognome, String esitoTeoria) 
-			throws EsitoTeoriaEccezione {
+			throws EsitoTeoriaException {
 		this(nome, cognome);
 		this.setEsitoTeoria(esitoTeoria);
 	}
@@ -65,10 +65,10 @@ public class Candidato {
 	 * @param cognome
 	 * @param esitoTeoria
 	 * @param progetto
-	 * @throws EsitoTeoriaEccezione 
+	 * @throws EsitoTeoriaException 
 	 */
 	public Candidato(String nome, String cognome, String esitoTeoria, Progetto progetto) 
-			throws EsitoTeoriaEccezione {
+			throws EsitoTeoriaException {
 		this(nome, cognome,esitoTeoria);
 		this.setProgetto(progetto);
 	}
@@ -116,13 +116,13 @@ public class Candidato {
 	/**
 	 * Imposta l'esito della teoria
 	 * @param esitoTeoria
-	 * @throws EsitoTeoriaEccezione 
+	 * @throws EsitoTeoriaException 
 	 */
-	private void setEsitoTeoria(String esitoTeoria) throws EsitoTeoriaEccezione {
+	private void setEsitoTeoria(String esitoTeoria) throws EsitoTeoriaException {
 		if (esitoTeoriaCorretto(esitoTeoria)){
 			this.esitoTeoria = esitoTeoria;
 		} else {
-			throw new EsitoTeoriaEccezione();
+			throw new EsitoTeoriaException();
 		}
 	}
 
