@@ -54,7 +54,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 	 */
 	public InserimentoEsitoProgetto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 741, 529);
+		setBounds(100, 100, 548, 419);
 		setTitle("INSERIMENTO VOTO PROGETTO");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -125,7 +125,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 				}
 			}
 		});
-		btnConferma.setBounds(595, 444, 116, 25);
+		btnConferma.setBounds(400, 327, 116, 25);
 		contentPane.add(btnConferma);
 	}
 }

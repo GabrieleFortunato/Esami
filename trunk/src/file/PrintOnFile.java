@@ -55,7 +55,7 @@ public class PrintOnFile {
 							"Esito progetto: "+(int)candidato.getProgetto().esito()
 					);
 					output.println(
-							"Esame superato con "+Utility.arrotonda(candidato.esito(), 0)
+							"Esame superato con "+(int)Utility.arrotonda(candidato.esito(), 0)
 					);
 							
 				}
