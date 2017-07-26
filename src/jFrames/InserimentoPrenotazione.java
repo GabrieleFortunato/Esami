@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
@@ -83,7 +84,12 @@ public class InserimentoPrenotazione extends JFrame {
 				String n = nome.getText();
 				String cg = cognome.getText();
 				Candidato c = new Candidato(n,cg);
-				InserimentoNelDatabase.inserisciPrenotazione(c);
+				try {
+					InserimentoNelDatabase.inserisciPrenotazione(c);
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
+						SQLException e1) {
+					Logger.getLogger("Connessione al database non riuscita");
+				}
 				dispose();
 			}
 		});

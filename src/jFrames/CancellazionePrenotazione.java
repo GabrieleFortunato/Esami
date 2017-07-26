@@ -3,6 +3,7 @@ package jFrames;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -82,7 +83,12 @@ public class CancellazionePrenotazione extends JFrame {
 				String n = nome.getText();
 				String cg = cognome.getText();
 				Candidato c = new Candidato(n,cg);
-				CancellazioneDaDatabase.cancellaCandidato(c);
+				try {
+					CancellazioneDaDatabase.cancellaCandidato(c);
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
+						SQLException e1) {
+					Logger.getLogger("Connessione al database non riuscita");
+				}
 				dispose();
 			}
 		});

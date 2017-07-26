@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
@@ -118,7 +119,12 @@ public class InserimentoEsitoProgetto extends JFrame {
 					int fmain = Integer.parseInt(main.getText());
 					Candidato c = new Candidato(nome,cognome);
 					Progetto p = new Progetto(libr,text,fmain);
-					InserimentoNelDatabase.inserisciEsitoProgetto(c,p);
+					try {
+						InserimentoNelDatabase.inserisciEsitoProgetto(c,p);
+					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+							| SQLException e) {
+						Logger.getLogger("Connessione al database non riuscita");
+					}
 					dispose();
 				} catch (VotoNonValidoEccezione e) {
 					// TODO Auto-generated catch block

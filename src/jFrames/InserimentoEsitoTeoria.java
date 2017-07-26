@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
@@ -93,7 +94,12 @@ public class InserimentoEsitoTeoria extends JFrame {
 					String surname = cognome.getText();
 					String theory = teoria.getText();
 					Candidato c = new Candidato(name,surname,theory);
-					InserimentoNelDatabase.inserisciEsitoTeoria(c);
+					try {
+						InserimentoNelDatabase.inserisciEsitoTeoria(c);
+					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+							| SQLException e1) {
+						Logger.getLogger("Connessione al database non riuscita");
+					}
 					dispose();
 				} catch (EsitoTeoriaEccezione e1) {
 					Logger.getLogger("Connessione non riuscita");
