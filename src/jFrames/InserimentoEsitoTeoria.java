@@ -23,6 +23,26 @@ import java.awt.event.ActionEvent;
  */
 public class InserimentoEsitoTeoria extends JFrame {
 
+	private final int cinque = 5;
+	private final int dieci = 10;
+	private final int sedici = 16;
+	private final int ventidue = 22;
+	private final int ventiquattro = 24;
+	private final int venticinque = 25;
+	private final int cinquantatre = 53;
+	private final int cinquantasei = 56;
+	private final int ottantadue = 82;	
+	private final int ottantacinque = 85;
+	private final int cento = 100;
+	private final int centoundici = 111;
+	private final int centoquattordici = 114;
+	private final int centotrentaquattro = 134;
+	private final int centottanta = 180;
+	private final int centottantasette = 187;
+	private final int duecentoquaranta = 240;
+	private final int trecento = 300;
+	private final int quattrocentocinquanta = 450; 
+	
 	private JPanel contentPane;
 	private JTextField cognome;
 	private JTextField nome;
@@ -49,37 +69,37 @@ public class InserimentoEsitoTeoria extends JFrame {
 	 */
 	public InserimentoEsitoTeoria() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(cento, cento, quattrocentocinquanta, trecento);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblCognomeCandidato = new JLabel("Cognome candidato: ");
-		lblCognomeCandidato.setBounds(24, 56, 134, 16);
+		lblCognomeCandidato.setBounds(ventiquattro, cinquantasei, centotrentaquattro, sedici);
 		contentPane.add(lblCognomeCandidato);
 		
 		JLabel lblNomeCandidato = new JLabel("Nome candidato: ");
-		lblNomeCandidato.setBounds(24, 85, 134, 16);
+		lblNomeCandidato.setBounds(ventiquattro, ottantacinque, centotrentaquattro, sedici);
 		contentPane.add(lblNomeCandidato);
 		
 		JLabel lblEsitoTeoria = new JLabel("Esito teoria: ");
-		lblEsitoTeoria.setBounds(24, 114, 134, 16);
+		lblEsitoTeoria.setBounds(ventiquattro, centoquattordici, centotrentaquattro, sedici);
 		contentPane.add(lblEsitoTeoria);
 		
 		cognome = new JTextField();
-		cognome.setBounds(180, 53, 240, 22);
+		cognome.setBounds(centottanta, cinquantatre, duecentoquaranta, ventidue);
 		contentPane.add(cognome);
-		cognome.setColumns(10);
+		cognome.setColumns(dieci);
 		
 		nome = new JTextField();
-		nome.setColumns(10);
-		nome.setBounds(180, 82, 240, 22);
+		nome.setColumns(dieci);
+		nome.setBounds(centottanta, ottantadue, duecentoquaranta, ventidue);
 		contentPane.add(nome);
 		
 		teoria = new JTextField();
 		teoria.setColumns(10);
-		teoria.setBounds(180, 111, 240, 22);
+		teoria.setBounds(centottanta, centoundici, duecentoquaranta, ventidue);
 		contentPane.add(teoria);
 		
 		JButton btnConferma = new JButton("CONFERMA");
@@ -102,7 +122,7 @@ public class InserimentoEsitoTeoria extends JFrame {
 				}
 			}
 		});
-		btnConferma.setBounds(180, 187, 240, 25);
+		btnConferma.setBounds(centottanta, centottantasette, duecentoquaranta, venticinque);
 		contentPane.add(btnConferma);
 	}
 

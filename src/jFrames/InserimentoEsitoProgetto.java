@@ -30,26 +30,26 @@ public class InserimentoEsitoProgetto extends JFrame {
 	private final int sedici = 16;
 	private final int ventidue = 22;
 	private final int venticinque = 25;
-	private final int trentasette = 37;
+	private final int trentuno = 31;
 	private final int trentanove = 39;
 	private final int quaranta = 40;
-	private final int sessanta = 60;
-	private final int sessantatre = 63;
-	private final int ottantanove = 89;	
-	private final int novantadue = 92;
+	private final int settantasette = 77;
 	private final int cento = 100;
+	private final int centosei = 106;
 	private final int centonove = 109;
+	private final int centosedici = 116;
 	private final int centoventidue = 122;
 	private final int centoventicinque = 125;
 	private final int centotrentaquattro = 134;
 	private final int centosessantuno = 161;
-	private final int centosessantotto = 168;
-	private final int centosettantaquattro = 174;
+	private final int centoottantasette = 187;
+	private final int duecentoquattro = 204;
+	private final int duecentosette = 207;
 	private final int duecentootto = 208;
-	private final int duecentotrenta = 230;
-	private final int trecento = 300;
-	private final int quattrocentocinquanta = 450;
+	private final int duecentoventicinque = 225;
+	private final int quattrocentoquarantaquattro = 444;
 	private final int cinquecentoventinove = 529;
+	private final int cinquecentonovantacinque = 595;
 	private final int settecentoquarantuno = 741;
 	
 	private JPanel contentPane;
@@ -96,39 +96,39 @@ public class InserimentoEsitoProgetto extends JFrame {
 		contentPane.add(lblNomeCandidato);
 		
 		JLabel lblVotoLibreria = new JLabel("Voto libreria:");
-		lblVotoLibreria.setBounds(40, 187, 101, 16);
+		lblVotoLibreria.setBounds(quaranta, centoottantasette, 101, sedici);
 		contentPane.add(lblVotoLibreria);
 		
 		JLabel lblVotoTest = new JLabel("Voto test:");
-		lblVotoTest.setBounds(40, 207, 77, 16);
+		lblVotoTest.setBounds(quaranta, duecentosette, settantasette, sedici);
 		contentPane.add(lblVotoTest);
 		
 		JLabel lblNewLabel = new JLabel("Voto main: ");
-		lblNewLabel.setBounds(40, 225, 77, 16);
+		lblNewLabel.setBounds(quaranta, duecentoventicinque, settantasette, sedici);
 		contentPane.add(lblNewLabel);
 		
 		cognomecandidato = new JTextField();
-		cognomecandidato.setBounds(208, 106, 116, 22);
+		cognomecandidato.setBounds(duecentootto, centosei , centosedici, ventidue);
 		contentPane.add(cognomecandidato);
-		cognomecandidato.setColumns(10);
+		cognomecandidato.setColumns(dieci);
 		
 		nomecandidato = new JTextField();
-		nomecandidato.setBounds(208, 122, 116, 22);
+		nomecandidato.setBounds(duecentootto, centoventidue, centosedici, ventidue);
 		contentPane.add(nomecandidato);
-		nomecandidato.setColumns(10);
+		nomecandidato.setColumns(dieci);
 		
 		libreria = new JTextField();
-		libreria.setBounds(duecentootto, 187, 31, ventidue);
+		libreria.setBounds(duecentootto, centoottantasette, trentuno, ventidue);
 		contentPane.add(libreria);
 		libreria.setColumns(dieci);
 		
 		test = new JTextField();
-		test.setBounds(duecentootto, 204, 31, ventidue);
+		test.setBounds(duecentootto, duecentoquattro, trentuno, ventidue);
 		contentPane.add(test);
 		test.setColumns(dieci);
 		
 		votoMain = new JTextField();
-		votoMain.setBounds(duecentootto, 225, 31, ventidue);
+		votoMain.setBounds(duecentootto, duecentoventicinque, trentuno, ventidue);
 		contentPane.add(votoMain);
 		votoMain.setColumns(dieci);
 		
@@ -155,7 +155,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 				}
 			}
 		});
-		btnConferma.setBounds(595, 444, 116, 25);
+		btnConferma.setBounds(cinquecentonovantacinque, quattrocentoquarantaquattro, centosedici, venticinque);
 		contentPane.add(btnConferma);
 	}
 }
