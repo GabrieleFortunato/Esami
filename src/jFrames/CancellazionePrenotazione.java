@@ -23,6 +23,24 @@ import database.Cancellazione;
  */
 public class CancellazionePrenotazione extends JFrame {
 
+	private final int cinque = 5;
+	private final int dieci = 10;
+	private final int sedici = 16;
+	private final int ventidue = 22;
+	private final int venticinque = 25;
+	private final int trentasette = 37;
+	private final int sessanta = 60;
+	private final int sessantatre = 63;
+	private final int ottantanove = 89;	
+	private final int novantadue = 92;
+	private final int cento = 100;
+	private final int centoventidue = 122;
+	private final int centosessantotto = 168;
+	private final int centosettantaquattro = 174;
+	private final int duecentotrenta = 230;
+	private final int trecento = 300;
+	private final int quattrocentocinquanta = 450;
+	
 	private JPanel contentPane;
 	private JTextField cognome;
 	private JTextField nome;
@@ -48,29 +66,29 @@ public class CancellazionePrenotazione extends JFrame {
 	 */
 	public CancellazionePrenotazione() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(cento, cento, quattrocentocinquanta, trecento);
 		setTitle("INSERIMENTO PRENOTAZIONE");
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblCognomeCandidato = new JLabel("Cognome candidato: ");
-		lblCognomeCandidato.setBounds(37, 63, 122, 16);
+		lblCognomeCandidato.setBounds(trentasette, sessantatre, centoventidue, sedici);
 		contentPane.add(lblCognomeCandidato);
 		
 		JLabel lblNomeCandidato = new JLabel("Nome candidato: ");
-		lblNomeCandidato.setBounds(37, 92, 122, 16);
+		lblNomeCandidato.setBounds(trentasette, novantadue, centoventidue, sedici);
 		contentPane.add(lblNomeCandidato);
 		
 		cognome = new JTextField();
-		cognome.setBounds(230, 60, 174, 22);
+		cognome.setBounds(duecentotrenta, sessanta, centosettantaquattro, ventidue);
 		contentPane.add(cognome);
-		cognome.setColumns(10);
+		cognome.setColumns(dieci);
 		
 		nome = new JTextField();
-		nome.setColumns(10);
-		nome.setBounds(230, 89, 174, 22);
+		nome.setColumns(dieci);
+		nome.setBounds(duecentotrenta, ottantanove, centosettantaquattro, ventidue);
 		contentPane.add(nome);
 		
 		JButton cog = new JButton("CONFERMA");
@@ -88,7 +106,7 @@ public class CancellazionePrenotazione extends JFrame {
 				dispose();
 			}
 		});
-		cog.setBounds(230, 168, 174, 25);
+		cog.setBounds(duecentotrenta, centosessantotto, centosettantaquattro, venticinque);
 		contentPane.add(cog);
 	}
 }

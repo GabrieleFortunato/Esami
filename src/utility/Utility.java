@@ -23,7 +23,7 @@ public class Utility {
 		return s;
 	}
 	
-	public static boolean voto(int voto){
+	public static boolean votoCorretto(int voto){
 		return (0<=voto&&voto<=30);
 	}
 	

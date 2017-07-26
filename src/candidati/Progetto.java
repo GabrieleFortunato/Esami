@@ -34,7 +34,7 @@ public class Progetto {
 	 * @throws VotoNonValidoException 
 	 */
 	private void setLibreria(int libreria) throws VotoNonValidoException {
-		if (Utility.voto(libreria)){
+		if (Utility.votoCorretto(libreria)){
 			this.libreria = libreria;
 		} else {
 			throw new VotoNonValidoException();
@@ -48,7 +48,7 @@ public class Progetto {
 	 * @throws VotoNonValidoException 
 	 */
 	private void setTest(int test) throws VotoNonValidoException {
-		if (Utility.voto(libreria)){
+		if (Utility.votoCorretto(libreria)){
 			this.test = test;
 		} else {
 			throw new VotoNonValidoException();
@@ -61,7 +61,7 @@ public class Progetto {
 	 * @throws VotoNonValidoException 
 	 */
 	private void setMain(int main) throws VotoNonValidoException {
-		if (Utility.voto(libreria)){
+		if (Utility.votoCorretto(libreria)){
 			this.main=main;
 		} else {
 			throw new VotoNonValidoException();

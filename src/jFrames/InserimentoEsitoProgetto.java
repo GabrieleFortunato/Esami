@@ -24,6 +24,34 @@ import java.awt.event.ActionEvent;
  */
 public class InserimentoEsitoProgetto extends JFrame {
 
+
+	private final int cinque = 5;
+	private final int dieci = 10;
+	private final int sedici = 16;
+	private final int ventidue = 22;
+	private final int venticinque = 25;
+	private final int trentasette = 37;
+	private final int trentanove = 39;
+	private final int quaranta = 40;
+	private final int sessanta = 60;
+	private final int sessantatre = 63;
+	private final int ottantanove = 89;	
+	private final int novantadue = 92;
+	private final int cento = 100;
+	private final int centonove = 109;
+	private final int centoventidue = 122;
+	private final int centoventicinque = 125;
+	private final int centotrentaquattro = 134;
+	private final int centosessantuno = 161;
+	private final int centosessantotto = 168;
+	private final int centosettantaquattro = 174;
+	private final int duecentootto = 208;
+	private final int duecentotrenta = 230;
+	private final int trecento = 300;
+	private final int quattrocentocinquanta = 450;
+	private final int cinquecentoventinove = 529;
+	private final int settecentoquarantuno = 741;
+	
 	private JPanel contentPane;
 	private JTextField nomecandidato;
 	private JTextField libreria;
@@ -52,19 +80,19 @@ public class InserimentoEsitoProgetto extends JFrame {
 	 */
 	public InserimentoEsitoProgetto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 741, 529);
+		setBounds(cento, cento, settecentoquarantuno, cinquecentoventinove);
 		setTitle("INSERIMENTO VOTO PROGETTO");
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblCognome = new JLabel("Cognome candidato:");
-		lblCognome.setBounds(40, 109, 161, 16);
+		lblCognome.setBounds(quaranta, centonove, centosessantuno, sedici);
 		contentPane.add(lblCognome);
 		
 		JLabel lblNomeCandidato = new JLabel("Nome candidato:");
-		lblNomeCandidato.setBounds(39, 125, 134, 16);
+		lblNomeCandidato.setBounds(trentanove, centoventicinque, centotrentaquattro, sedici);
 		contentPane.add(lblNomeCandidato);
 		
 		JLabel lblVotoLibreria = new JLabel("Voto libreria:");
@@ -90,19 +118,19 @@ public class InserimentoEsitoProgetto extends JFrame {
 		nomecandidato.setColumns(10);
 		
 		libreria = new JTextField();
-		libreria.setBounds(208, 187, 31, 22);
+		libreria.setBounds(duecentootto, 187, 31, ventidue);
 		contentPane.add(libreria);
-		libreria.setColumns(10);
+		libreria.setColumns(dieci);
 		
 		test = new JTextField();
-		test.setBounds(208, 204, 31, 22);
+		test.setBounds(duecentootto, 204, 31, ventidue);
 		contentPane.add(test);
-		test.setColumns(10);
+		test.setColumns(dieci);
 		
 		votoMain = new JTextField();
-		votoMain.setBounds(208, 225, 31, 22);
+		votoMain.setBounds(duecentootto, 225, 31, ventidue);
 		contentPane.add(votoMain);
-		votoMain.setColumns(10);
+		votoMain.setColumns(dieci);
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
@@ -123,8 +151,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 					}
 					dispose();
 				} catch (VotoNonValidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Logger.getLogger("Voto non valido");
 				}
 			}
 		});
