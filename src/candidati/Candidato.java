@@ -18,6 +18,11 @@ public class Candidato {
 	private String esitoTeoria;
 	private Progetto progetto;
 	
+	/**
+	 * Verifica che l'esito della teoria è corretto
+	 * @param s
+	 * @return
+	 */
 	private boolean esitoTeoriaCorretto(String s){
 		return (
 				s.equals("quasi sufficiente")||s.equals("sufficiente")||
