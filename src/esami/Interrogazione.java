@@ -37,6 +37,9 @@ public class Interrogazione implements Iterable<Candidato>{
 		this.setDaInterrogare(Lettura.daInterrogare());
 	}
 
+	/**
+	 * Itera sui candidati da interrogare
+	 */
 	@Override
 	public Iterator<Candidato> iterator() {
 		return daInterrogare.iterator();

@@ -76,6 +76,10 @@ public class PrintOnFile {
 		}
 	}
 	
+	/**
+	 * Cancella file
+	 * @param c
+	 */
 	public static void cancellaFile(Candidato c){
 		File file = new File(c.getCognome()+" "+c.getNome()+".txt");
 		if (file.exists()){

@@ -176,10 +176,10 @@ public class Candidato {
 		return esito;
 	}
 	
-	@Override
 	/**
-	 * Genera l'hashcode
+	 * Genera l'hashCode
 	 */
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

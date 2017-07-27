@@ -12,6 +12,11 @@ public class Utility {
 		
 	}
 	
+	/**
+	 * Restituisce una stringa per la query SQL
+	 * @param s
+	 * @return
+	 */
 	public static String stringForQuery(String s){
 		int length = s.length();
 		for (int i=0;i<length;i++){
