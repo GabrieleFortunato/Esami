@@ -25,12 +25,14 @@ public class PrintOnFile {
 	 * @param iterator
 	 */
 	public static void printOnFile(Iterator<Candidato> iterator){
+		File dir = new File("Esiti");
+		dir.mkdir();
 		try {
 			while (iterator.hasNext()){
 				Candidato candidato = iterator.next();
 				int esito = (int)candidato.getProgetto().esito();
 				PrintStream output = new PrintStream(
-						new File(candidato.getCognome()+" "+candidato.getNome()+".txt")
+						new File("Esiti\\"+candidato.getCognome()+" "+candidato.getNome()+".txt")
 				);
 				if (candidato.esito()>30){
 					output.println(
@@ -60,7 +62,7 @@ public class PrintOnFile {
 							"Esito progetto: "+esito
 					);
 					output.println(
-							"Esame superato con "+Utility.arrotonda(candidato.esito(), 0)
+							"Esame superato con "+(int)Utility.arrotonda(candidato.esito(), 0)
 					);
 							
 				}

@@ -23,6 +23,10 @@ import java.awt.event.ActionEvent;
  */
 public class InserimentoEsitoTeoria extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final int cinque = 5;
 	private final int dieci = 10;
 	private final int sedici = 16;
