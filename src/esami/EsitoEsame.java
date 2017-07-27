@@ -43,10 +43,10 @@ public class EsitoEsame implements Iterable<Candidato> {
 		this.interrogati = interrogati;
 	}
 
-	@Override
 	/**
 	 * Itera sugli interrogati
 	 */
+	@Override
 	public Iterator<Candidato> iterator() {
 		return interrogati.iterator();
 	}
