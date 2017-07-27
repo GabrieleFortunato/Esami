@@ -36,6 +36,8 @@ public class Cancellazione {
 		int res = st.executeUpdate(
 				"delete from candidato"
 		);
+		st.close();
+		conn.close();
 	}
 
 	public static void cancellaCandidato(Candidato c)
@@ -49,6 +51,8 @@ public class Cancellazione {
 		int res = st.executeUpdate(
 				"delete from candidato where (nome='"+c.getNome()+"' and cognome='"+c.getCognome()+"')"
 		);
+		st.close();
+		conn.close();
 		file.PrintOnFile.cancellaFile(c);
 	} 
 }

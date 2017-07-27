@@ -64,6 +64,9 @@ public class Inizializzazione {
 					"foreign key constaint (candidato) references candidato(id) on delete cascade"+
 					");"
 			);
+
+			st.close();
+			conn.close();
 	}
 
 }

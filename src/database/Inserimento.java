@@ -40,6 +40,8 @@ public class Inserimento {
 					+"' and cognome='"+Utility.stringForQuery(c.getCognome())
 					+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
 			);
+			st.close();
+			conn.close();
 		
 	}
 
@@ -55,6 +57,8 @@ public class Inserimento {
 					"insert ignore into candidato (nome,cognome) values ('"
 					+c.getNome()+"','"+c.getCognome()+"')"
 			);
+			st.close();
+			conn.close();
 	}
 	
 	public static void inserisciEsitoTeoria(Candidato c) 
@@ -72,6 +76,8 @@ public class Inserimento {
 					+"'),'"+Utility.stringForQuery(c.getEsitoTeoria())
 					+"')"
 			);
+			st.close();
+			conn.close();
 	}
 	
 }

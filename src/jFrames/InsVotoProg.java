@@ -10,9 +10,7 @@ import database.Inserimento;
 import database.Lettura;
 import eccezioni.EsitoTeoriaException;
 import eccezioni.VotoNonValidoException;
-import esami.EsitoEsame;
 import file.PrintOnFile;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;

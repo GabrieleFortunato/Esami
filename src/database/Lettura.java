@@ -53,29 +53,38 @@ public class Lettura {
 			Candidato candidato = new Candidato(nome,cognome,teoria,progetto);
 			list.add(candidato);
 		}
+		st.close();
+		res.close();
 		conn.close();
 		return list;
 	}
 	
-	public static HashSet<Candidato> perTeoria() throws SQLException, InstantiationException, 
-	IllegalAccessException, ClassNotFoundException{
+	public static HashSet<Candidato> perTeoria() {
 		HashSet<Candidato> list = new HashSet<>();
-		
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-			);
-			Statement st = conn.createStatement();
-			ResultSet res = st.executeQuery(
-					"select nome,cognome from candidato where id not in (select candidato from teoria)"
-			);
-			while (res.next()) {
-				String nome = res.getString("nome");
-				String cognome = res.getString("cognome");
-				Candidato candidato = new Candidato(nome,cognome);
-				list.add(candidato);
+			try {
+				Class.forName(driver).newInstance();
+				Connection conn = DriverManager.getConnection(
+						url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+				);
+				Statement st = conn.createStatement();
+				ResultSet res = st.executeQuery(
+						"select nome,cognome from candidato where id not in (select candidato from teoria)"
+				);
+				while (res.next()) {
+					String nome = res.getString("nome");
+					String cognome = res.getString("cognome");
+					Candidato candidato = new Candidato(nome,cognome);
+					list.add(candidato);
+				}
+				st.close();
+				res.close();
+				conn.close();
+			} catch (
+					InstantiationException | IllegalAccessException | ClassNotFoundException | 
+					SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			conn.close();
 		 
 		return list;
 	}
@@ -97,6 +106,8 @@ public class Lettura {
 				Candidato candidato = new Candidato(nome,cognome);
 				list.add(candidato);
 			}
+			st.close();
+			res.close();
 			conn.close();
 		return list;
 	}
@@ -118,6 +129,8 @@ public class Lettura {
 				Candidato candidato = new Candidato(nome,cognome);
 				list.add(candidato);
 			}
+			st.close();
+			res.close();
 			conn.close();
 		return list;
 	}
