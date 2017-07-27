@@ -22,11 +22,7 @@ import java.awt.event.ActionEvent;
  *
  */
 public class InserimentoEsitoTeoria extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
 	private final int cinque = 5;
 	private final int dieci = 10;
 	private final int sedici = 16;
@@ -47,7 +43,6 @@ public class InserimentoEsitoTeoria extends JFrame {
 	private final int trecento = 300;
 	private final int quattrocentocinquanta = 450; 
 	
-	private JPanel contentPane;
 	private JTextField cognome;
 	private JTextField nome;
 	private JTextField teoria;
@@ -72,6 +67,7 @@ public class InserimentoEsitoTeoria extends JFrame {
 	 * Create the frame.
 	 */
 	public InserimentoEsitoTeoria() {
+		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);
 		contentPane = new JPanel();
@@ -102,7 +98,7 @@ public class InserimentoEsitoTeoria extends JFrame {
 		contentPane.add(nome);
 		
 		teoria = new JTextField();
-		teoria.setColumns(10);
+		teoria.setColumns(dieci);
 		teoria.setBounds(centottanta, centoundici, duecentoquaranta, ventidue);
 		contentPane.add(teoria);
 		

@@ -97,7 +97,8 @@ public class Progetto {
 	 * @return
 	 */
 	public double esito(){
-		return (libreria+libreria+test+main)/4.0;
+		double four = 4.0;
+		return (libreria+libreria+test+main)/four;
 	}
 	
 }

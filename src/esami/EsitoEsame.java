@@ -3,6 +3,7 @@ package esami;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import candidati.Candidato;
 import database.Lettura;
@@ -17,7 +18,7 @@ import eccezioni.VotoNonValidoException;
  */
 public class EsitoEsame implements Iterable<Candidato> {
 
-	private HashSet<Candidato> interrogati;
+	private Set<Candidato> interrogati;
 	
 	/**
 	 * Metodo costruttore

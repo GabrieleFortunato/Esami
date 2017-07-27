@@ -155,23 +155,25 @@ public class Candidato {
 	 * @return
 	 */
 	private double teoria(){
+		int esito = 0;
 		if (esitoTeoria.equals("quasi sufficiente")){
-			return 16;
+			esito = 16;
 		} else if (esitoTeoria.equals("sufficiente")){
-			return 18;
+			esito = 18;
 		} else if (esitoTeoria.equals("più che sufficiente")){
-			return 20;
+			esito = 20;
 		} else if (esitoTeoria.equals("quasi buono")){
-			return 22;
+			esito = 22;
 		} else if (esitoTeoria.equals("buono")){
-			return 24;
+			esito = 24;
 		} else if (esitoTeoria.equals("più che buono")){
-			return 26;
+			esito = 26;
 		} else if (esitoTeoria.equals("quasi ottimo")){
-			return 28;
+			esito = 28;
 		} else {
-			return 30;
+			esito = 30;
 		}
+		return esito;
 	}
 	
 	@Override

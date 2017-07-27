@@ -30,11 +30,6 @@ import java.awt.event.ActionEvent;
  */
 public class InserimentoEsitoProgetto extends JFrame {
 
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private final int cinque = 5;
 	private final int dieci = 10;
 	private final int sedici = 16;
@@ -62,7 +57,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 	private final int cinquecentonovantacinque = 595;
 	private final int settecentoquarantuno = 741;
 	
-	private JPanel contentPane;
+	
 	private JTextField nomecandidato;
 	private JTextField libreria;
 	private JTextField test;
@@ -98,6 +93,7 @@ public class InserimentoEsitoProgetto extends JFrame {
 	 * Create the frame.
 	 */
 	public InserimentoEsitoProgetto() {
+		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, settecentoquarantuno, cinquecentoventinove);
 		setTitle("INSERIMENTO VOTO PROGETTO");

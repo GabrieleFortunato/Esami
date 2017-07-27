@@ -23,10 +23,6 @@ import database.Cancellazione;
  */
 public class CancellazionePrenotazione extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private final int cinque = 5;
 	private final int dieci = 10;
 	private final int sedici = 16;
@@ -45,7 +41,6 @@ public class CancellazionePrenotazione extends JFrame {
 	private final int trecento = 300;
 	private final int quattrocentocinquanta = 450;
 	
-	private JPanel contentPane;
 	private JTextField cognome;
 	private JTextField nome;
 
@@ -69,6 +64,7 @@ public class CancellazionePrenotazione extends JFrame {
 	 * Create the frame.
 	 */
 	public CancellazionePrenotazione() {
+		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);
 		setTitle("INSERIMENTO PRENOTAZIONE");

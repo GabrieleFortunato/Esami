@@ -24,10 +24,6 @@ import java.awt.event.ActionEvent;
  */
 public class InserimentoPrenotazione extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private final int cinque = 5;
 	private final int dieci = 10;
 	private final int sedici = 16;
@@ -43,7 +39,6 @@ public class InserimentoPrenotazione extends JFrame {
 	private final int centosettantaquattro = 174;
 	private final int duecentotrenta = 230;
 	
-	private JPanel contentPane;
 	private JTextField cognome;
 	private JTextField nome;
 
@@ -67,6 +62,7 @@ public class InserimentoPrenotazione extends JFrame {
 	 * Create the frame.
 	 */
 	public InserimentoPrenotazione() {
+		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setTitle("INSERIMENTO PRENOTAZIONE");
