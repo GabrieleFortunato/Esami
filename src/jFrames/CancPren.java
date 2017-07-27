@@ -1,28 +1,27 @@
 package jFrames;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import candidati.Candidato;
-import database.Inserimento;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import candidati.Candidato;
+import database.Cancellazione;
 
 /**
- * Classe InserimentoTeoria
+ * Classe CancellazionePrenotazione
  * 
  * @author Gabriele Fortunato
  *
  */
-public class InserimentoPrenotazione extends JFrame {
+public class CancPren extends JFrame {
 
 	private final int cinque = 5;
 	private final int dieci = 10;
@@ -34,10 +33,13 @@ public class InserimentoPrenotazione extends JFrame {
 	private final int sessantatre = 63;
 	private final int ottantanove = 89;	
 	private final int novantadue = 92;
+	private final int cento = 100;
 	private final int centoventidue = 122;
 	private final int centosessantotto = 168;
 	private final int centosettantaquattro = 174;
 	private final int duecentotrenta = 230;
+	private final int trecento = 300;
+	private final int quattrocentocinquanta = 450;
 	
 	private JTextField cognome;
 	private JTextField nome;
@@ -49,7 +51,7 @@ public class InserimentoPrenotazione extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InserimentoPrenotazione frame = new InserimentoPrenotazione();
+					InsPren frame = new InsPren();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					Logger.getLogger("Connessione non riuscita");
@@ -61,10 +63,10 @@ public class InserimentoPrenotazione extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InserimentoPrenotazione() {
+	public CancPren() {
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(cento, cento, quattrocentocinquanta, trecento);
 		setTitle("INSERIMENTO PRENOTAZIONE");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
@@ -96,7 +98,7 @@ public class InserimentoPrenotazione extends JFrame {
 				String cg = cognome.getText();
 				Candidato c = new Candidato(n,cg);
 				try {
-					Inserimento.inserisciPrenotazione(c);
+					Cancellazione.cancellaCandidato(c);
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
 						SQLException e1) {
 					Logger.getLogger("Connessione al database non riuscita");
@@ -108,3 +110,4 @@ public class InserimentoPrenotazione extends JFrame {
 		contentPane.add(cog);
 	}
 }
+

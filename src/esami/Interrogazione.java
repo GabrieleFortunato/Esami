@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-
 import candidati.Candidato;
 import database.Lettura;
 

@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
  * @author Gabriele Fortunato
  *
  */
-public class InserimentoEsitoTeoria extends JFrame {
+public class InsVotoTeoria extends JFrame {
 	
 	private final int cinque = 5;
 	private final int dieci = 10;
@@ -54,7 +54,7 @@ public class InserimentoEsitoTeoria extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InserimentoEsitoTeoria frame = new InserimentoEsitoTeoria();
+					InsVotoTeoria frame = new InsVotoTeoria();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					Logger.getLogger("Connessione non riuscita");
@@ -66,7 +66,7 @@ public class InserimentoEsitoTeoria extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InserimentoEsitoTeoria() {
+	public InsVotoTeoria() {
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);
