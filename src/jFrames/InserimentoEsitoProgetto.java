@@ -7,12 +7,14 @@ import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import candidati.Progetto;
 import database.Inserimento;
+import database.Lettura;
 import eccezioni.EsitoTeoriaException;
 import eccezioni.VotoNonValidoException;
 import esami.EsitoEsame;
 import file.PrintOnFile;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -71,16 +73,25 @@ public class InserimentoEsitoProgetto extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InserimentoEsitoProgetto frame = new InserimentoEsitoProgetto();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					Logger.getLogger("Connessione non riuscita");
-				}
+		try {
+			if (Lettura.daInterrogare().size()>0){
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							InserimentoEsitoProgetto frame = new InserimentoEsitoProgetto();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							Logger.getLogger("Connessione non riuscita");
+						}
+					}
+				});
+			} else {
+				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
 			}
-		});
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -151,9 +162,13 @@ public class InserimentoEsitoProgetto extends JFrame {
 					int fmain = Integer.parseInt(votoMain.getText());
 					Candidato c = new Candidato(nome,cognome);
 					Progetto p = new Progetto(libr,text,fmain);
-					Inserimento.inserisciEsitoProgetto(c,p);
-					EsitoEsame esito = new EsitoEsame();
-					PrintOnFile.printOnFile(esito.iterator());
+					if (!Lettura.candidati().contains(c)&&Lettura.interrogati().contains(c)){
+						Inserimento.inserisciEsitoProgetto(c,p);
+						EsitoEsame esito = new EsitoEsame();
+						PrintOnFile.printOnFile(esito.iterator());
+					} else {
+						JOptionPane.showMessageDialog (null , "Candidato non presente o già interrogato") ;
+					}
 					dispose();
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block

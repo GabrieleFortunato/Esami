@@ -83,7 +83,6 @@ public class Lettura {
 	public static HashSet<Candidato> daInterrogare() throws InstantiationException, IllegalAccessException,
 	ClassNotFoundException, SQLException{
 		HashSet<Candidato> list = new HashSet<>();
-		
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -99,7 +98,6 @@ public class Lettura {
 				list.add(candidato);
 			}
 			conn.close();
-		
 		return list;
 	}
 	
