@@ -7,7 +7,11 @@ import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import candidati.Progetto;
 import database.Inserimento;
+import eccezioni.EsitoTeoriaException;
 import eccezioni.VotoNonValidoException;
+import esami.EsitoEsame;
+import file.PrintOnFile;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -147,15 +151,31 @@ public class InserimentoEsitoProgetto extends JFrame {
 					int fmain = Integer.parseInt(votoMain.getText());
 					Candidato c = new Candidato(nome,cognome);
 					Progetto p = new Progetto(libr,text,fmain);
-					try {
-						Inserimento.inserisciEsitoProgetto(c,p);
-					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-							| SQLException e) {
-						Logger.getLogger("Connessione al database non riuscita");
-					}
+					Inserimento.inserisciEsitoProgetto(c,p);
+					EsitoEsame esito = new EsitoEsame();
+					PrintOnFile.printOnFile(esito.iterator());
 					dispose();
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				} catch (VotoNonValidoException e) {
-					Logger.getLogger("Voto non valido");
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (EsitoTeoriaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		});
