@@ -26,7 +26,9 @@ public class PrintOnFile {
 	 */
 	public static void printOnFile(Iterator<Candidato> iterator){
 		File dir = new File("Esiti");
-	
+		if (!dir.exists()){
+			dir.mkdir();
+		}
 		try {
 			while (iterator.hasNext()){
 				Candidato candidato = iterator.next();
