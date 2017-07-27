@@ -160,8 +160,7 @@ public class InsVotoProg extends JFrame {
 					Progetto p = new Progetto(libr,text,fmain);
 					if (!Lettura.candidati().contains(c)&&Lettura.interrogati().contains(c)){
 						Inserimento.inserisciEsitoProgetto(c,p);
-						EsitoEsame esito = new EsitoEsame();
-						PrintOnFile.printOnFile(esito.iterator());
+						PrintOnFile.printOnFile(c);
 					} else {
 						JOptionPane.showMessageDialog (null , "Candidato non presente o già interrogato") ;
 					}

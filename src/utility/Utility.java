@@ -19,13 +19,14 @@ public class Utility {
 	 */
 	public static String stringForQuery(String s){
 		int length = s.length();
+		String result = s;
 		for (int i=0;i<length;i++){
 			if (s.charAt(i)=='\''){
-				s=s.substring(0,i+1).concat(s.substring(i));
+				result=s.substring(0,i+1).concat(s.substring(i));
 				i++;
 			}
 		}
-		return s;
+		return result;
 	}
 	
 	public static boolean votoCorretto(int voto){

@@ -24,16 +24,15 @@ public class PrintOnFile {
 	 * Stampa su files gli esiti finali dei candidati
 	 * @param iterator
 	 */
-	public static void printOnFile(Iterator<Candidato> iterator){
+	public static void printOnFile(Candidato candidato){
 		File dir = new File("Esiti");
 		if (!dir.exists()){
 			dir.mkdir();
 		}
 		try {
-			while (iterator.hasNext()){
-				Candidato candidato = iterator.next();
+			PrintStream output;
 				int esito = (int)candidato.getProgetto().esito();
-				PrintStream output = new PrintStream(
+				output = new PrintStream(
 						new File("Esiti\\"+candidato.getCognome()+" "+candidato.getNome()+".txt")
 				);
 				if (candidato.esito()>30){
@@ -71,8 +70,8 @@ public class PrintOnFile {
 				output.flush();
 				output.close();
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		 catch (FileNotFoundException e) {
+		
 		}
 	}
 	
@@ -105,7 +104,7 @@ public class PrintOnFile {
 			output.flush();
 			output.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			
 		}
 	}
 	
@@ -129,7 +128,7 @@ public class PrintOnFile {
 			output.flush();
 			output.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			
 		}
 	}
 	
