@@ -134,4 +134,5 @@ public class Lettura {
 			conn.close();
 		return list;
 	}
+	
 }

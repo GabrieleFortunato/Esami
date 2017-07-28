@@ -53,7 +53,6 @@ public class Cancellazione {
 		);
 		st.close();
 		conn.close();
-		file.PrintOnFile.cancellaFile(c);
 	} 
 }
 

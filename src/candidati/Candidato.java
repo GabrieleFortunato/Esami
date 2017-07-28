@@ -81,6 +81,14 @@ public class Candidato {
 	}
 
 	/**
+	 * Imposta l'id del candidato
+	 * @param id
+	 */
+	public int getId(){
+		return idCandidato;
+	}
+
+	/**
 	 * Imposta il nome del candidato
 	 * @param nome
 	 */
@@ -117,7 +125,7 @@ public class Candidato {
 	 * @param esitoTeoria
 	 * @throws EsitoTeoriaException 
 	 */
-	private void setEsitoTeoria(String esitoTeoria) throws EsitoTeoriaException {
+	public void setEsitoTeoria(String esitoTeoria) throws EsitoTeoriaException {
 		if (esitoTeoriaCorretto(esitoTeoria)){
 			this.esitoTeoria = esitoTeoria;
 		} else {
@@ -137,7 +145,7 @@ public class Candidato {
 	 * Imposta il progetto svolto dal candidato
 	 * @param progetto
 	 */
-	private void setProgetto(Progetto progetto) {
+	public void setProgetto(Progetto progetto) {
 		this.progetto = progetto;
 	}
 	

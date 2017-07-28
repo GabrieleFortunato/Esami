@@ -1,8 +1,16 @@
 package jFrames;
 
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import candidati.Progetto;
@@ -11,14 +19,7 @@ import database.Lettura;
 import eccezioni.EsitoTeoriaException;
 import eccezioni.VotoNonValidoException;
 import file.PrintOnFile;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.logging.Logger;
-import java.awt.event.ActionEvent;
 
 /**
  * Classe InserimentoEsitoProgetto
@@ -82,7 +83,8 @@ public class InsVotoProg extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
 			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+		} catch (HeadlessException | InstantiationException | IllegalAccessException | ClassNotFoundException
+				| SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -148,46 +150,24 @@ public class InsVotoProg extends JFrame {
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					String cognome = cognomecandidato.getText();
-					String nome = nomecandidato.getText();
-					int libr = Integer.parseInt(libreria.getText());
-					int text = Integer.parseInt(test.getText());
-					int fmain = Integer.parseInt(votoMain.getText());
-					Candidato c = new Candidato(nome,cognome);
-					Progetto p = new Progetto(libr,text,fmain);
-					if (!Lettura.candidati().contains(c)&&Lettura.interrogati().contains(c)){
-						Inserimento.inserisciEsitoProgetto(c,p);
-						PrintOnFile.printOnFile(c);
-					} else {
-						JOptionPane.showMessageDialog (null , "Candidato non presente o già interrogato") ;
-					}
-					dispose();
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (VotoNonValidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (EsitoTeoriaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			public void actionPerformed(ActionEvent arg0) {String cognome = cognomecandidato.getText();
+			try {
+				String nome = nomecandidato.getText();
+				int libr = Integer.parseInt(libreria.getText());
+				int text = Integer.parseInt(test.getText());
+				int fmain = Integer.parseInt(votoMain.getText());
+				Candidato c = new Candidato(nome,cognome);
+				Progetto p = new Progetto(libr,text,fmain);
+				Inserimento.inserisciEsitoProgetto(c,p);
+				PrintOnFile.printOnFile(Lettura.interrogati());
+				dispose();
+			} catch (NumberFormatException | InstantiationException | IllegalAccessException | ClassNotFoundException
+					| VotoNonValidoException | SQLException | EsitoTeoriaException e) {
+				e.printStackTrace();
 				}
 			}
 		});
+		
 		btnConferma.setBounds(cinquecentonovantacinque, quattrocentoquarantaquattro, centosedici, venticinque);
 		contentPane.add(btnConferma);
 	}
