@@ -25,7 +25,7 @@ public class Utility {
 		for (int i=0;i<length;i++){
 			if (s.charAt(i)=='\''){
 				result=s.substring(0,i+1).concat(s.substring(i));
-				i++;
+				length = length-1;
 			}
 		}
 		return result;
