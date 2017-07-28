@@ -23,13 +23,6 @@ public class Inizializzazione {
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
 	
-	/**
-	 * Inizializza il database
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
 	public static void inizializzaDatabase() 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			Class.forName(driver).newInstance();

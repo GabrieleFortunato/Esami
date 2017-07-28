@@ -7,6 +7,9 @@ import java.sql.Statement;
 import candidati.Candidato;
 import candidati.Progetto;
 import utility.Utility;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 /**
  * Classe InserimentoNelDatabase
@@ -38,10 +41,10 @@ public class Inserimento {
 	 */
 	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-			);
+		try {
+			InitialContext context = new InitialContext();
+			DataSource ds = (DataSource) context.lookup(driver);
+			Connection conn = ds.getConnection();	
 			Statement st = conn.createStatement();
 			@SuppressWarnings("unused")
 			int res = st.executeUpdate(
@@ -52,6 +55,8 @@ public class Inserimento {
 			);
 			st.close();
 			conn.close();
+		} catch (NamingException e) {
+		}
 		
 	}
 

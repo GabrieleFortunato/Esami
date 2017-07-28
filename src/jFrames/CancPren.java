@@ -24,24 +24,6 @@ import database.Cancellazione;
 @SuppressWarnings("serial")
 public class CancPren extends JFrame {
 
-	private final int cinque = 5;
-	private final int dieci = 10;
-	private final int sedici = 16;
-	private final int ventidue = 22;
-	private final int venticinque = 25;
-	private final int trentasette = 37;
-	private final int sessanta = 60;
-	private final int sessantatre = 63;
-	private final int ottantanove = 89;	
-	private final int novantadue = 92;
-	private final int cento = 100;
-	private final int centoventidue = 122;
-	private final int centosessantotto = 168;
-	private final int centosettantaquattro = 174;
-	private final int duecentotrenta = 230;
-	private final int trecento = 300;
-	private final int quattrocentocinquanta = 450;
-	
 	private JTextField cognome;
 	private JTextField nome;
 
@@ -66,6 +48,23 @@ public class CancPren extends JFrame {
 	 */
 	public CancPren() {
 		JPanel contentPane;
+		int cinque = 5;
+		int dieci = 10;
+		int sedici = 16;
+		int ventidue = 22;
+		int venticinque = 25;
+		int trentasette = 37;
+		int sessanta = 60;
+		int sessantatre = 63;
+		int ottantanove = 89;	
+		int novantadue = 92;
+		int cento = 100;
+		int centoventidue = 122;
+		int centosessantotto = 168;
+		int centosettantaquattro = 174;
+		int duecentotrenta = 230;
+		int trecento = 300;
+		int quattrocentocinquanta = 450;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);
 		setTitle("INSERIMENTO PRENOTAZIONE");
