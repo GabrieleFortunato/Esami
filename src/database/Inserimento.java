@@ -1,7 +1,6 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import candidati.Candidato;
@@ -23,11 +22,7 @@ public class Inserimento {
 		
 	}
 	
-	private final static String url = "jdbc:mysql://localhost:3306/";
-	private final static String dbName = "esamiprogrammazione";
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String userName = "root"; 
-	private final static String password = "qrnq946";
 	
 	/**
 	 * Inserisci nel database l'esito del progetto 
@@ -62,37 +57,42 @@ public class Inserimento {
 
 	public static void inserisciPrenotazione(Candidato c) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-			);
-			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
-			int res = st.executeUpdate(
-					"insert ignore into candidato (nome,cognome) values ('"
-					+c.getNome()+"','"+c.getCognome()+"')"
-			);
-			st.close();
-			conn.close();
+			try {
+				InitialContext context = new InitialContext();
+				DataSource ds = (DataSource) context.lookup(driver);
+				Connection conn = ds.getConnection();	
+				Statement st = conn.createStatement();
+				@SuppressWarnings("unused")
+				int res = st.executeUpdate(
+						"insert ignore into candidato (nome,cognome) values ('"
+						+c.getNome()+"','"+c.getCognome()+"')"
+				);
+				st.close();
+				conn.close();
+			} catch (NamingException e) {
+				
+			}
 	}
 	
 	public static void inserisciEsitoTeoria(Candidato c) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-			);
+		try {
+			InitialContext context = new InitialContext();
+			DataSource ds = (DataSource) context.lookup(driver);
+			Connection conn = ds.getConnection();	
 			Statement st = conn.createStatement();
 			@SuppressWarnings("unused")
 			int res = st.executeUpdate(
-					"insert ignore into teoria values ((select id from candidato where nome='"
-					+Utility.stringForQuery(c.getNome())
-					+"' and cognome='"+Utility.stringForQuery(c.getCognome())
-					+"'),'"+Utility.stringForQuery(c.getEsitoTeoria())
-					+"')"
+					"insert ignore into teoria values ((select id from candidato where nome='"+
+					Utility.stringForQuery(c.getNome())+"' and cognome='"+
+					Utility.stringForQuery(c.getCognome())+"'),'"+
+					Utility.stringForQuery(c.getEsitoTeoria())+"')"
 			);
 			st.close();
 			conn.close();
+		} catch (NamingException e) {
+			
+		}
 	}
 	
 }

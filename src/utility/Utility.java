@@ -8,6 +8,8 @@ package utility;
  */
 public class Utility {
 	
+	private final static int dieci = 10;
+	
 	private Utility(){
 		
 	}
@@ -39,7 +41,7 @@ public class Utility {
 	}
 	
 	public static double arrotonda(double a, double b){
-		return Math.ceil(a*Math.pow(10, b))/Math.pow(10, b);
+		return Math.ceil(a*Math.pow(dieci, b))/Math.pow(dieci, b);
 	}
 	
 }

@@ -40,6 +40,7 @@ public class InsVotoProg extends JFrame {
 	private final int quaranta = 40;
 	private final int settantasette = 77;
 	private final int cento = 100;
+	private final int centouno = 101;
 	private final int centosei = 106;
 	private final int centonove = 109;
 	private final int centosedici = 116;
@@ -83,10 +84,9 @@ public class InsVotoProg extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
 			}
-		} catch (HeadlessException | InstantiationException | IllegalAccessException | ClassNotFoundException
-				| SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (HeadlessException | InstantiationException | IllegalAccessException |
+				ClassNotFoundException | SQLException e) {
+			
 		}
 	}
 
@@ -112,7 +112,7 @@ public class InsVotoProg extends JFrame {
 		contentPane.add(lblNomeCandidato);
 		
 		JLabel lblVotoLibreria = new JLabel("Voto libreria:");
-		lblVotoLibreria.setBounds(quaranta, centoottantasette, 101, sedici);
+		lblVotoLibreria.setBounds(quaranta, centoottantasette, centouno, sedici);
 		contentPane.add(lblVotoLibreria);
 		
 		JLabel lblVotoTest = new JLabel("Voto test:");
@@ -163,7 +163,7 @@ public class InsVotoProg extends JFrame {
 				dispose();
 			} catch (NumberFormatException | InstantiationException | IllegalAccessException | ClassNotFoundException
 					| VotoException | SQLException | EsitoTeoriaException e) {
-				e.printStackTrace();
+				
 				}
 			}
 		});
