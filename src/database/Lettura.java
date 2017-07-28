@@ -9,7 +9,7 @@ import java.util.HashSet;
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
-import eccezioni.VotoNonValidoException;
+import eccezioni.VotoException;
 
 /**
  * Classe LetturaDaDatabase
@@ -29,7 +29,18 @@ public class Lettura {
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
 	
-	public static HashSet<Candidato> interrogati() throws SQLException, VotoNonValidoException, 
+	/**
+	 * Legge dal database i candidati che hanno sostenuto e superato 
+	 * tutte le prove
+	 * @return
+	 * @throws SQLException
+	 * @throws VotoException
+	 * @throws EsitoTeoriaException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
+	 */
+	public static HashSet<Candidato> proveCompletate() throws SQLException, VotoException, 
 	EsitoTeoriaException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		HashSet<Candidato> list = new HashSet<>();
 		Class.forName(driver).newInstance();
@@ -42,6 +53,7 @@ public class Lettura {
 				+ "inner join teoria on candidato.id=teoria.candidato "
 				+ "inner join progetto on candidato.id=progetto.candidato"
 		);
+		Progetto progetto;
 		while (res.next()) {
 			String nome = res.getString("nome");
 			String cognome = res.getString("cognome");
@@ -49,7 +61,7 @@ public class Lettura {
 			int libreria = res.getInt("libreria");
 			int test = res.getInt("test");
 			int main = res.getInt("main");
-			Progetto progetto = new Progetto(libreria,test,main);
+			progetto = new Progetto(libreria,test,main);
 			Candidato candidato = new Candidato(nome,cognome,teoria,progetto);
 			list.add(candidato);
 		}

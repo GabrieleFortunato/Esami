@@ -194,10 +194,10 @@ public class Candidato {
 		return result;
 	}
 
-	@Override
 	/**
 	 * Verifica l'uguaglianza con un altro candidato in base all'id
 	 */
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

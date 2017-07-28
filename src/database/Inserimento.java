@@ -26,6 +26,16 @@ public class Inserimento {
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
 	
+	/**
+	 * Inserisci nel database l'esito del progetto 
+	 * svolto da un candidato
+	 * @param c
+	 * @param p
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			Class.forName(driver).newInstance();

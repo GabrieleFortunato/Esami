@@ -17,7 +17,7 @@ import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
 import eccezioni.EsitoTeoriaException;
-import eccezioni.VotoNonValidoException;
+import eccezioni.VotoException;
 import file.PrintOnFile;
 import java.awt.event.ActionListener;
 
@@ -159,10 +159,10 @@ public class InsVotoProg extends JFrame {
 				Candidato c = new Candidato(nome,cognome);
 				Progetto p = new Progetto(libr,text,fmain);
 				Inserimento.inserisciEsitoProgetto(c,p);
-				PrintOnFile.printOnFile(Lettura.interrogati());
+				PrintOnFile.printOnFile(Lettura.proveCompletate());
 				dispose();
 			} catch (NumberFormatException | InstantiationException | IllegalAccessException | ClassNotFoundException
-					| VotoNonValidoException | SQLException | EsitoTeoriaException e) {
+					| VotoException | SQLException | EsitoTeoriaException e) {
 				e.printStackTrace();
 				}
 			}

@@ -8,7 +8,7 @@ import java.util.Set;
 import candidati.Candidato;
 import database.Lettura;
 import eccezioni.EsitoTeoriaException;
-import eccezioni.VotoNonValidoException;
+import eccezioni.VotoException;
 
 /**
  * Classe EsitoEsame
@@ -26,13 +26,13 @@ public class EsitoEsame implements Iterable<Candidato> {
 	 * @throws IllegalAccessException
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
-	 * @throws VotoNonValidoException
+	 * @throws VotoException
 	 * @throws EsitoTeoriaException
 	 */
 	public EsitoEsame() 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, 
-			VotoNonValidoException, EsitoTeoriaException{
-		this.setInterrogati(Lettura.interrogati());
+			VotoException, EsitoTeoriaException{
+		this.setInterrogati(Lettura.proveCompletate());
 	}
 	
 	/**

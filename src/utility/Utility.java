@@ -29,6 +29,11 @@ public class Utility {
 		return result;
 	}
 	
+	/**
+	 * Verifica se un voto inserito è compreso tra 0 e 30
+	 * @param voto
+	 * @return
+	 */
 	public static boolean votoCorretto(int voto){
 		return (0<=voto&&voto<=30);
 	}

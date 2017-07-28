@@ -6,7 +6,7 @@ package eccezioni;
  * @author Gabriele Fortunato
  *
  */
-public class VotoNonValidoException extends Exception {
+public class NoInterrException extends Exception {
 	/**
 	 * 
 	 */

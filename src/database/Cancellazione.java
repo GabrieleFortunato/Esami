@@ -24,22 +24,15 @@ public class Cancellazione {
 	private final static String driver = "com.mysql.jdbc.Driver";
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
-	
-	public static void puliziaDatabase() 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		Class.forName(driver).newInstance();
-		Connection conn = DriverManager.getConnection(
-				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-		);
-		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
-		int res = st.executeUpdate(
-				"delete from candidato"
-		);
-		st.close();
-		conn.close();
-	}
 
+	/**
+	 * Cancella un candidato dal database
+	 * @param c
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public static void cancellaCandidato(Candidato c)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		Class.forName(driver).newInstance();
