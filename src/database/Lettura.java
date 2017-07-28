@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -27,7 +29,8 @@ public class Lettura {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
-
+	private static DataSource ds;
+	
 	/**
 	 * Legge dal database i candidati che hanno sostenuto e superato 
 	 * tutte le prove
@@ -44,7 +47,7 @@ public class Lettura {
 		Set<Candidato> list = new HashSet<>();
 		try {
 			InitialContext context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup(driver);
+			ds = (DataSource) context.lookup(driver);
 			Connection conn = ds.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet res = st.executeQuery(
@@ -68,6 +71,7 @@ public class Lettura {
 			res.close();
 			conn.close();
 		} catch (NamingException e) {
+			Logger.getLogger("");
 		}
 		return (HashSet<Candidato>) list;
 	}

@@ -3,6 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Logger;
+
 import candidati.Candidato;
 import candidati.Progetto;
 import utility.Utility;
@@ -23,6 +25,7 @@ public class Inserimento {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
+	private static DataSource ds;
 	
 	/**
 	 * Inserisci nel database l'esito del progetto 
@@ -38,7 +41,7 @@ public class Inserimento {
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		try {
 			InitialContext context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup(driver);
+			ds = (DataSource) context.lookup(driver);
 			Connection conn = ds.getConnection();	
 			Statement st = conn.createStatement();
 			@SuppressWarnings("unused")
@@ -51,6 +54,7 @@ public class Inserimento {
 			st.close();
 			conn.close();
 		} catch (NamingException e) {
+			Logger.getLogger("");
 		}
 		
 	}
@@ -59,7 +63,7 @@ public class Inserimento {
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			try {
 				InitialContext context = new InitialContext();
-				DataSource ds = (DataSource) context.lookup(driver);
+				ds = (DataSource) context.lookup(driver);
 				Connection conn = ds.getConnection();	
 				Statement st = conn.createStatement();
 				@SuppressWarnings("unused")
@@ -70,7 +74,7 @@ public class Inserimento {
 				st.close();
 				conn.close();
 			} catch (NamingException e) {
-				
+				Logger.getLogger("");
 			}
 	}
 	
@@ -78,7 +82,7 @@ public class Inserimento {
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		try {
 			InitialContext context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup(driver);
+			ds = (DataSource) context.lookup(driver);
 			Connection conn = ds.getConnection();	
 			Statement st = conn.createStatement();
 			@SuppressWarnings("unused")
@@ -91,7 +95,7 @@ public class Inserimento {
 			st.close();
 			conn.close();
 		} catch (NamingException e) {
-			
+			Logger.getLogger("");
 		}
 	}
 	

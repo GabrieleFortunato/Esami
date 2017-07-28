@@ -125,7 +125,7 @@ public class Candidato {
 	 * @param esitoTeoria
 	 * @throws EsitoTeoriaException 
 	 */
-	public void setEsitoTeoria(String esitoTeoria) throws EsitoTeoriaException {
+	private void setEsitoTeoria(String esitoTeoria) throws EsitoTeoriaException {
 		if (esitoTeoriaCorretto(esitoTeoria)){
 			this.esitoTeoria = esitoTeoria;
 		} else {
@@ -145,7 +145,7 @@ public class Candidato {
 	 * Imposta il progetto svolto dal candidato
 	 * @param progetto
 	 */
-	public void setProgetto(Progetto progetto) {
+	private void setProgetto(Progetto progetto) {
 		this.progetto = progetto;
 	}
 	

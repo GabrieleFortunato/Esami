@@ -3,6 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Logger;
+
 import candidati.Candidato;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -22,7 +24,8 @@ public class Cancellazione {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
-
+	private static DataSource ds;
+	
 	/**
 	 * Cancella un candidato dal database
 	 * @param c
@@ -36,7 +39,7 @@ public class Cancellazione {
 			SQLException{
 		try {
 			InitialContext context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup(driver);
+			ds = (DataSource) context.lookup(driver);
 			Connection conn = ds.getConnection();
 			Statement st = conn.createStatement();
 			@SuppressWarnings("unused")
@@ -47,7 +50,7 @@ public class Cancellazione {
 			st.close();
 			conn.close();
 		} catch (NamingException e) {
-			
+			Logger.getLogger("");
 		}
 	} 
 }
