@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
  * @author Gabriele Fortunato
  *
  */
+@SuppressWarnings("serial")
 public class InsPren extends JFrame {
 
 	private final int cinque = 5;

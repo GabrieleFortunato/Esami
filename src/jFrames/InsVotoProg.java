@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
  * @author Gabriele Fortunato
  *
  */
+@SuppressWarnings("serial")
 public class InsVotoProg extends JFrame {
 
 	private final int cinque = 5;
