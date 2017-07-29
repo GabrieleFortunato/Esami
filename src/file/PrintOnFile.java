@@ -30,51 +30,49 @@ public class PrintOnFile {
 			dir.mkdir();
 		}
 		PrintStream output;
-		for (Candidato c: candidati){
-			try {
-				int esito = (int)c.getProgetto().esito();
-				output = new PrintStream(
-						new File("Esiti\\"+c.getCognome()+" "+c.getNome()+".txt")
-				);
-				if (c.esito()>30){
-					output.println(
-							"Esito teoria: "+c.getEsitoTeoria()
-				);
-					output.println(
-							"Esito progetto: "+esito
-				);
-					output.println(
-							"Esame superato con 30 e lode"
-							);
-				} else if (c.esito()<18){
-					output.println(
-							"Esito teoria: "+c.getEsitoTeoria()		
-							);
-					output.println(
-							"Esito progetto: "+esito
-							);
-					output.println(
-							"Esame non superato"
-							);
-					} else{
+		try {
+			for (Candidato c: candidati){
+					int esito = (int)c.getProgetto().esito();
+					output = new PrintStream(
+							new File("Esiti\\"+c.getCognome()+" "+c.getNome()+".txt")
+					);
+					if (c.esito()>30){
 						output.println(
 								"Esito teoria: "+c.getEsitoTeoria()
-						);
+					);
 						output.println(
 								"Esito progetto: "+esito
-						);
+					);
 						output.println(
-								"Esame superato con "+(int)Utility.arrotonda(c.esito(),0)
-						);	
+								"Esame superato con 30 e lode"
+								);
+					} else if (c.esito()<18){
+						output.println(
+								"Esito teoria: "+c.getEsitoTeoria()		
+								);
+						output.println(
+								"Esito progetto: "+esito
+								);
+						output.println(
+								"Esame non superato"
+								);
+						} else{
+							output.println(
+									"Esito teoria: "+c.getEsitoTeoria()
+							);
+							output.println(
+									"Esito progetto: "+esito
+							);
+							output.println(
+									"Esame superato con "+(int)Utility.arrotonda(c.esito(),0)
+							);	
+						}
+						output.flush();
+						output.close();
 					}
-					output.flush();
-					output.close();
-				}
-			 catch (FileNotFoundException e) {
-				 JOptionPane.showMessageDialog (
-						 null , "Problemi di collegamento con il database"
-				);
-			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
