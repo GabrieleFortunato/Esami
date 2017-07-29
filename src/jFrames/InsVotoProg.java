@@ -11,14 +11,13 @@ import database.Lettura;
 import eccezioni.VotoException;
 import file.PrintOnFile;
 import utility.Utility;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
@@ -160,16 +159,23 @@ public class InsVotoProg extends JFrame {
 						Utility.scriviSuFile(p.getLibreria());
 						Utility.scriviSuFile(p.getTest());
 						Utility.scriviSuFile(p.getMain());
+						FileReader a = new FileReader(c.getNome()+".txt");
+						FileReader b = new FileReader(c.getCognome()+".txt");
+						FileReader c1 = new FileReader(p.getLibreria()+".txt");
+						FileReader d = new FileReader(p.getTest()+".txt");
+						FileReader e = new FileReader(p.getMain()+".txt");
 						Inserimento.inserisciEsitoProgetto(
-								Utility.stringa(new FileReader(c.getNome()+".txt")),
-								Utility.stringa(new FileReader(c.getCognome()+".txt")),
-								Utility.stringa(new FileReader(p.getLibreria()+".txt")),
-								Utility.stringa(new FileReader(p.getTest()+".txt")),
-								Utility.stringa(new FileReader(p.getMain()+".txt"))
+								Utility.stringa(a),Utility.stringa(b),
+								Utility.stringa(c1),Utility.stringa(d),Utility.stringa(e)
 								);
+						a.close();
+						b.close();
+						c1.close();
+						d.close();
+						e.close();
 						PrintOnFile.printOnFile(Lettura.interrogati());
 						dispose();
-					} catch (FileNotFoundException e) {
+					} catch (IOException e) {
 					}
 				} catch (NumberFormatException | VotoException | SQLException e) {
 					
