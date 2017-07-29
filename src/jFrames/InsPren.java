@@ -4,12 +4,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import candidati.Candidato;
 import database.Inserimento;
-
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -101,9 +101,10 @@ public class InsPren extends JFrame {
 				Candidato c = new Candidato(n,cg);
 				try {
 					Inserimento.inserisciPrenotazione(c);
-				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
-						SQLException e1) {
-					Logger.getLogger("Connessione al database non riuscita");
+				} catch (SQLException | NamingException e1) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di collegamento con il database"
+					); 
 				}
 				dispose();
 			}

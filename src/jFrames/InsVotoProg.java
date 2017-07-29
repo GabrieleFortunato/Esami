@@ -5,6 +5,8 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.logging.Logger;
+
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,8 +18,6 @@ import candidati.Candidato;
 import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
-import eccezioni.EsitoTeoriaException;
-import eccezioni.VotoException;
 import file.PrintOnFile;
 import java.awt.event.ActionListener;
 
@@ -84,9 +84,8 @@ public class InsVotoProg extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
 			}
-		} catch (HeadlessException | InstantiationException | IllegalAccessException |
-				ClassNotFoundException | SQLException e) {
-			
+		} catch (HeadlessException | NamingException | SQLException e) {
+			JOptionPane.showMessageDialog ( null, "Problemi di collegamento con il database" ) ;
 		}
 	}
 
@@ -156,14 +155,15 @@ public class InsVotoProg extends JFrame {
 				int libr = Integer.parseInt(libreria.getText());
 				int text = Integer.parseInt(test.getText());
 				int fmain = Integer.parseInt(votoMain.getText());
-				Candidato c = new Candidato(nome,cognome);
-				Progetto p = new Progetto(libr,text,fmain);
-				Inserimento.inserisciEsitoProgetto(c,p);
+				Candidato c = new Candidato(nome, cognome);
+				Progetto p = new Progetto(libr, text, fmain);
+				Inserimento.inserisciEsitoProgetto(c, p);
 				PrintOnFile.printOnFile(Lettura.proveCompletate());
 				dispose();
-			} catch (NumberFormatException | InstantiationException | IllegalAccessException | ClassNotFoundException
-					| VotoException | SQLException | EsitoTeoriaException e) {
-				
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog (
+						null , "Impossibile inserire nel database l'esito del progetto"
+				); 
 				}
 			}
 		});

@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -94,16 +96,17 @@ public class CancPren extends JFrame {
 		JButton cog = new JButton("CONFERMA");
 		cog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String n = nome.getText();
-				String cg = cognome.getText();
-				Candidato c = new Candidato(n,cg);
 				try {
+					String n = nome.getText();
+					String cg = cognome.getText();
+					Candidato c = new Candidato(n,cg);
 					Cancellazione.cancellaCandidato(c);
-				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
-						SQLException e1) {
-					Logger.getLogger("Connessione al database non riuscita");
+					dispose();
+				} catch (NamingException | SQLException e1) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di collegamento con il database"
+					); 
 				}
-				dispose();
 			}
 		});
 		cog.setBounds(duecentotrenta, centosessantotto, centosettantaquattro, venticinque);
