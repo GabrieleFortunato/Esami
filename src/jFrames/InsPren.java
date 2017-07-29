@@ -100,7 +100,7 @@ public class InsPren extends JFrame {
 					Inserimento.inserisciPrenotazione(c);
 					dispose();
 				} catch (SQLException e1) {
-					
+					Logger.getLogger("Eccezione");
 				}
 			}
 		});

@@ -3,6 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Logger;
+
 import candidati.Candidato;
 import candidati.Progetto;
 import utility.Utility;
@@ -27,7 +29,7 @@ public class Inserimento {
 			context = new InitialContext();ds = 
 			(DataSource) context.lookup(url);
 		} catch (NamingException e) {
-			
+			Logger.getLogger("Eccezione");
 		}
 	}
 	

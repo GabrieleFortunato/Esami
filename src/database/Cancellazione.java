@@ -3,6 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Logger;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -25,7 +27,7 @@ public class Cancellazione {
 			context = new InitialContext();ds = 
 			(DataSource) context.lookup(url);
 		} catch (NamingException e) {
-			
+			Logger.getLogger("Eccezione");
 		}
 	}
 	

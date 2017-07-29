@@ -100,7 +100,7 @@ public class CancPren extends JFrame {
 					Cancellazione.cancellaCandidato(c);
 					dispose();
 				} catch (SQLException e1) {
-					
+					Logger.getLogger("Eccezione");
 				}
 			}
 		});

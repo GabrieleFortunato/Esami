@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
@@ -31,7 +32,7 @@ public class Lettura {
 			context = new InitialContext();ds = 
 			(DataSource) context.lookup(url);
 		} catch (NamingException e) {
-			
+			Logger.getLogger("Eccezione");
 		}
 	}
 	
@@ -65,7 +66,7 @@ public class Lettura {
 			}
 			conn.close();
 		} catch (SQLException | VotoException | EsitoTeoriaException e) {
-				
+			Logger.getLogger("Eccezione");
 		}
 		return (HashSet<Candidato>) list;
 	}
@@ -73,8 +74,6 @@ public class Lettura {
 	public static HashSet<Candidato> perTeoria() {
 		Set<Candidato> list = new HashSet<>();
 		try {
-			InitialContext context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup(url);
 			Connection conn = ds.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet res = st.executeQuery(
@@ -88,8 +87,8 @@ public class Lettura {
 				list.add(candidato);
 			}
 			conn.close();
-		} catch (NamingException | SQLException e) {
-			
+		} catch (SQLException e) {
+			Logger.getLogger("Eccezione");
 		}
 		return (HashSet<Candidato>) list;
 	}
@@ -97,8 +96,6 @@ public class Lettura {
 	public static HashSet<Candidato> daInterrogare() {
 		Set<Candidato> list = new HashSet<>();
 		try {
-			InitialContext context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup(url);
 			Connection conn = ds.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet res = st.executeQuery(
@@ -112,16 +109,14 @@ public class Lettura {
 				list.add(candidato);
 			}
 			conn.close();
-		} catch (NamingException | SQLException e) {
-			
+		} catch (SQLException e) {
+			Logger.getLogger("Eccezione");
 		}
 		return (HashSet<Candidato>) list;
 	}
 	
 	public static HashSet<Candidato> candidati() throws NamingException, SQLException {
 		Set<Candidato> list = new HashSet<>();
-		InitialContext context = new InitialContext();
-		DataSource ds = (DataSource) context.lookup(url);
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(

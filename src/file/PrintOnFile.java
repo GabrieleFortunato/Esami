@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.HashSet;
+import java.util.logging.Logger;
+
 import candidati.Candidato;
 import utility.Utility;
 
@@ -70,7 +72,7 @@ public class PrintOnFile {
 						output.close();
 					}
 		} catch (FileNotFoundException e) {
-			
+			Logger.getLogger("Eccezione");
 		}
 	}
 }
