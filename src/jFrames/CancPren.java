@@ -93,7 +93,7 @@ public class CancPren extends JFrame {
 		nome.setBounds(duecentotrenta, ottantanove, centosettantaquattro, ventidue);
 		contentPane.add(nome);
 		
-		JButton cog = new JButton("CONFERMA1");
+		JButton cog = new JButton("CONFERMA");
 		cog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
