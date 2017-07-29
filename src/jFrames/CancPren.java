@@ -41,7 +41,7 @@ public class CancPren extends JFrame {
 	private final int duecentotrenta = 230;
 	private final int trecento = 300;
 	private final int quattrocentocinquanta = 450;
-	
+
 	private JTextField cognome;
 	private JTextField nome;
 
