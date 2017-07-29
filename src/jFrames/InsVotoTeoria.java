@@ -9,6 +9,7 @@ import database.Inserimento;
 import eccezioni.EsitoTeoriaException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -111,15 +112,11 @@ public class InsVotoTeoria extends JFrame {
 					String surname = cognome.getText();
 					String theory = teoria.getText();
 					Candidato c = new Candidato(name,surname,theory);
-					try {
-						Inserimento.inserisciEsitoTeoria(c);
-					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-							| SQLException e1) {
-						Logger.getLogger("Connessione al database non riuscita");
-					}
+					Inserimento.inserisciEsitoTeoria(c);
 					dispose();
-				} catch (EsitoTeoriaException e1) {
-					Logger.getLogger("Connessione non riuscita");
+				} catch (EsitoTeoriaException | NamingException | SQLException e1) {
+					// TODO Auto-generated catch block
+					
 				}
 			}
 		});

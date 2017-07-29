@@ -8,12 +8,12 @@ import candidati.Candidato;
 import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
-import eccezioni.EsitoTeoriaException;
 import eccezioni.VotoException;
 import file.PrintOnFile;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -67,24 +67,19 @@ public class InsVotoProg extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			if (Lettura.daInterrogare().size()>0){
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							InsVotoProg frame = new InsVotoProg();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							Logger.getLogger("Connessione non riuscita");
-						}
+		if (Lettura.daInterrogare().size()>0){
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						InsVotoProg frame = new InsVotoProg();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						Logger.getLogger("Connessione non riuscita");
 					}
-				});
-			} else {
-				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				}
+			});
+		} else {
+			JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
 		}
 	}
 
@@ -160,27 +155,9 @@ public class InsVotoProg extends JFrame {
 					Inserimento.inserisciEsitoProgetto(c,p);
 					PrintOnFile.printOnFile(Lettura.interrogati());
 					dispose();
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (EsitoTeoriaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (VotoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (NumberFormatException | VotoException | NamingException | 
+						SQLException e) {
+					
 				}
 			}
 		});
