@@ -20,7 +20,7 @@ public class Inizializzazione {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private static DataSource ds = null;
+	private static DataSource ds;
 	
 	/**
 	 * Inizializza il database
