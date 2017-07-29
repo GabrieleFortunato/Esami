@@ -25,26 +25,6 @@ import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class InsVotoTeoria extends JFrame {
 	
-	private final int cinque = 5;
-	private final int dieci = 10;
-	private final int sedici = 16;
-	private final int ventidue = 22;
-	private final int ventiquattro = 24;
-	private final int venticinque = 25;
-	private final int cinquantatre = 53;
-	private final int cinquantasei = 56;
-	private final int ottantadue = 82;	
-	private final int ottantacinque = 85;
-	private final int cento = 100;
-	private final int centoundici = 111;
-	private final int centoquattordici = 114;
-	private final int centotrentaquattro = 134;
-	private final int centottanta = 180;
-	private final int centottantasette = 187;
-	private final int duecentoquaranta = 240;
-	private final int trecento = 300;
-	private final int quattrocentocinquanta = 450; 
-	
 	private JTextField cognome;
 	private JTextField nome;
 	private JTextField teoria;
@@ -69,6 +49,25 @@ public class InsVotoTeoria extends JFrame {
 	 * Create the frame.
 	 */
 	public InsVotoTeoria() {
+		final int cinque = 5;
+		final int dieci = 10;
+		final int sedici = 16;
+		final int ventidue = 22;
+		final int ventiquattro = 24;
+		final int venticinque = 25;
+		final int cinquantatre = 53;
+		final int cinquantasei = 56;
+		final int ottantadue = 82;	
+		final int ottantacinque = 85;
+		final int cento = 100;
+		final int centoundici = 111;
+		final int centoquattordici = 114;
+		final int centotrentaquattro = 134;
+		final int centottanta = 180;
+		final int centottantasette = 187;
+		final int duecentoquaranta = 240;
+		final int trecento = 300;
+		final int quattrocentocinquanta = 450; 
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);

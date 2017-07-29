@@ -11,7 +11,7 @@ import eccezioni.EsitoTeoriaException;
 public class Candidato {
 	
 	private int idCandidato;
-	private static int idProgressivo=0;
+	static int idProgressivo=0;
 	private String nome;
 	private String cognome;
 	private String esitoTeoria;
