@@ -23,10 +23,12 @@ public class Utility {
 		int length = s.length();
 		String result = s;
 		for (int i=0;i<length;i++){
+			int index = i;
 			if (s.charAt(i)=='\''){
-				result=s.substring(0,i+1).concat(s.substring(i));
-				length = length-1;
+				result=s.substring(0,index+1).concat(s.substring(index));
+				index = i+1;
 			}
+			index++;
 		}
 		return result;
 	}
