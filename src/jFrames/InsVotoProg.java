@@ -69,6 +69,7 @@ public class InsVotoProg extends JFrame {
 		final int quaranta = 40;
 		final int settantasette = 77;
 		final int cento = 100;
+		final int centouno = 101;
 		final int centosei = 106;
 		final int centonove = 109;
 		final int centosedici = 116;
@@ -103,7 +104,7 @@ public class InsVotoProg extends JFrame {
 		contentPane.add(lblNomeCandidato);
 		
 		JLabel lblVotoLibreria = new JLabel("Voto libreria:");
-		lblVotoLibreria.setBounds(quaranta, centoottantasette, 101, sedici);
+		lblVotoLibreria.setBounds(quaranta, centoottantasette, centouno, sedici);
 		contentPane.add(lblVotoLibreria);
 		
 		JLabel lblVotoTest = new JLabel("Voto test:");

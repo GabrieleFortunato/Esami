@@ -59,13 +59,16 @@ public class InsPren extends JFrame {
 		final int sessantatre = 63;
 		final int ottantanove = 89;	
 		final int novantadue = 92;
+		final int cento = 100;
 		final int centoventidue = 122;
 		final int centosessantotto = 168;
 		final int centosettantaquattro = 174;
 		final int duecentotrenta = 230;
+		final int trecento = 300;
+		final int quattrocentocinquanta = 450;
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(cento,cento,quattrocentocinquanta,trecento);
 		setTitle("INSERIMENTO PRENOTAZIONE");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
