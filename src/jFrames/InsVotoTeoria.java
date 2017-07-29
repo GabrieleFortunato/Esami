@@ -9,7 +9,6 @@ import database.Inserimento;
 import eccezioni.EsitoTeoriaException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -113,7 +112,7 @@ public class InsVotoTeoria extends JFrame {
 					Candidato c = new Candidato(name,surname,theory);
 					Inserimento.inserisciEsitoTeoria(c);
 					dispose();
-				} catch (EsitoTeoriaException | NamingException | SQLException e1) {
+				} catch (EsitoTeoriaException | SQLException e1) {
 					// TODO Auto-generated catch block
 					
 				}

@@ -18,11 +18,18 @@ import javax.sql.DataSource;
  */
 public class Inserimento {
 
-	private Inserimento(){
-		
-	}
-	
 	private final static String url = "jdbc:mysql://localhost:3306/";
+	private static InitialContext context;
+	private static DataSource ds;
+	
+	private Inserimento(){
+		try {
+			context = new InitialContext();ds = 
+			(DataSource) context.lookup(url);
+		} catch (NamingException e) {
+			
+		}
+	}
 	
 	/**
 	 * Inserimento nel database dell'esito di un progetto
@@ -32,9 +39,7 @@ public class Inserimento {
 	 * @throws SQLException
 	 */
 	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
-			throws NamingException, SQLException {
-		InitialContext context = new InitialContext();
-		DataSource ds = (DataSource) context.lookup(url);
+			throws SQLException {
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")
@@ -46,9 +51,7 @@ public class Inserimento {
 		);
 	}
 
-	public static void inserisciPrenotazione(Candidato c) throws NamingException, SQLException {
-		InitialContext context = new InitialContext();
-	    DataSource ds = (DataSource) context.lookup(url);
+	public static void inserisciPrenotazione(Candidato c) throws SQLException {
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")
@@ -58,9 +61,7 @@ public class Inserimento {
 		);
 	}
 	
-	public static void inserisciEsitoTeoria(Candidato c) throws NamingException, SQLException{
-		InitialContext context = new InitialContext();
-	    DataSource ds = (DataSource) context.lookup(url);
+	public static void inserisciEsitoTeoria(Candidato c) throws SQLException{
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")

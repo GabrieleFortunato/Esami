@@ -15,21 +15,26 @@ import candidati.Candidato;
  *
  */
 public class Cancellazione {
+
+	private final static String url = "jdbc:mysql://localhost:3306/";
+	private static InitialContext context;
+	private static DataSource ds;
 	
 	private Cancellazione(){
-	
+		try {
+			context = new InitialContext();ds = 
+			(DataSource) context.lookup(url);
+		} catch (NamingException e) {
+			
+		}
 	}
-	
-	private final static String url = "jdbc:mysql://localhost:3306/";
 	
 	/**
 	 * Pulisce tutto il database
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public static void puliziaDatabase() throws NamingException, SQLException {
-		InitialContext context = new InitialContext();
-		DataSource ds = (DataSource) context.lookup(url);
+	public static void puliziaDatabase() throws SQLException {
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")
@@ -44,9 +49,7 @@ public class Cancellazione {
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public static void cancellaCandidato(Candidato c) throws NamingException, SQLException{
-		InitialContext context = new InitialContext();
-		DataSource ds = (DataSource) context.lookup(url);
+	public static void cancellaCandidato(Candidato c) throws SQLException{
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")

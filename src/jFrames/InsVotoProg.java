@@ -13,7 +13,6 @@ import file.PrintOnFile;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -154,8 +153,7 @@ public class InsVotoProg extends JFrame {
 					Inserimento.inserisciEsitoProgetto(c,p);
 					PrintOnFile.printOnFile(Lettura.interrogati());
 					dispose();
-				} catch (NumberFormatException | VotoException | NamingException | 
-						SQLException e) {
+				} catch (NumberFormatException | VotoException | SQLException e) {
 					
 				}
 			}

@@ -21,12 +21,19 @@ import javax.sql.DataSource;
  *
  */
 public class Lettura {
-
-	private Lettura(){
-		
-	}
 	
 	private final static String url = "jdbc:mysql://localhost:3306/";
+	private static InitialContext context;
+	private static DataSource ds;
+	
+	private Lettura(){
+		try {
+			context = new InitialContext();ds = 
+			(DataSource) context.lookup(url);
+		} catch (NamingException e) {
+			
+		}
+	}
 	
 	/**
 	 * Cerca nel database i candidati interrogati
@@ -35,8 +42,6 @@ public class Lettura {
 	public static HashSet<Candidato> interrogati() {
 		Set<Candidato> list = new HashSet<>();
 		try {
-			InitialContext context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup(url);
 			Connection conn = ds.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet res = st.executeQuery(
@@ -58,7 +63,7 @@ public class Lettura {
 				list.add(candidato);
 			}
 			conn.close();
-		} catch (NamingException | SQLException | VotoException | EsitoTeoriaException e) {
+		} catch (SQLException | VotoException | EsitoTeoriaException e) {
 				
 		}
 		return (HashSet<Candidato>) list;

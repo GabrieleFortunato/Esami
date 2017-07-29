@@ -15,20 +15,24 @@ import javax.sql.DataSource;
  */
 public class Inizializzazione {
 	
-	private Inizializzazione(){
-		
-	}
-	
 	private final static String url = "jdbc:mysql://localhost:3306/";
+	private static InitialContext context;
+	private static DataSource ds;
+	
+	private Inizializzazione(){
+		try {
+			context = new InitialContext();
+			ds = (DataSource) context.lookup(url);
+		} catch (NamingException e) {
+		}
+	}
 	
 	/**
 	 * Inizializza il database
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public static void inizializzaDatabase() throws NamingException, SQLException {
-		InitialContext context = new InitialContext();
-		DataSource ds = (DataSource) context.lookup(url);
+	public static void inizializzaDatabase() throws SQLException {
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")
