@@ -1,14 +1,12 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
 import candidati.Candidato;
+import candidati.Progetto;
 import utility.Utility;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 /**
  * Classe InserimentoNelDatabase
@@ -18,60 +16,62 @@ import javax.sql.DataSource;
  */
 public class Inserimento {
 
-	private final static String url = "jdbc:mysql://localhost:3306/";
-	private static InitialContext context;
-	private static DataSource ds;
-	
 	private Inserimento(){
-		try {
-			context = new InitialContext();ds = 
-			(DataSource) context.lookup(url);
-		} catch (NamingException e) {
-			Logger.getLogger("Eccezione");
-		}
+		
 	}
 	
-	/**
-	 * Inserimento nel database dell'esito di un progetto
-	 * @param c
-	 * @param p
-	 * @throws NamingException
-	 * @throws SQLException
-	 */
-	public static void inserisciEsitoProgetto(String nome, String cognome, String libreria, 
-			String test, String main) throws SQLException {
-		Connection conn = ds.getConnection();
-		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
-		int res = st.executeUpdate(
-				"insert ignore into progetto values"
-				+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
-				+"' and cognome='"+Utility.stringForQuery(cognome)
-				+"'),"+libreria+","+test+","+main+")"
-		);
+	private final static String url = "jdbc:mysql://localhost:3306/";
+	private final static String dbName = "esamiprogrammazione";
+	private final static String driver = "com.mysql.jdbc.Driver";
+	private final static String userName = "root"; 
+	private final static String password = "qrnq946";
+	
+	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+			Class.forName(driver).newInstance();
+			Connection conn = DriverManager.getConnection(
+					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+			);
+			Statement st = conn.createStatement();
+			@SuppressWarnings("unused")
+			int res = st.executeUpdate(
+					"insert ignore into progetto values"
+					+ "((select id from candidato where nome='"+Utility.stringForQuery(c.getNome())
+					+"' and cognome='"+Utility.stringForQuery(c.getCognome())
+					+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
+			);
+		
 	}
 
-	public static void inserisciPrenotazione(Candidato c) throws SQLException {
-		Connection conn = ds.getConnection();
-		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
-		int res = st.executeUpdate(
-				"insert ignore into candidato (nome,cognome) values ('"+
-				c.getNome()+"','"+c.getCognome()+"')"
-		);
+	public static void inserisciPrenotazione(Candidato c) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+			Class.forName(driver).newInstance();
+			Connection conn = DriverManager.getConnection(
+					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+			);
+			Statement st = conn.createStatement();
+			@SuppressWarnings("unused")
+			int res = st.executeUpdate(
+					"insert ignore into candidato (nome,cognome) values ('"
+					+c.getNome()+"','"+c.getCognome()+"')"
+			);
 	}
 	
-	public static void inserisciEsitoTeoria(Candidato c) throws SQLException{
-		Connection conn = ds.getConnection();
-		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
-		int res = st.executeUpdate(
-				"insert ignore into teoria values ((select id from candidato where nome='"
-				+Utility.stringForQuery(c.getNome())
-				+"' and cognome='"+Utility.stringForQuery(c.getCognome())
-				+"'),'"+Utility.stringForQuery(c.getEsitoTeoria())
-				+"')"
-		);
+	public static void inserisciEsitoTeoria(Candidato c) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+			Class.forName(driver).newInstance();
+			Connection conn = DriverManager.getConnection(
+					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+			);
+			Statement st = conn.createStatement();
+			@SuppressWarnings("unused")
+			int res = st.executeUpdate(
+					"insert ignore into teoria values ((select id from candidato where nome='"
+					+Utility.stringForQuery(c.getNome())
+					+"' and cognome='"+Utility.stringForQuery(c.getCognome())
+					+"'),'"+Utility.stringForQuery(c.getEsitoTeoria())
+					+"')"
+			);
 	}
 	
 }

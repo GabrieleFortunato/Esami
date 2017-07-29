@@ -112,8 +112,8 @@ public class InsVotoTeoria extends JFrame {
 					Candidato c = new Candidato(name,surname,theory);
 					Inserimento.inserisciEsitoTeoria(c);
 					dispose();
-				} catch (EsitoTeoriaException | SQLException e1) {
-					// TODO Auto-generated catch block
+				} catch (InstantiationException | IllegalAccessException | 
+						ClassNotFoundException | EsitoTeoriaException | SQLException e1) {
 					
 				}
 			}

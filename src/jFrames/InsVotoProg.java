@@ -8,14 +8,15 @@ import candidati.Candidato;
 import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
+import eccezioni.EsitoTeoriaException;
 import eccezioni.VotoException;
 import file.PrintOnFile;
 import utility.Utility;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -41,20 +42,16 @@ public class InsVotoProg extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		if (Lettura.daInterrogare().size()>0){
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						InsVotoProg frame = new InsVotoProg();
-						frame.setVisible(true);
-					} catch (Exception e) {
-						Logger.getLogger("Connessione non riuscita");
-					}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					InsVotoProg frame = new InsVotoProg();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					Logger.getLogger("Connessione non riuscita");
 				}
-			});
-		} else {
-			JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
-		}
+			}
+		});
 	}
 
 	/**
@@ -146,38 +143,40 @@ public class InsVotoProg extends JFrame {
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					try {
-						String cognome = cognomecandidato.getText();
-						String nome = nomecandidato.getText();
-						int libr = Integer.parseInt(libreria.getText());
-						int text = Integer.parseInt(test.getText());
-						int fmain = Integer.parseInt(votoMain.getText());
-						Candidato c = new Candidato(nome,cognome);
-						Progetto p = new Progetto(libr,text,fmain);
-						Utility.scriviSuFile(c.getCognome());
-						Utility.scriviSuFile(c.getNome());
-						Utility.scriviSuFile(p.getLibreria());
-						Utility.scriviSuFile(p.getTest());
-						Utility.scriviSuFile(p.getMain());
-						FileReader a = new FileReader(c.getNome()+".txt");
-						FileReader b = new FileReader(c.getCognome()+".txt");
-						FileReader c1 = new FileReader(p.getLibreria()+".txt");
-						FileReader d = new FileReader(p.getTest()+".txt");
-						FileReader e = new FileReader(p.getMain()+".txt");
-						Inserimento.inserisciEsitoProgetto(
-								Utility.stringa(a),Utility.stringa(b),
-								Utility.stringa(c1),Utility.stringa(d),Utility.stringa(e)
-								);
-						a.close();
-						b.close();
-						c1.close();
-						d.close();
-						e.close();
-						PrintOnFile.printOnFile(Lettura.interrogati());
-						dispose();
-					} catch (IOException e) {
-					}
-				} catch (NumberFormatException | VotoException | SQLException e) {
+					String cognome = cognomecandidato.getText();
+					String nome = nomecandidato.getText();
+					int libr = Integer.parseInt(libreria.getText());
+					int text = Integer.parseInt(test.getText());
+					int fmain = Integer.parseInt(votoMain.getText());
+					Candidato c = new Candidato(nome,cognome);
+					Progetto p = new Progetto(libr,text,fmain);
+					Utility.scriviSuFile(c.getCognome());
+					Utility.scriviSuFile(c.getNome());
+					Utility.scriviSuFile(p.getLibreria());
+					Utility.scriviSuFile(p.getTest());
+					Utility.scriviSuFile(p.getMain());
+					FileReader a = new FileReader(c.getNome()+".txt");
+					FileReader b = new FileReader(c.getCognome()+".txt");
+					FileReader c1 = new FileReader(p.getLibreria()+".txt");
+					FileReader d = new FileReader(p.getTest()+".txt");
+					FileReader e = new FileReader(p.getMain()+".txt");
+					Inserimento.inserisciEsitoProgetto(c,p);
+					a.close();
+					b.close();
+					c1.close();
+					d.close();
+					e.close();
+
+					new File(c.getNome()+".txt").delete();
+					new File(c.getCognome()+".txt").delete();
+					new File(p.getLibreria()+".txt").delete();
+					new File(p.getTest()+".txt").delete();
+					new File(p.getMain()+".txt").delete();
+					PrintOnFile.printOnFile(Lettura.interrogati());
+					dispose();
+				} catch (NumberFormatException | InstantiationException | 
+						IllegalAccessException | ClassNotFoundException | VotoException | 
+						SQLException | IOException | EsitoTeoriaException e) {
 					
 				}
 			}

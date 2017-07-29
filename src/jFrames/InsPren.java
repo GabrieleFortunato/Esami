@@ -93,14 +93,16 @@ public class InsPren extends JFrame {
 		JButton cog = new JButton("CONFERMA");
 		cog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				try {
 					String n = nome.getText();
 					String cg = cognome.getText();
 					Candidato c = new Candidato(n,cg);
 					Inserimento.inserisciPrenotazione(c);
 					dispose();
-				} catch (SQLException e1) {
-					Logger.getLogger("Eccezione");
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});
