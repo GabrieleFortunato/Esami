@@ -49,6 +49,7 @@ public class Lettura {
 					+ "inner join teoria on candidato.id=teoria.candidato "
 					+ "inner join progetto on candidato.id=progetto.candidato"
 			);
+			Progetto progetto = new Progetto(0,0,0);
 			while (res.next()) {
 				String nomeColonna = "nome";
 				String cognomeColonna = "nome";
@@ -58,7 +59,7 @@ public class Lettura {
 				int libreria = res.getInt("libreria");
 				int test = res.getInt("test");
 				int main = res.getInt("main");
-				Progetto progetto = new Progetto(libreria,test,main);
+				progetto = new Progetto(libreria,test,main);
 				Candidato candidato = new Candidato(nome,cognome,teoria,progetto);
 				list.add(candidato);
 			}
@@ -77,7 +78,8 @@ public class Lettura {
 			Connection conn = ds.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet res = st.executeQuery(
-					"select nome,cognome from candidato where id not in (select candidato from teoria)"
+					"select nome,cognome from candidato "
+					+ "where id not in (select candidato from teoria)"
 			);
 			while (res.next()) {
 				String nome = res.getString("nome");
@@ -100,7 +102,8 @@ public class Lettura {
 			Connection conn = ds.getConnection();
 			Statement st = conn.createStatement();
 			ResultSet res = st.executeQuery(
-					"select nome,cognome from candidato where id not in (select candidato from progetto)"
+					"select nome,cognome from candidato "
+					+ "where id not in (select candidato from progetto)"
 			);
 			while (res.next()) {
 				String nome = res.getString("nome");
