@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.HashSet;
-import javax.swing.JOptionPane;
 import candidati.Candidato;
 import utility.Utility;
 
