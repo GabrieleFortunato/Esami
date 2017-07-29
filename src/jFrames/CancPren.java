@@ -6,11 +6,9 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -26,6 +24,24 @@ import database.Cancellazione;
 @SuppressWarnings("serial")
 public class CancPren extends JFrame {
 
+	private final int cinque = 5;
+	private final int dieci = 10;
+	private final int sedici = 16;
+	private final int ventidue = 22;
+	private final int venticinque = 25;
+	private final int trentasette = 37;
+	private final int sessanta = 60;
+	private final int sessantatre = 63;
+	private final int ottantanove = 89;	
+	private final int novantadue = 92;
+	private final int cento = 100;
+	private final int centoventidue = 122;
+	private final int centosessantotto = 168;
+	private final int centosettantaquattro = 174;
+	private final int duecentotrenta = 230;
+	private final int trecento = 300;
+	private final int quattrocentocinquanta = 450;
+	
 	private JTextField cognome;
 	private JTextField nome;
 
@@ -50,23 +66,6 @@ public class CancPren extends JFrame {
 	 */
 	public CancPren() {
 		JPanel contentPane;
-		int cinque = 5;
-		int dieci = 10;
-		int sedici = 16;
-		int ventidue = 22;
-		int venticinque = 25;
-		int trentasette = 37;
-		int sessanta = 60;
-		int sessantatre = 63;
-		int ottantanove = 89;	
-		int novantadue = 92;
-		int cento = 100;
-		int centoventidue = 122;
-		int centosessantotto = 168;
-		int centosettantaquattro = 174;
-		int duecentotrenta = 230;
-		int trecento = 300;
-		int quattrocentocinquanta = 450;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);
 		setTitle("INSERIMENTO PRENOTAZIONE");
@@ -96,17 +95,16 @@ public class CancPren extends JFrame {
 		JButton cog = new JButton("CONFERMA");
 		cog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String n = nome.getText();
+				String cg = cognome.getText();
+				Candidato c = new Candidato(n,cg);
 				try {
-					String n = nome.getText();
-					String cg = cognome.getText();
-					Candidato c = new Candidato(n,cg);
 					Cancellazione.cancellaCandidato(c);
-					dispose();
-				} catch (NamingException | SQLException e1) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di collegamento con il database"
-					); 
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
+						SQLException e1) {
+					Logger.getLogger("Connessione al database non riuscita");
 				}
+				dispose();
 			}
 		});
 		cog.setBounds(duecentotrenta, centosessantotto, centosettantaquattro, venticinque);

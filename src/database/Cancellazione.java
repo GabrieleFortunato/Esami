@@ -1,12 +1,10 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import candidati.Candidato;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 /**
  * Classe CancellazioneDaDatabase
@@ -16,31 +14,41 @@ import javax.sql.DataSource;
  */
 public class Cancellazione {
 	
-	private Cancellazione(){
+	private
+	Cancellazione(){
 	
 	}
 	
+	private final static String url = "jdbc:mysql://localhost:3306/";
+	private final static String dbName = "esamiprogrammazione";
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private static DataSource ds;
+	private final static String userName = "root"; 
+	private final static String password = "qrnq946";
 	
-	/**
-	 * Cancella un candidato dal database
-	 * @param c
-	 * @throws NamingException
-	 * @throws SQLException
-	 */
-	public static void cancellaCandidato(Candidato c) throws NamingException, SQLException {
-		InitialContext context = new InitialContext();
-		ds = (DataSource) context.lookup(driver);
-		Connection conn = ds.getConnection();
+	public static void puliziaDatabase() 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		Class.forName(driver).newInstance();
+		Connection conn = DriverManager.getConnection(
+				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+		);
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")
 		int res = st.executeUpdate(
-				"delete from candidato where (nome='"+c.getNome()+
-				"' and cognome='"+c.getCognome()+"')"
+				"delete from candidato"
 		);
-		st.close();
-		conn.close();
+	}
+
+	public static void cancellaCandidato(Candidato c)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		Class.forName(driver).newInstance();
+		Connection conn = DriverManager.getConnection(
+				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+		);
+		Statement st = conn.createStatement();
+		@SuppressWarnings("unused")
+		int res = st.executeUpdate(
+				"delete from candidato where (nome='"+c.getNome()+"' and cognome='"+c.getCognome()+"')"
+		);
 	} 
 }
 

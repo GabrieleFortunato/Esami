@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.HashSet;
+import javax.swing.JOptionPane;
 import candidati.Candidato;
 import utility.Utility;
 
@@ -64,14 +65,15 @@ public class PrintOnFile {
 						);
 						output.println(
 								"Esame superato con "+(int)Utility.arrotonda(c.esito(),0)
-						);
-								
+						);	
 					}
 					output.flush();
 					output.close();
 				}
 			 catch (FileNotFoundException e) {
-			
+				 JOptionPane.showMessageDialog (
+						 null , "Problemi di collegamento con il database"
+				);
 			}
 		}
 	}
