@@ -69,7 +69,7 @@ public class InsVotoProg extends JFrame {
 		final int quaranta = 40;
 		final int settantasette = 77;
 		final int cento = 100;
-		final int centouno = 102;
+		final int centouno = 101;
 		final int centosei = 106;
 		final int centonove = 109;
 		final int centosedici = 116;
