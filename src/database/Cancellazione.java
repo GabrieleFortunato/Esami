@@ -22,6 +22,11 @@ public class Cancellazione {
 	
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	
+	/**
+	 * Pulisce tutto il database
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public static void puliziaDatabase() throws NamingException, SQLException {
 		InitialContext context = new InitialContext();
 		DataSource ds = (DataSource) context.lookup(url);
@@ -33,6 +38,12 @@ public class Cancellazione {
 		);
 	}
 
+	/**
+	 * Cancella un solo database
+	 * @param c
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public static void cancellaCandidato(Candidato c) throws NamingException, SQLException{
 		InitialContext context = new InitialContext();
 		DataSource ds = (DataSource) context.lookup(url);

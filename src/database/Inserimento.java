@@ -24,6 +24,13 @@ public class Inserimento {
 	
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	
+	/**
+	 * Inserimento nel database dell'esito di un progetto
+	 * @param c
+	 * @param p
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
 			throws NamingException, SQLException {
 		InitialContext context = new InitialContext();

@@ -21,6 +21,11 @@ public class Inizializzazione {
 	
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	
+	/**
+	 * Inizializza il database
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public static void inizializzaDatabase() throws NamingException, SQLException {
 		InitialContext context = new InitialContext();
 		DataSource ds = (DataSource) context.lookup(url);

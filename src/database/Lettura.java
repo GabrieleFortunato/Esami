@@ -28,6 +28,10 @@ public class Lettura {
 	
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	
+	/**
+	 * Cerca nel database i candidati interrogati
+	 * @return
+	 */
 	public static HashSet<Candidato> interrogati() {
 		Set<Candidato> list = new HashSet<>();
 		try {
@@ -41,8 +45,10 @@ public class Lettura {
 					+ "inner join progetto on candidato.id=progetto.candidato"
 			);
 			while (res.next()) {
-				String nome = res.getString("nome");
-				String cognome = res.getString("cognome");
+				String nomeColonna = "nome";
+				String cognomeColonna = "nome";
+				String nome = res.getString(nomeColonna);
+				String cognome = res.getString(cognomeColonna);
 				String teoria = res.getString("esito");
 				int libreria = res.getInt("libreria");
 				int test = res.getInt("test");
