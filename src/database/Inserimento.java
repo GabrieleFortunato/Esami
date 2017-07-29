@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
-
 import candidati.Candidato;
-import candidati.Progetto;
 import utility.Utility;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -40,16 +38,16 @@ public class Inserimento {
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
-			throws SQLException {
+	public static void inserisciEsitoProgetto(String nome, String cognome, String libreria, 
+			String test, String main) throws SQLException {
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")
 		int res = st.executeUpdate(
 				"insert ignore into progetto values"
-				+ "((select id from candidato where nome='"+Utility.stringForQuery(c.getNome())
-				+"' and cognome='"+Utility.stringForQuery(c.getCognome())
-				+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
+				+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
+				+"' and cognome='"+Utility.stringForQuery(cognome)
+				+"'),"+libreria+","+test+","+main+")"
 		);
 	}
 

@@ -10,11 +10,15 @@ import database.Inserimento;
 import database.Lettura;
 import eccezioni.VotoException;
 import file.PrintOnFile;
+import utility.Utility;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
@@ -143,16 +147,30 @@ public class InsVotoProg extends JFrame {
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					String cognome = cognomecandidato.getText();
-					String nome = nomecandidato.getText();
-					int libr = Integer.parseInt(libreria.getText());
-					int text = Integer.parseInt(test.getText());
-					int fmain = Integer.parseInt(votoMain.getText());
-					Candidato c = new Candidato(nome,cognome);
-					Progetto p = new Progetto(libr,text,fmain);
-					Inserimento.inserisciEsitoProgetto(c,p);
-					PrintOnFile.printOnFile(Lettura.interrogati());
-					dispose();
+					try {
+						String cognome = cognomecandidato.getText();
+						String nome = nomecandidato.getText();
+						int libr = Integer.parseInt(libreria.getText());
+						int text = Integer.parseInt(test.getText());
+						int fmain = Integer.parseInt(votoMain.getText());
+						Candidato c = new Candidato(nome,cognome);
+						Progetto p = new Progetto(libr,text,fmain);
+						Utility.scriviSuFile(c.getCognome());
+						Utility.scriviSuFile(c.getNome());
+						Utility.scriviSuFile(p.getLibreria());
+						Utility.scriviSuFile(p.getTest());
+						Utility.scriviSuFile(p.getMain());
+						Inserimento.inserisciEsitoProgetto(
+								Utility.stringa(new FileReader(c.getNome()+".txt")),
+								Utility.stringa(new FileReader(c.getCognome()+".txt")),
+								Utility.stringa(new FileReader(p.getLibreria()+".txt")),
+								Utility.stringa(new FileReader(p.getTest()+".txt")),
+								Utility.stringa(new FileReader(p.getMain()+".txt"))
+								);
+						PrintOnFile.printOnFile(Lettura.interrogati());
+						dispose();
+					} catch (FileNotFoundException e) {
+					}
 				} catch (NumberFormatException | VotoException | SQLException e) {
 					
 				}

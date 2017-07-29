@@ -1,5 +1,11 @@
 package utility;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
+
 /**
  * Classe Utility
  * 
@@ -50,6 +56,42 @@ public class Utility {
 	 */
 	public static double arrotonda(double a, double b){
 		return Math.ceil(a*Math.pow(dieci, b))/Math.pow(dieci, b);
+	}
+	
+	public static void scriviSuFile(String s){
+		try {
+			PrintStream output = new PrintStream(s+".txt");
+			output.print(s);
+			output.flush();
+			output.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static String stringa(FileReader file){
+		BufferedReader b = new BufferedReader(file);
+		String s = null;
+		try {
+			s = b.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return s;
+	}
+	
+	public static void scriviSuFile(int s){
+		try {
+			PrintStream output = new PrintStream(s+".txt");
+			output.print(s);
+			output.flush();
+			output.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
