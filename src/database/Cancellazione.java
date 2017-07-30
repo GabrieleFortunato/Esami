@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import candidati.Candidato;
 
 /**
  * Classe CancellazioneDaDatabase
@@ -51,12 +49,12 @@ public class Cancellazione {
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public static void cancellaCandidato(Candidato c) throws SQLException{
+	public static void cancellaCandidato(String nome, String cognome) throws SQLException{
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")
 		int res = st.executeUpdate(
-				"delete from candidato where (nome='"+c.getNome()+"' and cognome='"+c.getCognome()+"')"
+				"delete from candidato where (nome='"+nome+"' and cognome='"+cognome+"')"
 		);
 	} 
 }

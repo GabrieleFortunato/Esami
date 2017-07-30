@@ -3,6 +3,9 @@ package jFrames;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -11,8 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
 import database.Cancellazione;
+import utility.Utility;
 
 /**
  * Classe CancellazionePrenotazione
@@ -94,13 +97,20 @@ public class CancPren extends JFrame {
 		cog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String n = nome.getText();
-					String cg = cognome.getText();
-					Candidato c = new Candidato(n,cg);
-					Cancellazione.cancellaCandidato(c);
-					dispose();
-				} catch (SQLException e1) {
-					Logger.getLogger("Eccezione");
+					String cogn = cognome.getText();
+					String nom = nome.getText();
+					Utility.scriviSuFile(cogn);
+					Utility.scriviSuFile(nom);
+					FileReader a = new FileReader(nom+".txt");
+					FileReader b = new FileReader(cogn+".txt");
+					Cancellazione.cancellaCandidato(nom,cogn);
+					a.close();
+					b.close();
+					new File(nom+".txt").delete();
+					new File(cogn+".txt").delete();
+				} catch (SQLException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});
