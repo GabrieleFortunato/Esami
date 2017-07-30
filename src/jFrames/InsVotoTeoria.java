@@ -22,7 +22,7 @@ import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class InsVotoTeoria extends JFrame {
 	
-	private JTextField cognome;
+	private JTextField cog;
 	private JTextField nome;
 	private JTextField teoria;
 
@@ -85,10 +85,10 @@ public class InsVotoTeoria extends JFrame {
 		lblEsitoTeoria.setBounds(ventiquattro, centoquattordici, centotrentaquattro, sedici);
 		contentPane.add(lblEsitoTeoria);
 		
-		cognome = new JTextField();
-		cognome.setBounds(centottanta, cinquantatre, duecentoquaranta, ventidue);
-		contentPane.add(cognome);
-		cognome.setColumns(dieci);
+		cog = new JTextField();
+		cog.setBounds(centottanta, cinquantatre, duecentoquaranta, ventidue);
+		contentPane.add(cog);
+		cog.setColumns(dieci);
 		
 		nome = new JTextField();
 		nome.setColumns(dieci);
@@ -105,7 +105,7 @@ public class InsVotoTeoria extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String name = nome.getText();
-					String surname = cognome.getText();
+					String surname = cog.getText();
 					String theory = teoria.getText();
 					Inserimento.inserisciEsitoTeoria(name,surname,theory);
 					dispose();
