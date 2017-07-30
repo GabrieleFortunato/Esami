@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
-import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
 import eccezioni.EsitoTeoriaException;
@@ -148,18 +146,16 @@ public class InsVotoProg extends JFrame {
 					int libr = Integer.parseInt(libreria.getText());
 					int text = Integer.parseInt(test.getText());
 					int fmain = Integer.parseInt(votoMain.getText());
-					Candidato c = new Candidato(nome,cognome);
-					Progetto p = new Progetto(libr,text,fmain);
-					Utility.scriviSuFile(c.getCognome());
-					Utility.scriviSuFile(c.getNome());
-					Utility.scriviSuFile(p.getLibreria());
-					Utility.scriviSuFile(p.getTest());
-					Utility.scriviSuFile(p.getMain());
-					FileReader a = new FileReader(c.getNome()+".txt");
-					FileReader b = new FileReader(c.getCognome()+".txt");
-					FileReader c1 = new FileReader(p.getLibreria()+".txt");
-					FileReader d = new FileReader(p.getTest()+".txt");
-					FileReader e = new FileReader(p.getMain()+".txt");
+					Utility.scriviSuFile(cognome);
+					Utility.scriviSuFile(nome);
+					Utility.scriviSuFile(libr);
+					Utility.scriviSuFile(text);
+					Utility.scriviSuFile(fmain);
+					FileReader a = new FileReader(nome+".txt");
+					FileReader b = new FileReader(cognome+".txt");
+					FileReader c1 = new FileReader(libr+".txt");
+					FileReader d = new FileReader(text+".txt");
+					FileReader e = new FileReader(fmain+".txt");
 					Inserimento.inserisciEsitoProgetto(
 							Utility.stringa(a),Utility.stringa(b),Utility.stringa(c1),
 							Utility.stringa(d),Utility.stringa(e)
@@ -169,11 +165,11 @@ public class InsVotoProg extends JFrame {
 					c1.close();
 					d.close();
 					e.close();
-					new File(c.getNome()+".txt").delete();
-					new File(c.getCognome()+".txt").delete();
-					new File(p.getLibreria()+".txt").delete();
-					new File(p.getTest()+".txt").delete();
-					new File(p.getMain()+".txt").delete();
+					new File(nome+".txt").delete();
+					new File(cognome+".txt").delete();
+					new File(libr+".txt").delete();
+					new File(test+".txt").delete();
+					new File(fmain+".txt").delete();
 					PrintOnFile.printOnFile(Lettura.interrogati());
 				} catch (NumberFormatException | InstantiationException | 
 						IllegalAccessException | ClassNotFoundException | VotoException | 
