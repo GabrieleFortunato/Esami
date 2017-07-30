@@ -34,7 +34,6 @@ public class Inizializzazione {
 	}
 	
 	private static DataSource ds(InitialContext context){
-		DataSource ds = null;
 		try {
 			ds = (DataSource) context.lookup(driver);
 		} catch (NamingException e) {
@@ -42,6 +41,7 @@ public class Inizializzazione {
 		}
 		return ds;
 	}
+	
 	/**
 	 * Inizializza il database
 	 * @throws NamingException 

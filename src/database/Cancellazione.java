@@ -35,7 +35,6 @@ public class Cancellazione {
 	}
 	
 	private static DataSource ds(InitialContext context){
-		DataSource ds = null;
 		try {
 			ds = (DataSource) context.lookup(driver);
 		} catch (NamingException e) {

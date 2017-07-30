@@ -27,7 +27,7 @@ public class Lettura {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private static InitialContext context = context();
+	private final static InitialContext context = context();
 	private static DataSource ds = ds(context);
 	
 	private static InitialContext context(){
@@ -41,7 +41,6 @@ public class Lettura {
 	}
 	
 	private static DataSource ds(InitialContext context){
-		DataSource ds = null;
 		try {
 			ds = (DataSource) context.lookup(driver);
 		} catch (NamingException e) {
