@@ -26,7 +26,7 @@ public class PrintOnFile {
 	 * @param iterator
 	 */
 	public static void printOnFile(HashSet<Candidato> candidati){
-		File dir = new File("Esitis");
+		File dir = new File("Esiti");
 		if (!dir.exists()){
 			dir.mkdir();
 		}
