@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 /**
@@ -32,12 +31,8 @@ public class InsVotoTeoria extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					InsVotoTeoria frame = new InsVotoTeoria();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					Logger.getLogger("Connessione non riuscita");
-				}
+				InsVotoTeoria frame = new InsVotoTeoria();
+				frame.setVisible(true);
 			}
 		});
 	}

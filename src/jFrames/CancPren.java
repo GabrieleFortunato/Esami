@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -35,12 +33,8 @@ public class CancPren extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					InsPren frame = new InsPren();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					Logger.getLogger("Connessione non riuscita");
-				}
+				InsPren frame = new InsPren();
+				frame.setVisible(true);
 			}
 		});
 	}
@@ -101,14 +95,10 @@ public class CancPren extends JFrame {
 					String nom = nome.getText();
 					Utility.scriviSuFile(cogn);
 					Utility.scriviSuFile(nom);
-					FileReader a = new FileReader(nom+".txt");
-					FileReader b = new FileReader(cogn+".txt");
 					Cancellazione.cancellaCandidato(nom,cogn);
-					a.close();
-					b.close();
 					new File(nom+".txt").delete();
 					new File(cogn+".txt").delete();
-				} catch (SQLException | IOException e1) {
+				} catch (SQLException e1) {
 					Logger.getLogger("");
 				}
 			}

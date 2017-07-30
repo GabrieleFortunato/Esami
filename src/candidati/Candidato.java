@@ -11,7 +11,7 @@ import eccezioni.EsitoTeoriaException;
 public class Candidato {
 	
 	private int idCandidato;
-	static int idProgressivo=0;
+	static int idProgressivo= id();
 	private String nome;
 	private String cognome;
 	private String esitoTeoria;
@@ -31,6 +31,9 @@ public class Candidato {
 		);
 	}
 
+	private static int id(){
+		return 0;
+	}
 	/**
 	 * Metodo costruttore
 	 * @param nome

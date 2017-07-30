@@ -3,8 +3,6 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -18,18 +16,30 @@ import javax.sql.DataSource;
 public class Inizializzazione {
 	
 	private final static String url = "jdbc:mysql://localhost:3306/";
-	private static InitialContext context;
-	private static DataSource ds;
+	private final static InitialContext context = context();
+	private final static DataSource ds = ds(context);
 	
 	private Inizializzazione(){
-		try {
-			context = new InitialContext();
-			ds = (DataSource) context.lookup(url);
-		} catch (NamingException e) {
-			Logger.getLogger("Eccezione");
-		}
+		
 	}
 	
+	private static InitialContext context(){
+		try {
+			return new InitialContext();
+		} catch (NamingException e) {
+			
+		} 
+		return null;
+	}
+	
+	private static DataSource ds(InitialContext context){
+		try {
+			return (DataSource) context.lookup(url);
+		} catch (NamingException e) {
+		
+		}
+		return null;
+	}
 	/**
 	 * Inizializza il database
 	 * @throws NamingException

@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 /**
@@ -42,12 +41,8 @@ public class InsVotoProg extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					InsVotoProg frame = new InsVotoProg();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					Logger.getLogger("Connessione non riuscita");
-				}
+				InsVotoProg frame = new InsVotoProg();
+				frame.setVisible(true);
 			}
 		});
 	}
@@ -151,11 +146,16 @@ public class InsVotoProg extends JFrame {
 					Utility.scriviSuFile(libr);
 					Utility.scriviSuFile(text);
 					Utility.scriviSuFile(fmain);
-					FileReader a = new FileReader(nome+".txt");
-					FileReader b = new FileReader(cognome+".txt");
-					FileReader c1 = new FileReader(libr+".txt");
-					FileReader d = new FileReader(text+".txt");
-					FileReader e = new FileReader(fmain+".txt");
+					String nomefile = nome;
+					FileReader a = new FileReader(nomefile+".txt");
+					nomefile = cognome;
+					FileReader b = new FileReader(nomefile+".txt");
+					nomefile = Integer.toString(libr);
+					FileReader c1 = new FileReader(nomefile+".txt");
+					nomefile = Integer.toString(text);
+					FileReader d = new FileReader(nomefile+".txt");
+					nomefile = Integer.toString(fmain);
+					FileReader e = new FileReader(nomefile+".txt");
 					Inserimento.inserisciEsitoProgetto(
 							Utility.stringa(a),Utility.stringa(b),Utility.stringa(c1),
 							Utility.stringa(d),Utility.stringa(e)
@@ -165,11 +165,16 @@ public class InsVotoProg extends JFrame {
 					c1.close();
 					d.close();
 					e.close();
-					new File(nome+".txt").delete();
-					new File(cognome+".txt").delete();
-					new File(libr+".txt").delete();
-					new File(test+".txt").delete();
-					new File(fmain+".txt").delete();
+					nomefile = nome;
+					new File(nomefile+".txt").delete();
+					nomefile = cognome;
+					new File(nomefile+".txt").delete();
+					nomefile = Integer.toString(libr);
+					new File(nomefile+".txt").delete();
+					nomefile = Integer.toString(text);
+					new File(nomefile+".txt").delete();
+					nomefile = Integer.toString(fmain);
+					new File(nomefile+".txt").delete();
 					PrintOnFile.printOnFile(Lettura.interrogati());
 				} catch (NumberFormatException | InstantiationException | 
 						IllegalAccessException | ClassNotFoundException | VotoException | 
