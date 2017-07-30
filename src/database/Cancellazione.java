@@ -15,7 +15,10 @@ import javax.sql.DataSource;
  *
  */
 public class Cancellazione {
-	
+
+	/**
+	 * Metodo costruttore
+	 */
 	private Cancellazione(){
 	
 	}

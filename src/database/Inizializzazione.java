@@ -15,6 +15,9 @@ import javax.sql.DataSource;
  */
 public class Inizializzazione {
 	
+	/**
+	 * Metodo costruttore
+	 */
 	private Inizializzazione(){
 		
 	}

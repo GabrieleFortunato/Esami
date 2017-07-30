@@ -149,8 +149,9 @@ public class InsVotoProg extends JFrame {
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {String cognome = cognomecandidato.getText();
+			public void actionPerformed(ActionEvent arg0) {
 			try {
+				String cognome = cognomecandidato.getText();
 				String nome = nomecandidato.getText();
 				int libr = Integer.parseInt(libreria.getText());
 				int text = Integer.parseInt(test.getText());

@@ -15,6 +15,9 @@ import utility.Utility;
  */
 public class PrintOnFile {
 
+	/**
+	 * Metodo costruttore
+	 */
 	private PrintOnFile(){
 		
 	}

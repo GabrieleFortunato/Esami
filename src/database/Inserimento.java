@@ -18,6 +18,9 @@ import javax.sql.DataSource;
  */
 public class Inserimento {
 
+	/**
+	 * Metodo costruttore
+	 */
 	private Inserimento(){
 		
 	}

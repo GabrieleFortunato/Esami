@@ -22,6 +22,9 @@ import javax.sql.DataSource;
  */
 public class Lettura {
 
+	/**
+	 * Metodo costruttore
+	 */
 	private Lettura(){
 		
 	}
