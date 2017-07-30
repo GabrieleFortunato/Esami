@@ -3,17 +3,19 @@ package jFrames;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Logger;
+
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import candidati.Candidato;
 import database.Cancellazione;
-import utility.Utility;
 
 /**
  * Classe CancellazionePrenotazione
@@ -33,8 +35,12 @@ public class CancPren extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				InsPren frame = new InsPren();
-				frame.setVisible(true);
+				try {
+					InsPren frame = new InsPren();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					Logger.getLogger("Connessione non riuscita");
+				}
 			}
 		});
 	}
@@ -43,24 +49,24 @@ public class CancPren extends JFrame {
 	 * Create the frame.
 	 */
 	public CancPren() {
-		final int cinque = 5;
-		final int dieci = 10;
-		final int sedici = 16;
-		final int ventidue = 22;
-		final int venticinque = 25;
-		final int trentasette = 37;
-		final int sessanta = 60;
-		final int sessantatre = 63;
-		final int ottantanove = 89;	
-		final int novantadue = 92;
-		final int cento = 100;
-		final int centoventidue = 122;
-		final int centosessantotto = 168;
-		final int centosettantaquattro = 174;
-		final int duecentotrenta = 230;
-		final int trecento = 300;
-		final int quattrocentocinquanta = 450;
 		JPanel contentPane;
+		int cinque = 5;
+		int dieci = 10;
+		int sedici = 16;
+		int ventidue = 22;
+		int venticinque = 25;
+		int trentasette = 37;
+		int sessanta = 60;
+		int sessantatre = 63;
+		int ottantanove = 89;	
+		int novantadue = 92;
+		int cento = 100;
+		int centoventidue = 122;
+		int centosessantotto = 168;
+		int centosettantaquattro = 174;
+		int duecentotrenta = 230;
+		int trecento = 300;
+		int quattrocentocinquanta = 450;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);
 		setTitle("INSERIMENTO PRENOTAZIONE");
@@ -91,15 +97,15 @@ public class CancPren extends JFrame {
 		cog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String cogn = cognome.getText();
-					String nom = nome.getText();
-					Utility.scriviSuFile(cogn);
-					Utility.scriviSuFile(nom);
-					Cancellazione.cancellaCandidato(nom,cogn);
-					new File(nom+".txt").delete();
-					new File(cogn+".txt").delete();
-				} catch (SQLException e1) {
-					Logger.getLogger("");
+					String n = nome.getText();
+					String cg = cognome.getText();
+					Candidato c = new Candidato(n,cg);
+					Cancellazione.cancellaCandidato(c);
+					dispose();
+				} catch (NamingException | SQLException e1) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di collegamento con il database"
+					); 
 				}
 			}
 		});

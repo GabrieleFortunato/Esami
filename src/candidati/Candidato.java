@@ -11,7 +11,7 @@ import eccezioni.EsitoTeoriaException;
 public class Candidato {
 	
 	private int idCandidato;
-	static int idProgressivo= id();
+	private static int idProgressivo=0;
 	private String nome;
 	private String cognome;
 	private String esitoTeoria;
@@ -31,9 +31,6 @@ public class Candidato {
 		);
 	}
 
-	private static int id(){
-		return 0;
-	}
 	/**
 	 * Metodo costruttore
 	 * @param nome
@@ -57,8 +54,7 @@ public class Candidato {
 	 */
 	public Candidato(String nome, String cognome, String esitoTeoria) 
 			throws EsitoTeoriaException {
-		this.setCognome(cognome);
-		this.setNome(nome);
+		this(nome, cognome);
 		this.setEsitoTeoria(esitoTeoria);
 	}
 
@@ -72,9 +68,7 @@ public class Candidato {
 	 */
 	public Candidato(String nome, String cognome, String esitoTeoria, Progetto progetto) 
 			throws EsitoTeoriaException {
-		this.setCognome(cognome);
-		this.setNome(nome);
-		this.setEsitoTeoria(esitoTeoria);
+		this(nome, cognome,esitoTeoria);
 		this.setProgetto(progetto);
 	}
 

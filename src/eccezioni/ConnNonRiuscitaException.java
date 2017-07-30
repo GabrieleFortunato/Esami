@@ -1,13 +1,13 @@
 package eccezioni;
 
 /**
- * Classe Eccezione
+ * Eccezione che viene lanciata se la connessione al database non è riuscita
  * 
  * @author Gabriele Fortunato
  *
  */
-public class VotoException extends Exception {
-
+public class ConnNonRiuscitaException extends Exception {
+	
 	/**
 	 * 
 	 */

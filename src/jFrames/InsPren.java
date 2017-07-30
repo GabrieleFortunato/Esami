@@ -6,15 +6,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import database.Inserimento;
-import utility.Utility;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 /**
@@ -25,6 +24,24 @@ import java.awt.event.ActionEvent;
  */
 @SuppressWarnings("serial")
 public class InsPren extends JFrame {
+
+	private final int cinque = 5;
+	private final int dieci = 10;
+	private final int sedici = 16;
+	private final int ventidue = 22;
+	private final int venticinque = 25;
+	private final int trentasette = 37;
+	private final int sessanta = 60;
+	private final int sessantatre = 63;
+	private final int ottantanove = 89;	
+	private final int novantadue = 92;
+	private final int cento = 100;
+	private final int centoventidue = 122;
+	private final int centosessantotto = 168;
+	private final int centosettantaquattro = 174;
+	private final int duecentotrenta = 230;
+	private final int trecento = 300;
+	private final int quattrocentocinquanta = 450;
 	
 	private JTextField cognome;
 	private JTextField nome;
@@ -35,8 +52,12 @@ public class InsPren extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				InsPren frame = new InsPren();
-				frame.setVisible(true);
+				try {
+					InsPren frame = new InsPren();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					Logger.getLogger("Connessione non riuscita");
+				}
 			}
 		});
 	}
@@ -45,26 +66,9 @@ public class InsPren extends JFrame {
 	 * Create the frame.
 	 */
 	public InsPren() {
-		final int cinque = 5;
-		final int dieci = 10;
-		final int sedici = 16;
-		final int ventidue = 22;
-		final int venticinque = 25;
-		final int trentasette = 37;
-		final int sessanta = 60;
-		final int sessantatre = 63;
-		final int ottantanove = 89;	
-		final int novantadue = 92;
-		final int cento = 100;
-		final int centoventidue = 122;
-		final int centosessantotto = 168;
-		final int centosettantaquattro = 174;
-		final int duecentotrenta = 230;
-		final int trecento = 300;
-		final int quattrocentocinquanta = 450;
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(cento,cento,quattrocentocinquanta,trecento);
+		setBounds(cento, cento, quattrocentocinquanta, trecento);
 		setTitle("INSERIMENTO PRENOTAZIONE");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
@@ -92,23 +96,17 @@ public class InsPren extends JFrame {
 		JButton cog = new JButton("CONFERMA");
 		cog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String n = nome.getText();
+				String cg = cognome.getText();
+				Candidato c = new Candidato(n,cg);
 				try {
-					String cogn = cognome.getText();
-					String nom = nome.getText();
-					Candidato c = new Candidato(nom,cogn);
-					Utility.scriviSuFile(c.getCognome());
-					Utility.scriviSuFile(c.getNome());
-					FileReader a = new FileReader(c.getNome()+".txt");
-					FileReader b = new FileReader(c.getCognome()+".txt");
-					Inserimento.inserisciPrenotazione(Utility.stringa(a),Utility.stringa(b));
-					a.close();
-					b.close();
-					new File(c.getNome()+".txt").delete();
-					new File(c.getCognome()+".txt").delete();
-					dispose();
-				} catch (InstantiationException | IllegalAccessException | 
-						ClassNotFoundException | SQLException | IOException e1) {
+					Inserimento.inserisciPrenotazione(c);
+				} catch (SQLException | NamingException e1) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di collegamento con il database"
+					); 
 				}
+				dispose();
 			}
 		});
 		cog.setBounds(duecentotrenta, centosessantotto, centosettantaquattro, venticinque);

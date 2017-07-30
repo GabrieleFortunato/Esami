@@ -1,24 +1,25 @@
 package jFrames;
 
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.logging.Logger;
+
+import javax.naming.NamingException;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import candidati.Candidato;
+import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
-import eccezioni.EsitoTeoriaException;
-import eccezioni.VotoException;
 import file.PrintOnFile;
-import utility.Utility;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.awt.event.ActionEvent;
 
 /**
  * Classe InserimentoEsitoProgetto
@@ -28,6 +29,35 @@ import java.awt.event.ActionEvent;
  */
 @SuppressWarnings("serial")
 public class InsVotoProg extends JFrame {
+
+	private final int cinque = 5;
+	private final int dieci = 10;
+	private final int sedici = 16;
+	private final int ventidue = 22;
+	private final int venticinque = 25;
+	private final int trentuno = 31;
+	private final int trentanove = 39;
+	private final int quaranta = 40;
+	private final int settantasette = 77;
+	private final int cento = 100;
+	private final int centouno = 101;
+	private final int centosei = 106;
+	private final int centonove = 109;
+	private final int centosedici = 116;
+	private final int centoventidue = 122;
+	private final int centoventicinque = 125;
+	private final int centotrentaquattro = 134;
+	private final int centosessantuno = 161;
+	private final int centoottantasette = 187;
+	private final int duecentoquattro = 204;
+	private final int duecentosette = 207;
+	private final int duecentootto = 208;
+	private final int duecentoventicinque = 225;
+	private final int quattrocentoquarantaquattro = 444;
+	private final int cinquecentoventinove = 529;
+	private final int cinquecentonovantacinque = 595;
+	private final int settecentoquarantuno = 741;
+	
 	
 	private JTextField nomecandidato;
 	private JTextField libreria;
@@ -39,45 +69,30 @@ public class InsVotoProg extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				InsVotoProg frame = new InsVotoProg();
-				frame.setVisible(true);
+		try {
+			if (Lettura.daInterrogare().size()>0){
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							InsVotoProg frame = new InsVotoProg();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							Logger.getLogger("Connessione non riuscita");
+						}
+					}
+				});
+			} else {
+				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
 			}
-		});
+		} catch (HeadlessException | NamingException | SQLException e) {
+			JOptionPane.showMessageDialog ( null, "Problemi di collegamento con il database" ) ;
+		}
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public InsVotoProg() {
-		final int cinque = 5;
-		final int dieci = 10;
-		final int sedici = 16;
-		final int ventidue = 22;
-		final int venticinque = 25;
-		final int trentuno = 31;
-		final int trentanove = 39;
-		final int quaranta = 40;
-		final int settantasette = 77;
-		final int cento = 100;
-		final int centouno = 101;
-		final int centosei = 106;
-		final int centonove = 109;
-		final int centosedici = 116;
-		final int centoventidue = 122;
-		final int centoventicinque = 125;
-		final int centotrentaquattro = 134;
-		final int centosessantuno = 161;
-		final int centoottantasette = 187;
-		final int duecentoquattro = 204;
-		final int duecentosette = 207;
-		final int duecentootto = 208;
-		final int duecentoventicinque = 225;
-		final int quattrocentoquarantaquattro = 444;
-		final int cinquecentoventinove = 529;
-		final int cinquecentonovantacinque = 595;
-		final int settecentoquarantuno = 741;
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, settecentoquarantuno, cinquecentoventinove);
@@ -134,54 +149,25 @@ public class InsVotoProg extends JFrame {
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					String cognome = cognomecandidato.getText();
-					String nome = nomecandidato.getText();
-					int libr = Integer.parseInt(libreria.getText());
-					int text = Integer.parseInt(test.getText());
-					int fmain = Integer.parseInt(votoMain.getText());
-					Utility.scriviSuFile(cognome);
-					Utility.scriviSuFile(nome);
-					Utility.scriviSuFile(libr);
-					Utility.scriviSuFile(text);
-					Utility.scriviSuFile(fmain);
-					String nomefile = nome;
-					FileReader a = new FileReader(nomefile+".txt");
-					nomefile = cognome;
-					FileReader b = new FileReader(nomefile+".txt");
-					nomefile = Integer.toString(libr);
-					FileReader c1 = new FileReader(nomefile+".txt");
-					nomefile = Integer.toString(text);
-					FileReader d = new FileReader(nomefile+".txt");
-					nomefile = Integer.toString(fmain);
-					FileReader e = new FileReader(nomefile+".txt");
-					Inserimento.inserisciEsitoProgetto(
-							Utility.stringa(a),Utility.stringa(b),Utility.stringa(c1),
-							Utility.stringa(d),Utility.stringa(e)
-					);
-					a.close();
-					b.close();
-					c1.close();
-					d.close();
-					e.close();
-					nomefile = nome;
-					new File(Utility.nomeFile(nomefile)).delete();
-					nomefile = cognome;
-					new File(Utility.nomeFile(nomefile)).delete();
-					nomefile = Integer.toString(libr);
-					new File(Utility.nomeFile(nomefile)).delete();
-					nomefile = Integer.toString(text);
-					new File(Utility.nomeFile(nomefile)).delete();
-					nomefile = Integer.toString(fmain);
-					new File(Utility.nomeFile(nomefile)).delete();
-					PrintOnFile.printOnFile(Lettura.interrogati());
-				} catch (NumberFormatException | InstantiationException | 
-						IllegalAccessException | ClassNotFoundException | VotoException | 
-						SQLException | IOException | EsitoTeoriaException e) {
+			public void actionPerformed(ActionEvent arg0) {String cognome = cognomecandidato.getText();
+			try {
+				String nome = nomecandidato.getText();
+				int libr = Integer.parseInt(libreria.getText());
+				int text = Integer.parseInt(test.getText());
+				int fmain = Integer.parseInt(votoMain.getText());
+				Candidato c = new Candidato(nome, cognome);
+				Progetto p = new Progetto(libr, text, fmain);
+				Inserimento.inserisciEsitoProgetto(c, p);
+				PrintOnFile.printOnFile(Lettura.proveCompletate());
+				dispose();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog (
+						null , "Impossibile inserire nel database l'esito del progetto"
+				); 
 				}
 			}
 		});
+		
 		btnConferma.setBounds(cinquecentonovantacinque, quattrocentoquarantaquattro, centosedici, venticinque);
 		contentPane.add(btnConferma);
 	}
