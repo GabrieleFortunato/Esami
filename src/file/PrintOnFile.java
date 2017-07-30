@@ -30,7 +30,7 @@ public class PrintOnFile {
 		if (!dir.exists()){
 			dir.mkdir();
 		}
-		PrintStream output=null;
+		PrintStream output;
 		try {
 			for (Candidato c: candidati){
 					int esito = (int)c.getProgetto().esito();
