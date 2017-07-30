@@ -6,10 +6,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import database.Inserimento;
+import utility.Utility;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
@@ -93,16 +97,22 @@ public class InsPren extends JFrame {
 		JButton cog = new JButton("CONFERMA");
 		cog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				try {
-					String n = nome.getText();
-					String cg = cognome.getText();
-					Candidato c = new Candidato(n,cg);
-					Inserimento.inserisciPrenotazione(c);
+					String cogn = cognome.getText();
+					String nom = nome.getText();
+					Candidato c = new Candidato(nom,cogn);
+					Utility.scriviSuFile(c.getCognome());
+					Utility.scriviSuFile(c.getNome());
+					FileReader a = new FileReader(c.getNome()+".txt");
+					FileReader b = new FileReader(c.getCognome()+".txt");
+					Inserimento.inserisciPrenotazione(Utility.stringa(a),Utility.stringa(b));
+					a.close();
+					b.close();
+					new File(c.getNome()+".txt").delete();
+					new File(c.getCognome()+".txt").delete();
 					dispose();
-				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (InstantiationException | IllegalAccessException | 
+						ClassNotFoundException | SQLException | IOException e1) {
 				}
 			}
 		});

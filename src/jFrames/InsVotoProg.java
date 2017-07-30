@@ -160,20 +160,21 @@ public class InsVotoProg extends JFrame {
 					FileReader c1 = new FileReader(p.getLibreria()+".txt");
 					FileReader d = new FileReader(p.getTest()+".txt");
 					FileReader e = new FileReader(p.getMain()+".txt");
-					Inserimento.inserisciEsitoProgetto(c,p);
+					Inserimento.inserisciEsitoProgetto(
+							Utility.stringa(a),Utility.stringa(b),Utility.stringa(c1),
+							Utility.stringa(d),Utility.stringa(e)
+					);
 					a.close();
 					b.close();
 					c1.close();
 					d.close();
 					e.close();
-
 					new File(c.getNome()+".txt").delete();
 					new File(c.getCognome()+".txt").delete();
 					new File(p.getLibreria()+".txt").delete();
 					new File(p.getTest()+".txt").delete();
 					new File(p.getMain()+".txt").delete();
 					PrintOnFile.printOnFile(Lettura.interrogati());
-					dispose();
 				} catch (NumberFormatException | InstantiationException | 
 						IllegalAccessException | ClassNotFoundException | VotoException | 
 						SQLException | IOException | EsitoTeoriaException e) {

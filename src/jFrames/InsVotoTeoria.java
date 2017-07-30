@@ -4,9 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
 import database.Inserimento;
-import eccezioni.EsitoTeoriaException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -109,11 +107,10 @@ public class InsVotoTeoria extends JFrame {
 					String name = nome.getText();
 					String surname = cognome.getText();
 					String theory = teoria.getText();
-					Candidato c = new Candidato(name,surname,theory);
-					Inserimento.inserisciEsitoTeoria(c);
+					Inserimento.inserisciEsitoTeoria(name,surname,theory);
 					dispose();
 				} catch (InstantiationException | IllegalAccessException | 
-						ClassNotFoundException | EsitoTeoriaException | SQLException e1) {
+						ClassNotFoundException | SQLException e1) {
 					
 				}
 			}

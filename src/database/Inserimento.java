@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import candidati.Candidato;
-import candidati.Progetto;
 import utility.Utility;
 
 /**
@@ -26,8 +24,10 @@ public class Inserimento {
 	private final static String userName = "root"; 
 	private final static String password = "qrnq946";
 	
-	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+	public static void inserisciEsitoProgetto(
+			String nome, String cognome, String libr, String test, String main
+			) throws InstantiationException, IllegalAccessException, ClassNotFoundException, 
+					 SQLException{
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
@@ -36,14 +36,14 @@ public class Inserimento {
 			@SuppressWarnings("unused")
 			int res = st.executeUpdate(
 					"insert ignore into progetto values"
-					+ "((select id from candidato where nome='"+Utility.stringForQuery(c.getNome())
-					+"' and cognome='"+Utility.stringForQuery(c.getCognome())
-					+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
+					+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
+					+"' and cognome='"+Utility.stringForQuery(cognome)
+					+"'),"+libr+","+test+","+main+")"
 			);
 		
 	}
 
-	public static void inserisciPrenotazione(Candidato c) 
+	public static void inserisciPrenotazione(String nome, String cognome) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
@@ -53,11 +53,11 @@ public class Inserimento {
 			@SuppressWarnings("unused")
 			int res = st.executeUpdate(
 					"insert ignore into candidato (nome,cognome) values ('"
-					+c.getNome()+"','"+c.getCognome()+"')"
+					+nome+"','"+cognome+"')"
 			);
 	}
 	
-	public static void inserisciEsitoTeoria(Candidato c) 
+	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
@@ -67,9 +67,9 @@ public class Inserimento {
 			@SuppressWarnings("unused")
 			int res = st.executeUpdate(
 					"insert ignore into teoria values ((select id from candidato where nome='"
-					+Utility.stringForQuery(c.getNome())
-					+"' and cognome='"+Utility.stringForQuery(c.getCognome())
-					+"'),'"+Utility.stringForQuery(c.getEsitoTeoria())
+					+Utility.stringForQuery(nome)
+					+"' and cognome='"+Utility.stringForQuery(cognome)
+					+"'),'"+Utility.stringForQuery(teoria)
 					+"')"
 			);
 	}
