@@ -150,7 +150,7 @@ public class InsVotoProg extends JFrame {
 		contentPane.add(votoMain);
 		votoMain.setColumns(dieci);
 		
-		JButton btnConferma = new JButton("CONFERMA1s");
+		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			try {
