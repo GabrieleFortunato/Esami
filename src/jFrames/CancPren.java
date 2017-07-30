@@ -109,8 +109,7 @@ public class CancPren extends JFrame {
 					new File(nom+".txt").delete();
 					new File(cogn+".txt").delete();
 				} catch (SQLException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					Logger.getLogger("");
 				}
 			}
 		});

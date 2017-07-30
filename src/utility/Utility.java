@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.logging.Logger;
 
 /**
  * Classe Utility
@@ -65,8 +66,7 @@ public class Utility {
 			output.flush();
 			output.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger("");
 		}
 	}
 	
@@ -76,8 +76,7 @@ public class Utility {
 		try {
 			s = b.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger("");
 		}
 		return s;
 	}
@@ -89,8 +88,7 @@ public class Utility {
 			output.flush();
 			output.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger("");
 		}
 	}
 	
