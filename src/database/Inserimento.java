@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import candidati.Candidato;
-import candidati.Progetto;
 import utility.Utility;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -36,7 +35,8 @@ public class Inserimento {
 	 * @throws NamingException 
 	 * @throws SQLException 
 	 */
-	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
+	public static void inserisciEsitoProgetto(String nome, String cognome, String lib, 
+			String test, String main) 
 			throws NamingException, SQLException {
 		InitialContext context = new InitialContext();
 		ds = (DataSource) context.lookup(driver);
@@ -45,9 +45,8 @@ public class Inserimento {
 		@SuppressWarnings("unused")
 		int res = st.executeUpdate(
 				"insert ignore into progetto values"
-				+ "((select id from candidato where nome='"+Utility.stringForQuery(c.getNome())
-				+"' and cognome='"+Utility.stringForQuery(c.getCognome())
-				+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
+				+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
+				+"' and cognome='"+Utility.stringForQuery(cognome)+"'),"+lib+","+test+","+main+")"
 		);
 		st.close();
 		conn.close();

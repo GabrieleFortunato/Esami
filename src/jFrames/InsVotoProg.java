@@ -1,12 +1,8 @@
 package jFrames;
 
 import java.awt.EventQueue;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
-import java.sql.SQLException;
 import java.util.logging.Logger;
-
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,12 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
-import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
 import file.PrintOnFile;
+import utility.Utility;
+
 import java.awt.event.ActionListener;
+import java.io.FileReader;
 
 /**
  * Classe InserimentoEsitoProgetto
@@ -69,25 +66,19 @@ public class InsVotoProg extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			if (Lettura.daInterrogare().size()>0){
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							InsVotoProg frame = new InsVotoProg();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							Logger.getLogger("Connessione non riuscita");
-						}
+	
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						InsVotoProg frame = new InsVotoProg();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						Logger.getLogger("Connessione non riuscita");
 					}
-				});
-			} else {
-				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
-			}
-		} catch (HeadlessException | NamingException | SQLException e) {
-			JOptionPane.showMessageDialog ( null, "Problemi di collegamento con il database" ) ;
-		}
-	}
+				}
+			});
+		} 
+	
 
 	/**
 	 * Create the frame.
@@ -156,9 +147,23 @@ public class InsVotoProg extends JFrame {
 				int libr = Integer.parseInt(libreria.getText());
 				int text = Integer.parseInt(test.getText());
 				int fmain = Integer.parseInt(votoMain.getText());
-				Candidato c = new Candidato(nome, cognome);
-				Progetto p = new Progetto(libr, text, fmain);
-				Inserimento.inserisciEsitoProgetto(c, p);
+				Utility.scriviSuFile(cognome);
+				Utility.scriviSuFile(nome);
+				Utility.scriviSuFile(Integer.toString(libr));
+				Utility.scriviSuFile(Integer.toString(text));
+				Utility.scriviSuFile(Integer.toString(fmain));
+				String filename;
+				filename = cognome+"txt";
+				String c = Utility.stringa(new FileReader(filename));
+				filename = nome+"txt";
+				String n = Utility.stringa(new FileReader(filename));
+				filename = libr+"txt";
+				String l = Utility.stringa(new FileReader(filename));
+				filename = text+"txt";
+				String t = Utility.stringa(new FileReader(filename));
+				filename = fmain+"txt";
+				String m = Utility.stringa(new FileReader(filename));
+				Inserimento.inserisciEsitoProgetto(n,c,l,t,m);
 				PrintOnFile.printOnFile(Lettura.proveCompletate());
 				dispose();
 			} catch (Exception e) {

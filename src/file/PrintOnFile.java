@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.HashSet;
+import java.util.logging.Logger;
+
 import candidati.Candidato;
 import utility.Utility;
 
@@ -32,8 +34,8 @@ public class PrintOnFile {
 			dir.mkdir();
 		}
 		PrintStream output;
-		for (Candidato c: candidati){
-			try {
+		try {
+			for (Candidato c: candidati){
 				int esito = (int)c.getProgetto().esito();
 				output = new PrintStream(
 						new File("Esiti\\"+c.getCognome()+" "+c.getNome()+".txt")
@@ -72,10 +74,9 @@ public class PrintOnFile {
 					}
 					output.flush();
 					output.close();
-				}
-			 catch (FileNotFoundException e) {
-			
 			}
+		} catch (FileNotFoundException e) {
+			Logger.getLogger("File non trovato");
 		}
 	}
 }
