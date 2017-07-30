@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Logger;
+
 import utility.Utility;
 
 /**
@@ -32,15 +34,15 @@ public class Inserimento {
 			Connection conn = DriverManager.getConnection(
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
 			);
-			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
-			int res = st.executeUpdate(
+			Statement st = conn.createStatement();			int res = st.executeUpdate(
 					"insert ignore into progetto values"
 					+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
 					+"' and cognome='"+Utility.stringForQuery(cognome)
 					+"'),"+libr+","+test+","+main+")"
 			);
-		
+			Logger.getLogger(Integer.toString(res));
+			st.close();
+			conn.close();
 	}
 
 	public static void inserisciPrenotazione(String nome, String cognome) 
@@ -50,11 +52,13 @@ public class Inserimento {
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
 			);
 			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
 			int res = st.executeUpdate(
 					"insert ignore into candidato (nome,cognome) values ('"
 					+nome+"','"+cognome+"')"
 			);
+			Logger.getLogger(Integer.toString(res));
+			st.close();
+			conn.close();
 	}
 	
 	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) 
@@ -64,7 +68,6 @@ public class Inserimento {
 					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
 			);
 			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
 			int res = st.executeUpdate(
 					"insert ignore into teoria values ((select id from candidato where nome='"
 					+Utility.stringForQuery(nome)
@@ -72,6 +75,9 @@ public class Inserimento {
 					+"'),'"+Utility.stringForQuery(teoria)
 					+"')"
 			);
+			Logger.getLogger(Integer.toString(res));
+			st.close();
+			conn.close();
 	}
 	
 }

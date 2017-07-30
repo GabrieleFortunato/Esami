@@ -57,7 +57,8 @@ public class Candidato {
 	 */
 	public Candidato(String nome, String cognome, String esitoTeoria) 
 			throws EsitoTeoriaException {
-		this(nome, cognome);
+		this.setCognome(cognome);
+		this.setNome(nome);
 		this.setEsitoTeoria(esitoTeoria);
 	}
 
@@ -71,7 +72,9 @@ public class Candidato {
 	 */
 	public Candidato(String nome, String cognome, String esitoTeoria, Progetto progetto) 
 			throws EsitoTeoriaException {
-		this(nome, cognome,esitoTeoria);
+		this.setCognome(cognome);
+		this.setNome(nome);
+		this.setEsitoTeoria(esitoTeoria);
 		this.setProgetto(progetto);
 	}
 

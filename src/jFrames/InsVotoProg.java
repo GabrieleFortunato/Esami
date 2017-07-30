@@ -166,20 +166,19 @@ public class InsVotoProg extends JFrame {
 					d.close();
 					e.close();
 					nomefile = nome;
-					new File(nomefile+".txt").delete();
+					new File(Utility.nomeFile(nomefile)).delete();
 					nomefile = cognome;
-					new File(nomefile+".txt").delete();
+					new File(Utility.nomeFile(nomefile)).delete();
 					nomefile = Integer.toString(libr);
-					new File(nomefile+".txt").delete();
+					new File(Utility.nomeFile(nomefile)).delete();
 					nomefile = Integer.toString(text);
-					new File(nomefile+".txt").delete();
+					new File(Utility.nomeFile(nomefile)).delete();
 					nomefile = Integer.toString(fmain);
-					new File(nomefile+".txt").delete();
+					new File(Utility.nomeFile(nomefile)).delete();
 					PrintOnFile.printOnFile(Lettura.interrogati());
 				} catch (NumberFormatException | InstantiationException | 
 						IllegalAccessException | ClassNotFoundException | VotoException | 
 						SQLException | IOException | EsitoTeoriaException e) {
-					
 				}
 			}
 		});

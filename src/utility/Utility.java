@@ -92,4 +92,8 @@ public class Utility {
 		}
 	}
 	
+	public static String nomeFile(String s){
+		return s+".txt";
+	}
+	
 }

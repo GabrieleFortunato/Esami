@@ -37,10 +37,12 @@ public class Cancellazione {
 	public static void puliziaDatabase() throws SQLException {
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
 		int res = st.executeUpdate(
 				"delete from candidato"
 		);
+		Logger.getLogger(Integer.toString(res));
+		st.close();
+		conn.close();
 	}
 
 	/**
@@ -52,10 +54,12 @@ public class Cancellazione {
 	public static void cancellaCandidato(String nome, String cognome) throws SQLException{
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
 		int res = st.executeUpdate(
 				"delete from candidato where (nome='"+nome+"' and cognome='"+cognome+"')"
 		);
+		st.close();
+		conn.close();
+		Logger.getLogger(Integer.toString(res));
 	} 
 }
 
