@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
+
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
@@ -25,28 +27,29 @@ public class Lettura {
 	private Lettura(){
 		
 	}
-	
+
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static InitialContext context = context();
-	private static DataSource ds = ds(context);
+	private final static InitialContext context = getContext();
+	private final static DataSource ds = getDs(context);
 	
-	private static InitialContext context(){
-		InitialContext context = null;
+	private final static InitialContext getContext(){
+		InitialContext context1 = null;
 		try {
-			context = new InitialContext();
+			context1 = new InitialContext();
 		} catch (NamingException e) {
-			
+			Logger.getLogger("Eccezione sollevata");
 		}
-		return context;
+		return context1;
 	}
 	
-	private static DataSource ds(InitialContext context){
+	private final static DataSource getDs(InitialContext context){
 		try {
-			ds = (DataSource) context.lookup(driver);
+			DataSource ds1 = (DataSource) context.lookup(driver);
+			return ds1;
 		} catch (NamingException e) {
-		
+			Logger.getLogger("Eccezione sollevata");
 		}
-		return ds;
+		return null;
 	}
 	
 	/**
@@ -64,7 +67,6 @@ public class Lettura {
 	public static HashSet<Candidato> interrogati() 
 			throws NamingException, SQLException, VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
-		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(
@@ -95,7 +97,6 @@ public class Lettura {
 	public static HashSet<Candidato> daInterrogare() 
 			throws NamingException, SQLException{
 		Set<Candidato> list = new HashSet<>();
-		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(

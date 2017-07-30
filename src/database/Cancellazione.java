@@ -3,6 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Logger;
+
 import candidati.Candidato;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -19,28 +21,29 @@ public class Cancellazione {
 	private Cancellazione(){
 	
 	}
-	
+
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private static InitialContext context = context();
-	private static DataSource ds = ds(context);
+	private final static InitialContext context = getContext();
+	private final static DataSource ds = getDs(context);
 	
-	private static InitialContext context(){
-		InitialContext context = null;
+	private final static InitialContext getContext(){
+		InitialContext context1 = null;
 		try {
-			context = new InitialContext();
+			context1 = new InitialContext();
 		} catch (NamingException e) {
-			
+			Logger.getLogger("Eccezione sollevata");
 		}
-		return context;
+		return context1;
 	}
 	
-	private static DataSource ds(InitialContext context){
+	private final static DataSource getDs(InitialContext context){
 		try {
-			ds = (DataSource) context.lookup(driver);
+			DataSource ds1 = (DataSource) context.lookup(driver);
+			return ds1;
 		} catch (NamingException e) {
-		
+			Logger.getLogger("Eccezione sollevata");
 		}
-		return ds;
+		return null;
 	}
 	
 	/**
