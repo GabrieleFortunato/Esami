@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
+
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -100,7 +102,7 @@ public class CancPren extends JFrame {
 					Candidato c = new Candidato(n,cg);
 					Cancellazione.cancellaCandidato(c);
 					dispose();
-				} catch (SQLException e1) {
+				} catch (NamingException | SQLException e1) {
 					JOptionPane.showMessageDialog (
 							null , "Problemi di collegamento con il database"
 					); 

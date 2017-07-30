@@ -3,8 +3,6 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -22,28 +20,7 @@ public class Inizializzazione {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static InitialContext context = getContext();
-	private final static DataSource ds = getDs(context);
-	
-	private final static InitialContext getContext(){
-		InitialContext context1 = null;
-		try {
-			context1 = new InitialContext();
-		} catch (NamingException e) {
-			Logger.getLogger("Eccezione sollevata");
-		}
-		return context1;
-	}
-	
-	private final static DataSource getDs(InitialContext context){
-		try {
-			DataSource ds1 = (DataSource) context.lookup(driver);
-			return ds1;
-		} catch (NamingException e) {
-			Logger.getLogger("Eccezione sollevata");
-		}
-		return null;
-	}
+	private static DataSource ds;
 	
 	/**
 	 * Inizializza il database
@@ -51,6 +28,8 @@ public class Inizializzazione {
 	 * @throws SQLException
 	 */
 	public static void inizializzaDatabase() throws NamingException, SQLException {
+		InitialContext context = new InitialContext();
+		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")

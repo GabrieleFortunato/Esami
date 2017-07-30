@@ -3,9 +3,8 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
-
 import candidati.Candidato;
+import candidati.Progetto;
 import utility.Utility;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -22,30 +21,9 @@ public class Inserimento {
 	private Inserimento(){
 		
 	}
-
+	
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static InitialContext context = getContext();
-	private final static DataSource ds = getDs(context);
-	
-	private final static InitialContext getContext(){
-		InitialContext context1 = null;
-		try {
-			context1 = new InitialContext();
-		} catch (NamingException e) {
-			Logger.getLogger("Eccezione sollevata");
-		}
-		return context1;
-	}
-	
-	private final static DataSource getDs(InitialContext context){
-		try {
-			DataSource ds1 = (DataSource) context.lookup(driver);
-			return ds1;
-		} catch (NamingException e) {
-			Logger.getLogger("Eccezione sollevata");
-		}
-		return null;
-	}
+	private static DataSource ds;
 	
 	/**
 	 * Inserisci nel database l'esito del progetto 
@@ -55,17 +33,18 @@ public class Inserimento {
 	 * @throws NamingException 
 	 * @throws SQLException 
 	 */
-	public static void inserisciEsitoProgetto(
-			String nome, String cognome, String libr, String test, String main
-			) throws NamingException, SQLException  {
+	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
+			throws NamingException, SQLException {
+		InitialContext context = new InitialContext();
+		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();	
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")
 		int res = st.executeUpdate(
 				"insert ignore into progetto values"
-				+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
-				+"' and cognome='"+Utility.stringForQuery(cognome)
-				+"'),"+libr+","+test+","+main+")"
+				+ "((select id from candidato where nome='"+Utility.stringForQuery(c.getNome())
+				+"' and cognome='"+Utility.stringForQuery(c.getCognome())
+				+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
 		);
 		st.close();
 		conn.close();
@@ -73,6 +52,8 @@ public class Inserimento {
 	}
 
 	public static void inserisciPrenotazione(Candidato c) throws SQLException, NamingException {
+		InitialContext context = new InitialContext();
+		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();	
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")
@@ -86,6 +67,8 @@ public class Inserimento {
 	}
 	
 	public static void inserisciEsitoTeoria(Candidato c) throws NamingException, SQLException {
+		InitialContext context = new InitialContext();
+		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();	
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")

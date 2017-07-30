@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
-
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
@@ -27,30 +25,9 @@ public class Lettura {
 	private Lettura(){
 		
 	}
-
+	
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static InitialContext context = getContext();
-	private final static DataSource ds = getDs(context);
-	
-	private final static InitialContext getContext(){
-		InitialContext context1 = null;
-		try {
-			context1 = new InitialContext();
-		} catch (NamingException e) {
-			Logger.getLogger("Eccezione sollevata");
-		}
-		return context1;
-	}
-	
-	private final static DataSource getDs(InitialContext context){
-		try {
-			DataSource ds1 = (DataSource) context.lookup(driver);
-			return ds1;
-		} catch (NamingException e) {
-			Logger.getLogger("Eccezione sollevata");
-		}
-		return null;
-	}
+	private static DataSource ds;
 	
 	/**
 	 * Legge dal database i candidati che hanno sostenuto e superato 
@@ -64,9 +41,11 @@ public class Lettura {
 	 * @throws IllegalAccessException
 	 * @throws ClassNotFoundException
 	 */
-	public static HashSet<Candidato> interrogati() 
+	public static HashSet<Candidato> proveCompletate() 
 			throws NamingException, SQLException, VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
+		InitialContext context = new InitialContext();
+		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(
@@ -97,6 +76,8 @@ public class Lettura {
 	public static HashSet<Candidato> daInterrogare() 
 			throws NamingException, SQLException{
 		Set<Candidato> list = new HashSet<>();
+		InitialContext context = new InitialContext();
+		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(
