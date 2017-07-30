@@ -42,6 +42,7 @@ public class Lettura {
 				+ "inner join teoria on candidato.id=teoria.candidato "
 				+ "inner join progetto on candidato.id=progetto.candidato"
 		);
+		Progetto progetto;
 		while (res.next()) {
 			String nome = res.getString("nome");
 			String cognome = res.getString("cognome");
@@ -49,7 +50,7 @@ public class Lettura {
 			int libreria = res.getInt("libreria");
 			int test = res.getInt("test");
 			int main = res.getInt("main");
-			Progetto progetto = new Progetto(libreria,test,main);
+			progetto = new Progetto(libreria,test,main);
 			Candidato candidato = new Candidato(nome,cognome,teoria,progetto);
 			list.add(candidato);
 		}
