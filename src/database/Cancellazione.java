@@ -21,7 +21,28 @@ public class Cancellazione {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private static DataSource ds;
+	private static InitialContext context = context();
+	private static DataSource ds = ds(context);
+	
+	private static InitialContext context(){
+		InitialContext context = null;
+		try {
+			context = new InitialContext();
+		} catch (NamingException e) {
+			
+		}
+		return context;
+	}
+	
+	private static DataSource ds(InitialContext context){
+		DataSource ds = null;
+		try {
+			ds = (DataSource) context.lookup(driver);
+		} catch (NamingException e) {
+		
+		}
+		return ds;
+	}
 	
 	/**
 	 * Cancella un candidato dal database
@@ -29,9 +50,7 @@ public class Cancellazione {
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public static void cancellaCandidato(Candidato c) throws NamingException, SQLException {
-		InitialContext context = new InitialContext();
-		ds = (DataSource) context.lookup(driver);
+	public static void cancellaCandidato(Candidato c) throws SQLException {
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")

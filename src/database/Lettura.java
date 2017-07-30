@@ -27,7 +27,28 @@ public class Lettura {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private static DataSource ds;
+	private static InitialContext context = context();
+	private static DataSource ds = ds(context);
+	
+	private static InitialContext context(){
+		InitialContext context = null;
+		try {
+			context = new InitialContext();
+		} catch (NamingException e) {
+			
+		}
+		return context;
+	}
+	
+	private static DataSource ds(InitialContext context){
+		DataSource ds = null;
+		try {
+			ds = (DataSource) context.lookup(driver);
+		} catch (NamingException e) {
+		
+		}
+		return ds;
+	}
 	
 	/**
 	 * Legge dal database i candidati che hanno sostenuto e superato 
@@ -41,10 +62,9 @@ public class Lettura {
 	 * @throws IllegalAccessException
 	 * @throws ClassNotFoundException
 	 */
-	public static HashSet<Candidato> proveCompletate() 
+	public static HashSet<Candidato> interrogati() 
 			throws NamingException, SQLException, VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
-		InitialContext context = new InitialContext();
 		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
@@ -76,7 +96,6 @@ public class Lettura {
 	public static HashSet<Candidato> daInterrogare() 
 			throws NamingException, SQLException{
 		Set<Candidato> list = new HashSet<>();
-		InitialContext context = new InitialContext();
 		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();

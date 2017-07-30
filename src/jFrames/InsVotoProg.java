@@ -5,7 +5,6 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-
 import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,12 +13,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
-import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
+import eccezioni.EsitoTeoriaException;
+import eccezioni.VotoException;
 import file.PrintOnFile;
+import utility.Utility;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Classe InserimentoEsitoProgetto
@@ -149,22 +152,52 @@ public class InsVotoProg extends JFrame {
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {String cognome = cognomecandidato.getText();
+			public void actionPerformed(ActionEvent arg0) {
 			try {
+				String cognome = cognomecandidato.getText();
 				String nome = nomecandidato.getText();
 				int libr = Integer.parseInt(libreria.getText());
 				int text = Integer.parseInt(test.getText());
 				int fmain = Integer.parseInt(votoMain.getText());
-				Candidato c = new Candidato(nome, cognome);
-				Progetto p = new Progetto(libr, text, fmain);
-				Inserimento.inserisciEsitoProgetto(c, p);
-				PrintOnFile.printOnFile(Lettura.proveCompletate());
-				dispose();
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog (
-						null , "Impossibile inserire nel database l'esito del progetto"
-				); 
-				}
+				Utility.scriviSuFile(cognome);
+				Utility.scriviSuFile(nome);
+				Utility.scriviSuFile(libr);
+				Utility.scriviSuFile(text);
+				Utility.scriviSuFile(fmain);
+				String nomefile = nome;
+				FileReader a = new FileReader(nomefile+".txt");
+				nomefile = cognome;
+				FileReader b = new FileReader(nomefile+".txt");
+				nomefile = Integer.toString(libr);
+				FileReader c1 = new FileReader(nomefile+".txt");
+				nomefile = Integer.toString(text);
+				FileReader d = new FileReader(nomefile+".txt");
+				nomefile = Integer.toString(fmain);
+				FileReader e = new FileReader(nomefile+".txt");
+				Inserimento.inserisciEsitoProgetto(
+						Utility.stringa(a),Utility.stringa(b),Utility.stringa(c1),
+						Utility.stringa(d),Utility.stringa(e)
+				);
+				a.close();
+				b.close();
+				c1.close();
+				d.close();
+				e.close();
+				nomefile = nome;
+				new File(Utility.nomeFile(nomefile)).delete();
+				nomefile = cognome;
+				new File(Utility.nomeFile(nomefile)).delete();
+				nomefile = Integer.toString(libr);
+				new File(Utility.nomeFile(nomefile)).delete();
+				nomefile = Integer.toString(text);
+				new File(Utility.nomeFile(nomefile)).delete();
+				nomefile = Integer.toString(fmain);
+				new File(Utility.nomeFile(nomefile)).delete();
+				PrintOnFile.printOnFile(Lettura.interrogati());
+			} catch (NumberFormatException | NamingException | SQLException | IOException | VotoException
+					| EsitoTeoriaException e) {
+				
+			}
 			}
 		});
 		

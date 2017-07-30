@@ -1,5 +1,12 @@
 package utility;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.logging.Logger;
+
 /**
  * Classe Utility
  * 
@@ -23,10 +30,12 @@ public class Utility {
 		int length = s.length();
 		String result = s;
 		for (int i=0;i<length;i++){
+			int index = i;
 			if (s.charAt(i)=='\''){
-				result=s.substring(0,i+1).concat(s.substring(i));
-				length = length-1;
+				result=s.substring(0,index+1).concat(s.substring(index));
+				index = i+1;
 			}
+			index++;
 		}
 		return result;
 	}
@@ -40,8 +49,51 @@ public class Utility {
 		return (0<=voto&&voto<=30);
 	}
 	
+	/**
+	 * Arrotonda un numero decimale
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public static double arrotonda(double a, double b){
 		return Math.ceil(a*Math.pow(dieci, b))/Math.pow(dieci, b);
+	}
+	
+	public static void scriviSuFile(String s){
+		try {
+			PrintStream output = new PrintStream(s+".txt");
+			output.print(s);
+			output.flush();
+			output.close();
+		} catch (FileNotFoundException e) {
+			Logger.getLogger("");
+		}
+	}
+	
+	public static String stringa(FileReader file){
+		BufferedReader b = new BufferedReader(file);
+		String s = null;
+		try {
+			s = b.readLine();
+		} catch (IOException e) {
+			Logger.getLogger("");
+		}
+		return s;
+	}
+	
+	public static void scriviSuFile(int s){
+		try {
+			PrintStream output = new PrintStream(s+".txt");
+			output.print(s);
+			output.flush();
+			output.close();
+		} catch (FileNotFoundException e) {
+			Logger.getLogger("");
+		}
+	}
+	
+	public static String nomeFile(String s){
+		return s+".txt";
 	}
 	
 }
