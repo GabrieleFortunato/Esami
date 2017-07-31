@@ -1,12 +1,8 @@
 package jFrames;
 
 import java.awt.EventQueue;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
-import java.sql.SQLException;
 import java.util.logging.Logger;
-
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -69,24 +65,16 @@ public class InsVotoProg extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			if (Lettura.daInterrogare().size()>0){
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							InsVotoProg frame = new InsVotoProg();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							Logger.getLogger("Connessione non riuscita");
-						}
-					}
-				});
-			} else {
-				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					InsVotoProg frame = new InsVotoProg();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					Logger.getLogger("Connessione non riuscita");
+				}
 			}
-		} catch (HeadlessException | NamingException | SQLException e) {
-			JOptionPane.showMessageDialog ( null, "Problemi di collegamento con il database" ) ;
-		}
+		});
 	}
 
 	/**

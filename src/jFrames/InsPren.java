@@ -7,12 +7,9 @@ import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import database.Inserimento;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
@@ -99,13 +96,7 @@ public class InsPren extends JFrame {
 				String n = nome.getText();
 				String cg = cognome.getText();
 				Candidato c = new Candidato(n,cg);
-				try {
-					Inserimento.inserisciPrenotazione(c);
-				} catch (SQLException | NamingException e1) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di collegamento con il database"
-					); 
-				}
+				Inserimento.inserisciPrenotazione(c);
 				dispose();
 			}
 		});

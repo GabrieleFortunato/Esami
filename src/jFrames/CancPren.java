@@ -102,7 +102,7 @@ public class CancPren extends JFrame {
 					Candidato c = new Candidato(n,cg);
 					Cancellazione.cancellaCandidato(c);
 					dispose();
-				} catch (NamingException | SQLException e1) {
+				} catch (NamingException | SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 					JOptionPane.showMessageDialog (
 							null , "Problemi di collegamento con il database"
 					); 

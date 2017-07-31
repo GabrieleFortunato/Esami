@@ -28,8 +28,13 @@ public class Cancellazione {
 	 * @param c
 	 * @throws NamingException
 	 * @throws SQLException
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public static void cancellaCandidato(Candidato c) throws NamingException, SQLException {
+	public static void cancellaCandidato(Candidato c) throws NamingException, SQLException, 
+	InstantiationException, IllegalAccessException, ClassNotFoundException {
+		Class.forName(driver).newInstance();
 		InitialContext context = new InitialContext();
 		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
