@@ -22,6 +22,9 @@ import javax.sql.DataSource;
  */
 public class Lettura {
 
+	/**
+	 * Metodo costruttore
+	 */
 	private Lettura(){
 		
 	}
@@ -53,12 +56,13 @@ public class Lettura {
 				+ "inner join teoria on candidato.id=teoria.candidato "
 				+ "inner join progetto on candidato.id=progetto.candidato"
 		);
-		Progetto progetto;
+		Progetto progetto = null;
 		while (res.next()) {
 			String nome = res.getString("nome");
 			String cognome = res.getString("cognome");
 			String teoria = res.getString("esito");
 			int libreria = res.getInt("libreria");
+	
 			int test = res.getInt("test");
 			int main = res.getInt("main");
 			progetto = new Progetto(libreria,test,main);
@@ -71,8 +75,12 @@ public class Lettura {
 		return (HashSet<Candidato>) list;
 	}
 	
-
-	
+	/**
+	 * Cerca nel database i candidati da interrogare
+	 * @return
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
 	public static HashSet<Candidato> daInterrogare() 
 			throws NamingException, SQLException{
 		Set<Candidato> list = new HashSet<>();

@@ -15,7 +15,10 @@ import javax.sql.DataSource;
  *
  */
 public class Cancellazione {
-	
+
+	/**
+	 * Metodo costruttore
+	 */
 	private Cancellazione(){
 	
 	}
@@ -34,7 +37,6 @@ public class Cancellazione {
 	 */
 	public static void cancellaCandidato(String nome, String cognome) throws NamingException, SQLException, 
 	InstantiationException, IllegalAccessException, ClassNotFoundException {
-		Class.forName(driver).newInstance();
 		InitialContext context = new InitialContext();
 		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
