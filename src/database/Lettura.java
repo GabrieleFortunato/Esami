@@ -36,8 +36,9 @@ public class Lettura {
 			ClassNotFoundException, VotoException{
 		HashSet<Candidato> list = new HashSet<>();
 		Class.forName(driver).newInstance();
+		String stringa = "?autoReconnect=true&useSSL=false";
 		Connection conn = DriverManager.getConnection(
-				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+				url+dbName+stringa,userName,password
 		);
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(
@@ -47,8 +48,10 @@ public class Lettura {
 		);
 		Progetto progetto;
 		while (res.next()) {
-			String nome = res.getString("nome");
-			String cognome = res.getString("cognome");
+			String colonna = "nome";
+			String nome = res.getString(colonna);
+			colonna = "cognome";
+			String cognome = res.getString(colonna);
 			String teoria = res.getString("esito");
 			int libreria = res.getInt("libreria");
 			int test = res.getInt("test");
