@@ -1,8 +1,12 @@
 package jFrames;
 
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.logging.Logger;
+
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,19 +69,25 @@ public class InsVotoProg extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-	
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						InsVotoProg frame = new InsVotoProg();
-						frame.setVisible(true);
-					} catch (Exception e) {
-						Logger.getLogger("Connessione non riuscita");
+		try {
+			if (Lettura.daInterrogare().size()>0){
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							InsVotoProg frame = new InsVotoProg();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							Logger.getLogger("Connessione non riuscita");
+						}
 					}
-				}
-			});
-		} 
-	
+				});
+			} else {
+				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
+			}
+		} catch (HeadlessException | NamingException | SQLException e) {
+			JOptionPane.showMessageDialog ( null, "Problemi di collegamento con il database" ) ;
+		}
+	}
 
 	/**
 	 * Create the frame.
@@ -139,17 +149,16 @@ public class InsVotoProg extends JFrame {
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {String cognome = cognomecandidato.getText();
 			try {
-				String cognome = cognomecandidato.getText();
 				String nome = nomecandidato.getText();
 				int libr = Integer.parseInt(libreria.getText());
 				int text = Integer.parseInt(test.getText());
 				int fmain = Integer.parseInt(votoMain.getText());
-				Candidato c = new Candidato(nome,cognome);
-				Progetto p = new Progetto(libr,text,fmain);
-				Inserimento.inserisciEsitoProgetto(c,p);
-				PrintOnFile.printOnFile(Lettura.interrogati());
+				Candidato c = new Candidato(nome, cognome);
+				Progetto p = new Progetto(libr, text, fmain);
+				Inserimento.inserisciEsitoProgetto(c, p);
+				PrintOnFile.printOnFile(Lettura.proveCompletate());
 				dispose();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog (

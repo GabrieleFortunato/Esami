@@ -6,7 +6,7 @@ package eccezioni;
  * @author Gabriele Fortunato
  *
  */
-public class ConnException extends Exception {
+public class ConnNonRiuscitaException extends Exception {
 	
 	/**
 	 * 
