@@ -14,16 +14,15 @@ import candidati.Candidato;
  */
 public class Cancellazione {
 	
-	private
-	Cancellazione(){
+	private Cancellazione(){
 	
 	}
 	
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	private final static String dbName = "esamiprogrammazione";
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String userName = "root"; 
-	private final static String password = "qrnq946";
+	private final static String userName = dbUtility.stringaUser(); 
+	private final static String password = dbUtility.stringaPass();
 	
 	public static void puliziaDatabase() 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
