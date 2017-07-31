@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-
 import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
 import database.Cancellazione;
 
 /**
@@ -99,8 +97,7 @@ public class CancPren extends JFrame {
 				try {
 					String n = nome.getText();
 					String cg = cognome.getText();
-					Candidato c = new Candidato(n,cg);
-					Cancellazione.cancellaCandidato(c);
+					Cancellazione.cancellaCandidato(n,cg);
 					dispose();
 				} catch (NamingException | SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 					JOptionPane.showMessageDialog (

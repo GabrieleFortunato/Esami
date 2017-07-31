@@ -3,13 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Hashtable;
-
-import candidati.Candidato;
-import candidati.Progetto;
 import utility.Utility;
-
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -40,7 +34,7 @@ public class Inserimento {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
+	public static void inserisciEsitoProgetto(String nome, String cognome, String lib, String test, String main) 
 			throws NamingException, SQLException, InstantiationException, IllegalAccessException,
 			ClassNotFoundException {
 		Class.forName(driver).newInstance();
@@ -51,34 +45,23 @@ public class Inserimento {
 		@SuppressWarnings("unused")
 		int res = st.executeUpdate(
 				"insert ignore into progetto values"
-				+ "((select id from candidato where nome='"+Utility.stringForQuery(c.getNome())
-				+"' and cognome='"+Utility.stringForQuery(c.getCognome())
-				+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
+				+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
+				+"' and cognome='"+Utility.stringForQuery(cognome)+"'),"+lib+","+test+","+main+")"
 		);
 		st.close();
 		conn.close();
 		
 	}
 
-	@SuppressWarnings("unchecked")
-	public static void inserisciPrenotazione(Candidato c) {
+	public static void inserisciPrenotazione(String nome, String cognome) {
 		try {
-			@SuppressWarnings("rawtypes")
-			Hashtable env = new Hashtable(11);
-			env.put(Context.INITIAL_CONTEXT_FACTORY, 
-			    "com.sun.jndi.ldap.LdapCtxFactory");
-			env.put(Context.PROVIDER_URL, "jdbc:mysql://localhost:3306/");
-
-			// Enable connection pooling
-			env.put("com.sun.jndi.ldap.connect.pool", "true");
 			InitialContext context = new InitialContext();
 			ds = (DataSource) context.lookup(driver);
 			Connection conn = ds.getConnection();	
 			Statement st = conn.createStatement();
 			@SuppressWarnings("unused")
 			int res = st.executeUpdate(
-					"insert ignore into candidato (nome,cognome) values ('"+
-					c.getNome()+"','"+c.getCognome()+"')"
+					"insert ignore into candidato (nome,cognome) values ('"+nome+"','"+cognome+"')"
 			);
 			st.close();
 			conn.close();
@@ -88,7 +71,8 @@ public class Inserimento {
 		}
 	}
 	
-	public static void inserisciEsitoTeoria(Candidato c) throws NamingException, SQLException {
+	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) 
+			throws NamingException, SQLException {
 		InitialContext context = new InitialContext();
 		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();	
@@ -96,9 +80,9 @@ public class Inserimento {
 		@SuppressWarnings("unused")
 		int res = st.executeUpdate(
 				"insert ignore into teoria values ((select id from candidato where nome='"+
-				Utility.stringForQuery(c.getNome())+"' and cognome='"+
-				Utility.stringForQuery(c.getCognome())+"'),'"+
-				Utility.stringForQuery(c.getEsitoTeoria())+"')"
+				Utility.stringForQuery(nome)+"' and cognome='"+
+				Utility.stringForQuery(cognome)+"'),'"+
+				Utility.stringForQuery(teoria)+"')"
 		);
 		st.close();
 		conn.close();

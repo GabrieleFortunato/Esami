@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
 import database.Inserimento;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -95,8 +94,7 @@ public class InsPren extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String n = nome.getText();
 				String cg = cognome.getText();
-				Candidato c = new Candidato(n,cg);
-				Inserimento.inserisciPrenotazione(c);
+				Inserimento.inserisciPrenotazione(n,cg);
 				dispose();
 			}
 		});

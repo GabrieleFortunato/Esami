@@ -3,7 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import candidati.Candidato;
+import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -32,18 +32,17 @@ public class Cancellazione {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public static void cancellaCandidato(Candidato c) throws NamingException, SQLException, 
+	public static void cancellaCandidato(String nome, String cognome) throws NamingException, SQLException, 
 	InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Class.forName(driver).newInstance();
 		InitialContext context = new InitialContext();
 		ds = (DataSource) context.lookup(driver);
 		Connection conn = ds.getConnection();
 		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
-		int res = st.executeUpdate(
-				"delete from candidato where (nome='"+c.getNome()+
-				"' and cognome='"+c.getCognome()+"')"
-		);
+		String sql = 
+				"delete from candidato where (nome='"+nome+"' and cognome='"+cognome+"')";
+		int res = st.executeUpdate(sql);
+		Logger.getLogger(Integer.toString(res));
 		st.close();
 		conn.close();
 	} 

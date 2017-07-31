@@ -10,8 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
-import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
 import file.PrintOnFile;
@@ -137,15 +135,15 @@ public class InsVotoProg extends JFrame {
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {String cognome = cognomecandidato.getText();
+			public void actionPerformed(ActionEvent arg0) {
 			try {
+				String cognome = cognomecandidato.getText();
 				String nome = nomecandidato.getText();
 				int libr = Integer.parseInt(libreria.getText());
 				int text = Integer.parseInt(test.getText());
 				int fmain = Integer.parseInt(votoMain.getText());
-				Candidato c = new Candidato(nome, cognome);
-				Progetto p = new Progetto(libr, text, fmain);
-				Inserimento.inserisciEsitoProgetto(c, p);
+				Inserimento.inserisciEsitoProgetto(nome,cognome, Integer.toString(libr), 
+						Integer.toString(text), Integer.toString(fmain));
 				PrintOnFile.printOnFile(Lettura.proveCompletate());
 				dispose();
 			} catch (Exception e) {
