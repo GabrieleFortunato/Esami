@@ -28,17 +28,17 @@ public class Lettura {
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	private final static String dbName = "esamiprogrammazione";
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String userName = "root"; 
-	private final static String password = "qrnq946";
+	private final static String userName = dbUtility.stringaUser(); 
+	private final static String password = dbUtility.stringaPass();
 	
 	public static HashSet<Candidato> interrogati() 
 			throws SQLException,	EsitoTeoriaException, InstantiationException, IllegalAccessException, 
 			ClassNotFoundException, VotoException{
 		HashSet<Candidato> list = new HashSet<>();
 		Class.forName(driver).newInstance();
-		String stringa = "?autoReconnect=true&useSSL=false";
+		String str = "?autoReconnect=true&useSSL=false";
 		Connection conn = DriverManager.getConnection(
-				url+dbName+stringa,userName,password
+				url+dbName+str,userName,password
 		);
 		Statement st = conn.createStatement();
 		ResultSet res = st.executeQuery(

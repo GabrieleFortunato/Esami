@@ -27,8 +27,9 @@ public class Cancellazione {
 	public static void puliziaDatabase() 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		Class.forName(driver).newInstance();
+		String str = "?autoReconnect=true&useSSL=false";
 		Connection conn = DriverManager.getConnection(
-				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+				url+dbName+str,userName,password
 		);
 		Statement st = conn.createStatement();
 		@SuppressWarnings("unused")

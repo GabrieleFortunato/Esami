@@ -23,14 +23,15 @@ public class Inserimento {
 	private final static String url = "jdbc:mysql://localhost:3306/";
 	private final static String dbName = "esamiprogrammazione";
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String userName = "root"; 
-	private final static String password = "qrnq946";
+	private final static String userName = dbUtility.stringaUser(); 
+	private final static String password = dbUtility.stringaPass();
 	
 	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 			Class.forName(driver).newInstance();
+			String str = "?autoReconnect=true&useSSL=false";
 			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+					url+dbName+str,userName,password
 			);
 			Statement st = conn.createStatement();
 			@SuppressWarnings("unused")
