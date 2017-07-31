@@ -7,9 +7,7 @@ import javax.swing.border.EmptyBorder;
 import candidati.Candidato;
 import database.Inserimento;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -96,17 +94,17 @@ public class InsPren extends JFrame {
 		JButton cog = new JButton("CONFERMA");
 		cog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String n = nome.getText();
-				String cg = cognome.getText();
-				Candidato c = new Candidato(n,cg);
 				try {
+					String n = nome.getText();
+					String cg = cognome.getText();
+					Candidato c = new Candidato(n,cg);
 					Inserimento.inserisciPrenotazione(c);
-				} catch (SQLException | NamingException e1) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di collegamento con il database"
-					); 
+					dispose();
+				} catch (
+						InstantiationException | IllegalAccessException | 
+						ClassNotFoundException | SQLException e1) {
+					
 				}
-				dispose();
 			}
 		});
 		cog.setBounds(duecentotrenta, centosessantotto, centosettantaquattro, venticinque);

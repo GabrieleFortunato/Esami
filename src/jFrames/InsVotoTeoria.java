@@ -10,7 +10,6 @@ import eccezioni.EsitoTeoriaException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -115,11 +114,14 @@ public class InsVotoTeoria extends JFrame {
 					Candidato c = new Candidato(name,surname,theory);
 					Inserimento.inserisciEsitoTeoria(c);
 					dispose();
-				} catch (EsitoTeoriaException | NamingException | SQLException e1) {
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
+						EsitoTeoriaException | SQLException e1) {
+					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog (
 							null , "Impossibile inserire nel database l'esito della teoria"
 					);
 				}
+			
 			}
 		});
 		btnConferma.setBounds(centottanta, centottantasette, duecentoquaranta, venticinque);

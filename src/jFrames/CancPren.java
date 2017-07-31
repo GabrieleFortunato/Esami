@@ -4,13 +4,10 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -35,12 +32,8 @@ public class CancPren extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					InsPren frame = new InsPren();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					Logger.getLogger("Connessione non riuscita");
-				}
+				InsPren frame = new InsPren();
+				frame.setVisible(true);
 			}
 		});
 	}
@@ -102,10 +95,10 @@ public class CancPren extends JFrame {
 					Candidato c = new Candidato(n,cg);
 					Cancellazione.cancellaCandidato(c);
 					dispose();
-				} catch (NamingException | SQLException e1) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di collegamento con il database"
-					); 
+				} catch (
+						InstantiationException | IllegalAccessException | 
+						ClassNotFoundException | SQLException e1) {
+					
 				}
 			}
 		});

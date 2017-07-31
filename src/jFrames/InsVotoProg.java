@@ -10,13 +10,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import candidati.Candidato;
+import candidati.Progetto;
 import database.Inserimento;
 import database.Lettura;
 import file.PrintOnFile;
-import utility.Utility;
-
 import java.awt.event.ActionListener;
-import java.io.FileReader;
 
 /**
  * Classe InserimentoEsitoProgetto
@@ -147,24 +146,10 @@ public class InsVotoProg extends JFrame {
 				int libr = Integer.parseInt(libreria.getText());
 				int text = Integer.parseInt(test.getText());
 				int fmain = Integer.parseInt(votoMain.getText());
-				Utility.scriviSuFile(cognome);
-				Utility.scriviSuFile(nome);
-				Utility.scriviSuFile(Integer.toString(libr));
-				Utility.scriviSuFile(Integer.toString(text));
-				Utility.scriviSuFile(Integer.toString(fmain));
-				String filename;
-				filename = cognome+"txt";
-				String c = Utility.stringa(new FileReader(filename));
-				filename = nome+"txt";
-				String n = Utility.stringa(new FileReader(filename));
-				filename = libr+"txt";
-				String l = Utility.stringa(new FileReader(filename));
-				filename = text+"txt";
-				String t = Utility.stringa(new FileReader(filename));
-				filename = fmain+"txt";
-				String m = Utility.stringa(new FileReader(filename));
-				Inserimento.inserisciEsitoProgetto(n,c,l,t,m);
-				PrintOnFile.printOnFile(Lettura.proveCompletate());
+				Candidato c = new Candidato(nome,cognome);
+				Progetto p = new Progetto(libr,text,fmain);
+				Inserimento.inserisciEsitoProgetto(c,p);
+				PrintOnFile.printOnFile(Lettura.interrogati());
 				dispose();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog (
