@@ -41,12 +41,12 @@ public class Cancellazione {
 		Statement st = null;
 			try {
 				InitialContext context = new InitialContext();
-				ds = (DataSource) context.lookup(driver);
+				ds = (DataSource)context.lookup(driver);
 				conn = ds.getConnection();
 				st = conn.createStatement();
-				String sql = 
-						"delete from candidato where (nome='"+nome+"' and cognome='"+cognome+"')";
-				int res = st.executeUpdate(sql);
+				int res = st.executeUpdate(
+						"delete from candidato where (nome='"+nome+"' and cognome='"+cognome+"')"
+				);
 				Logger.getLogger(Integer.toString(res));
 			} catch (NamingException | SQLException e) {
 				JOptionPane.showMessageDialog (

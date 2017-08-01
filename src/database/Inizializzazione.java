@@ -96,7 +96,6 @@ public class Inizializzazione {
 						);
 				Logger.getLogger(Integer.toString(res4));
 			} catch (NamingException | SQLException e) {
-				e.printStackTrace();
 				JOptionPane.showMessageDialog (
 						null , "Impossibile inizializzare il database"
 				);

@@ -51,10 +51,12 @@ public class Inserimento {
 			ds = (DataSource) context.lookup(driver);
 			conn = ds.getConnection();	
 			st = conn.createStatement();
+			nome = Utility.stringForQuery(nome);
+			cognome = Utility.stringForQuery(cognome);
 			int res = st.executeUpdate(
 					"insert ignore into progetto values"
-					+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
-					+"' and cognome='"+Utility.stringForQuery(cognome)+"'),"+lib+","+test+","+main+")"
+					+ "((select id from candidato where nome='"+nome+"' and cognome='"+cognome+"'),"
+					+lib+","+test+","+main+")"
 			);
 			Logger.getLogger(Integer.toString(res));
 		} catch (NamingException | SQLException e) {
@@ -82,9 +84,11 @@ public class Inserimento {
 	public static void inserisciPrenotazione(String nome, String cognome) {
 		try {
 			Context context = new InitialContext();
-			javax.sql.DataSource ds =(javax.sql.DataSource)context.lookup(driver);
+			ds =(javax.sql.DataSource)context.lookup(driver);
 			Connection conn = ds.getConnection();
 			Statement st = conn.createStatement();
+			nome = Utility.stringForQuery(nome);
+			cognome = Utility.stringForQuery(cognome);
 			int res = st.executeUpdate(
 					"insert ignore into candidato (nome,cognome) values ('"+nome+"','"+cognome+"')"
 			);
@@ -109,11 +113,12 @@ public class Inserimento {
 			ds = (DataSource) context.lookup(driver);
 			conn = ds.getConnection();	
 			st = conn.createStatement();
+			nome = Utility.stringForQuery(nome);
+			cognome = Utility.stringForQuery(cognome);
+			teoria = Utility.stringForQuery(teoria);
 			int res = st.executeUpdate(
 					"insert ignore into teoria values ((select id from candidato where nome='"+
-					Utility.stringForQuery(nome)+"' and cognome='"+
-					Utility.stringForQuery(cognome)+"'),'"+
-					Utility.stringForQuery(teoria)+"')"
+					nome+"' and cognome='"+cognome+"'),'"+teoria+"')"
 			);
 			Logger.getLogger(Integer.toString(res));
 		} catch (NamingException | SQLException e) {

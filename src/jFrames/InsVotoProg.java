@@ -138,9 +138,12 @@ public class InsVotoProg extends JFrame {
 
 				String cognome = cognomecandidato.getText();
 				String nome = nomecandidato.getText();
-				int libr = Integer.parseInt(libreria.getText());
-				int text = Integer.parseInt(test.getText());
-				int fmain = Integer.parseInt(votoMain.getText());
+				String s = libreria.getText();
+				int libr = Integer.parseInt(s);
+				s = test.getText();
+				int text = Integer.parseInt(s);
+				s = votoMain.getText();
+				int fmain = Integer.parseInt(s);
 				Inserimento.inserisciEsitoProgetto(nome,cognome, Integer.toString(libr), 
 						Integer.toString(text), Integer.toString(fmain));
 				PrintOnFile.printOnFile(Lettura.proveCompletate());
