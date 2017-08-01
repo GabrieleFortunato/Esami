@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import javax.swing.JOptionPane;
+
 
 /**
  * Classe InizializzaDatabase
@@ -26,7 +26,28 @@ public class Inizializzazione {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private static DataSource ds;
+	private static InitialContext context = getContext();
+	private static DataSource ds = getDs();
+	
+	private static InitialContext getContext(){
+		InitialContext result = null;
+		try {
+			result = new InitialContext();
+		} catch (NamingException e) {
+			
+		}
+		return result;
+	}
+	
+	private static DataSource getDs(){
+		ds = null;
+		try {
+			ds = (DataSource) context.lookup(driver);
+		} catch (NamingException e) {
+			
+		}
+		return ds;
+	}
 	
 	/**
 	 * Inizializza il database
@@ -37,9 +58,8 @@ public class Inizializzazione {
 		Connection conn = null;
 		Statement st = null;
 			try {
-				InitialContext context = new InitialContext();
 				ds = (DataSource) context.lookup(driver);
-				conn = ds.getConnection();
+				conn = ds.getConnection("root", "qrnq946");
 				st = conn.createStatement();
 				int res = st.executeUpdate(
 						"create database if not exists esamiprogrammazione"		
@@ -76,16 +96,19 @@ public class Inizializzazione {
 						);
 				Logger.getLogger(Integer.toString(res4));
 			} catch (NamingException | SQLException e) {
+				e.printStackTrace();
 				JOptionPane.showMessageDialog (
-						null , "Impossibile inizializzare una variabile"
+						null , "Impossibile inizializzare il database"
 				);
 			} finally {
 				try {
-					st.close();
-					conn.close();
+					if (st!=null&&conn!=null){
+						st.close();
+						conn.close();
+					}
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog (
-							null , "Impossibile inizializzare una variabile"
+							null , "Impossibile inizializzare il database"
 					);
 				}
 			}

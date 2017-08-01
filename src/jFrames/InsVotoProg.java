@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -136,7 +135,7 @@ public class InsVotoProg extends JFrame {
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			try {
+
 				String cognome = cognomecandidato.getText();
 				String nome = nomecandidato.getText();
 				int libr = Integer.parseInt(libreria.getText());
@@ -146,11 +145,6 @@ public class InsVotoProg extends JFrame {
 						Integer.toString(text), Integer.toString(fmain));
 				PrintOnFile.printOnFile(Lettura.proveCompletate());
 				dispose();
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog (
-						null , "Impossibile inserire nel database l'esito del progetto"
-				); 
-				}
 			}
 		});
 		

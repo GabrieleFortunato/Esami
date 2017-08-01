@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.logging.Logger;
 
 import utility.Utility;
+
+import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -78,25 +80,24 @@ public class Inserimento {
 	 * @param cognome
 	 */
 	public static void inserisciPrenotazione(String nome, String cognome) {
-		Connection conn = null;
-		Statement st = null;
 		try {
-			InitialContext context = new InitialContext();
-			ds = (DataSource) context.lookup(driver);
-			conn = ds.getConnection();	
-			st = conn.createStatement();
+			Context context = new InitialContext();
+			javax.sql.DataSource ds =(javax.sql.DataSource)context.lookup(driver);
+			Connection conn = ds.getConnection();
+			Statement st = conn.createStatement();
 			int res = st.executeUpdate(
 					"insert ignore into candidato (nome,cognome) values ('"+nome+"','"+cognome+"')"
 			);
 			Logger.getLogger(Integer.toString(res));
 		} catch (NamingException e) {
 			JOptionPane.showMessageDialog (
-					null , "Naming exception"
+				null , "Naming exception"
 			);
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog (
-					null , "SQL exception"
-			);
+		}
+			 catch (SQLException e) {
+				 JOptionPane.showMessageDialog (
+				null , "SQL exception"
+			);	
 		} 
 	}
 	
