@@ -2,10 +2,9 @@ package file;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.logging.Logger;
-
 import candidati.Candidato;
 import utility.Utility;
 
@@ -33,16 +32,16 @@ public class PrintOnFile {
 		if (!dir.exists()){
 			dir.mkdir();
 		}
-		PrintStream output = null;
+		PrintWriter output = null;
 		try {
 			for (Candidato c: candidati){
 				int esito = (int)c.getProgetto().esito();
-				output = new PrintStream(
+				String teoria = c.getEsitoTeoria();
+				output = new PrintWriter(
 						new File("Esiti\\"+c.getCognome()+" "+c.getNome()+".txt")
 				);
 				if (c.esito()>30){
-					output.println(
-							"Esito teoria: "+c.getEsitoTeoria()
+					output.println(("Esito teoria: "+teoria)
 				);
 					output.println(
 							"Esito progetto: "+esito
