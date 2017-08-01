@@ -6,12 +6,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import database.Inserimento;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
@@ -107,17 +104,11 @@ public class InsVotoTeoria extends JFrame {
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
 					String name = nome.getText();
 					String surname = cognome.getText();
 					String theory = teoria.getText();
 					Inserimento.inserisciEsitoTeoria(name,surname,theory);
 					dispose();
-				} catch (NamingException | SQLException e1) {
-					JOptionPane.showMessageDialog (
-							null , "Impossibile inserire nel database l'esito della teoria"
-					);
-				}
 			}
 		});
 		btnConferma.setBounds(centottanta, centottantasette, duecentoquaranta, venticinque);

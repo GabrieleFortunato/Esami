@@ -9,6 +9,7 @@ import utility.Utility;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.swing.JOptionPane;
 
 /**
  * Classe InserimentoNelDatabase
@@ -26,6 +27,7 @@ public class Inserimento {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
+	private static DataSource ds = null;
 	
 	/**
 	 * Inserisci nel database l'esito del progetto 
@@ -38,21 +40,35 @@ public class Inserimento {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public static void inserisciEsitoProgetto(String nome, String cognome, String lib, String test, String main) 
-			throws NamingException, SQLException, InstantiationException, IllegalAccessException,
-			ClassNotFoundException {
-		InitialContext context = new InitialContext();
-		DataSource ds = (DataSource) context.lookup(driver);
-		Connection conn = ds.getConnection();	
-		Statement st = conn.createStatement();
-		int res = st.executeUpdate(
-				"insert ignore into progetto values"
-				+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
-				+"' and cognome='"+Utility.stringForQuery(cognome)+"'),"+lib+","+test+","+main+")"
-		);
-		Logger.getLogger(Integer.toString(res));
-		st.close();
-		conn.close();
+	public static void inserisciEsitoProgetto(String nome, String cognome, 
+			String lib, String test, String main) {
+		Connection conn = null;	
+		Statement st = null;
+		try {
+			InitialContext context = new InitialContext();
+			ds = (DataSource) context.lookup(driver);
+			conn = ds.getConnection();	
+			st = conn.createStatement();
+			int res = st.executeUpdate(
+					"insert ignore into progetto values"
+					+ "((select id from candidato where nome='"+Utility.stringForQuery(nome)
+					+"' and cognome='"+Utility.stringForQuery(cognome)+"'),"+lib+","+test+","+main+")"
+			);
+			Logger.getLogger(Integer.toString(res));
+		} catch (NamingException | SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Impossibile inserire nel database l'esito della teoria"
+			);
+		} finally {
+			try {
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog (
+						null , "Problemi di connesion con il database"
+				);
+			}
+		}
 		
 	}
 
@@ -62,11 +78,13 @@ public class Inserimento {
 	 * @param cognome
 	 */
 	public static void inserisciPrenotazione(String nome, String cognome) {
+		Connection conn = null;	
+		Statement st = null;
 		try {
 			InitialContext context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup(driver);
-			Connection conn = ds.getConnection();	
-			Statement st = conn.createStatement();
+			ds = (DataSource) context.lookup(driver);
+			conn = ds.getConnection();	
+			st = conn.createStatement();
 			int res = st.executeUpdate(
 					"insert ignore into candidato (nome,cognome) values ('"+nome+"','"+cognome+"')"
 			);
@@ -74,26 +92,50 @@ public class Inserimento {
 			st.close();
 			conn.close();
 		} catch (NamingException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog (
+				null , "Impossibile inserire nel database l'esito della teoria"
+			);
+		} finally {
+			try {
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog (
+						null , "Problemi di connesion con il database"
+				);
+			}
 		}
 	}
 	
-	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) 
-			throws NamingException, SQLException {
-		InitialContext context = new InitialContext();
-		DataSource ds = (DataSource) context.lookup(driver);
-		Connection conn = ds.getConnection();	
-		Statement st = conn.createStatement();
-		int res = st.executeUpdate(
-				"insert ignore into teoria values ((select id from candidato where nome='"+
-				Utility.stringForQuery(nome)+"' and cognome='"+
-				Utility.stringForQuery(cognome)+"'),'"+
-				Utility.stringForQuery(teoria)+"')"
-		);
-		Logger.getLogger(Integer.toString(res));
-		st.close();
-		conn.close();
+	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) {
+		Connection conn = null;	
+		Statement st = null;
+		try {
+			InitialContext context = new InitialContext();
+			ds = (DataSource) context.lookup(driver);
+			conn = ds.getConnection();	
+			st = conn.createStatement();
+			int res = st.executeUpdate(
+					"insert ignore into teoria values ((select id from candidato where nome='"+
+					Utility.stringForQuery(nome)+"' and cognome='"+
+					Utility.stringForQuery(cognome)+"'),'"+
+					Utility.stringForQuery(teoria)+"')"
+			);
+			Logger.getLogger(Integer.toString(res));
+		} catch (NamingException | SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Impossibile inserire nel database l'esito della teoria"
+			);
+		} finally {
+			try {
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog (
+						null , "Problemi di collegamento con il database"
+				);
+			}
+		}
 	}
 	
 }

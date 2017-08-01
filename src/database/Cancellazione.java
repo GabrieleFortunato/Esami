@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.swing.JOptionPane;
 
 /**
  * Classe CancellazioneDaDatabase
@@ -24,7 +25,7 @@ public class Cancellazione {
 	}
 	
 	private final static String driver = "com.mysql.jdbc.Driver";
-	private static DataSource ds;
+	private static DataSource ds = null;
 	
 	/**
 	 * Cancella un candidato dal database
@@ -35,19 +36,31 @@ public class Cancellazione {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public static void cancellaCandidato(String nome, String cognome) throws NamingException, SQLException, 
-	InstantiationException, IllegalAccessException, ClassNotFoundException {
-		InitialContext context = new InitialContext();
-		ds = (DataSource) context.lookup(driver);
-		Connection conn = ds.getConnection();
-		Statement st = conn.createStatement();
-		String sql = 
-				"delete from candidato where (nome='"+nome+"' and cognome='"+cognome+"')";
-		int res = st.executeUpdate(sql);
-		Logger.getLogger(Integer.toString(res));
-		st.close();
-		conn.close();
-	} 
+	public static void cancellaCandidato(String nome, String cognome) {
+		Connection conn = null;
+		Statement st = null;
+			try {
+				InitialContext context = new InitialContext();
+				ds = (DataSource) context.lookup(driver);
+				conn = ds.getConnection();
+				st = conn.createStatement();
+				String sql = 
+						"delete from candidato where (nome='"+nome+"' and cognome='"+cognome+"')";
+				int res = st.executeUpdate(sql);
+				Logger.getLogger(Integer.toString(res));
+			} catch (NamingException | SQLException e) {
+				JOptionPane.showMessageDialog (
+						null , "Impossibile inizializzare una variabile"
+				);
+			} finally {
+				try {
+					st.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Impossibile inizializzare una variabile"
+					);
+				}
+			} 
+		} 
 }
-
-
