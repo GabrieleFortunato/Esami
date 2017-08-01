@@ -7,6 +7,6 @@ package eccezioni;
  *
  */
 @SuppressWarnings("serial")
-public class ConnNonRiuscitaException extends Exception {
+public class ConnException extends Exception {
 
 }

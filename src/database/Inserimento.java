@@ -78,7 +78,7 @@ public class Inserimento {
 	 * @param cognome
 	 */
 	public static void inserisciPrenotazione(String nome, String cognome) {
-		Connection conn = null;	
+		Connection conn = null;
 		Statement st = null;
 		try {
 			InitialContext context = new InitialContext();
@@ -89,22 +89,15 @@ public class Inserimento {
 					"insert ignore into candidato (nome,cognome) values ('"+nome+"','"+cognome+"')"
 			);
 			Logger.getLogger(Integer.toString(res));
-			st.close();
-			conn.close();
-		} catch (NamingException | SQLException e) {
+		} catch (NamingException e) {
 			JOptionPane.showMessageDialog (
-				null , "Impossibile inserire nel database l'esito della teoria"
+					null , "Naming exception"
 			);
-		} finally {
-			try {
-				st.close();
-				conn.close();
-			} catch (SQLException e) {
-				JOptionPane.showMessageDialog (
-						null , "Problemi di connesion con il database"
-				);
-			}
-		}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "SQL exception"
+			);
+		} 
 	}
 	
 	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) {
