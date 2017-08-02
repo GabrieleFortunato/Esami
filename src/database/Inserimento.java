@@ -13,6 +13,9 @@ import com.mysql.jdbc.Statement;
  */
 public class Inserimento {
 	
+	/**
+	 * Localhost
+	 */
 	static String url = "jdbc:mysql://localhost:3306/";
 	static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	static String driver = "com.mysql.jdbc.Driver";
