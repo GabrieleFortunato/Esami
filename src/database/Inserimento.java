@@ -18,8 +18,6 @@ public class Inserimento {
 	static String url = "jdbc:mysql://localhost:3306/";
 	static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	static String driver = "com.mysql.jdbc.Driver";
-	static String userName = Utility.user();
-	static String password = Utility.pass();
 	
 	/**
 	 * Metodo costruttore
