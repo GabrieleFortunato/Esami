@@ -3,6 +3,9 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+
 import com.mysql.jdbc.PreparedStatement;
 
 /**
@@ -15,9 +18,9 @@ public class Inserimento {
 	/**
 	 * Localhost
 	 */
-	static String url = "jdbc:mysql://localhost:3306/";
-	static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
-	static String driver = "com.mysql.jdbc.Driver";
+	final static String url = "jdbc:mysql://localhost:3306/";
+	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+	final static String driver = "com.mysql.jdbc.Driver";
 	
 	/**
 	 * Metodo costruttore
@@ -44,7 +47,9 @@ public class Inserimento {
 			st.close();
 			conn.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog (
+					null , "Problemi di lettura da file"
+			);
 		}
 	}	
 }
