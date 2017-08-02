@@ -4,7 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import database.Inserimento;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -21,6 +23,24 @@ import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class InsPren extends JFrame {
 
+	private final int cinque = 5;
+	private final int dieci = 10;
+	private final int sedici = 16;
+	private final int ventidue = 22;
+	private final int venticinque = 25;
+	private final int trentasette = 37;
+	private final int sessanta = 60;
+	private final int sessantatre = 63;
+	private final int ottantanove = 89;	
+	private final int novantadue = 92;
+	private final int cento = 100;
+	private final int centoventidue = 122;
+	private final int centosessantotto = 168;
+	private final int centosettantaquattro = 174;
+	private final int duecentotrenta = 230;
+	private final int trecento = 300;
+	private final int quattrocentocinquanta = 450;
+	
 	private JTextField cognome;
 	private JTextField nome;
 
@@ -44,24 +64,6 @@ public class InsPren extends JFrame {
 	 * Create the frame.
 	 */
 	public InsPren() {
-		final int cinque = 5;
-		final int dieci = 10;
-		final int sedici = 16;
-		final int ventidue = 22;
-		final int venticinque = 25;
-		final int trentasette = 37;
-		final int sessanta = 60;
-		final int sessantatre = 63;
-		final int ottantanove = 89;	
-		final int novantadue = 92;
-		final int cento = 100;
-		final int centoventidue = 122;
-		final int centosessantotto = 168;
-		final int centosettantaquattro = 174;
-		final int duecentotrenta = 230;
-		final int trecento = 300;
-		final int quattrocentocinquanta = 450;
-		
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);
@@ -94,7 +96,7 @@ public class InsPren extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String n = nome.getText();
 				String cg = cognome.getText();
-				Inserimento.inserisciPrenotazione(n,cg);
+				Inserimento.inserisciPrenotazione(n, cg);
 				dispose();
 			}
 		});
