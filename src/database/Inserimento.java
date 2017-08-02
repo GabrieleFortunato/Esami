@@ -6,15 +6,25 @@ import java.util.logging.Logger;
 
 import com.mysql.jdbc.Statement;
 
-import utility.Utility;
-
+/**
+ * Inserimento nel database
+ * @author gabriele
+ *
+ */
 public class Inserimento {
 	
 	static String url = "jdbc:mysql://localhost:3306/";
 	static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	static String driver = "com.mysql.jdbc.Driver";
-	static String userName = "root"; 
-	static String password = "qrnq946";
+	static String userName = Utility.user(); 
+	static String password = Utility.pass();
+	
+	/**
+	 * Metodo costruttore
+	 */
+	private Inserimento(){
+		
+	}
 	
 	public static void inserisciPrenotazione(String nome, String cognome){
 		nome = Utility.stringForQuery(nome);
@@ -29,6 +39,7 @@ public class Inserimento {
 					"insert into candidato (nome,cognome) values('"+nome+"','"+cognome+"')"
 			);
 			Logger.getLogger(Integer.toString(res));
+			st.close();
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();

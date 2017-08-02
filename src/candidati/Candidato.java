@@ -1,5 +1,10 @@
 package candidati;
 
+/**
+ * Caratteristriche del candidato
+ * @author gabriele
+ *
+ */
 public class Candidato {
 	
 	@SuppressWarnings("unused")

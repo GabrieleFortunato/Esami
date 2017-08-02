@@ -1,5 +1,10 @@
 package candidati;
 
+/**
+ * Caratteristiche del progetto
+ * @author gabriele
+ *
+ */
 public class Progetto {
 
 	private int libreria;

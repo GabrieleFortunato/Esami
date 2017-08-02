@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 /**
- * Classe InserimentoTeoria
+ * Prenotazione di un candidato
  * 
  * @author Gabriele Fortunato
  *
