@@ -18,7 +18,7 @@ public class Inserimento {
 	static String url = "jdbc:mysql://localhost:3306/";
 	static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	static String driver = "com.mysql.jdbc.Driver";
-	static String userName = Utility.user(); 
+	static String userName = Utility.user();
 	static String password = Utility.pass();
 	
 	/**
@@ -34,7 +34,7 @@ public class Inserimento {
 		try {
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
-					url+dbName,userName,password
+					url+dbName,Utility.user(),Utility.pass()
 			);
 			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 					"insert into candidato (nome,cognome) values(?,?)"
