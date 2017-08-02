@@ -3,8 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.logging.Logger;
-
-import com.mysql.jdbc.Statement;
+import com.mysql.jdbc.PreparedStatement;
 
 /**
  * Inserimento nel database
@@ -37,10 +36,12 @@ public class Inserimento {
 			Connection conn = DriverManager.getConnection(
 					url+dbName,userName,password
 			);
-			Statement st = (Statement) conn.createStatement();
-			int res = st.executeUpdate(
-					"insert into candidato (nome,cognome) values('"+nome+"','"+cognome+"')"
+			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+					"insert into candidato (nome,cognome) values(?,?)"
 			);
+			st.setString(1, nome);
+			st.setString(2, cognome);
+			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
 			st.close();
 			conn.close();
