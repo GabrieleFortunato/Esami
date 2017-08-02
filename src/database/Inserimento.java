@@ -33,7 +33,6 @@ public class Inserimento {
 		nome = Utility.stringForQuery(nome);
 		cognome = Utility.stringForQuery(cognome);
 		try {
-			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(
 					url+dbName,Utility.user(),Utility.pass()
 			);

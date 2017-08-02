@@ -46,7 +46,7 @@ public class Utility {
 			output.close();
 		} catch (FileNotFoundException e1) {
 			JOptionPane.showMessageDialog (
-				null , "Problemi di lettura da file"
+				null , "Problemi di lettura da file user"
 			);
 		}
 		try {
@@ -55,22 +55,21 @@ public class Utility {
 			s = buffer.readLine();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog (
-				null , "Problemi di lettura da file"
+				null , "Problemi di lettura da file user"
 			);
 		}
-		new File("user.txt").delete();
 		return s;
 	}
 	
 	public static String pass() {
 		try {
-			PrintStream output = new PrintStream(new File("user.txt"));
-			output.println("root");
+			PrintStream output = new PrintStream(new File("pass.txt"));
+			output.println("qrnq946");
 			output.flush();
 			output.close();
 		} catch (FileNotFoundException e1) {
 			JOptionPane.showMessageDialog (
-				null , "Problemi di lettura da file"
+				null , "Problemi di scritture da file pass"
 			);
 		}
 		String s = null;
@@ -80,7 +79,7 @@ public class Utility {
 			s = buffer.readLine();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog (
-				null , "Problemi di lettura da file"
+				null , "Problemi di lettura da file pass"
 			);
 		}
 		return s;
