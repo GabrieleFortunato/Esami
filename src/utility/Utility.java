@@ -8,7 +8,7 @@ package utility;
  */
 public class Utility {
 	
-	private final static int dieci = 10;
+	private final static int DIECI = 10;
 	
 	/**
 	 * Metodo costruttore
@@ -33,7 +33,7 @@ public class Utility {
 	 * @return
 	 */
 	public static double arrotonda(double a, double b){
-		return Math.ceil(a*Math.pow(dieci, b))/Math.pow(dieci, b);
+		return Math.ceil(a*Math.pow(DIECI, b))/Math.pow(DIECI, b);
 	}
 	
 }

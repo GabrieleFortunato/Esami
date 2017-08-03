@@ -32,17 +32,17 @@ public class Lettura {
 	/**
 	 * Localhost
 	 */
-	final static String url = "jdbc:mysql://localhost:3306/";
+	final static String URL = "jdbc:mysql://localhost:3306/";
 
 	/**
 	 * Nome  del database
 	 */
-	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+	final static String DBNAME = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 
 	/**
 	 * Driver
 	 */
-	final static String driver = "com.mysql.jdbc.Driver";
+	final static String DRIVER = "com.mysql.jdbc.Driver";
 	
 	/**
 	 * Legge dal database i candidati che hanno sostenuto e superato 
@@ -56,7 +56,7 @@ public class Lettura {
 		Set<Candidato> list = new HashSet<>();
 		try {
 			conn = DriverManager.getConnection(
-					url+dbName,Utility.user(),Utility.pass()
+					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement(
 					"select nome,cognome,esito,libreria,test,main from candidato "
@@ -113,15 +113,15 @@ public class Lettura {
 		Connection conn = null;
 		PreparedStatement st = null;
 		ResultSet res = null;
-		nome = Utility.stringForQuery(nome);
-		cognome = Utility.stringForQuery(cognome);
+		String a = Utility.stringForQuery(nome);
+		String b = Utility.stringForQuery(cognome);
 		int ris = 0;
 		try {
 			conn = DriverManager.getConnection(
-					url+dbName,Utility.user(),Utility.pass()
+					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement(
-					"select id from candidato where (nome='"+nome+"' and cognome='"+cognome+"')"
+					"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
 			);
 			res = st.executeQuery();
 			boolean flag = res.next();

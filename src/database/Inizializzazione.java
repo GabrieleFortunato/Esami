@@ -19,17 +19,17 @@ public class Inizializzazione {
 	/**
 	 * Localhost
 	 */
-	final static String url = "jdbc:mysql://localhost:3306/";
+	final static String URL= "jdbc:mysql://localhost:3306/";
 	
 	/**
 	 * Nome  del database
 	 */
-	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+	final static String DBNAME = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	
 	/**
 	 * Driver
 	 */
-	final static String driver = "com.mysql.jdbc.Driver";
+	final static String DRIVER = "com.mysql.jdbc.Driver";
 	
 	/**
 	 * Metodo costruttore
@@ -48,7 +48,7 @@ public class Inizializzazione {
 		PreparedStatement st = null;
 		try {
 			conn = DriverManager.getConnection(
-					url+dbName,Utility.user(),Utility.pass()
+					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement(
 					"create database if not exists esamiprogrammazione"

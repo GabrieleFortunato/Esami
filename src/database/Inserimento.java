@@ -18,17 +18,17 @@ public class Inserimento {
 	/**
 	 * Localhost
 	 */
-	final static String url = "jdbc:mysql://localhost:3306/";
+	final static String URL = "jdbc:mysql://localhost:3306/";
 	
 	/**
 	 * Nome  del database
 	 */
-	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+	final static String DBNAME = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	
 	/**
 	 * Driver
 	 */
-	final static String driver = "com.mysql.jdbc.Driver";
+	final static String DRIVER = "com.mysql.jdbc.Driver";
 
 	/**
 	 * Metodo costruttore
@@ -45,24 +45,22 @@ public class Inserimento {
 	public static void inserisciPrenotazione(String nome, String cognome){
 		Connection conn = null;
 		PreparedStatement st = null;
-		nome = Utility.stringForQuery(nome);
-		cognome = Utility.stringForQuery(cognome);
+		String a = Utility.stringForQuery(nome);
+		String b = Utility.stringForQuery(cognome);
 		try {
 			conn = DriverManager.getConnection(
-					url+dbName,Utility.user(),Utility.pass()
+					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement(
 					"insert into candidato (nome,cognome) values(?,?)"
 			);
-			st.setString(1, nome);
-			st.setString(2, cognome);
+			st.setString(1, a);
+			st.setString(2, b);
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
-			st.close();
-			conn.close();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
-					null , "Problemi di lettura da file"
+					null , "Problemi di connessione con il database"
 			);
 		} finally {
 			if (st!=null&&conn!=null){
@@ -76,18 +74,24 @@ public class Inserimento {
 				}
 			}
 		}
+		
 	}	
 	
+	/**
+	 * Inserimento nel database del voto della prova teorica
+	 * @param nome
+	 * @param cognome
+	 * @param teoria
+	 */
 	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria){
 		Connection conn = null;
 		PreparedStatement st = null;
-		nome = Utility.stringForQuery(nome);
-		cognome = Utility.stringForQuery(cognome);
-		teoria = Utility.stringForQuery(teoria);
-		String id = Integer.toString(Lettura.id(nome, cognome));
+		String a = Utility.stringForQuery(nome);
+		String b = Utility.stringForQuery(cognome);
+		String id = Integer.toString(Lettura.id(a, b));
 		try {
 			conn = DriverManager.getConnection(
-					url+dbName,Utility.user(),Utility.pass()
+					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement(
 							"insert ignore into teoria values (?,?)"
@@ -96,26 +100,22 @@ public class Inserimento {
 			st.setString(2, teoria);
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
-			st.close();
-			conn.close();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
-					null , "Problemi di lettura da file"
+					null , "Problemi di connessione con il database"
 			);
-		} finally {
-			if (st!=null&&conn!=null){
-				try {
-					st.close();
-					conn.close();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di connessione con il database"
-					);
-				}
+		} finally{
+			try {
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog (
+						null , "Problemi di connessione con il database"
+				);
 			}
 		}
-	}	
-	
+	}
+		
 	/**
 	 * Inserisci nel database l'esito del progetto 
 	 * svolto da un candidato
@@ -127,12 +127,12 @@ public class Inserimento {
 	public static void inserisciEsitoProgetto(String nome, String cognome, String libr, String test, String main){
 		Connection conn = null;
 		PreparedStatement st = null;
-		nome = Utility.stringForQuery(nome);
-		cognome = Utility.stringForQuery(cognome);
+		String a = Utility.stringForQuery(nome);
+		String b = Utility.stringForQuery(cognome);
 		try {
-			String id = Integer.toString(Lettura.id(nome, cognome));
+			String id = Integer.toString(Lettura.id(a, b));
 			conn = DriverManager.getConnection(
-					url+dbName,Utility.user(),Utility.pass()
+					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement(
 					"insert ignore into progetto values(?,?,?,?)"

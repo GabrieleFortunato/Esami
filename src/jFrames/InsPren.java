@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 /**
@@ -30,12 +29,8 @@ public class InsPren extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
 					InsPren frame = new InsPren();
 					frame.setVisible(true);
-				} catch (Exception e) {
-					Logger.getLogger("Connessione non riuscita");
-				}
 			}
 		});
 	}
