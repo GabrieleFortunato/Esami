@@ -47,9 +47,7 @@ public class Cancellazione {
 		String b = Utility.stringForQuery(cognome);
 		String sql = "delete from candidato where (nome='"+a+"' and cognome='"+b+"')";
 		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
+			conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
 			st = (PreparedStatement) conn.prepareStatement(sql);
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
