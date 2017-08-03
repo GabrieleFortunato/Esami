@@ -1,8 +1,12 @@
 package candidati;
 
+import eccezioni.VotoException;
+import utility.Utility;
+
 /**
- * Caratteristiche del progetto
- * @author gabriele
+ * Classe Progetto
+ * 
+ * @author Gabriele Fortunato
  *
  */
 public class Progetto {
@@ -16,8 +20,9 @@ public class Progetto {
 	 * @param libreria
 	 * @param test
 	 * @param main
+	 * @throws VotoException 
 	 */
-	public Progetto(int libreria, int test, int main) {
+	public Progetto(int libreria, int test, int main) throws VotoException {
 		this.setLibreria(libreria);
 		this.setTest(test);
 		this.setMain(main);
@@ -26,33 +31,74 @@ public class Progetto {
 	/**
 	 * Imposta il voto della libreria
 	 * @param libreria
+	 * @throws VotoException 
 	 */
-	private void setLibreria(int libreria) {
-		this.libreria = libreria;
+	private void setLibreria(int libreria) throws VotoException {
+		if (Utility.votoCorretto(libreria)){
+			this.libreria = libreria;
+		} else {
+			throw new VotoException();
+		}
+		
 	}
 
 	/**
-	 * Imposta il voto dei casi di test
+	 * Imposta il voto dei test
 	 * @param test
+	 * @throws VotoException 
 	 */
-	private void setTest(int test) {
-		this.test = test;
+	private void setTest(int test) throws VotoException {
+		if (Utility.votoCorretto(libreria)){
+			this.test = test;
+		} else {
+			throw new VotoException();
+		}
 	}
 
 	/**
 	 * Imposta il voto del main
 	 * @param main
+	 * @throws VotoException 
 	 */
-	private void setMain(int main) {
-		this.main = main;
+	private void setMain(int main) throws VotoException {
+		if (Utility.votoCorretto(libreria)){
+			this.main=main;
+		} else {
+			throw new VotoException();
+		}
 	}
 	
+	/**
+	 * Restituisce il voto della libreria
+	 * @return
+	 */
+	public int getLibreria() {
+		return libreria;
+	}
+
+	/**
+	 * Restituisce il voto dei test
+	 * @return
+	 */
+	public int getTest() {
+		return test;
+	}
+
+	/**
+	 * Imposta il voto del main
+	 * @return
+	 */
+	public int getMain() {
+		return main;
+	}
+
 	/**
 	 * Restituisce l'esito del progetto
 	 * @return
 	 */
 	public double esito(){
-		return (libreria+libreria+test+main)/4.0;
+		double four = 4.0;
+		return (libreria+libreria+test+main)/four;
 	}
 	
 }

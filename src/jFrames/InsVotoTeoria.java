@@ -13,34 +13,37 @@ import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 /**
- * Classe InserimentoTeoria
+ * Classe InserimentoEsitoTeoria
  * 
  * @author Gabriele Fortunato
  *
  */
 @SuppressWarnings("serial")
-public class InsPren extends JFrame {
-
+public class InsVotoTeoria extends JFrame {
+	
 	private final int cinque = 5;
 	private final int dieci = 10;
 	private final int sedici = 16;
 	private final int ventidue = 22;
+	private final int ventiquattro = 24;
 	private final int venticinque = 25;
-	private final int trentasette = 37;
-	private final int sessanta = 60;
-	private final int sessantatre = 63;
-	private final int ottantanove = 89;	
-	private final int novantadue = 92;
+	private final int cinquantatre = 53;
+	private final int cinquantasei = 56;
+	private final int ottantadue = 82;	
+	private final int ottantacinque = 85;
 	private final int cento = 100;
-	private final int centoventidue = 122;
-	private final int centosessantotto = 168;
-	private final int centosettantaquattro = 174;
-	private final int duecentotrenta = 230;
+	private final int centoundici = 111;
+	private final int centoquattordici = 114;
+	private final int centotrentaquattro = 134;
+	private final int centottanta = 180;
+	private final int centottantasette = 187;
+	private final int duecentoquaranta = 240;
 	private final int trecento = 300;
-	private final int quattrocentocinquanta = 450;
+	private final int quattrocentocinquanta = 450; 
 	
 	private JTextField cognome;
 	private JTextField nome;
+	private JTextField teoria;
 
 	/**
 	 * Launch the application.
@@ -49,7 +52,7 @@ public class InsPren extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InsPren frame = new InsPren();
+					InsVotoTeoria frame = new InsVotoTeoria();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					Logger.getLogger("Connessione non riuscita");
@@ -61,44 +64,54 @@ public class InsPren extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InsPren() {
+	public InsVotoTeoria() {
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);
-		setTitle("INSERIMENTO PRENOTAZIONE");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblCognomeCandidato = new JLabel("Cognome candidato: ");
-		lblCognomeCandidato.setBounds(trentasette, sessantatre, centoventidue, sedici);
+		lblCognomeCandidato.setBounds(ventiquattro, cinquantasei, centotrentaquattro, sedici);
 		contentPane.add(lblCognomeCandidato);
 		
 		JLabel lblNomeCandidato = new JLabel("Nome candidato: ");
-		lblNomeCandidato.setBounds(trentasette, novantadue, centoventidue, sedici);
+		lblNomeCandidato.setBounds(ventiquattro, ottantacinque, centotrentaquattro, sedici);
 		contentPane.add(lblNomeCandidato);
 		
+		JLabel lblEsitoTeoria = new JLabel("Esito teoria: ");
+		lblEsitoTeoria.setBounds(ventiquattro, centoquattordici, centotrentaquattro, sedici);
+		contentPane.add(lblEsitoTeoria);
+		
 		cognome = new JTextField();
-		cognome.setBounds(duecentotrenta, sessanta, centosettantaquattro, ventidue);
+		cognome.setBounds(centottanta, cinquantatre, duecentoquaranta, ventidue);
 		contentPane.add(cognome);
 		cognome.setColumns(dieci);
 		
 		nome = new JTextField();
 		nome.setColumns(dieci);
-		nome.setBounds(duecentotrenta, ottantanove, centosettantaquattro, ventidue);
+		nome.setBounds(centottanta, ottantadue, duecentoquaranta, ventidue);
 		contentPane.add(nome);
 		
-		JButton cog = new JButton("CONFERMA");
-		cog.addActionListener(new ActionListener() {
+		teoria = new JTextField();
+		teoria.setColumns(dieci);
+		teoria.setBounds(centottanta, centoundici, duecentoquaranta, ventidue);
+		contentPane.add(teoria);
+		
+		JButton btnConferma = new JButton("CONFERMA");
+		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String n = nome.getText();
-				String cg = cognome.getText();
-				Inserimento.inserisciPrenotazione(n,cg);
+				String name = nome.getText();
+				String surname = cognome.getText();
+				String theory = teoria.getText();
+				Inserimento.inserisciEsitoTeoria(name,surname,theory);
 				dispose();
 			}
 		});
-		cog.setBounds(duecentotrenta, centosessantotto, centosettantaquattro, venticinque);
-		contentPane.add(cog);
+		btnConferma.setBounds(centottanta, centottantasette, duecentoquaranta, venticinque);
+		contentPane.add(btnConferma);
 	}
+
 }

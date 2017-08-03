@@ -2,15 +2,16 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.logging.Logger;
-
+import javax.naming.NamingException;
 import javax.swing.JOptionPane;
 
-import com.mysql.jdbc.PreparedStatement;
-
 /**
- * Inserimento nel database
- * @author gabriele
+ * Classe InserimentoNelDatabase
+ * 
+ * @author Gabriele Fortunato
  *
  */
 public class Inserimento {
@@ -51,5 +52,63 @@ public class Inserimento {
 			);
 		}
 	}	
-}
+	
+	public static void inserisciEsitoTeoria(String nome, String cognome,String teoria){
+		nome = Utility.stringForQuery(nome);
+		cognome = Utility.stringForQuery(cognome);
+		teoria = Utility.stringForQuery(teoria);
+		try {
+			Connection conn = DriverManager.getConnection(
+					url+dbName,Utility.user(),Utility.pass()
+			);
+			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+							"insert ignore into teoria values ((select id from candidato where nome='"+nome+"' and cognome='"+
+							cognome+"'),'"+
+							teoria+"')"
+			);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
+			st.close();
+			conn.close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di lettura da file"
+			);
+		}
+	}	
+	
+	
+	
+	/**
+	 * Inserisci nel database l'esito del progetto 
+	 * svolto da un candidato
+	 * @param c
+	 * @param p
+	 * @throws NamingException 
+	 * @throws SQLException 
+	 */
+	public static void inserisciEsitoProgetto(String nome, String cognome, String libr, String test, String main){
+		try {
+			nome = Utility.stringForQuery(nome);
+			cognome = Utility.stringForQuery(cognome);
+			Connection conn = DriverManager.getConnection(
+					url+dbName,Utility.user(),Utility.pass()
+			);
+			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+					"insert ignore into progetto values"+"((select id from candidato where nome='"+nome+"' and cognome='"+"'),"+
+					libr+","+test+","+main+")"
+			);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
+			st.close();
+			conn.close();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di lettura da file"
+			);
+		}
+		
+	}
 
+	
+}
