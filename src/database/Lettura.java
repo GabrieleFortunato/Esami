@@ -21,6 +21,9 @@ import javax.swing.JOptionPane;
  */
 public class Lettura {
 
+	/**
+	 * Metodo costruttore
+	 */
 	private Lettura(){
 		
 	}
@@ -30,6 +33,10 @@ public class Lettura {
 	 * Localhost
 	 */
 	final static String url = "jdbc:mysql://localhost:3306/";
+
+	/**
+	 * Nome  del database
+	 */
 	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	final static String driver = "com.mysql.jdbc.Driver";
 	

@@ -1,11 +1,11 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
+import javax.swing.JOptionPane;
 
 /**
  * Classe InizializzaDatabase
@@ -15,59 +15,81 @@ import javax.sql.DataSource;
  */
 public class Inizializzazione {
 	
+	/**
+	 * Localhost
+	 */
+	final static String url = "jdbc:mysql://localhost:3306/";
+	
+	/**
+	 * Nome  del database
+	 */
+	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+	final static String driver = "com.mysql.jdbc.Driver";
+	
+	/**
+	 * Metodo costruttore
+	 */
 	private Inizializzazione(){
 		
 	}
-	
-	private final static String driver = "com.mysql.jdbc.Driver";
-	private static DataSource ds;
 	
 	/**
 	 * Inizializza il database
 	 * @throws NamingException 
 	 * @throws SQLException
 	 */
-	public static void inizializzaDatabase() throws NamingException, SQLException {
-		InitialContext context = new InitialContext();
-		ds = (DataSource) context.lookup(driver);
-		Connection conn = ds.getConnection();
-		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
-		int res = st.executeUpdate(
-				"create database if not exists esamiprogrammazione"		
-				);
-		@SuppressWarnings("unused")
-		int res1 = st.executeUpdate(
-				"use esamiprogrammazione"
-				);
-		@SuppressWarnings("unused")
-		int res2 = st.executeUpdate(
-				"create table if not exists candidato("+
-				"id int auto_increment primary key,"+
-				"nome varchar(60),"+
-				"cognome varchar(60),"+
-				"unique (nome,cognome)"+
-				");"
-				);
-		@SuppressWarnings("unused")
-		int res3 = st.executeUpdate("create table if not exists teoria("+
-				"candidato int primary key,"+
-				"esito varchar(60),"+
-				"foreign key constaint (candidato) references candidato(id) on delete cascade"+
-				");"
-				);
-		@SuppressWarnings("unused")
-		int res4 = st.executeUpdate(
-				"create table if not exists progetto("+
-				"candidato int primary key,"+
-				"libreria int,"+
-				"test int,"+
-				"main int,"+
-				"foreign key constaint (candidato) references candidato(id) on delete cascade"+
-				");"
-				);
-		st.close();
-		conn.close();
+	public static void inizializzaDatabase() {
+		try {
+			Connection conn = DriverManager.getConnection(
+					url+dbName,Utility.user(),Utility.pass()
+			);
+			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+					"create database if not exists esamiprogrammazione"
+			);
+			@SuppressWarnings("unused")
+			int res = st.executeUpdate();
+			PreparedStatement st1 = (PreparedStatement) conn.prepareStatement(
+					"use esamiprogrammazione"
+			);
+			@SuppressWarnings("unused")
+			int res1 = st1.executeUpdate();
+			PreparedStatement st2 = (PreparedStatement) conn.prepareStatement(
+					"create table if not exists candidato("+
+					"id int auto_increment primary key,"+
+					"nome varchar(60),"+
+					"cognome varchar(60),"+
+					"unique (nome,cognome)"+
+					");"
+			);
+			@SuppressWarnings("unused")
+			int res2 = st2.executeUpdate();
+			PreparedStatement st3 = (PreparedStatement) conn.prepareStatement(
+					"create table if not exists teoria("+
+					"candidato int primary key,"+
+					"esito varchar(60),"+
+					"foreign key constaint (candidato) references candidato(id) on delete cascade"+
+					");"
+			);
+			@SuppressWarnings("unused")
+			int res3 = st3.executeUpdate();
+			PreparedStatement st4 = (PreparedStatement) conn.prepareStatement(
+					"create table if not exists progetto("+
+					"candidato int primary key,"+
+					"libreria int,"+
+					"test int,"+
+					"main int,"+
+					"foreign key constaint (candidato) references candidato(id) on delete cascade"+
+					");"
+			);
+			@SuppressWarnings("unused")
+			int res4 = st4.executeUpdate();
+			st.close();
+			conn.close();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di connessione con il database"
+			);
+		}
 	}
 
 }

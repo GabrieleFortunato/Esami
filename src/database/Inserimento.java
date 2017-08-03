@@ -20,6 +20,10 @@ public class Inserimento {
 	 * Localhost
 	 */
 	final static String url = "jdbc:mysql://localhost:3306/";
+	
+	/**
+	 * Nome  del database
+	 */
 	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	final static String driver = "com.mysql.jdbc.Driver";
 	
@@ -53,7 +57,7 @@ public class Inserimento {
 		}
 	}	
 	
-	public static void inserisciEsitoTeoria(String nome, String cognome,String teoria){
+	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria){
 		nome = Utility.stringForQuery(nome);
 		cognome = Utility.stringForQuery(cognome);
 		teoria = Utility.stringForQuery(teoria);

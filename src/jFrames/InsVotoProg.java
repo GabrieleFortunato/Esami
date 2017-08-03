@@ -22,35 +22,6 @@ import java.awt.event.ActionListener;
 @SuppressWarnings("serial")
 public class InsVotoProg extends JFrame {
 
-	private final int cinque = 5;
-	private final int dieci = 10;
-	private final int sedici = 16;
-	private final int ventidue = 22;
-	private final int venticinque = 25;
-	private final int trentuno = 31;
-	private final int trentanove = 39;
-	private final int quaranta = 40;
-	private final int settantasette = 77;
-	private final int cento = 100;
-	private final int centouno = 101;
-	private final int centosei = 106;
-	private final int centonove = 109;
-	private final int centosedici = 116;
-	private final int centoventidue = 122;
-	private final int centoventicinque = 125;
-	private final int centotrentaquattro = 134;
-	private final int centosessantuno = 161;
-	private final int centoottantasette = 187;
-	private final int duecentoquattro = 204;
-	private final int duecentosette = 207;
-	private final int duecentootto = 208;
-	private final int duecentoventicinque = 225;
-	private final int quattrocentoquarantaquattro = 444;
-	private final int cinquecentoventinove = 529;
-	private final int cinquecentonovantacinque = 595;
-	private final int settecentoquarantuno = 741;
-	
-	
 	private JTextField nomecandidato;
 	private JTextField libreria;
 	private JTextField test;
@@ -73,6 +44,35 @@ public class InsVotoProg extends JFrame {
 	 * Create the frame.
 	 */
 	public InsVotoProg() {
+
+		final int cinque = 5;
+		final int dieci = 10;
+		final int sedici = 16;
+		final int ventidue = 22;
+		final int venticinque = 25;
+		final int trentuno = 31;
+		final int trentanove = 39;
+		final int quaranta = 40;
+		final int settantasette = 77;
+		final int cento = 100;
+		final int centouno = 101;
+		final int centosei = 106;
+		final int centonove = 109;
+		final int centosedici = 116;
+		final int centoventidue = 122;
+		final int centoventicinque = 125;
+		final int centotrentaquattro = 134;
+		final int centosessantuno = 161;
+		final int centoottantasette = 187;
+		final int duecentoquattro = 204;
+		final int duecentosette = 207;
+		final int duecentootto = 208;
+		final int duecentoventicinque = 225;
+		final int quattrocentoquarantaquattro = 444;
+		final int cinquecentoventinove = 529;
+		final int cinquecentonovantacinque = 595;
+		final int settecentoquarantuno = 741;
+		
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, settecentoquarantuno, cinquecentoventinove);

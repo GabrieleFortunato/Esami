@@ -16,7 +16,9 @@ import javax.swing.JOptionPane;
  */
 public class Utility {
 	
-	
+	/**
+	 * Metodo costruttore
+	 */
 	private Utility(){
 		
 	}
