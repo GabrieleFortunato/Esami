@@ -1,5 +1,7 @@
 package eccezioni;
 
+import javax.swing.JOptionPane;
+
 /**
  * Classe Eccezione
  * 
@@ -7,6 +9,16 @@ package eccezioni;
  *
  */
 @SuppressWarnings("serial")
-public class VotoException extends Exception {
+final public class VotoException extends Exception {
 
+	/**
+	 * Stampa un messaggio quando viene lanciata l'eccezione
+	 * @param message
+	 */
+	public void stampaMessaggio(String message){
+		JOptionPane.showMessageDialog (
+				null , message
+			);
+	}
+	
 }

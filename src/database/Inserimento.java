@@ -24,6 +24,10 @@ public class Inserimento {
 	 * Nome  del database
 	 */
 	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+	
+	/**
+	 * Driver
+	 */
 	final static String driver = "com.mysql.jdbc.Driver";
 
 	/**
@@ -33,6 +37,11 @@ public class Inserimento {
 		
 	}
 	
+	/**
+	 * Inserisci la prenotazione
+	 * @param nome
+	 * @param cognome
+	 */
 	public static void inserisciPrenotazione(String nome, String cognome){
 		Connection conn = null;
 		PreparedStatement st = null;

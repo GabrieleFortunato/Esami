@@ -39,6 +39,10 @@ public class Utility {
 		return result;
 	}
 	
+	/**
+	 * Legge da file il nome utente di MySQL
+	 * @return
+	 */
 	public static String user() {
 		String s = null;
 		try {

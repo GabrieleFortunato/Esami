@@ -38,6 +38,10 @@ public class Lettura {
 	 * Nome  del database
 	 */
 	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+
+	/**
+	 * Driver
+	 */
 	final static String driver = "com.mysql.jdbc.Driver";
 	
 	/**
@@ -61,7 +65,8 @@ public class Lettura {
 			);
 			res = st.executeQuery();
 			Progetto progetto = null;
-			while (res.next()) {
+			boolean flag = res.next();
+			while (flag) {
 				String nome = res.getString("nome");
 				String cognome = res.getString("cognome");
 				String teoria = res.getString("esito");
@@ -71,19 +76,16 @@ public class Lettura {
 				progetto = new Progetto(libreria,test,main);
 				Candidato candidato = new Candidato(nome,cognome,teoria,progetto);
 				list.add(candidato);
+				flag = res.next();
 			}
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
 			);
 		} catch (VotoException e) {
-			JOptionPane.showMessageDialog (
-					null , "Voto non valido"
-			);
+			e.stampaMessaggio("Voto non valido");
 		} catch (EsitoTeoriaException e) {
-			JOptionPane.showMessageDialog (
-					null , "Esito della teoria non valido"
-			);
+			e.stampaMessaggio("Esito della teoria non valido");
 		} finally {
 			if (st!=null&&res!=null&&conn!=null){
 				try {
@@ -122,9 +124,10 @@ public class Lettura {
 					"select id from candidato where (nome='"+nome+"' and cognome='"+cognome+"')"
 			);
 			res = st.executeQuery();
-			while (res.next()) {
+			boolean flag = res.next();
+			while (flag) {
 				ris = res.getInt("id");
-				
+				flag = res.next();
 			}
 			st.close();
 			res.close();
