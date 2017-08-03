@@ -57,15 +57,16 @@ public class Inserimento {
 		nome = Utility.stringForQuery(nome);
 		cognome = Utility.stringForQuery(cognome);
 		teoria = Utility.stringForQuery(teoria);
+		String id = Integer.toString(Lettura.id(nome, cognome));
 		try {
 			Connection conn = DriverManager.getConnection(
 					url+dbName,Utility.user(),Utility.pass()
 			);
 			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
-							"insert ignore into teoria values ((select id from candidato where nome='"+nome+"' and cognome='"+
-							cognome+"'),'"+
-							teoria+"')"
+							"insert ignore into teoria values (?,?)"
 			);
+			st.setString(1, id);
+			st.setString(2, teoria);
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
 			st.close();
@@ -76,8 +77,6 @@ public class Inserimento {
 			);
 		}
 	}	
-	
-	
 	
 	/**
 	 * Inserisci nel database l'esito del progetto 
@@ -91,20 +90,24 @@ public class Inserimento {
 		try {
 			nome = Utility.stringForQuery(nome);
 			cognome = Utility.stringForQuery(cognome);
+			String id = Integer.toString(Lettura.id(nome, cognome));
 			Connection conn = DriverManager.getConnection(
 					url+dbName,Utility.user(),Utility.pass()
 			);
 			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
-					"insert ignore into progetto values"+"((select id from candidato where nome='"+nome+"' and cognome='"+"'),"+
-					libr+","+test+","+main+")"
+					"insert ignore into progetto values(?,?,?,?)"
 			);
+			st.setString(1, id);
+			st.setString(2, libr);
+			st.setString(3, test);
+			st.setString(4, main);
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
 			st.close();
 			conn.close();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
-					null , "Problemi di lettura da file"
+					null , "Problemi di connessione con il database"
 			);
 		}
 		
