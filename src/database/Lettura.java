@@ -72,8 +72,8 @@ public class Lettura {
 				String teoria = res.getString("esito");
 				int libreria = res.getInt("libreria");
 				int test = res.getInt("test");
-				int main = res.getInt("main");
-				progetto = new Progetto(libreria,test,main);
+				int fmain = res.getInt("main");
+				progetto = new Progetto(libreria,test,fmain);
 				Candidato candidato = new Candidato(nome,cognome,teoria,progetto);
 				list.add(candidato);
 				flag = res.next();
