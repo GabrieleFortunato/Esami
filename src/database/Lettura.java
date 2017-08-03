@@ -60,7 +60,7 @@ public class Lettura {
 							+ "inner join progetto on candidato.id=progetto.candidato"
 			);
 			res = st.executeQuery();
-			Progetto progetto;
+			Progetto progetto = null;
 			while (res.next()) {
 				String nome = res.getString("nome");
 				String cognome = res.getString("cognome");
