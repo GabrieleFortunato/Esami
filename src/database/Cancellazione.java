@@ -9,12 +9,9 @@ import javax.swing.JOptionPane;
 
 /**
  * Classe CancellazioneDaDatabase
- * 
  * @author Gabriele Fortunato
- *
  */
 public class Cancellazione {
-	
 	
 	/**
 	 * Localhost
