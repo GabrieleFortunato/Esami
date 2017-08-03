@@ -10,6 +10,9 @@ public class Utility {
 	
 	private final static int dieci = 10;
 	
+	/**
+	 * Metodo costruttore
+	 */
 	private Utility(){
 		
 	}

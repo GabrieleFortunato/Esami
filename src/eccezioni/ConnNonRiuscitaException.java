@@ -6,11 +6,7 @@ package eccezioni;
  * @author Gabriele Fortunato
  *
  */
+@SuppressWarnings("serial")
 public class ConnNonRiuscitaException extends Exception {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 }

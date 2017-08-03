@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,7 +25,7 @@ public class Inserimento {
 	 */
 	final static String dbName = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	final static String driver = "com.mysql.jdbc.Driver";
-	
+
 	/**
 	 * Metodo costruttore
 	 */
@@ -35,13 +34,15 @@ public class Inserimento {
 	}
 	
 	public static void inserisciPrenotazione(String nome, String cognome){
+		Connection conn = null;
+		PreparedStatement st = null;
 		nome = Utility.stringForQuery(nome);
 		cognome = Utility.stringForQuery(cognome);
 		try {
-			Connection conn = DriverManager.getConnection(
+			conn = DriverManager.getConnection(
 					url+dbName,Utility.user(),Utility.pass()
 			);
-			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+			st = (PreparedStatement) conn.prepareStatement(
 					"insert into candidato (nome,cognome) values(?,?)"
 			);
 			st.setString(1, nome);
@@ -54,19 +55,32 @@ public class Inserimento {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di lettura da file"
 			);
+		} finally {
+			if (st!=null&&conn!=null){
+				try {
+					st.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
 		}
 	}	
 	
 	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria){
+		Connection conn = null;
+		PreparedStatement st = null;
 		nome = Utility.stringForQuery(nome);
 		cognome = Utility.stringForQuery(cognome);
 		teoria = Utility.stringForQuery(teoria);
 		String id = Integer.toString(Lettura.id(nome, cognome));
 		try {
-			Connection conn = DriverManager.getConnection(
+			conn = DriverManager.getConnection(
 					url+dbName,Utility.user(),Utility.pass()
 			);
-			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+			st = (PreparedStatement) conn.prepareStatement(
 							"insert ignore into teoria values (?,?)"
 			);
 			st.setString(1, id);
@@ -79,6 +93,17 @@ public class Inserimento {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di lettura da file"
 			);
+		} finally {
+			if (st!=null&&conn!=null){
+				try {
+					st.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
 		}
 	}	
 	
@@ -91,14 +116,16 @@ public class Inserimento {
 	 * @throws SQLException 
 	 */
 	public static void inserisciEsitoProgetto(String nome, String cognome, String libr, String test, String main){
+		Connection conn = null;
+		PreparedStatement st = null;
+		nome = Utility.stringForQuery(nome);
+		cognome = Utility.stringForQuery(cognome);
 		try {
-			nome = Utility.stringForQuery(nome);
-			cognome = Utility.stringForQuery(cognome);
 			String id = Integer.toString(Lettura.id(nome, cognome));
-			Connection conn = DriverManager.getConnection(
+			conn = DriverManager.getConnection(
 					url+dbName,Utility.user(),Utility.pass()
 			);
-			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+			st = (PreparedStatement) conn.prepareStatement(
 					"insert ignore into progetto values(?,?,?,?)"
 			);
 			st.setString(1, id);
@@ -113,6 +140,17 @@ public class Inserimento {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
 			);
+		} finally {
+			if (st!=null&&conn!=null){
+				try {
+					st.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
 		}
 		
 	}
