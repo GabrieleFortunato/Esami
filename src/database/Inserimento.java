@@ -57,6 +57,7 @@ public class Inserimento {
 			st.setString(1, a);
 			st.setString(2, b);
 			int res = st.executeUpdate();
+			System.out.println("Candidato inserito");
 			Logger.getLogger(Integer.toString(res));
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
@@ -105,8 +106,12 @@ public class Inserimento {
 			);
 		} finally{
 			try {
-				st.close();
-				conn.close();
+				if (st!=null){
+					st.close();
+				}
+				if (conn!=null){
+					conn.close();
+				}
 			} catch (SQLException e) {
 				JOptionPane.showMessageDialog (
 						null , "Problemi di connessione con il database"

@@ -54,14 +54,17 @@ public class Lettura {
 		ResultSet res = null;
 		Set<Candidato> list = new HashSet<>();
 		try {
+			System.out.println("OK");
 			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
+			System.out.println("OK");
 			st = (PreparedStatement) conn.prepareStatement(
 					"select nome,cognome,esito,libreria,test,main from candidato "
 							+ "inner join teoria on candidato.id=teoria.candidato "
 							+ "inner join progetto on candidato.id=progetto.candidato"
 			);
+			System.out.println("OK");
 			res = st.executeQuery();
 			Progetto progetto = null;
 			boolean flag = res.next();
