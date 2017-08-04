@@ -84,17 +84,14 @@ public class Inserimento {
 	 * @param teoria
 	 */
 	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria){
-		Connection conn = null;
-		PreparedStatement st = null;
 		String a = Utility.stringForQuery(nome);
 		String b = Utility.stringForQuery(cognome);
 		String id = Integer.toString(Lettura.id(a, b));
 		try {
+			Connection conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
+			PreparedStatement st = (PreparedStatement) conn.prepareStatement("insert ignore into teoria values (?,?)");
 			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
-			);
-			st = (PreparedStatement) conn.prepareStatement(
-							"insert ignore into teoria values (?,?)"
 			);
 			st.setString(1, id);
 			st.setString(2, teoria);
@@ -104,20 +101,7 @@ public class Inserimento {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
 			);
-		} finally{
-			try {
-				if (st!=null){
-					st.close();
-				}
-				if (conn!=null){
-					conn.close();
-				}
-			} catch (SQLException e) {
-				JOptionPane.showMessageDialog (
-						null , "Problemi di connessione con il database"
-				);
-			}
-		}
+		} 
 	}
 		
 	/**
@@ -129,18 +113,12 @@ public class Inserimento {
 	 * @throws SQLException 
 	 */
 	public static void inserisciEsitoProgetto(String nome, String cognome, String libr, String test, String main){
-		Connection conn = null;
-		PreparedStatement st = null;
-		String a = Utility.stringForQuery(nome);
+			String a = Utility.stringForQuery(nome);
 		String b = Utility.stringForQuery(cognome);
 		try {
 			String id = Integer.toString(Lettura.id(a, b));
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
-			st = (PreparedStatement) conn.prepareStatement(
-					"insert ignore into progetto values(?,?,?,?)"
-			);
+			Connection conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
+			PreparedStatement st = (PreparedStatement) conn.prepareStatement("insert ignore into progetto values(?,?,?,?)");
 			st.setString(1, id);
 			st.setString(2, libr);
 			st.setString(3, test);
@@ -153,20 +131,7 @@ public class Inserimento {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
 			);
-		} finally {
-			if (st!=null&&conn!=null){
-				try {
-					st.close();
-					conn.close();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di connessione con il database"
-					);
-				}
-			}
-		}
-		
+		} 	
 	}
-
 	
 }

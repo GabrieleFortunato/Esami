@@ -49,23 +49,20 @@ public class Lettura {
 	 * @return
 	 */
 	public static HashSet<Candidato> proveCompletate() {
-		Connection conn = null;
-		PreparedStatement st = null;
-		ResultSet res = null;
 		Set<Candidato> list = new HashSet<>();
 		try {
 			System.out.println("OK");
-			conn = DriverManager.getConnection(
+			Connection conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			System.out.println("OK");
-			st = (PreparedStatement) conn.prepareStatement(
+			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 					"select nome,cognome,esito,libreria,test,main from candidato "
 							+ "inner join teoria on candidato.id=teoria.candidato "
 							+ "inner join progetto on candidato.id=progetto.candidato"
 			);
 			System.out.println("OK");
-			res = st.executeQuery();
+			ResultSet res = st.executeQuery();
 			Progetto progetto = null;
 			boolean flag = res.next();
 			while (flag) {
@@ -80,6 +77,9 @@ public class Lettura {
 				list.add(candidato);
 				flag = res.next();
 			}
+			st.close();
+			res.close();
+			conn.close();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
@@ -88,19 +88,7 @@ public class Lettura {
 			e.stampaMessaggio("Voto non valido");
 		} catch (EsitoTeoriaException e) {
 			e.stampaMessaggio("Esito della teoria non valido");
-		} finally {
-			if (st!=null&&res!=null&&conn!=null){
-				try {
-					st.close();
-					res.close();
-					conn.close();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di connessione con il database"
-					);
-				}
-			}
-		}
+		} 
 		return (HashSet<Candidato>) list;
 	}
 	
@@ -112,20 +100,15 @@ public class Lettura {
 	 * @return
 	 */
 	public static int id(String nome, String cognome) {
-		Connection conn = null;
-		PreparedStatement st = null;
-		ResultSet res = null;
 		String a = Utility.stringForQuery(nome);
 		String b = Utility.stringForQuery(cognome);
 		int ris = 0;
 		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
-			st = (PreparedStatement) conn.prepareStatement(
+			Connection conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
+			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 					"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
 			);
-			res = st.executeQuery();
+			ResultSet res = st.executeQuery();
 			boolean flag = res.next();
 			while (flag) {
 				ris = res.getInt("id");
@@ -138,19 +121,7 @@ public class Lettura {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
 			);
-		} finally {
-			if (st!=null&&res!=null&&conn!=null){
-				try {
-					st.close();
-					res.close();
-					conn.close();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di connessione con il database"
-					);
-				}
-			}
-		}
+		} 
 		return ris;
 	}
 	
