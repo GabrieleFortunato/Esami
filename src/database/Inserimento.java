@@ -57,7 +57,6 @@ public class Inserimento {
 			st.setString(1, a);
 			st.setString(2, b);
 			int res = st.executeUpdate();
-			System.out.println("Candidato inserito");
 			Logger.getLogger(Integer.toString(res));
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
