@@ -44,11 +44,13 @@ public class Inizializzazione {
 	 * @throws SQLException
 	 */
 	public static void inizializzaDatabase() {
+		Connection conn = null;
+		PreparedStatement st = null;
 		try {
-			Connection conn = DriverManager.getConnection(
+			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
-			PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+			st = (PreparedStatement) conn.prepareStatement(
 					"create database if not exists esamiprogrammazione"
 			);
 			int res = st.executeUpdate();
@@ -92,7 +94,26 @@ public class Inizializzazione {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
 			);
-		} 			
+		} finally {
+			if (st!=null){
+				try {
+					st.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
+			if (conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
+		}
 	}
-}
 
+}

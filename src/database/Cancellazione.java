@@ -41,24 +41,34 @@ public class Cancellazione {
 	 * @param cognome
 	 */
 	public static void cancellaCandidato(String nome, String cognome){
+		Connection conn = null;
+		PreparedStatement st = null;
 		String a = Utility.stringForQuery(nome);
 		String b = Utility.stringForQuery(cognome);
 		String sql = "delete from candidato where (nome=? and cognome=?)";
 		try {
-			Connection conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
-			PreparedStatement st = (PreparedStatement) conn.prepareStatement(sql);
+			conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
+			st = (PreparedStatement) conn.prepareStatement(sql);
 			st.setString(1, a);
 			st.setString(2, b);
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
-			st.close();
-			conn.close();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
 			);
-		} 
-		
+		} finally {
+			if (st!=null&&conn!=null){
+				try {
+					st.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
+		}
 	} 
 }
 
