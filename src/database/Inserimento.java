@@ -45,8 +45,6 @@ public class Inserimento {
 	public static void inserisciPrenotazione(String nome, String cognome){
 		Connection conn = null;
 		PreparedStatement st = null;
-		String a = Utility.stringForQuery(nome);
-		String b = Utility.stringForQuery(cognome);
 		try {
 			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
@@ -54,8 +52,8 @@ public class Inserimento {
 			st = (PreparedStatement) conn.prepareStatement(
 					"insert into candidato (nome,cognome) values(?,?)"
 			);
-			st.setString(1, a);
-			st.setString(2, b);
+			st.setString(1, nome);
+			st.setString(2, cognome);
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
 		} catch (SQLException e) {
@@ -85,9 +83,7 @@ public class Inserimento {
 	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria){
 		Connection conn = null;
 		PreparedStatement st = null;
-		String a = Utility.stringForQuery(nome);
-		String b = Utility.stringForQuery(cognome);
-		String id = Integer.toString(Lettura.id(a, b));
+		String id = Integer.toString(Lettura.id(nome, cognome));
 		try {
 			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
@@ -130,10 +126,8 @@ public class Inserimento {
 	public static void inserisciEsitoProgetto(String nome, String cognome, String libr, String test, String main){
 		Connection conn = null;
 		PreparedStatement st = null;
-		String a = Utility.stringForQuery(nome);
-		String b = Utility.stringForQuery(cognome);
+		String id = Integer.toString(Lettura.id(nome,cognome));
 		try {
-			String id = Integer.toString(Lettura.id(a, b));
 			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
@@ -163,7 +157,8 @@ public class Inserimento {
 					);
 				}
 			}
-		}		
+		}
+		
 	}
 
 }

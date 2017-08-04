@@ -43,14 +43,12 @@ public class Cancellazione {
 	public static void cancellaCandidato(String nome, String cognome){
 		Connection conn = null;
 		PreparedStatement st = null;
-		String a = Utility.stringForQuery(nome);
-		String b = Utility.stringForQuery(cognome);
 		String sql = "delete from candidato where (nome=? and cognome=?)";
 		try {
 			conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
 			st = (PreparedStatement) conn.prepareStatement(sql);
-			st.setString(1, a);
-			st.setString(2, b);
+			st.setString(1, nome);
+			st.setString(2, cognome);
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
 		} catch (SQLException e) {
