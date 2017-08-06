@@ -1,6 +1,6 @@
 package candidati;
 
-import eccezioni.VotoNonValidoException;
+import eccezioni.VotoException;
 import utility.Utility;
 
 /**
@@ -20,9 +20,9 @@ public class Progetto {
 	 * @param libreria
 	 * @param test
 	 * @param main
-	 * @throws VotoNonValidoException 
+	 * @throws VotoException 
 	 */
-	public Progetto(int libreria, int test, int main) throws VotoNonValidoException {
+	public Progetto(int libreria, int test, int main) throws VotoException {
 		this.setLibreria(libreria);
 		this.setTest(test);
 		this.setMain(main);
@@ -31,13 +31,13 @@ public class Progetto {
 	/**
 	 * Imposta il voto della libreria
 	 * @param libreria
-	 * @throws VotoNonValidoException 
+	 * @throws VotoException 
 	 */
-	private void setLibreria(int libreria) throws VotoNonValidoException {
+	private void setLibreria(int libreria) throws VotoException {
 		if (Utility.votoCorretto(libreria)){
 			this.libreria = libreria;
 		} else {
-			throw new VotoNonValidoException();
+			throw new VotoException();
 		}
 		
 	}
@@ -45,26 +45,26 @@ public class Progetto {
 	/**
 	 * Imposta il voto dei test
 	 * @param test
-	 * @throws VotoNonValidoException 
+	 * @throws VotoException 
 	 */
-	private void setTest(int test) throws VotoNonValidoException {
+	private void setTest(int test) throws VotoException {
 		if (Utility.votoCorretto(libreria)){
 			this.test = test;
 		} else {
-			throw new VotoNonValidoException();
+			throw new VotoException();
 		}
 	}
 
 	/**
 	 * Imposta il voto del main
 	 * @param main
-	 * @throws VotoNonValidoException 
+	 * @throws VotoException 
 	 */
-	private void setMain(int main) throws VotoNonValidoException {
+	private void setMain(int main) throws VotoException {
 		if (Utility.votoCorretto(libreria)){
 			this.main=main;
 		} else {
-			throw new VotoNonValidoException();
+			throw new VotoException();
 		}
 	}
 	

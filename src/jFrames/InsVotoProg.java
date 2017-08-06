@@ -1,24 +1,17 @@
 package jFrames;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
-import candidati.Progetto;
-import database.Inserimento;
-import database.Lettura;
-import eccezioni.EsitoTeoriaException;
-import eccezioni.VotoNonValidoException;
-import file.PrintOnFile;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import database.Inserimento;
+import file.PrintOnFile;
+
+import java.awt.event.ActionListener;
 
 /**
  * Classe InserimentoEsitoProgetto
@@ -26,36 +19,9 @@ import java.awt.event.ActionEvent;
  * @author Gabriele Fortunato
  *
  */
+@SuppressWarnings("serial")
 public class InsVotoProg extends JFrame {
 
-	private final int cinque = 5;
-	private final int dieci = 10;
-	private final int sedici = 16;
-	private final int ventidue = 22;
-	private final int venticinque = 25;
-	private final int trentuno = 31;
-	private final int trentanove = 39;
-	private final int quaranta = 40;
-	private final int settantasette = 77;
-	private final int cento = 100;
-	private final int centosei = 106;
-	private final int centonove = 109;
-	private final int centosedici = 116;
-	private final int centoventidue = 122;
-	private final int centoventicinque = 125;
-	private final int centotrentaquattro = 134;
-	private final int centosessantuno = 161;
-	private final int centoottantasette = 187;
-	private final int duecentoquattro = 204;
-	private final int duecentosette = 207;
-	private final int duecentootto = 208;
-	private final int duecentoventicinque = 225;
-	private final int quattrocentoquarantaquattro = 444;
-	private final int cinquecentoventinove = 529;
-	private final int cinquecentonovantacinque = 595;
-	private final int settecentoquarantuno = 741;
-	
-	
 	private JTextField nomecandidato;
 	private JTextField libreria;
 	private JTextField test;
@@ -66,31 +32,47 @@ public class InsVotoProg extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			if (Lettura.daInterrogare().size()>0){
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							InsVotoProg frame = new InsVotoProg();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							Logger.getLogger("Connessione non riuscita");
-						}
-					}
-				});
-			} else {
-				JOptionPane.showMessageDialog ( null, "Nessun candidato da interrogare" ) ;
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				InsVotoProg frame = new InsVotoProg();
+				frame.setVisible(true);
 			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		});
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public InsVotoProg() {
+
+		final int cinque = 5;
+		final int dieci = 10;
+		final int sedici = 16;
+		final int ventidue = 22;
+		final int venticinque = 25;
+		final int trentuno = 31;
+		final int trentanove = 39;
+		final int quaranta = 40;
+		final int settantasette = 77;
+		final int cento = 100;
+		final int centouno = 101;
+		final int centosei = 106;
+		final int centonove = 109;
+		final int centosedici = 116;
+		final int centoventidue = 122;
+		final int centoventicinque = 125;
+		final int centotrentaquattro = 134;
+		final int centosessantuno = 161;
+		final int centoottantasette = 187;
+		final int duecentoquattro = 204;
+		final int duecentosette = 207;
+		final int duecentootto = 208;
+		final int duecentoventicinque = 225;
+		final int quattrocentoquarantaquattro = 444;
+		final int cinquecentoventinove = 529;
+		final int cinquecentonovantacinque = 595;
+		final int settecentoquarantuno = 741;
+		
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, settecentoquarantuno, cinquecentoventinove);
@@ -109,7 +91,7 @@ public class InsVotoProg extends JFrame {
 		contentPane.add(lblNomeCandidato);
 		
 		JLabel lblVotoLibreria = new JLabel("Voto libreria:");
-		lblVotoLibreria.setBounds(quaranta, centoottantasette, 101, sedici);
+		lblVotoLibreria.setBounds(quaranta, centoottantasette, centouno, sedici);
 		contentPane.add(lblVotoLibreria);
 		
 		JLabel lblVotoTest = new JLabel("Voto test:");
@@ -148,45 +130,17 @@ public class InsVotoProg extends JFrame {
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					String cognome = cognomecandidato.getText();
-					String nome = nomecandidato.getText();
-					int libr = Integer.parseInt(libreria.getText());
-					int text = Integer.parseInt(test.getText());
-					int fmain = Integer.parseInt(votoMain.getText());
-					Candidato c = new Candidato(nome,cognome);
-					Progetto p = new Progetto(libr,text,fmain);
-					if (!Lettura.candidati().contains(c)&&Lettura.interrogati().contains(c)){
-						Inserimento.inserisciEsitoProgetto(c,p);
-						PrintOnFile.printOnFile(c);
-					} else {
-						JOptionPane.showMessageDialog (null , "Candidato non presente o già interrogato") ;
-					}
-					dispose();
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (VotoNonValidoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (EsitoTeoriaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				String cognome = cognomecandidato.getText();
+				String nome = nomecandidato.getText();
+				String libr = libreria.getText();
+				String text = test.getText();
+				String fmain = votoMain.getText();
+				Inserimento.inserisciEsitoProgetto(nome,cognome, libr,text,fmain);
+				PrintOnFile.printOnFile(database.Lettura.proveCompletate());
+				dispose();
 			}
 		});
+		
 		btnConferma.setBounds(cinquecentonovantacinque, quattrocentoquarantaquattro, centosedici, venticinque);
 		contentPane.add(btnConferma);
 	}

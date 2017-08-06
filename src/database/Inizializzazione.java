@@ -2,8 +2,11 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 
 /**
  * Classe InizializzaDatabase
@@ -13,33 +16,51 @@ import java.sql.Statement;
  */
 public class Inizializzazione {
 	
+	/**
+	 * Localhost
+	 */
+	final static String URL= "jdbc:mysql://localhost:3306/";
+	
+	/**
+	 * Nome  del database
+	 */
+	final static String DBNAME = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+	
+	/**
+	 * Driver
+	 */
+	final static String DRIVER = "com.mysql.jdbc.Driver";
+	
+	/**
+	 * Metodo costruttore
+	 */
 	private Inizializzazione(){
 		
 	}
 	
-	private final static String url = "jdbc:mysql://localhost:3306/";
-	private final static String dbName = "esamiprogrammazione";
-	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String userName = "root"; 
-	private final static String password = "qrnq946";
-	
-	public static void inizializzaDatabase() 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+	/**
+	 * Inizializza il database
+	 * @throws NamingException 
+	 * @throws SQLException
+	 */
+	public static void inizializzaDatabase() {
+		Connection conn = null;
+		PreparedStatement st = null;
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
 			);
-			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
-			int res = st.executeUpdate(
-					"create database if not exists esamiprogrammazione"		
+			st = (PreparedStatement) conn.prepareStatement(
+					"create database if not exists esamiprogrammazione"
 			);
-			@SuppressWarnings("unused")
-			int res1 = st.executeUpdate(
+			int res = st.executeUpdate();
+			PreparedStatement st1 = (PreparedStatement) conn.prepareStatement(
 					"use esamiprogrammazione"
 			);
-			@SuppressWarnings("unused")
-			int res2 = st.executeUpdate(
+			Logger.getLogger(Integer.toString(res));
+			int res1 = st1.executeUpdate();
+			Logger.getLogger(Integer.toString(res1));
+			PreparedStatement st2 = (PreparedStatement) conn.prepareStatement(
 					"create table if not exists candidato("+
 					"id int auto_increment primary key,"+
 					"nome varchar(60),"+
@@ -47,15 +68,18 @@ public class Inizializzazione {
 					"unique (nome,cognome)"+
 					");"
 			);
-			@SuppressWarnings("unused")
-			int res3 = st.executeUpdate("create table if not exists teoria("+
+			int res2 = st2.executeUpdate();
+			Logger.getLogger(Integer.toString(res2));
+			PreparedStatement st3 = (PreparedStatement) conn.prepareStatement(
+					"create table if not exists teoria("+
 					"candidato int primary key,"+
 					"esito varchar(60),"+
 					"foreign key constaint (candidato) references candidato(id) on delete cascade"+
 					");"
 			);
-			@SuppressWarnings("unused")
-			int res4 = st.executeUpdate(
+			int res3 = st3.executeUpdate();
+			Logger.getLogger(Integer.toString(res3));
+			PreparedStatement st4 = (PreparedStatement) conn.prepareStatement(
 					"create table if not exists progetto("+
 					"candidato int primary key,"+
 					"libreria int,"+
@@ -64,9 +88,32 @@ public class Inizializzazione {
 					"foreign key constaint (candidato) references candidato(id) on delete cascade"+
 					");"
 			);
-
-			st.close();
-			conn.close();
+			int res4 = st4.executeUpdate();
+			Logger.getLogger(Integer.toString(res4));
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di connessione con il database"
+			);
+		} finally {
+			if (st!=null){
+				try {
+					st.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
+			if (conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
+		}
 	}
 
 }

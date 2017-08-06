@@ -3,16 +3,12 @@ package jFrames;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.logging.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
 import database.Cancellazione;
 
 /**
@@ -21,6 +17,7 @@ import database.Cancellazione;
  * @author Gabriele Fortunato
  *
  */
+@SuppressWarnings("serial")
 public class CancPren extends JFrame {
 
 	private final int cinque = 5;
@@ -50,12 +47,8 @@ public class CancPren extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					InsPren frame = new InsPren();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					Logger.getLogger("Connessione non riuscita");
-				}
+				InsPren frame = new InsPren();
+				frame.setVisible(true);
 			}
 		});
 	}
@@ -96,13 +89,7 @@ public class CancPren extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String n = nome.getText();
 				String cg = cognome.getText();
-				Candidato c = new Candidato(n,cg);
-				try {
-					Cancellazione.cancellaCandidato(c);
-				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | 
-						SQLException e1) {
-					Logger.getLogger("Connessione al database non riuscita");
-				}
+				Cancellazione.cancellaCandidato(n,cg);
 				dispose();
 			}
 		});

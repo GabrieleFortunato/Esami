@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
  *
  */
 @SuppressWarnings("serial")
-final public class EsitoTeoriaException extends Exception {
-	
+final public class VotoException extends Exception {
+
 	/**
 	 * Stampa un messaggio quando viene lanciata l'eccezione
 	 * @param message
@@ -20,6 +20,5 @@ final public class EsitoTeoriaException extends Exception {
 				null , message
 			);
 	}
-	
 	
 }

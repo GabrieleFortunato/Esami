@@ -4,14 +4,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import candidati.Candidato;
 import database.Inserimento;
-import eccezioni.EsitoTeoriaException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
@@ -21,6 +18,7 @@ import java.awt.event.ActionEvent;
  * @author Gabriele Fortunato
  *
  */
+@SuppressWarnings("serial")
 public class InsVotoTeoria extends JFrame {
 	
 	private final int cinque = 5;
@@ -105,21 +103,11 @@ public class InsVotoTeoria extends JFrame {
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					String name = nome.getText();
-					String surname = cognome.getText();
-					String theory = teoria.getText();
-					Candidato c = new Candidato(name,surname,theory);
-					try {
-						Inserimento.inserisciEsitoTeoria(c);
-					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException
-							| SQLException e1) {
-						Logger.getLogger("Connessione al database non riuscita");
-					}
-					dispose();
-				} catch (EsitoTeoriaException e1) {
-					Logger.getLogger("Connessione non riuscita");
-				}
+				String name = nome.getText();
+				String surname = cognome.getText();
+				String theory = teoria.getText();
+				Inserimento.inserisciEsitoTeoria(name,surname,theory);
+				dispose();
 			}
 		});
 		btnConferma.setBounds(centottanta, centottantasette, duecentoquaranta, venticinque);

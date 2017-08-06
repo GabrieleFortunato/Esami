@@ -2,11 +2,10 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-import candidati.Candidato;
-import candidati.Progetto;
-import utility.Utility;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Classe InserimentoNelDatabase
@@ -15,69 +14,151 @@ import utility.Utility;
  *
  */
 public class Inserimento {
+	
+	/**
+	 * Localhost
+	 */
+	final static String URL = "jdbc:mysql://localhost:3306/";
+	
+	/**
+	 * Nome  del database
+	 */
+	final static String DBNAME = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+	
+	/**
+	 * Driver
+	 */
+	final static String DRIVER = "com.mysql.jdbc.Driver";
 
+	/**
+	 * Metodo costruttore
+	 */
 	private Inserimento(){
 		
 	}
 	
-	private final static String url = "jdbc:mysql://localhost:3306/";
-	private final static String dbName = "esamiprogrammazione";
-	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String userName = "root"; 
-	private final static String password = "qrnq946";
+	/**
+	 * Inserisci la prenotazione
+	 * @param nome
+	 * @param cognome
+	 */
+	public static void inserisciPrenotazione(String nome, String cognome){
+		Connection conn = null;
+		PreparedStatement st = null;
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"insert into candidato (nome,cognome) values(?,?)"
+			);
+			st.setString(1, nome);
+			st.setString(2, cognome);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di connessione con il database"
+			);
+		} finally {
+			if (st!=null&&conn!=null){
+				try {
+					st.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
+		}
+	}	
 	
-	public static void inserisciEsitoProgetto(Candidato c, Progetto p) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+	/**
+	 * Inserimento nel database del voto della prova teorica
+	 * @param nome
+	 * @param cognome
+	 * @param teoria
+	 */
+	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria){
+		Connection conn = null;
+		PreparedStatement st = null;
+		String id = Integer.toString(Lettura.id(nome, cognome));
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
 			);
-			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
-			int res = st.executeUpdate(
-					"insert ignore into progetto values"
-					+ "((select id from candidato where nome='"+Utility.stringForQuery(c.getNome())
-					+"' and cognome='"+Utility.stringForQuery(c.getCognome())
-					+"'),"+p.getLibreria()+","+p.getTest()+","+p.getMain()+")"
+			st = (PreparedStatement) conn.prepareStatement(
+							"insert ignore into teoria values (?,?)"
 			);
+			st.setString(1, id);
+			st.setString(2, teoria);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di connessione con il database"
+			);
+		} finally{
+			try {
+				if (st!=null){
+					st.close();
+				}
+				if (conn!=null){
+					conn.close();
+				}
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog (
+						null , "Problemi di connessione con il database"
+				);
+			}
+		}
+	}
+		
+	/**
+	 * Inserisci nel database l'esito del progetto 
+	 * svolto da un candidato
+	 * @param c
+	 * @param p
+	 * @throws NamingException 
+	 * @throws SQLException 
+	 */
+	public static void inserisciEsitoProgetto(String nome, String cognome, String libr, String test, String main){
+		Connection conn = null;
+		PreparedStatement st = null;
+		String id = Integer.toString(Lettura.id(nome,cognome));
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"insert ignore into progetto values(?,?,?,?)"
+			);
+			st.setString(1, id);
+			st.setString(2, libr);
+			st.setString(3, test);
+			st.setString(4, main);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
 			st.close();
 			conn.close();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di connessione con il database"
+			);
+		} finally {
+			if (st!=null&&conn!=null){
+				try {
+					st.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
+		}
 		
 	}
 
-	public static void inserisciPrenotazione(Candidato c) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-			);
-			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
-			int res = st.executeUpdate(
-					"insert ignore into candidato (nome,cognome) values ('"
-					+c.getNome()+"','"+c.getCognome()+"')"
-			);
-			st.close();
-			conn.close();
-	}
-	
-	public static void inserisciEsitoTeoria(Candidato c) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-			);
-			Statement st = conn.createStatement();
-			@SuppressWarnings("unused")
-			int res = st.executeUpdate(
-					"insert ignore into teoria values ((select id from candidato where nome='"
-					+Utility.stringForQuery(c.getNome())
-					+"' and cognome='"+Utility.stringForQuery(c.getCognome())
-					+"'),'"+Utility.stringForQuery(c.getEsitoTeoria())
-					+"')"
-			);
-			st.close();
-			conn.close();
-	}
-	
 }

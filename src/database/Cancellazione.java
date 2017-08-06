@@ -2,58 +2,71 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-import candidati.Candidato;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Classe CancellazioneDaDatabase
- * 
  * @author Gabriele Fortunato
- *
  */
 public class Cancellazione {
 	
-	private
-	Cancellazione(){
+	/**
+	 * Localhost
+	 */
+	final static String URL = "jdbc:mysql://localhost:3306/";
 	
-	}
+	/**
+	 * Nome  del database
+	 */
+	final static String DBNAME = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
 	
-	private final static String url = "jdbc:mysql://localhost:3306/";
-	private final static String dbName = "esamiprogrammazione";
-	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String userName = "root"; 
-	private final static String password = "qrnq946";
-	
-	public static void puliziaDatabase() 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		Class.forName(driver).newInstance();
-		Connection conn = DriverManager.getConnection(
-				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-		);
-		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
-		int res = st.executeUpdate(
-				"delete from candidato"
-		);
-		st.close();
-		conn.close();
-	}
+	/**
+	 * Driver
+	 */
+	final static String DRIVER = "com.mysql.jdbc.Driver";
 
-	public static void cancellaCandidato(Candidato c)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		Class.forName(driver).newInstance();
-		Connection conn = DriverManager.getConnection(
-				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-		);
-		Statement st = conn.createStatement();
-		@SuppressWarnings("unused")
-		int res = st.executeUpdate(
-				"delete from candidato where (nome='"+c.getNome()+"' and cognome='"+c.getCognome()+"')"
-		);
-		st.close();
-		conn.close();
-		file.PrintOnFile.cancellaFile(c);
+	/**
+	 * Metodo costruttore
+	 */
+	private Cancellazione(){
+		
+	}
+	
+	/**
+	 * Cancella un candidato dal database
+	 * @param nome
+	 * @param cognome
+	 */
+	public static void cancellaCandidato(String nome, String cognome){
+		Connection conn = null;
+		PreparedStatement st = null;
+		String sql = "delete from candidato where (nome=? and cognome=?)";
+		try {
+			conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
+			st = (PreparedStatement) conn.prepareStatement(sql);
+			st.setString(1, nome);
+			st.setString(2, cognome);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di connessione con il database"
+			);
+		} finally {
+			if (st!=null&&conn!=null){
+				try {
+					st.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
+		}
 	} 
 }
 

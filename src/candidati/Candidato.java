@@ -81,6 +81,14 @@ public class Candidato {
 	}
 
 	/**
+	 * Imposta l'id del candidato
+	 * @param id
+	 */
+	public int getId(){
+		return idCandidato;
+	}
+
+	/**
 	 * Imposta il nome del candidato
 	 * @param nome
 	 */
@@ -186,16 +194,14 @@ public class Candidato {
 		return result;
 	}
 
-	@Override
 	/**
 	 * Verifica l'uguaglianza con un altro candidato in base all'id
 	 */
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (obj == null||getClass() != obj.getClass())
 			return false;
 		Candidato other = (Candidato) obj;
 		if (idCandidato != other.idCandidato)

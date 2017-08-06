@@ -2,14 +2,16 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashSet;
+import java.util.Set;
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
-import eccezioni.VotoNonValidoException;
+import eccezioni.VotoException;
+import javax.swing.JOptionPane;
 
 /**
  * Classe LetturaDaDatabase
@@ -19,119 +21,135 @@ import eccezioni.VotoNonValidoException;
  */
 public class Lettura {
 
+	/**
+	 * Metodo costruttore
+	 */
 	private Lettura(){
 		
 	}
 	
-	private final static String url = "jdbc:mysql://localhost:3306/";
-	private final static String dbName = "esamiprogrammazione";
-	private final static String driver = "com.mysql.jdbc.Driver";
-	private final static String userName = "root"; 
-	private final static String password = "qrnq946";
+	/**
+	 * Localhost
+	 */
+	final static String URL = "jdbc:mysql://localhost:3306/";
+
+	/**
+	 * Nome  del database
+	 */
+	final static String DBNAME = "esamiprogrammazione"+"?autoReconnect=true&useSSL=false";
+
+	/**
+	 * Driver
+	 */
+	final static String DRIVER = "com.mysql.jdbc.Driver";
 	
-	public static HashSet<Candidato> interrogati() throws SQLException, VotoNonValidoException, 
-	EsitoTeoriaException, InstantiationException, IllegalAccessException, ClassNotFoundException{
-		HashSet<Candidato> list = new HashSet<>();
-		Class.forName(driver).newInstance();
-		Connection conn = DriverManager.getConnection(
-				url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-		);
-		Statement st = conn.createStatement();
-		ResultSet res = st.executeQuery(
-				"select nome,cognome,esito,libreria,test,main from candidato "
-				+ "inner join teoria on candidato.id=teoria.candidato "
-				+ "inner join progetto on candidato.id=progetto.candidato"
-		);
-		while (res.next()) {
-			String nome = res.getString("nome");
-			String cognome = res.getString("cognome");
-			String teoria = res.getString("esito");
-			int libreria = res.getInt("libreria");
-			int test = res.getInt("test");
-			int main = res.getInt("main");
-			Progetto progetto = new Progetto(libreria,test,main);
-			Candidato candidato = new Candidato(nome,cognome,teoria,progetto);
-			list.add(candidato);
-		}
-		st.close();
-		res.close();
-		conn.close();
-		return list;
-	}
-	
-	public static HashSet<Candidato> perTeoria() {
-		HashSet<Candidato> list = new HashSet<>();
-			try {
-				Class.forName(driver).newInstance();
-				Connection conn = DriverManager.getConnection(
-						url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-				);
-				Statement st = conn.createStatement();
-				ResultSet res = st.executeQuery(
-						"select nome,cognome from candidato where id not in (select candidato from teoria)"
-				);
-				while (res.next()) {
-					String nome = res.getString("nome");
-					String cognome = res.getString("cognome");
-					Candidato candidato = new Candidato(nome,cognome);
-					list.add(candidato);
+	/**
+	 * Legge dal database i candidati che hanno sostenuto e superato 
+	 * tutte le prove
+	 * @return
+	 */
+	public static HashSet<Candidato> proveCompletate() {
+		Connection conn = null;
+		PreparedStatement st = null;
+		ResultSet res = null;
+		Set<Candidato> list = new HashSet<>();
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"select nome,cognome,esito,libreria,test,main from candidato "
+							+ "inner join teoria on candidato.id=teoria.candidato "
+							+ "inner join progetto on candidato.id=progetto.candidato"
+			);
+			res = st.executeQuery();
+			Progetto progetto = null;
+			boolean flag = res.next();
+			while (flag) {
+				String nome = res.getString("nome");
+				String cognome = res.getString("cognome");
+				String teoria = res.getString("esito");
+				int libreria = res.getInt("libreria");
+				int test = res.getInt("test");
+				int fmain = res.getInt("main");
+				progetto = new Progetto(libreria,test,fmain);
+				Candidato candidato = new Candidato(nome,cognome,teoria,progetto);
+				list.add(candidato);
+				flag = res.next();
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di connessione con il database"
+			);
+		} catch (VotoException e) {
+			e.stampaMessaggio("Voto non valido");
+		} catch (EsitoTeoriaException e) {
+			e.stampaMessaggio("Esito della teoria non valido");
+		} finally {
+			if (st!=null&&res!=null&&conn!=null){
+				try {
+					st.close();
+					res.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
 				}
-				st.close();
-				res.close();
-				conn.close();
-			} catch (
-					InstantiationException | IllegalAccessException | ClassNotFoundException | 
-					SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-		 
-		return list;
+		}
+		return (HashSet<Candidato>) list;
 	}
 	
-	public static HashSet<Candidato> daInterrogare() throws InstantiationException, IllegalAccessException,
-	ClassNotFoundException, SQLException{
-		HashSet<Candidato> list = new HashSet<>();
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
+
+	
+	/**
+	 * Legge dal database i candidati che hanno sostenuto e superato 
+	 * tutte le prove
+	 * @return
+	 */
+	public static int id(String nome, String cognome) {
+		Connection conn = null;
+		PreparedStatement st = null;
+		ResultSet res = null;
+		String a = Utility.stringForQuery(nome);
+		String b = Utility.stringForQuery(cognome);
+		int ris = 0;
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
 			);
-			Statement st = conn.createStatement();
-			ResultSet res = st.executeQuery(
-					"select nome,cognome from candidato where id not in (select candidato from progetto)"
+			st = (PreparedStatement) conn.prepareStatement(
+					"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
 			);
-			while (res.next()) {
-				String nome = res.getString("nome");
-				String cognome = res.getString("cognome");
-				Candidato candidato = new Candidato(nome,cognome);
-				list.add(candidato);
+			res = st.executeQuery();
+			boolean flag = res.next();
+			while (flag) {
+				ris = res.getInt("id");
+				flag = res.next();
 			}
 			st.close();
 			res.close();
 			conn.close();
-		return list;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog (
+					null , "Problemi di connessione con il database"
+			);
+		} finally {
+			if (st!=null&&res!=null&&conn!=null){
+				try {
+					st.close();
+					res.close();
+					conn.close();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog (
+							null , "Problemi di connessione con il database"
+					);
+				}
+			}
+		}
+		return ris;
 	}
 	
-	public static HashSet<Candidato> candidati() throws InstantiationException, IllegalAccessException, 
-	ClassNotFoundException, SQLException{
-		HashSet<Candidato> list = new HashSet<>();
-			Class.forName(driver).newInstance();
-			Connection conn = DriverManager.getConnection(
-					url+dbName+"?autoReconnect=true&useSSL=false",userName,password
-			);
-			Statement st = conn.createStatement();
-			ResultSet res = st.executeQuery(
-					"select nome,cognome from candidato"
-			);
-			while (res.next()) {
-				String nome = res.getString("nome");
-				String cognome = res.getString("cognome");
-				Candidato candidato = new Candidato(nome,cognome);
-				list.add(candidato);
-			}
-			st.close();
-			res.close();
-			conn.close();
-		return list;
-	}
+
 }
