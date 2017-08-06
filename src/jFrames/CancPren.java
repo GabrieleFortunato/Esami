@@ -20,7 +20,7 @@ import database.Cancellazione;
 @SuppressWarnings("serial")
 public class CancPren extends JFrame {
 
-	private final int cinque = 5;
+	private final int cinque = 2;
 	private final int dieci = 10;
 	private final int sedici = 16;
 	private final int ventidue = 22;
