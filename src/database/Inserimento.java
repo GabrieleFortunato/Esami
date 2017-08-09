@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,9 +49,17 @@ public class Inserimento {
 		Connection conn = null;
 		PreparedStatement st = null;
 		try {
+			System.out.println("OK");
+			InitialContext ctx = new InitialContext();
+			System.out.println("OK");
+			DataSource ds = (DataSource) ctx.lookup(URL);
+			System.out.println("OK");
 			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
+			System.out.println("OK");
+			conn = ds.getConnection(Utility.user(),Utility.pass());
+			System.out.println("OK");
 			st = (PreparedStatement) conn.prepareStatement(
 					"insert into candidato (nome,cognome) values(?,?)"
 			);
@@ -57,9 +68,9 @@ public class Inserimento {
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog (
-					null , "Problemi di connessione con il database"
-			);
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
 		} finally {
 			if (st!=null&&conn!=null){
 				try {
