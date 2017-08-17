@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import database.Inserimento;
+import eccezioni.EsitoTeoriaException;
+import eccezioni.VotoException;
 import file.PrintOnFile;
 
 import java.awt.event.ActionListener;
@@ -140,8 +142,11 @@ public class InsVotoProg extends JFrame {
 				try {
 					PrintOnFile.printOnFile(database.Lettura.proveCompletate());
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("Impossibile leggere da database");
+				} catch (VotoException e) {
+					System.out.println("Voto del progetto non valido");
+				} catch (EsitoTeoriaException e) {
+					System.out.println("Esito della teoria non valido");
 				}
 				dispose();
 			}

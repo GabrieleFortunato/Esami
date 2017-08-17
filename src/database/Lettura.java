@@ -48,8 +48,10 @@ public class Lettura {
 	 * tutte le prove
 	 * @return
 	 * @throws SQLException 
+	 * @throws VotoException 
+	 * @throws EsitoTeoriaException 
 	 */
-	public static HashSet<Candidato> proveCompletate() throws SQLException {
+	public static HashSet<Candidato> proveCompletate() throws SQLException, VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
 		Connection conn = DriverManager.getConnection(
 				URL+DBNAME,Utility.user(),Utility.pass()
@@ -61,6 +63,7 @@ public class Lettura {
 		);
 		ResultSet res = st.executeQuery();
 		Progetto progetto = null;
+		Candidato candidato = null;
 		boolean flag = res.next();
 		while (flag) {
 			String nome = res.getString("nome");
@@ -69,12 +72,9 @@ public class Lettura {
 			int libreria = res.getInt("libreria");
 			int test = res.getInt("test");
 			int fmain = res.getInt("main");
-			try {
-				progetto = new Progetto(libreria,test,fmain);
-			} catch (VotoException e) {
-				System.out.println("Voti del progetto non valido");
-			}
-			Candidato candidato = null;
+			progetto = new Progetto(libreria,test,fmain);
+			candidato = new Candidato(nome,cognome,teoria,progetto);
+			
 			try {
 				candidato = new Candidato(nome,cognome,teoria,progetto);
 			} catch (EsitoTeoriaException e) {

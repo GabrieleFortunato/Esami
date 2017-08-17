@@ -99,6 +99,10 @@ public class Test {
 			PrintOnFile.printOnFile(Lettura.proveCompletate());
 		} catch (SQLException e) {
 			System.out.println("Impossibile leggere da database");
+		} catch (VotoException e) {
+			System.out.println("Voto del progetto non valido");
+		} catch (EsitoTeoriaException e) {
+			System.out.println("Esito della teoria non valido");
 		}
 	}
 
