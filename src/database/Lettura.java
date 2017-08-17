@@ -74,12 +74,6 @@ public class Lettura {
 			int fmain = res.getInt("main");
 			progetto = new Progetto(libreria,test,fmain);
 			candidato = new Candidato(nome,cognome,teoria,progetto);
-			
-			try {
-				candidato = new Candidato(nome,cognome,teoria,progetto);
-			} catch (EsitoTeoriaException e) {
-				System.out.println("Esito teoria non valido");
-			}
 			list.add(candidato);
 			flag = res.next();
 		}

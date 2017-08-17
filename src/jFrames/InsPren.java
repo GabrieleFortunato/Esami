@@ -94,8 +94,7 @@ public class InsPren extends JFrame {
 				try {
 					Inserimento.inserisciPrenotazione(n,cg);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					System.out.println("Impossibile inserire la prenotazione");
 				}
 				dispose();
 			}
