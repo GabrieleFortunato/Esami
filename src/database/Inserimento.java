@@ -42,37 +42,24 @@ public class Inserimento {
 	 * Inserisci la prenotazione
 	 * @param nome
 	 * @param cognome
+	 * @throws SQLException 
 	 */
-	public static void inserisciPrenotazione(String nome, String cognome){
+	public static void inserisciPrenotazione(String nome, String cognome) 
+			throws SQLException{
 		Connection conn = null;
 		PreparedStatement st = null;
-		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
-			st = (PreparedStatement) conn.prepareStatement(
-					"insert into candidato (nome,cognome) values(?,?)"
-			);
-			st.setString(1, nome);
-			st.setString(2, cognome);
-			int res = st.executeUpdate();
-			Logger.getLogger(Integer.toString(res));
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog (
-					null , "Problemi di connessione con il database"
-			);
-		} finally {
-			if (st!=null&&conn!=null){
-				try {
-					st.close();
-					conn.close();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di connessione con il database"
-					);
-				}
-			}
-		}
+		conn = DriverManager.getConnection(
+				URL+DBNAME,Utility.user(),Utility.pass()
+		);
+		st = (PreparedStatement) conn.prepareStatement(
+				"insert into candidato (nome,cognome) values(?,?)"
+		);
+		st.setString(1, nome);
+		st.setString(2, cognome);
+		int res = st.executeUpdate();
+		Logger.getLogger(Integer.toString(res));
+		st.close();
+		conn.close();
 	}	
 	
 	/**
@@ -96,6 +83,7 @@ public class Inserimento {
 			st.setString(2, teoria);
 			int res = st.executeUpdate();
 			Logger.getLogger(Integer.toString(res));
+			System.out.println("Esito teoria inserito");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
@@ -143,6 +131,7 @@ public class Inserimento {
 			Logger.getLogger(Integer.toString(res));
 			st.close();
 			conn.close();
+			System.out.println("Esito progetto inserito");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"

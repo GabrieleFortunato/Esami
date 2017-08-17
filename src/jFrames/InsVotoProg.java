@@ -12,6 +12,7 @@ import database.Inserimento;
 import file.PrintOnFile;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 /**
  * Classe InserimentoEsitoProgetto
@@ -136,7 +137,12 @@ public class InsVotoProg extends JFrame {
 				String text = test.getText();
 				String fmain = votoMain.getText();
 				Inserimento.inserisciEsitoProgetto(nome,cognome, libr,text,fmain);
-				PrintOnFile.printOnFile(database.Lettura.proveCompletate());
+				try {
+					PrintOnFile.printOnFile(database.Lettura.proveCompletate());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				dispose();
 			}
 		});

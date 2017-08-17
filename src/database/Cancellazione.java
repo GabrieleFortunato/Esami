@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  * Classe CancellazioneDaDatabase
@@ -39,35 +38,22 @@ public class Cancellazione {
 	 * Cancella un candidato dal database
 	 * @param nome
 	 * @param cognome
+	 * @throws SQLException 
 	 */
-	public static void cancellaCandidato(String nome, String cognome){
+	public static void cancellaCandidato(String nome, String cognome) throws SQLException{
 		Connection conn = null;
 		PreparedStatement st = null;
 		String sql = "delete from candidato where (nome=? and cognome=?)";
-		try {
-			conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
-			st = (PreparedStatement) conn.prepareStatement(sql);
-			st.setString(1, nome);
-			st.setString(2, cognome);
-			int res = st.executeUpdate();
-			Logger.getLogger(Integer.toString(res));
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog (
-					null , "Problemi di connessione con il database"
-			);
-		} finally {
-			if (st!=null&&conn!=null){
-				try {
-					st.close();
-					conn.close();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di connessione con il database"
-					);
-				}
-			}
-		}
+		conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
+		st = (PreparedStatement) conn.prepareStatement(sql);
+		st.setString(1, nome);
+		st.setString(2, cognome);
+		int res = st.executeUpdate();
+		Logger.getLogger(Integer.toString(res));
+		st.close();
+		conn.close();
 	} 
+
 }
 
 

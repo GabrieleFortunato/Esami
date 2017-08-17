@@ -47,57 +47,45 @@ public class Lettura {
 	 * Legge dal database i candidati che hanno sostenuto e superato 
 	 * tutte le prove
 	 * @return
+	 * @throws SQLException 
 	 */
-	public static HashSet<Candidato> proveCompletate() {
-		Connection conn = null;
-		PreparedStatement st = null;
-		ResultSet res = null;
+	public static HashSet<Candidato> proveCompletate() throws SQLException {
 		Set<Candidato> list = new HashSet<>();
-		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
-			st = (PreparedStatement) conn.prepareStatement(
-					"select nome,cognome,esito,libreria,test,main from candidato "
-							+ "inner join teoria on candidato.id=teoria.candidato "
-							+ "inner join progetto on candidato.id=progetto.candidato"
-			);
-			res = st.executeQuery();
-			Progetto progetto = null;
-			boolean flag = res.next();
-			while (flag) {
-				String nome = res.getString("nome");
-				String cognome = res.getString("cognome");
-				String teoria = res.getString("esito");
-				int libreria = res.getInt("libreria");
-				int test = res.getInt("test");
-				int fmain = res.getInt("main");
+		Connection conn = DriverManager.getConnection(
+				URL+DBNAME,Utility.user(),Utility.pass()
+		);
+		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+				"select nome,cognome,esito,libreria,test,main from candidato "
+						+ "inner join teoria on candidato.id=teoria.candidato "
+						+ "inner join progetto on candidato.id=progetto.candidato"
+		);
+		ResultSet res = st.executeQuery();
+		Progetto progetto = null;
+		boolean flag = res.next();
+		while (flag) {
+			String nome = res.getString("nome");
+			String cognome = res.getString("cognome");
+			String teoria = res.getString("esito");
+			int libreria = res.getInt("libreria");
+			int test = res.getInt("test");
+			int fmain = res.getInt("main");
+			try {
 				progetto = new Progetto(libreria,test,fmain);
-				Candidato candidato = new Candidato(nome,cognome,teoria,progetto);
-				list.add(candidato);
-				flag = res.next();
+			} catch (VotoException e) {
+				System.out.println("Voti del progetto non valido");
 			}
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog (
-					null , "Problemi di connessione con il database"
-			);
-		} catch (VotoException e) {
-			e.stampaMessaggio("Voto non valido");
-		} catch (EsitoTeoriaException e) {
-			e.stampaMessaggio("Esito della teoria non valido");
-		} finally {
-			if (st!=null&&res!=null&&conn!=null){
-				try {
-					st.close();
-					res.close();
-					conn.close();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di connessione con il database"
-					);
-				}
+			Candidato candidato = null;
+			try {
+				candidato = new Candidato(nome,cognome,teoria,progetto);
+			} catch (EsitoTeoriaException e) {
+				System.out.println("Esito teoria non valido");
 			}
+			list.add(candidato);
+			flag = res.next();
 		}
+		res.close();
+		st.close();
+		conn.close();
 		return (HashSet<Candidato>) list;
 	}
 	
