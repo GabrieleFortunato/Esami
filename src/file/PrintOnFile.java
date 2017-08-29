@@ -28,10 +28,6 @@ public class PrintOnFile {
 	 * @param iterator
 	 */
 	public static void printOnFile(HashSet<Candidato> candidati){
-		File dir = new File("Esiti");
-		if (!dir.exists()){
-			dir.mkdir();
-		}
 		PrintStream output = null;
 		try {
 			for (Candidato c: candidati){
