@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import candidati.Candidato;
 import candidati.Progetto;
-import database.Cancellazione;
-import database.Inizializzazione;
 import database.Inserimento;
 import database.Lettura;
 import eccezioni.EsitoTeoriaException;
@@ -72,7 +70,6 @@ public class Test {
 						Integer.toString(c.getProgetto().getTest()),
 						Integer.toString(c.getProgetto().getMain())
 				);
-				System.out.println(c.getNome()+" "+c.getCognome()+" inserito nel database");
 			} catch (SQLException e) {
 				System.out.println("Candidato già prenotato");
 			}
@@ -81,28 +78,18 @@ public class Test {
 	
 	public static void main(String[] args) {
 		ArrayList<Candidato> candidati = candidati();
-		try {
-			for (Candidato c:candidati){
-				Cancellazione.cancellaCandidato(c.getNome(), c.getCognome());
-				System.out.println(c.getNome()+" "+c.getCognome()+" cancellato da database");
-			}
-		} catch (SQLException e1) {
-			System.out.println("Impossibile cancellazione il candidato dal database");
-		}
-		try {
-			Inizializzazione.inizializzaDatabase();
-		} catch (SQLException e) {
-			System.out.println("Impossibile inizializzare il database");
-		}
 		database(candidati);
 		try {
 			PrintOnFile.printOnFile(Lettura.proveCompletate());
 		} catch (SQLException e) {
-			System.out.println("Impossibile leggere da database");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (VotoException e) {
-			System.out.println("Voto del progetto non valido");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (EsitoTeoriaException e) {
-			System.out.println("Esito della teoria non valido");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

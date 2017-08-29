@@ -96,7 +96,6 @@ public class InsPren extends JFrame {
 				} catch (SQLException e1) {
 					System.out.println("Impossibile inserire la prenotazione");
 				}
-				dispose();
 			}
 		});
 		cog.setBounds(duecentotrenta, centosessantotto, centosettantaquattro, venticinque);

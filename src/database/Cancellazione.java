@@ -54,6 +54,23 @@ public class Cancellazione {
 		conn.close();
 	} 
 
+	/**
+	 * Cancella un candidato dal database
+	 * @param nome
+	 * @param cognome
+	 * @throws SQLException 
+	 */
+	public static void cancellaDatabase() throws SQLException{
+		Connection conn = null;
+		PreparedStatement st = null;
+		String sql = "drop database if exists esamiprogrammazione";
+		conn = DriverManager.getConnection(URL,Utility.user(),Utility.pass());
+		st = (PreparedStatement) conn.prepareStatement(sql);
+		int res = st.executeUpdate(sql);
+		Logger.getLogger(Integer.toString(res));
+		st.close();
+		conn.close();
+	} 
 }
 
 

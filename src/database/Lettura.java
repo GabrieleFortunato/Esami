@@ -82,9 +82,7 @@ public class Lettura {
 		conn.close();
 		return (HashSet<Candidato>) list;
 	}
-	
 
-	
 	/**
 	 * Legge dal database i candidati che hanno sostenuto e superato 
 	 * tutte le prove
@@ -133,5 +131,4 @@ public class Lettura {
 		return ris;
 	}
 	
-
 }
