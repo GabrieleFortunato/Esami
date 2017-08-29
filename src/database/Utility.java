@@ -46,16 +46,6 @@ public class Utility {
 	public static String user() {
 		String s = null;
 		try {
-			PrintStream output = new PrintStream(new File("user.txt"));
-			output.println("root");
-			output.flush();
-			output.close();
-		} catch (FileNotFoundException e1) {
-			JOptionPane.showMessageDialog (
-				null , "Problemi di lettura da file user"
-			);
-		}
-		try {
 			@SuppressWarnings("resource")
 			BufferedReader buffer = new BufferedReader(new FileReader("user.txt"));
 			s = buffer.readLine();
@@ -68,16 +58,6 @@ public class Utility {
 	}
 	
 	public static String pass() {
-		try {
-			PrintStream output = new PrintStream(new File("pass.txt"));
-			output.println("qrnq946");
-			output.flush();
-			output.close();
-		} catch (FileNotFoundException e1) {
-			JOptionPane.showMessageDialog (
-				null , "Problemi di scritture da file pass"
-			);
-		}
 		String s = null;
 		try {
 			@SuppressWarnings("resource")
