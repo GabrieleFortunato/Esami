@@ -77,8 +77,6 @@ public class Test {
 	}
 	
 	public static void main(String[] args) {
-		ArrayList<Candidato> candidati = candidati();
-		database(candidati);
 		try {
 			PrintOnFile.printOnFile(Lettura.proveCompletate());
 		} catch (SQLException e) {
