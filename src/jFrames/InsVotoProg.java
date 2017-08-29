@@ -9,12 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import database.Inserimento;
-import eccezioni.EsitoTeoriaException;
-import eccezioni.VotoException;
-import file.PrintOnFile;
-
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 /**
  * Classe InserimentoEsitoProgetto
@@ -139,16 +134,6 @@ public class InsVotoProg extends JFrame {
 				String text = test.getText();
 				String fmain = votoMain.getText();
 				Inserimento.inserisciEsitoProgetto(nome,cognome, libr,text,fmain);
-				try {
-					PrintOnFile.printOnFile(database.Lettura.proveCompletate());
-				} catch (SQLException e) {
-					System.out.println("Impossibile leggere da database");
-				} catch (VotoException e) {
-					System.out.println("Voto del progetto non valido");
-				} catch (EsitoTeoriaException e) {
-					System.out.println("Esito della teoria non valido");
-				}
-				dispose();
 			}
 		});
 		
