@@ -64,7 +64,7 @@ public class Lettura {
 		InitialContext context = new InitialContext();
 	    ds = (DataSource) context.lookup(URL);
 	    Connection conn = ds.getConnection();
-				PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 				"select nome,cognome,esito,libreria,test,main from candidato "
 				+ "inner join teoria on candidato.id=teoria.candidato "
 				+ "inner join progetto on candidato.id=progetto.candidato"
@@ -96,21 +96,19 @@ public class Lettura {
 	 * tutte le prove
 	 * @return
 	 * @throws SQLException 
+	 * @throws NamingException 
 	 */
-	public static int id(String nome, String cognome) throws SQLException {
-		Connection conn = null;
-		PreparedStatement st = null;
-		ResultSet res = null;
-		String a = Utility.stringForQuery(nome);
-		String b = Utility.stringForQuery(cognome);
+	public static int id(String nome, String cognome) throws SQLException, NamingException {
+		InitialContext context = new InitialContext();
+	    ds = (DataSource) context.lookup(URL);
+	    Connection conn = ds.getConnection();
+		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+				"select nome,cognome,esito,libreria,test,main from candidato "
+				+ "inner join teoria on candidato.id=teoria.candidato "
+				+ "inner join progetto on candidato.id=progetto.candidato"
+		);
+		ResultSet res = st.executeQuery();
 		int ris = 0;
-		conn = DriverManager.getConnection(
-				URL+DBNAME,Utility.user(),Utility.pass()
-		);
-		st = (PreparedStatement) conn.prepareStatement(
-				"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
-		);
-		res = st.executeQuery();
 		boolean flag = res.next();
 		while (flag) {
 			ris = res.getInt("id");
