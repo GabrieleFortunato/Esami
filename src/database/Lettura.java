@@ -151,9 +151,13 @@ public class Lettura {
 			list.add(candidato);
 			flag = res.next();
 		}
+		if (st!=null){
+			st.close();
+		}
 		res.close();
-		st.close();
-		conn.close();
+		if (conn!=null){
+			conn.close();
+		}
 		return (HashSet<Candidato>) list;
 	}
 
