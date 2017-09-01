@@ -70,7 +70,8 @@ public class Cancellazione {
 		Logger.getLogger(Integer.toString(res));
 		st.close();
 		conn.close();
-	} 
+	}
+
 }
 
 

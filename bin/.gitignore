@@ -1,7 +1,16 @@
-/candidati/
 /database/
+<<<<<<< HEAD
 /eccezioni/
 /file/
+=======
+/Esiti/
+>>>>>>> branch 'master' of https://github.com/GabrieleFortunato/Esami
 /jFrames/
+<<<<<<< HEAD
 /test/
+=======
+/candidati/
+/eccezioni/
+/file/
+>>>>>>> branch 'master' of https://github.com/GabrieleFortunato/Esami
 /utility/

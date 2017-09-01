@@ -42,6 +42,7 @@ public class Inserimento {
 	 * Inserisci la prenotazione
 	 * @param nome
 	 * @param cognome
+<<<<<<< HEAD
 	 * @throws SQLException 
 	 */
 	public static void inserisciPrenotazione(String nome, String cognome) 

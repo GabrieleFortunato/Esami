@@ -136,6 +136,8 @@ public class InsVotoProg extends JFrame {
 				Inserimento.inserisciEsitoProgetto(nome,cognome, libr,text,fmain);
 				dispose();
 				new InsVotoProg().setVisible(true);
+
+				dispose();
 			}
 		});
 		

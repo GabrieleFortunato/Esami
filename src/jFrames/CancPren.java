@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,9 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import database.Cancellazione;
+import database.Inserimento;
 
 /**
- * Classe CancellazionePrenotazione
+ * Classe InserimentoTeoria
  * 
  * @author Gabriele Fortunato
  *
@@ -64,7 +64,7 @@ public class CancPren extends JFrame {
 		JPanel contentPane;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(cento, cento, quattrocentocinquanta, trecento);
-		setTitle("INSERIMENTO PRENOTAZIONE");
+		setTitle("CANCELLAMENTO PRENOTAZIONE");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
 		setContentPane(contentPane);
@@ -98,6 +98,13 @@ public class CancPren extends JFrame {
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
 				}
+				String n = nome.getText();
+				String cg = cognome.getText();
+				try {
+					Inserimento.inserisciPrenotazione(n,cg);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+				}
 				dispose();
 			}
 		});
@@ -105,4 +112,3 @@ public class CancPren extends JFrame {
 		contentPane.add(cog);
 	}
 }
-

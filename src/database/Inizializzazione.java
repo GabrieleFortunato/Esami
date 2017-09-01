@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
+
 /**
  * Classe InizializzaDatabase
  * 
@@ -88,7 +89,7 @@ public class Inizializzazione {
 		int res4 = st4.executeUpdate();
 		Logger.getLogger(Integer.toString(res4)); 
 		st.close();
-		conn.close();
+		conn.close();		
 	}
 
 }

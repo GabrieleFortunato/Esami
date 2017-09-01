@@ -116,22 +116,10 @@ public class Lettura {
 			JOptionPane.showMessageDialog (
 					null , "Problemi di connessione con il database"
 			);
-		} finally {
-			if (st!=null&&res!=null&&conn!=null){
-				try {
-					st.close();
-					res.close();
-					conn.close();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di connessione con il database"
-					);
-				}
-			}
 		}
 		return ris;
 	}
-
+	
 	/**
 	 * Legge da database i candidati di cui inserire l'esito della teoria
 	 * @return

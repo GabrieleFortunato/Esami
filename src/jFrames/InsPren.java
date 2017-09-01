@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import database.Inserimento;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -98,6 +99,12 @@ public class InsPren extends JFrame {
 				}
 				setVisible(false);
 				setVisible(true);
+				try {
+					Inserimento.inserisciPrenotazione(n,cg);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+				}
+				dispose();
 			}
 		});
 		cog.setBounds(duecentotrenta, centosessantotto, centosettantaquattro, venticinque);

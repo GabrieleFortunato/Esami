@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.HashSet;
-import javax.swing.JOptionPane;
+import java.util.logging.Logger;
 import candidati.Candidato;
 import utility.Utility;
 
@@ -22,20 +22,23 @@ public class PrintOnFile {
 	private PrintOnFile(){
 		
 	}
-	
+
 	/**
 	 * Stampa su files gli esiti finali dei candidati
 	 * @param iterator
 	 */
 	public static void printOnFile(HashSet<Candidato> candidati){
+		File dir = new File("Esiti");
+		if (!dir.exists()){
+			dir.mkdir();
+		}
 		PrintStream output = null;
 		try {
 			for (Candidato c: candidati){
 				int esito = (int)c.getProgetto().esito();
 				if (esito>=18){
 					output = new PrintStream(
-							new File(c.getCognome()+" "+c.getNome()+".txt")
-					);
+							new File(c.getCognome()+" "+c.getNome()+".txt"));
 					if (c.esito()>30){
 						output.println(
 								"Esito teoria: "+c.getEsitoTeoria()
@@ -45,37 +48,35 @@ public class PrintOnFile {
 						);
 						output.println(
 								"Esame superato con 30 e lode"
-									);
-						} else if (c.esito()<18){
-							output.println(
-									"Esito teoria: "+c.getEsitoTeoria()		
+						);
+					} else if (c.esito()<18){
+						output.println(
+								"Esito teoria: "+c.getEsitoTeoria()		
+						);
+						output.println(
+								"Esito progetto: "+esito
 								);
-							output.println(
-									"Esito progetto: "+esito
-								);
-							output.println(
-									"Esame non superato"
-								);
-							} else{
-								output.println(
-										"Esito teoria: "+c.getEsitoTeoria()
-								);
-								output.println(
-										"Esito progetto: "+esito
-								);
-								output.println(
-										"Esame superato con "+(int)Utility.arrotonda(c.esito(),0)
-								);
-										
-							}
-							output.flush();
-							output.close();
-				}
+						output.println(
+								"Esame non superato"
+						);
+					} else {
+						output.println(
+								"Esito teoria: "+c.getEsitoTeoria()
+						);
+						output.println(
+								"Esito progetto: "+esito
+						);
+						output.println(
+								"Esame superato con "+(int)Utility.arrotonda(c.esito(),0)
+						);
+					}
+					output.flush();
+					output.close();
+				}	
 			}
 		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog (
-					null , "Impossibile aprire il file"
-			);
+			Logger.getLogger("Il file non può essere aperto");
 		}
-	}
+	}	
+	
 }
