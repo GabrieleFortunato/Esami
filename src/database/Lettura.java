@@ -11,7 +11,6 @@ import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
 import eccezioni.VotoException;
-import javax.swing.JOptionPane;
 
 /**
  * Classe LetturaDaDatabase
@@ -59,8 +58,8 @@ public class Lettura {
 		);
 		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 				"select nome,cognome,esito,libreria,test,main from candidato "
-						+ "inner join teoria on candidato.id=teoria.candidato "
-						+ "inner join progetto on candidato.id=progetto.candidato"
+				+ "inner join teoria on candidato.id=teoria.candidato "
+				+ "inner join progetto on candidato.id=progetto.candidato"
 		);
 		ResultSet res = st.executeQuery();
 		Progetto progetto = null;
@@ -88,35 +87,30 @@ public class Lettura {
 	 * Legge dal database l'id del candidato 
 	 * tutte le prove
 	 * @return
+	 * @throws SQLException 
 	 */
-	public static int id(String nome, String cognome) {
+	public static int id(String nome, String cognome) throws SQLException {
 		Connection conn = null;
 		PreparedStatement st = null;
 		ResultSet res = null;
 		String a = Utility.stringForQuery(nome);
 		String b = Utility.stringForQuery(cognome);
 		int ris = 0;
-		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
-			st = (PreparedStatement) conn.prepareStatement(
-					"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
-			);
-			res = st.executeQuery();
-			boolean flag = res.next();
-			while (flag) {
-				ris = res.getInt("id");
-				flag = res.next();
-			}
-			st.close();
-			res.close();
-			conn.close();
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog (
-					null , "Problemi di connessione con il database"
-			);
+		conn = DriverManager.getConnection(
+				URL+DBNAME,Utility.user(),Utility.pass()
+		);
+		st = (PreparedStatement) conn.prepareStatement(
+				"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
+		);
+		res = st.executeQuery();
+		boolean flag = res.next();
+		while (flag) {
+			ris = res.getInt("id");
+			flag = res.next();
 		}
+		st.close();
+		res.close();
+		conn.close();
 		return ris;
 	}
 	

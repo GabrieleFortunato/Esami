@@ -61,8 +61,8 @@ public class Cancellazione {
 	 * @throws SQLException 
 	 */
 	public static void cancellaDatabase() throws SQLException{
-		Connection conn = null;
-		PreparedStatement st = null;
+		Connection conn;
+		PreparedStatement st;
 		String sql = "drop database if exists esamiprogrammazione";
 		conn = DriverManager.getConnection(URL,Utility.user(),Utility.pass());
 		st = (PreparedStatement) conn.prepareStatement(sql);

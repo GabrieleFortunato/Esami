@@ -5,11 +5,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import database.Inserimento;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 /**
  * Classe InserimentoEsitoProgetto
@@ -133,7 +135,13 @@ public class InsVotoProg extends JFrame {
 				String libr = libreria.getText();
 				String text = test.getText();
 				String fmain = votoMain.getText();
-				Inserimento.inserisciEsitoProgetto(nome,cognome, libr,text,fmain);
+				try {
+					Inserimento.inserisciEsitoProgetto(nome,cognome, libr,text,fmain);
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(
+							null, "Problemi di connessione con il database"
+					);
+				}
 				dispose();
 				new InsVotoProg().setVisible(true);
 

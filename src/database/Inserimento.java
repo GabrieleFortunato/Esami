@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import javax.swing.JOptionPane;
 
 /**
  * Classe InserimentoNelDatabase
@@ -68,41 +67,30 @@ public class Inserimento {
 	 * @param nome
 	 * @param cognome
 	 * @param teoria
+	 * @throws SQLException 
 	 */
-	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria){
+	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) 
+			throws SQLException{
 		Connection conn = null;
 		PreparedStatement st = null;
 		String id = Integer.toString(Lettura.id(nome, cognome));
-		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
-			st = (PreparedStatement) conn.prepareStatement(
-							"insert ignore into teoria values (?,?)"
-			);
-			st.setString(1, id);
-			st.setString(2, teoria);
-			int res = st.executeUpdate();
-			Logger.getLogger(Integer.toString(res));
-			System.out.println("Esito teoria inserito");
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog (
-					null , "Problemi di connessione con il database"
-			);
-		} finally{
-			try {
-				if (st!=null){
-					st.close();
-				}
-				if (conn!=null){
-					conn.close();
-				}
-			} catch (SQLException e) {
-				JOptionPane.showMessageDialog (
-						null , "Problemi di connessione con il database"
-				);
-			}
+		conn = DriverManager.getConnection(
+				URL+DBNAME,Utility.user(),Utility.pass()
+		);
+		st = (PreparedStatement) conn.prepareStatement(
+						"insert ignore into teoria values (?,?)"
+		);
+		st.setString(1, id);
+		st.setString(2, teoria);
+		int res = st.executeUpdate();
+		Logger.getLogger(Integer.toString(res));
+		System.out.println("Esito teoria inserito");
+		if (st!=null){
+			st.close();
 		}
+		if (conn!=null){
+			conn.close();
+		}	
 	}
 		
 	/**
@@ -113,43 +101,31 @@ public class Inserimento {
 	 * @throws NamingException 
 	 * @throws SQLException 
 	 */
-	public static void inserisciEsitoProgetto(String nome, String cognome, String libr, String test, String main){
+	public static void inserisciEsitoProgetto(
+			String nome, String cognome, String libr, String test, String main
+			) throws SQLException{
 		Connection conn = null;
 		PreparedStatement st = null;
 		String id = Integer.toString(Lettura.id(nome,cognome));
-		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
-			st = (PreparedStatement) conn.prepareStatement(
-					"insert ignore into progetto values(?,?,?,?)"
-			);
-			st.setString(1, id);
-			st.setString(2, libr);
-			st.setString(3, test);
-			st.setString(4, main);
-			int res = st.executeUpdate();
-			Logger.getLogger(Integer.toString(res));
+		conn = DriverManager.getConnection(
+				URL+DBNAME,Utility.user(),Utility.pass()
+		);
+		st = (PreparedStatement) conn.prepareStatement(
+				"insert ignore into progetto values(?,?,?,?)"
+		);
+		st.setString(1, id);
+		st.setString(2, libr);
+		st.setString(3, test);
+		st.setString(4, main);
+		int res = st.executeUpdate();
+		Logger.getLogger(Integer.toString(res));
+		st.close();
+		conn.close();
+		System.out.println("Esito progetto inserito"); 
+		if (st!=null&&conn!=null){
 			st.close();
-			conn.close();
-			System.out.println("Esito progetto inserito");
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog (
-					null , "Problemi di connessione con il database"
-			);
-		} finally {
-			if (st!=null&&conn!=null){
-				try {
-					st.close();
-					conn.close();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog (
-							null , "Problemi di connessione con il database"
-					);
-				}
-			}
+			conn.close();		
 		}
-		
 	}
 
 }
