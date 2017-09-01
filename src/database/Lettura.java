@@ -51,7 +51,8 @@ public class Lettura {
 	 * @throws VotoException 
 	 * @throws EsitoTeoriaException 
 	 */
-	public static HashSet<Candidato> proveCompletate() throws SQLException, VotoException, EsitoTeoriaException {
+	public static HashSet<Candidato> proveCompletate() 
+			throws SQLException, VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
 		Connection conn = DriverManager.getConnection(
 				URL+DBNAME,Utility.user(),Utility.pass()
@@ -84,7 +85,7 @@ public class Lettura {
 	}
 
 	/**
-	 * Legge dal database i candidati che hanno sostenuto e superato 
+	 * Legge dal database l'id del candidato 
 	 * tutte le prove
 	 * @return
 	 */
@@ -130,5 +131,44 @@ public class Lettura {
 		}
 		return ris;
 	}
-	
+
+	/**
+	 * Legge da database i candidati di cui inserire l'esito della teoria
+	 * @return
+	 * @throws SQLException
+	 * @throws VotoException
+	 * @throws EsitoTeoriaException
+	 */
+	public static HashSet<Candidato> candidatoInserireTeoria() 
+			throws SQLException, VotoException, EsitoTeoriaException {
+		Set<Candidato> list = new HashSet<>();
+		Connection conn = DriverManager.getConnection(
+				URL+DBNAME,Utility.user(),Utility.pass()
+		);
+		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+				"select nome,cognome from candidato "
+				+ "where id not in (select candidato from teoria)"
+		);
+		ResultSet res = st.executeQuery();
+		Progetto progetto = null;
+		Candidato candidato = null;
+		boolean flag = res.next();
+		while (flag) {
+			String nome = res.getString("nome");
+			String cognome = res.getString("cognome");
+			String teoria = res.getString("esito");
+			int libreria = res.getInt("libreria");
+			int test = res.getInt("test");
+			int fmain = res.getInt("main");
+			progetto = new Progetto(libreria,test,fmain);
+			candidato = new Candidato(nome,cognome,teoria,progetto);
+			list.add(candidato);
+			flag = res.next();
+		}
+		res.close();
+		st.close();
+		conn.close();
+		return (HashSet<Candidato>) list;
+	}
+
 }
