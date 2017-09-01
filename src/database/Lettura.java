@@ -85,8 +85,7 @@ public class Lettura {
 				flag = res.next();
 			};
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,"Impossibile connetterisi al database");
 		} finally {
 			try {
 				conn.close();
@@ -147,37 +146,45 @@ public class Lettura {
 	 * @throws EsitoTeoriaException
 	 */
 	public static HashSet<Candidato> candidatoInserireTeoria() 
-			throws SQLException, VotoException, EsitoTeoriaException {
+			throws VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
-		Connection conn = DriverManager.getConnection(
-				URL+DBNAME,Utility.user(),Utility.pass()
-		);
-		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
-				"select nome,cognome from candidato "
-				+ "where id not in (select candidato from teoria)"
-		);
-		ResultSet res = st.executeQuery();
-		Progetto progetto = null;
-		Candidato candidato = null;
-		boolean flag = res.next();
-		while (flag) {
-			String nome = res.getString("nome");
-			String cognome = res.getString("cognome");
-			String teoria = res.getString("esito");
-			int libreria = res.getInt("libreria");
-			int test = res.getInt("test");
-			int fmain = res.getInt("main");
-			progetto = new Progetto(libreria,test,fmain);
-			candidato = new Candidato(nome,cognome,teoria,progetto);
-			list.add(candidato);
-			flag = res.next();
-		}
-		if (st!=null){
-			st.close();
-		}
-		res.close();
-		if (conn!=null){
-			conn.close();
+		Connection conn = null;
+		ResultSet res = null;
+		PreparedStatement st = null;
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"select nome,cognome from candidato "
+					+ "where id not in (select candidato from teoria)"
+			);
+			res = st.executeQuery();
+			Progetto progetto = null;
+			Candidato candidato = null;
+			boolean flag = res.next();
+			while (flag) {
+				String nome = res.getString("nome");
+				String cognome = res.getString("cognome");
+				String teoria = res.getString("esito");
+				int libreria = res.getInt("libreria");
+				int test = res.getInt("test");
+				int fmain = res.getInt("main");
+				progetto = new Progetto(libreria,test,fmain);
+				candidato = new Candidato(nome,cognome,teoria,progetto);
+				list.add(candidato);
+				flag = res.next();
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Impossibile connetterisi al database");
+		} finally {
+			try {
+				st.close();
+				res.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null,"Impossibile connetterisi al database");
+			}
 		}
 		return (HashSet<Candidato>) list;
 	}
