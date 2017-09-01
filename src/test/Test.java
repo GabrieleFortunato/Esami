@@ -2,6 +2,9 @@ package test;
 
 import java.sql.SQLException;
 import java.util.logging.Logger;
+
+import javax.naming.NamingException;
+
 import database.Lettura;
 import eccezioni.EsitoTeoriaException;
 import eccezioni.VotoException;
@@ -18,6 +21,9 @@ public class Test {
 			Logger.getLogger("");
 		} catch (EsitoTeoriaException e) {
 			Logger.getLogger("");
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

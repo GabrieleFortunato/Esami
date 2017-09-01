@@ -7,6 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
@@ -49,14 +54,15 @@ public class Lettura {
 	 * @throws SQLException 
 	 * @throws VotoException 
 	 * @throws EsitoTeoriaException 
+	 * @throws NamingException 
 	 */
 	public static HashSet<Candidato> proveCompletate() 
-			throws SQLException, VotoException, EsitoTeoriaException {
+			throws SQLException, VotoException, EsitoTeoriaException, NamingException {
 		Set<Candidato> list = new HashSet<>();
-		Connection conn = DriverManager.getConnection(
-				URL+DBNAME,Utility.user(),Utility.pass()
-		);
-		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+		InitialContext context = new InitialContext();
+	    DataSource ds = (DataSource) context.lookup(URL);
+	    Connection conn = ds.getConnection();
+	    PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 				"select nome,cognome,esito,libreria,test,main from candidato "
 				+ "inner join teoria on candidato.id=teoria.candidato "
 				+ "inner join progetto on candidato.id=progetto.candidato"
