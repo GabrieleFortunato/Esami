@@ -90,8 +90,8 @@ public class Lettura {
 	 * @throws SQLException 
 	 */
 	public static int id(String nome, String cognome) throws SQLException {
-		Connection conn = null;
-		PreparedStatement st = null;
+		Connection conn;
+		PreparedStatement st;
 		ResultSet res = null;
 		String a = Utility.stringForQuery(nome);
 		String b = Utility.stringForQuery(cognome);
