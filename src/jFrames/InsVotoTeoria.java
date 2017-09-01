@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import database.Inserimento;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -106,7 +107,7 @@ public class InsVotoTeoria extends JFrame {
 				String theory = teoria.getText();
 				try {
 					Inserimento.inserisciEsitoTeoria(name,surname,theory);
-				} catch (SQLException e1) {
+				} catch (SQLException | NamingException e1) {
 					JOptionPane.showMessageDialog(
 							null, "Problemi di connessione con il database"
 					);

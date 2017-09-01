@@ -1,16 +1,12 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
@@ -46,8 +42,6 @@ public class Lettura {
 	 */
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 	
-	private static DataSource ds;
-	
 	/**
 	 * Legge dal database i candidati che hanno sostenuto e superato 
 	 * tutte le prove
@@ -55,14 +49,13 @@ public class Lettura {
 	 * @throws SQLException 
 	 * @throws VotoException 
 	 * @throws EsitoTeoriaException 
-	 * @throws NamingException 
 	 */
 	public static HashSet<Candidato> proveCompletate() 
-			throws SQLException, VotoException, EsitoTeoriaException, NamingException {
+			throws SQLException, VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
-		InitialContext context = new InitialContext();
-	    ds = (DataSource) context.lookup(URL);
-	    Connection conn = ds.getConnection();
+		Connection conn = DriverManager.getConnection(
+				URL+DBNAME,Utility.user(),Utility.pass()
+		);
 		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 				"select nome,cognome,esito,libreria,test,main from candidato "
 				+ "inner join teoria on candidato.id=teoria.candidato "
@@ -95,19 +88,21 @@ public class Lettura {
 	 * tutte le prove
 	 * @return
 	 * @throws SQLException 
-	 * @throws NamingException 
 	 */
-	public static int id(String nome, String cognome) throws SQLException, NamingException {
-		InitialContext context = new InitialContext();
-	    ds = (DataSource) context.lookup(URL);
-	    Connection conn = ds.getConnection();
-		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
-				"select nome,cognome,esito,libreria,test,main from candidato "
-				+ "inner join teoria on candidato.id=teoria.candidato "
-				+ "inner join progetto on candidato.id=progetto.candidato"
-		);
-		ResultSet res = st.executeQuery();
+	public static int id(String nome, String cognome) throws SQLException {
+		Connection conn = null;
+		PreparedStatement st = null;
+		ResultSet res = null;
+		String a = Utility.stringForQuery(nome);
+		String b = Utility.stringForQuery(cognome);
 		int ris = 0;
+		conn = DriverManager.getConnection(
+				URL+DBNAME,Utility.user(),Utility.pass()
+		);
+		st = (PreparedStatement) conn.prepareStatement(
+				"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
+		);
+		res = st.executeQuery();
 		boolean flag = res.next();
 		while (flag) {
 			ris = res.getInt("id");
@@ -129,14 +124,13 @@ public class Lettura {
 	 * @throws SQLException
 	 * @throws VotoException
 	 * @throws EsitoTeoriaException
-	 * @throws NamingException 
 	 */
 	public static HashSet<Candidato> candidatoInserireTeoria() 
-			throws SQLException, VotoException, EsitoTeoriaException, NamingException {
+			throws SQLException, VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
-		InitialContext context = new InitialContext();
-	    ds = (DataSource) context.lookup(URL);
-	    Connection conn = ds.getConnection();
+		Connection conn = DriverManager.getConnection(
+				URL+DBNAME,Utility.user(),Utility.pass()
+		);
 		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 				"select nome,cognome from candidato "
 				+ "where id not in (select candidato from teoria)"
