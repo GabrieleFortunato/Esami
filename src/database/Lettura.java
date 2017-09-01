@@ -56,15 +56,12 @@ public class Lettura {
 		Connection conn = DriverManager.getConnection(
 				URL+DBNAME,Utility.user(),Utility.pass()
 		);
-		conn.close();
 		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 				"select nome,cognome,esito,libreria,test,main from candidato "
 				+ "inner join teoria on candidato.id=teoria.candidato "
 				+ "inner join progetto on candidato.id=progetto.candidato"
 		);
 		ResultSet res = st.executeQuery();
-		res.close();
-		st.close();
 		Progetto progetto = null;
 		Candidato candidato = null;
 		boolean flag = res.next();
@@ -80,6 +77,9 @@ public class Lettura {
 			list.add(candidato);
 			flag = res.next();
 		};
+		conn.close();
+		res.close();
+		st.close();
 		return (HashSet<Candidato>) list;
 	}
 
