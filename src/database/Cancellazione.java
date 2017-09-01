@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,6 +32,9 @@ public class Cancellazione {
 	 */
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 
+	private static InitialContext context ;
+	private static DataSource ds;
+	
 	/**
 	 * Metodo costruttore
 	 */
@@ -40,14 +46,17 @@ public class Cancellazione {
 	 * Cancella un candidato dal database
 	 * @param nome
 	 * @param cognome
+	 * @throws NamingException 
 	 * @throws SQLException 
 	 */
-	public static void cancellaCandidato(String nome, String cognome) {
+	public static void cancellaCandidato(String nome, String cognome) throws NamingException {
 		Connection conn = null;
 		PreparedStatement st = null;
+		context = new InitialContext();
+		ds = (DataSource) context.lookup(URL);
 		String sql = "delete from candidato where (nome=? and cognome=?)";
 		try {
-			conn = DriverManager.getConnection(URL+DBNAME,Utility.user(),Utility.pass());
+			conn = ds.getConnection(Utility.user(),Utility.pass());
 			st = (PreparedStatement) conn.prepareStatement(sql);
 			st.setString(1, nome);
 			st.setString(2, cognome);

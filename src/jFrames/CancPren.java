@@ -3,9 +3,12 @@ package jFrames;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -90,7 +93,11 @@ public class CancPren extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String n = nome.getText();
 				String cg = cognome.getText();
-				Cancellazione.cancellaCandidato(n,cg);
+				try {
+					Cancellazione.cancellaCandidato(n,cg);
+				} catch (NamingException e1) {
+					JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+				}
 				dispose();
 			}
 		});
