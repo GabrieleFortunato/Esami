@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.swing.JOptionPane;
 
 /**
  * Classe InserimentoNelDatabase
@@ -41,25 +42,32 @@ public class Inserimento {
 	 * Inserisci la prenotazione
 	 * @param nome
 	 * @param cognome
-<<<<<<< HEAD
 	 * @throws SQLException 
 	 */
-	public static void inserisciPrenotazione(String nome, String cognome) 
-			throws SQLException{
+	public static void inserisciPrenotazione(String nome, String cognome) {
 		Connection conn = null;
 		PreparedStatement st = null;
-		conn = DriverManager.getConnection(
-				URL+DBNAME,Utility.user(),Utility.pass()
-		);
-		st = (PreparedStatement) conn.prepareStatement(
-				"insert into candidato (nome,cognome) values(?,?)"
-		);
-		st.setString(1, nome);
-		st.setString(2, cognome);
-		int res = st.executeUpdate();
-		Logger.getLogger(Integer.toString(res));
-		st.close();
-		conn.close();
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"insert into candidato (nome,cognome) values(?,?)"
+			);
+			st.setString(1, nome);
+			st.setString(2, cognome);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+		} finally {
+			try {
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+			}
+		}	
 	}	
 	
 	/**
@@ -70,27 +78,30 @@ public class Inserimento {
 	 * @throws SQLException 
 	 * @throws NamingException 
 	 */
-	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) 
-			throws SQLException, NamingException{
+	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) {
 		Connection conn = null;
 		PreparedStatement st = null;
-		String id = Integer.toString(Lettura.id(nome, cognome));
-		conn = DriverManager.getConnection(
-				URL+DBNAME,Utility.user(),Utility.pass()
-		);
-		st = (PreparedStatement) conn.prepareStatement(
-						"insert ignore into teoria values (?,?)"
-		);
-		st.setString(1, id);
-		st.setString(2, teoria);
-		int res = st.executeUpdate();
-		Logger.getLogger(Integer.toString(res));
-		System.out.println("Esito teoria inserito");
-		if (st!=null){
-			st.close();
-		}
-		if (conn!=null){
-			conn.close();
+		try {
+			String id = Integer.toString(Lettura.id(nome, cognome));
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+							"insert ignore into teoria values (?,?)"
+			);
+			st.setString(1, id);
+			st.setString(2, teoria);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+		} finally {
+			try {
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+			}
 		}	
 	}
 		
@@ -107,26 +118,32 @@ public class Inserimento {
 			) throws SQLException, NamingException{
 		Connection conn = null;
 		PreparedStatement st = null;
-		String id = Integer.toString(Lettura.id(nome,cognome));
-		conn = DriverManager.getConnection(
-				URL+DBNAME,Utility.user(),Utility.pass()
-		);
-		st = (PreparedStatement) conn.prepareStatement(
-				"insert ignore into progetto values(?,?,?,?)"
-		);
-		st.setString(1, id);
-		st.setString(2, libr);
-		st.setString(3, test);
-		st.setString(4, main);
-		int res = st.executeUpdate();
-		Logger.getLogger(Integer.toString(res));
-		st.close();
-		conn.close();
-		System.out.println("Esito progetto inserito"); 
-		if (st!=null&&conn!=null){
+		try {
+			String id = Integer.toString(Lettura.id(nome,cognome));
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"insert ignore into progetto values(?,?,?,?)"
+			);
+			st.setString(1, id);
+			st.setString(2, libr);
+			st.setString(3, test);
+			st.setString(4, main);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
 			st.close();
-			conn.close();		
-		}
+			conn.close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+		} finally {
+			try {
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+			}
+		}			
 	}
 
 }

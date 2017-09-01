@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.swing.JOptionPane;
+
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
@@ -51,35 +54,47 @@ public class Lettura {
 	 * @throws EsitoTeoriaException 
 	 */
 	public static HashSet<Candidato> proveCompletate() 
-			throws SQLException, VotoException, EsitoTeoriaException {
+			throws VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
-		Connection conn = DriverManager.getConnection(
-				URL+DBNAME,Utility.user(),Utility.pass()
-		);
-		conn.close();
-		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
-				"select nome,cognome,esito,libreria,test,main from candidato "
-				+ "inner join teoria on candidato.id=teoria.candidato "
-				+ "inner join progetto on candidato.id=progetto.candidato"
-		);
-		ResultSet res = st.executeQuery();
-		res.close();
-		st.close();
-		Progetto progetto = null;
-		Candidato candidato = null;
-		boolean flag = res.next();
-		while (flag) {
-			String nome = res.getString("nome");
-			String cognome = res.getString("cognome");
-			String teoria = res.getString("esito");
-			int libreria = res.getInt("libreria");
-			int test = res.getInt("test");
-			int fmain = res.getInt("main");
-			progetto = new Progetto(libreria,test,fmain);
-			candidato = new Candidato(nome,cognome,teoria,progetto);
-			list.add(candidato);
-			flag = res.next();
-		};
+		Connection conn = null;
+		PreparedStatement st = null;
+		ResultSet res = null;
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"select nome,cognome,esito,libreria,test,main from candidato "
+					+ "inner join teoria on candidato.id=teoria.candidato "
+					+ "inner join progetto on candidato.id=progetto.candidato"
+			);
+			res = st.executeQuery();
+			Progetto progetto = null;
+			Candidato candidato = null;
+			boolean flag = res.next();
+			while (flag) {
+				String nome = res.getString("nome");
+				String cognome = res.getString("cognome");
+				String teoria = res.getString("esito");
+				int libreria = res.getInt("libreria");
+				int test = res.getInt("test");
+				int fmain = res.getInt("main");
+				progetto = new Progetto(libreria,test,fmain);
+				candidato = new Candidato(nome,cognome,teoria,progetto);
+				list.add(candidato);
+				flag = res.next();
+			};
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+		} finally {
+			try {
+				res.close();
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+			}
+		}
 		return (HashSet<Candidato>) list;
 	}
 
@@ -89,30 +104,37 @@ public class Lettura {
 	 * @return
 	 * @throws SQLException 
 	 */
-	public static int id(String nome, String cognome) throws SQLException {
+	public static int id(String nome, String cognome)  {
 		Connection conn = null;
 		PreparedStatement st = null;
 		ResultSet res = null;
 		String a = Utility.stringForQuery(nome);
 		String b = Utility.stringForQuery(cognome);
 		int ris = 0;
-		conn = DriverManager.getConnection(
-				URL+DBNAME,Utility.user(),Utility.pass()
-		);
-		st = (PreparedStatement) conn.prepareStatement(
-				"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
-		);
-		res = st.executeQuery();
-		boolean flag = res.next();
-		while (flag) {
-			ris = res.getInt("id");
-			flag = res.next();
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
+			);
+			res = st.executeQuery();
+			boolean flag = res.next();
+			while (flag) {
+				ris = res.getInt("id");
+				flag = res.next();
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+		} finally {
+			try {
+				res.close();
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+			}
 		}
-		if (st!=null){
-			st.close();
-		}
-		res.close();
-		conn.close();
 		return ris;
 	}
 	
@@ -124,35 +146,48 @@ public class Lettura {
 	 * @throws EsitoTeoriaException
 	 */
 	public static HashSet<Candidato> candidatoInserireTeoria() 
-			throws SQLException, VotoException, EsitoTeoriaException {
+			throws VotoException, EsitoTeoriaException {
 		Set<Candidato> list = new HashSet<>();
-		Connection conn = DriverManager.getConnection(
-				URL+DBNAME,Utility.user(),Utility.pass()
-		);
-		PreparedStatement st = (PreparedStatement) conn.prepareStatement(
-				"select nome,cognome from candidato "
-				+ "where id not in (select candidato from teoria)"
-		);
-		ResultSet res = st.executeQuery();
-		Progetto progetto = null;
-		Candidato candidato = null;
-		boolean flag = res.next();
-		while (flag) {
-			String nome = res.getString("nome");
-			String cognome = res.getString("cognome");
-			String teoria = res.getString("esito");
-			int libreria = res.getInt("libreria");
-			int test = res.getInt("test");
-			int fmain = res.getInt("main");
-			progetto = new Progetto(libreria,test,fmain);
-			candidato = new Candidato(nome,cognome,teoria,progetto);
-			list.add(candidato);
-			flag = res.next();
+		Connection conn = null;
+		PreparedStatement st = null;
+		ResultSet res = null;
+		try {
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"select nome,cognome from candidato "
+					+ "where id not in (select candidato from teoria)"
+			);
+			res = st.executeQuery();
+			Progetto progetto = null;
+			Candidato candidato = null;
+			boolean flag = res.next();
+			while (flag) {
+				String nome = res.getString("nome");
+				String cognome = res.getString("cognome");
+				String teoria = res.getString("esito");
+				int libreria = res.getInt("libreria");
+				int test = res.getInt("test");
+				int fmain = res.getInt("main");
+				progetto = new Progetto(libreria,test,fmain);
+				candidato = new Candidato(nome,cognome,teoria,progetto);
+				list.add(candidato);
+				flag = res.next();
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+		} finally {
+			try {
+				res.close();
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+			}
 		}
-		res.close();
-		st.close();
-		conn.close();
 		return (HashSet<Candidato>) list;
 	}
 
 }
+

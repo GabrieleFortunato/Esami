@@ -6,11 +6,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import database.Inserimento;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 /**
@@ -92,18 +90,9 @@ public class InsPren extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String n = nome.getText();
 				String cg = cognome.getText();
-				try {
-					Inserimento.inserisciPrenotazione(n,cg);
-				} catch (SQLException e1) {
-					System.out.println("Impossibile inserire la prenotazione");
-				}
+				Inserimento.inserisciPrenotazione(n,cg);
 				setVisible(false);
 				setVisible(true);
-				try {
-					Inserimento.inserisciPrenotazione(n,cg);
-				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
-				}
 				dispose();
 			}
 		});
