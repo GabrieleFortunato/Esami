@@ -68,9 +68,10 @@ public class Inserimento {
 	 * @param cognome
 	 * @param teoria
 	 * @throws SQLException 
+	 * @throws NamingException 
 	 */
 	public static void inserisciEsitoTeoria(String nome, String cognome, String teoria) 
-			throws SQLException{
+			throws SQLException, NamingException{
 		Connection conn = null;
 		PreparedStatement st = null;
 		String id = Integer.toString(Lettura.id(nome, cognome));
@@ -103,7 +104,7 @@ public class Inserimento {
 	 */
 	public static void inserisciEsitoProgetto(
 			String nome, String cognome, String libr, String test, String main
-			) throws SQLException{
+			) throws SQLException, NamingException{
 		Connection conn = null;
 		PreparedStatement st = null;
 		String id = Integer.toString(Lettura.id(nome,cognome));
