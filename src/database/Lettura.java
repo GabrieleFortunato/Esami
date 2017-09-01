@@ -47,6 +47,8 @@ public class Lettura {
 	 */
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 	
+	private static DataSource ds;
+	
 	/**
 	 * Legge dal database i candidati che hanno sostenuto e superato 
 	 * tutte le prove
@@ -60,9 +62,9 @@ public class Lettura {
 			throws SQLException, VotoException, EsitoTeoriaException, NamingException {
 		Set<Candidato> list = new HashSet<>();
 		InitialContext context = new InitialContext();
-	    DataSource ds = (DataSource) context.lookup(URL);
+	    ds = (DataSource) context.lookup(URL);
 	    Connection conn = ds.getConnection();
-	    PreparedStatement st = (PreparedStatement) conn.prepareStatement(
+				PreparedStatement st = (PreparedStatement) conn.prepareStatement(
 				"select nome,cognome,esito,libreria,test,main from candidato "
 				+ "inner join teoria on candidato.id=teoria.candidato "
 				+ "inner join progetto on candidato.id=progetto.candidato"
