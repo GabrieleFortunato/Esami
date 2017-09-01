@@ -108,9 +108,13 @@ public class Lettura {
 			ris = res.getInt("id");
 			flag = res.next();
 		}
-		st.close();
+		if (st!=null){
+			st.close();
+		}
 		res.close();
-		conn.close();
+		if (conn!=null){
+			conn.close();
+		}
 		return ris;
 	}
 	
