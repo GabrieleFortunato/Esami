@@ -75,4 +75,30 @@ public class PrintOnFile {
 		}
 	}	
 	
+	public static void daInserireTeoria(HashSet<Candidato> candidati){
+		PrintStream output = null;
+		if (candidati.size()>0){
+			try {
+				output=new PrintStream(new File("Inserire teoria.txt"));
+				output.println("\nCANDIDATI DI CUI INSERIRE L'ESITO DELLA TEORIA\n");
+				for (Candidato c: candidati){
+					output.println(c.getCognome()+" "+c.getNome());
+				}
+			} catch (FileNotFoundException e) {
+				Logger.getLogger("Il file non può essere aperto");
+			} 
+		} else {
+			try {
+				output=new PrintStream(new File("Inserire teoria.txt"));
+				output.println("Non ci sono candidati di cui inserire l'esito della prate teorica");
+			} catch (FileNotFoundException e) {
+				Logger.getLogger("Il file non può essere aperto");
+			}
+		}
+		if (output!=null){
+			output.flush();
+			output.close();
+		}
+	}
+	
 }

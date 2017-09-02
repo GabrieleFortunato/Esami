@@ -160,23 +160,17 @@ public class Lettura {
 					+ "where id not in (select candidato from teoria)"
 			);
 			res = st.executeQuery();
-			Progetto progetto = null;
 			Candidato candidato = null;
 			boolean flag = res.next();
 			while (flag) {
 				String nome = res.getString("nome");
 				String cognome = res.getString("cognome");
-				String teoria = res.getString("esito");
-				int libreria = res.getInt("libreria");
-				int test = res.getInt("test");
-				int fmain = res.getInt("main");
-				progetto = new Progetto(libreria,test,fmain);
-				candidato = new Candidato(nome,cognome,teoria,progetto);
+				candidato = new Candidato(nome,cognome);
 				list.add(candidato);
 				flag = res.next();
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+			JOptionPane.showMessageDialog(null,"Problemi di lettura da database");
 		} finally {
 			try {
 				res.close();
