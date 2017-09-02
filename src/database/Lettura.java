@@ -7,13 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.swing.JOptionPane;
-
 import candidati.Candidato;
 import candidati.Progetto;
 import eccezioni.EsitoTeoriaException;
-import eccezioni.VotoException;
+import eccezioni.VotoException; 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 /**
  * Classe LetturaDaDatabase
@@ -45,6 +46,10 @@ public class Lettura {
 	 */
 	final static String DRIVER = "com.mysql.jdbc.Driver";
 	
+	private static InitialContext context;
+	private static DataSource ds;
+ 
+	
 	/**
 	 * Legge dal database i candidati che hanno sostenuto e superato 
 	 * tutte le prove
@@ -52,17 +57,18 @@ public class Lettura {
 	 * @throws SQLException 
 	 * @throws VotoException 
 	 * @throws EsitoTeoriaException 
+	 * @throws NamingException 
 	 */
 	public static HashSet<Candidato> proveCompletate() 
-			throws VotoException, EsitoTeoriaException {
+			throws VotoException, EsitoTeoriaException, NamingException {
 		Set<Candidato> list = new HashSet<>();
+		context = new InitialContext();
+		ds = (DataSource) context.lookup(URL);
 		Connection conn = null;
 		PreparedStatement st = null;
 		ResultSet res = null;
 		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
+			conn = ds.getConnection();
 			st = (PreparedStatement) conn.prepareStatement(
 					"select nome,cognome,esito,libreria,test,main from candidato "
 					+ "inner join teoria on candidato.id=teoria.candidato "
@@ -102,19 +108,20 @@ public class Lettura {
 	 * Legge dal database l'id del candidato 
 	 * tutte le prove
 	 * @return
+	 * @throws NamingException 
 	 * @throws SQLException 
 	 */
-	public static int id(String nome, String cognome)  {
+	public static int id(String nome, String cognome) throws NamingException  {
 		Connection conn = null;
 		PreparedStatement st = null;
 		ResultSet res = null;
+		context = new InitialContext();
+		ds = (DataSource) context.lookup(URL);
 		String a = Utility.stringForQuery(nome);
 		String b = Utility.stringForQuery(cognome);
 		int ris = 0;
 		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
+			conn = ds.getConnection();
 			st = (PreparedStatement) conn.prepareStatement(
 					"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
 			);
