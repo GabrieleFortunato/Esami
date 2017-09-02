@@ -1,8 +1,6 @@
 package file;
 
 import java.sql.SQLException;
-
-import javax.naming.NamingException;
 import javax.swing.JOptionPane;
 import database.Lettura;
 import eccezioni.EsitoTeoriaException;
@@ -19,15 +17,13 @@ public class StampaEsiti {
 			JOptionPane.showMessageDialog(null,"Voto progetto non valido");
 		} catch (EsitoTeoriaException e) {
 			JOptionPane.showMessageDialog(null,"Esito teoria non valido");
-		} catch (NamingException e) {
-			JOptionPane.showMessageDialog(null,"Problemi di collegamento con il database");
 		}
-
 		try {
-			PrintOnFile.daInserireTeoria(Lettura.candidatoInserireTeoria());
-		} catch (VotoException | EsitoTeoriaException | NamingException e) {
-			JOptionPane.showMessageDialog(null,"Esito teoria non valido");
-		}
+				PrintOnFile.daInserireTeoria(Lettura.candidatoInserireTeoria());
+			} catch (VotoException | EsitoTeoriaException e) {
+				JOptionPane.showMessageDialog(null,"Esito teoria non valido");
+			}
+		
 	}
 
 }
