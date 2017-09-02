@@ -25,7 +25,7 @@ public class StampaEsiti {
 
 		try {
 			PrintOnFile.daInserireTeoria(Lettura.candidatoInserireTeoria());
-		} catch (VotoException | EsitoTeoriaException e) {
+		} catch (VotoException | EsitoTeoriaException | NamingException e) {
 			JOptionPane.showMessageDialog(null,"Esito teoria non valido");
 		}
 	}

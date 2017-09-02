@@ -1,7 +1,6 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -151,17 +150,18 @@ public class Lettura {
 	 * @throws SQLException
 	 * @throws VotoException
 	 * @throws EsitoTeoriaException
+	 * @throws NamingException 
 	 */
 	public static HashSet<Candidato> candidatoInserireTeoria() 
-			throws VotoException, EsitoTeoriaException {
+			throws VotoException, EsitoTeoriaException, NamingException {
 		Set<Candidato> list = new HashSet<>();
+		context = new InitialContext();
+		ds = (DataSource) context.lookup(URL);
 		Connection conn = null;
 		PreparedStatement st = null;
 		ResultSet res = null;
 		try {
-			conn = DriverManager.getConnection(
-					URL+DBNAME,Utility.user(),Utility.pass()
-			);
+			conn = ds.getConnection();
 			st = (PreparedStatement) conn.prepareStatement(
 					"select nome,cognome from candidato "
 					+ "where id not in (select candidato from teoria)"
