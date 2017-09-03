@@ -12,6 +12,7 @@ public class Test {
 	public static void main(String[] args) throws SQLException {
 		try {
 			PrintOnFile.printOnFile(Lettura.proveCompletate());
+			PrintOnFile.daInserireTeoria(Lettura.candidatoInserireTeoria());
 		}  catch (VotoException e) {
 			Logger.getLogger("");
 		} catch (EsitoTeoriaException e) {
