@@ -18,11 +18,6 @@ public class StampaEsiti {
 		} catch (EsitoTeoriaException e) {
 			JOptionPane.showMessageDialog(null,"Esito teoria non valido");
 		}
-		try {
-				PrintOnFile.daInserireTeoria(Lettura.candidatoInserireTeoria());
-			} catch (VotoException | EsitoTeoriaException e) {
-				JOptionPane.showMessageDialog(null,"Esito teoria non valido");
-			}
 		
 	}
 
