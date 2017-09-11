@@ -214,7 +214,7 @@ public class Candidato {
 	 * @return
 	 */
 	public double esito(){
-		double esito = ((teoria()+progetto.esito())*7/12.0);
+		double esito = ((2*teoria()+progetto.esito()*7/2)/5.0);
 		return esito;
 	}
 
