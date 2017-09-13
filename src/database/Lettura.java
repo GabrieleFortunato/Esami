@@ -64,7 +64,7 @@ public class Lettura {
 			st = (PreparedStatement) conn.prepareStatement(
 					"select nome,cognome,esito,libreria,test,main from candidato "
 					+ "inner join teoria on candidato.id=teoria.candidato "
-					+ "inner join progetto on candidato.id=progetto.candidato"
+					+ "inner join progetto on candidato.id=progetto.candidato order by cognome"
 			);
 			res = st.executeQuery();
 			Progetto progetto = null;
@@ -83,7 +83,7 @@ public class Lettura {
 				flag = res.next();
 			};
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+			JOptionPane.showMessageDialog(null,"Impossibile leggere i dati");
 		} finally {
 			try {
 				res.close();

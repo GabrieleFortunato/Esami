@@ -214,8 +214,35 @@ public class Candidato {
 	 * @return
 	 */
 	public double esito(){
-		double esito = ((2*teoria()+progetto.esito()*7/2)/5.0);
+		double esito = ((2*teoria()+(16/5.0)*progetto.esito())/5.0);
 		return esito;
+	}
+
+	@Override
+	public String toString() {
+		int esito = (int) esito();
+		if (esito>30){
+			return 
+					"\n"+
+					cognome.toUpperCase()+" "+nome.toUpperCase()+
+					"\nEsito teoria: "+teoria()+
+					"\nEsito progetto: "+progetto.esito()+
+					"\nEsame superato con 30 e lode";
+		} else if (esito<18){
+			return 
+					"\n"+
+					cognome.toUpperCase()+" "+nome.toUpperCase()+
+					"\nEsito teoria: "+teoria()+
+					"\nEsito progetto: "+progetto.esito()+
+					"\nEsame non superato";
+		} else {
+			return 
+					"\n"+
+					cognome.toUpperCase()+" "+nome.toUpperCase()+
+					"\nEsito teoria: "+teoria()+
+					"\nEsito progetto: "+progetto.esito()+
+					"\nEsame superato con "+esito;
+		}
 	}
 
 }

@@ -6,7 +6,6 @@ import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.logging.Logger;
 import candidati.Candidato;
-import utility.Utility;
 
 /**
  * Classe PrintOnFile
@@ -28,52 +27,24 @@ public class PrintOnFile {
 	 * @param iterator
 	 */
 	public static void printOnFile(HashSet<Candidato> candidati){
-		PrintStream output = null;
+		PrintStream output;
 		try {
+			output = new PrintStream(
+					new File("esiti.txt"));
+			output.println("Candidati promossi".toUpperCase());
 			for (Candidato c: candidati){
-				int esito = (int)c.getProgetto().esito();
-				if (esito>=18){
-					output = new PrintStream(
-							new File(c.getCognome()+" "+c.getNome()+".txt"));
-					if (c.esito()>30){
-						output.println(
-								"Esito teoria: "+c.getEsitoTeoria()
-						);
-						output.println(
-								"Esito progetto: "+esito
-						);
-						output.println(
-								"Esame superato con 30 e lode"
-						);
-					} else if (c.esito()<18){
-						output.println(
-								"Esito teoria: "+c.getEsitoTeoria()		
-						);
-						output.println(
-								"Esito progetto: "+esito
-								);
-						output.println(
-								"Esame non superato"
-						);
-					} else {
-						output.println(
-								"Esito teoria: "+c.getEsitoTeoria()
-						);
-						output.println(
-								"Esito progetto: "+esito
-						);
-						output.println(
-								"Esame superato con "+(int)Utility.arrotonda(c.esito(),0)
-						);
-					}
-					output.flush();
-					output.close();
-				}	
+				output.println(c);
 			}
-		} catch (FileNotFoundException e) {
-			Logger.getLogger("Il file non può essere aperto");
+			output.flush();
+			output.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-	}	
+		
+		} 
+	
+
 	
 	public static void daInserireTeoria(HashSet<Candidato> candidati){
 		PrintStream output = null;
