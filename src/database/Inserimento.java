@@ -115,7 +115,7 @@ public class Inserimento {
 	 */
 	public static void inserisciEsitoProgetto(
 			String nome, String cognome, String libr, String test, String main
-			) throws SQLException, NamingException{
+			) throws SQLException{
 		Connection conn = null;
 		PreparedStatement st = null;
 		try {
@@ -135,13 +135,13 @@ public class Inserimento {
 			st.close();
 			conn.close();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+			JOptionPane.showMessageDialog(null,"Impossibile inserire l'esito del progetto");
 		} finally {
 			try {
 				st.close();
 				conn.close();
 			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+				JOptionPane.showMessageDialog(null,"Impossibile chiudere la connessione");
 			}
 		}			
 	}

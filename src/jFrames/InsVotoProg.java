@@ -2,8 +2,6 @@ package jFrames;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-
-import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -139,7 +137,7 @@ public class InsVotoProg extends JFrame {
 				String fmain = votoMain.getText();
 				try {
 					Inserimento.inserisciEsitoProgetto(nome,cognome, libr,text,fmain);
-				} catch (SQLException | NamingException e) {
+				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(
 							null, "Problemi di connessione con il database"
 					);

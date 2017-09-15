@@ -30,10 +30,11 @@ public class PrintOnFile {
 		PrintStream output;
 		try {
 			output = new PrintStream(
-					new File("esiti.txt"));
-			output.println("Candidati promossi".toUpperCase());
+					new File("Candidati promossi.txt"));
 			for (Candidato c: candidati){
-				output.println(c);
+				if (c.promosso()){
+					output.println(c);
+				}
 			}
 			output.flush();
 			output.close();

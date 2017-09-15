@@ -8,7 +8,7 @@ import eccezioni.EsitoTeoriaException;
  * @author Gabriele Fortunato
  *
  */
-public class Candidato {
+public class Candidato implements Comparable<Candidato>{
 	
 	private int idCandidato;
 	private static int idProgressivo=0;
@@ -192,7 +192,7 @@ public class Candidato {
 		int result = 1;
 		result = prime * result + idCandidato;
 		return result;
-	}
+	}	
 
 	/**
 	 * Verifica l'uguaglianza con un altro candidato in base all'id
@@ -214,11 +214,14 @@ public class Candidato {
 	 * @return
 	 */
 	public double esito(){
-		double esito = ((2*teoria()+(16/5.0)*progetto.esito())/5.0);
+		double esito = ((3*teoria()+(7/3.0)*progetto.esito())/5.0);
 		return esito;
 	}
 
 	@Override
+	/**
+	 * Restituisce le informazioni sotto forma di stringa
+	 */
 	public String toString() {
 		int esito = (int) esito();
 		if (esito>30){
@@ -243,6 +246,28 @@ public class Candidato {
 					"\nEsito progetto: "+progetto.esito()+
 					"\nEsame superato con "+esito;
 		}
+	}
+
+	@Override
+	/**
+	 * Confronta con un altro candidato in base all'esito finale
+	 */
+	public int compareTo(Candidato c) {
+		if (this.esito()<c.esito()){
+			return -1;
+		} else if (this.esito()>c.esito()){
+			return 1;
+		} else {
+			return 0;
+		}
+ 	}
+	
+	/**
+	 * Verifica che il candidato è stato promosso
+	 * @return
+	 */
+	public boolean promosso(){
+		return esito()>=18;
 	}
 
 }

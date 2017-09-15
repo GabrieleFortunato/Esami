@@ -86,11 +86,17 @@ public class Lettura {
 			JOptionPane.showMessageDialog(null,"Impossibile leggere i dati");
 		} finally {
 			try {
-				res.close();
-				st.close();
-				conn.close();
+				if (res!=null){
+					res.close();
+				}
+				if (st!=null){
+					st.close();
+				}
+				if (conn!=null){
+					conn.close();
+				}
 			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
+				JOptionPane.showMessageDialog(null,"Impossibile chiudere la connessione");
 			}
 		}
 		return (HashSet<Candidato>) list;

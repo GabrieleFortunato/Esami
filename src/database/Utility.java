@@ -1,11 +1,8 @@
 package database;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,16 +54,6 @@ public class Utility {
 	}
 	
 	public static String pass() {
-		try {
-			PrintStream output = new PrintStream(new File("pass.txt"));
-			output.println("qrnq946");
-			output.flush();
-			output.close();
-		} catch (FileNotFoundException e1) {
-			JOptionPane.showMessageDialog (
-				null , "Problemi di scritture da file pass"
-			);
-		}
 		String s = null;
 		try {
 			@SuppressWarnings("resource")
