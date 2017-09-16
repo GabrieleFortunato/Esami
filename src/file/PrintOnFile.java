@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.logging.Logger;
 import candidati.Candidato;
+import database.Cancellazione;
 
 /**
  * Classe PrintOnFile
@@ -35,6 +36,8 @@ public class PrintOnFile {
 				if (c.promosso()){
 					output.println(c);
 				}
+				Cancellazione.cancellaCandidato(c.getNome(), c.getCognome());
+				System.out.println(c.getCognome().toUpperCase()+" "+c.getNome()+" "+c.esito());
 			}
 			output.flush();
 			output.close();
@@ -44,8 +47,6 @@ public class PrintOnFile {
 		}
 		
 		} 
-	
-
 	
 	public static void daInserireTeoria(HashSet<Candidato> candidati){
 		PrintStream output = null;
