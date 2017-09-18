@@ -2,12 +2,12 @@
 BARINA ANTONELLA
 Esito teoria: 16.0
 Esito progetto: 30.0
-Esame superato con 26
+Esame superato con 25
 
 CAMARDO GIOVANNA
 Esito teoria: 20.0
 Esito progetto: 30.0
-Esame superato con 28
+Esame superato con 27
 
 D'ANDREA NICOLETTA
 Esito teoria: 26.0
@@ -22,22 +22,22 @@ Esame superato con 18
 FOSSATI MADDALENA
 Esito teoria: 20.0
 Esito progetto: 27.0
-Esame superato con 26
+Esame superato con 25
 
 FUMAGALLI DONATELLA
 Esito teoria: 28.0
 Esito progetto: 29.0
-Esame superato con 30 e lode
+Esame superato con 30
 
 LAMANNA PAOLA
 Esito teoria: 20.0
 Esito progetto: 27.0
-Esame superato con 26
+Esame superato con 25
 
 MANIERO LUCA
 Esito teoria: 20.0
 Esito progetto: 28.0
-Esame superato con 27
+Esame superato con 26
 
 PARSI MARIA RITA
 Esito teoria: 18.0
@@ -47,12 +47,12 @@ Esame superato con 18
 PEREGO LARA
 Esito teoria: 20.0
 Esito progetto: 27.0
-Esame superato con 26
+Esame superato con 25
 
 SOZZINI SERENA
 Esito teoria: 16.0
 Esito progetto: 30.0
-Esame superato con 26
+Esame superato con 25
 
 TRIVELLINI MARINA
 Esito teoria: 28.0
@@ -62,9 +62,9 @@ Esame superato con 30
 TUNESI MARIALUISA
 Esito teoria: 20.0
 Esito progetto: 30.0
-Esame superato con 28
+Esame superato con 27
 
 VENCO ELISA
 Esito teoria: 16.0
 Esito progetto: 29.0
-Esame superato con 25
+Esame superato con 24

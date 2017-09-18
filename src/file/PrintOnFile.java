@@ -6,7 +6,6 @@ import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.logging.Logger;
 import candidati.Candidato;
-import database.Cancellazione;
 
 /**
  * Classe PrintOnFile
@@ -36,17 +35,13 @@ public class PrintOnFile {
 				if (c.promosso()){
 					output.println(c);
 				}
-				Cancellazione.cancellaCandidato(c.getNome(), c.getCognome());
-				System.out.println(c.getCognome().toUpperCase()+" "+c.getNome()+" "+c.esito());
 			}
 			output.flush();
 			output.close();
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		} 
+	} 
 	
 	public static void daInserireTeoria(HashSet<Candidato> candidati){
 		PrintStream output = null;
