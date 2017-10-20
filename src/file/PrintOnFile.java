@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.logging.Logger;
 import candidati.Candidato;
+import utility.Utility;
 
 /**
  * Classe PrintOnFile
@@ -30,10 +31,20 @@ public class PrintOnFile {
 		PrintStream output;
 		try {
 			output = new PrintStream(
-					new File("Candidati promossi.txt"));
+					new File("Esiti.txt"));
 			for (Candidato c: candidati){
-				if (c.promosso()){
-					output.println(c);
+				int esito = (int)Utility.arrotonda(c.esito(), 2.0);
+				int progetto = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
+				output.println(" ");
+				output.println("\n"+c.getCognome().toUpperCase()+" "+c.getNome());
+				if (esito>=31){
+					output.println("Esito teoria: "+c.getEsitoTeoria());
+					output.println("Esito progetto: "+progetto);
+					output.println("Esito esame: 30 e lode");
+				} else {
+					output.println("Esito teoria: "+c.getEsitoTeoria());
+					output.println("Esito progetto: "+progetto);
+					output.println("Esito esame: "+esito);
 				}
 			}
 			output.flush();

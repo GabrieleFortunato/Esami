@@ -15,9 +15,7 @@ import eccezioni.VotoException;
 
 /**
  * Classe LetturaDaDatabase
- * 
  * @author Gabriele Fortunato
- *
  */
 public class Lettura {
 

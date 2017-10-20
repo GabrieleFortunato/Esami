@@ -143,9 +143,6 @@ public class InsVotoProg extends JFrame {
 					);
 				}
 				dispose();
-				new InsVotoProg().setVisible(true);
-
-				dispose();
 			}
 		});
 		

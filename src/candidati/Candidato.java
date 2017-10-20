@@ -5,9 +5,7 @@ import utility.Utility;
 
 /**
  * Classe Candidato
- * 
  * @author Gabriele Fortunato
- *
  */
 public class Candidato implements Comparable<Candidato>{
 	
@@ -183,11 +181,11 @@ public class Candidato implements Comparable<Candidato>{
 		}
 		return esito;
 	}
-	
+
+	@Override
 	/**
 	 * Genera l'hashCode
 	 */
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -229,23 +227,23 @@ public class Candidato implements Comparable<Candidato>{
 			return 
 					"\n"+
 					cognome.toUpperCase()+" "+nome.toUpperCase()+
-					"\nEsito teoria: "+teoria()+
-					"\nEsito progetto: "+progetto.esito()+
-					"\nEsame superato con 30 e lode";
+					"\n\nEsito teoria: "+teoria()+
+					"\n\nEsito progetto: "+progetto+
+					"\n\nEsame superato con 30 e lode";
 		} else if (esito<18){
 			return 
 					"\n"+
 					cognome.toUpperCase()+" "+nome.toUpperCase()+
-					"\nEsito teoria: "+teoria()+
-					"\nEsito progetto: "+progetto.esito()+
-					"\nEsame non superato";
+					"\n\nEsito teoria: "+teoria()+
+					"\n\nEsito progetto: "+progetto.esito()+
+					"\n\nEsame non superato";
 		} else {
 			return 
 					"\n"+
 					cognome.toUpperCase()+" "+nome.toUpperCase()+
-					"\nEsito teoria: "+teoria()+
-					"\nEsito progetto: "+progetto.esito()+
-					"\nEsame superato con "+esito;
+					"\n\nEsito teoria: "+teoria()+
+					"\n\nEsito progetto: "+progetto.esito()+
+					"\n\nEsame superato con "+esito;
 		}
 	}
 
