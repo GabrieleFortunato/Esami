@@ -213,7 +213,7 @@ public class Candidato implements Comparable<Candidato>{
 	 * @return
 	 */
 	public double esito(){
-		double esito = ((3*teoria()+(7/6.0)*progetto.esito())/5.0);
+		double esito = ((3*teoria()+(7/3.0)*progetto.esito())/5.0);
 		return esito;
 	}
 
