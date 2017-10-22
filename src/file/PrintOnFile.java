@@ -36,15 +36,20 @@ public class PrintOnFile {
 				int esito = (int)Utility.arrotonda(c.esito(), 2.0);
 				int progetto = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
 				output.println(" ");
-				output.println("\n"+c.getCognome().toUpperCase()+" "+c.getNome());
+				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
+				output.println(nominativo);
 				if (esito>=31){
 					output.println("Esito teoria: "+c.getEsitoTeoria());
 					output.println("Esito progetto: "+progetto);
-					output.println("Esito esame: 30 e lode");
+					output.println("Esame superato con 30 e lode");
+				} else if (esito>=18) {
+					output.println("Esito teoria: "+c.getEsitoTeoria());
+					output.println("Esito progetto: "+progetto);
+					output.println("Esame superato con "+esito);
 				} else {
 					output.println("Esito teoria: "+c.getEsitoTeoria());
 					output.println("Esito progetto: "+progetto);
-					output.println("Esito esame: "+esito);
+					output.println("Esame non superato. ");
 				}
 			}
 			output.flush();
