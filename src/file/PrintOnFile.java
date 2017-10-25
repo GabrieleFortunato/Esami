@@ -29,31 +29,42 @@ public class PrintOnFile {
 	 */
 	public static void printOnFile(HashSet<Candidato> candidati){
 		PrintStream output;
+		PrintStream output1;
 		try {
 			output = new PrintStream(
-					new File("Esiti.txt"));
+					new File("Candidati promossi.txt"));
+			output1 = new PrintStream(
+					new File("Candidati non promossi.txt"));
 			for (Candidato c: candidati){
 				int esito = (int)Utility.arrotonda(c.esito(), 2.0);
 				int progetto = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
-				output.println(" ");
-				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
-				output.println(nominativo);
-				if (esito>=31){
-					output.println("Esito teoria: "+c.getEsitoTeoria());
-					output.println("Esito progetto: "+progetto);
-					output.println("Esame superato con 30 e lode");
-				} else if (esito>=18) {
-					output.println("Esito teoria: "+c.getEsitoTeoria());
-					output.println("Esito progetto: "+progetto);
-					output.println("Esame superato con "+esito);
-				} else {
-					output.println("Esito teoria: "+c.getEsitoTeoria());
-					output.println("Esito progetto: "+progetto);
-					output.println("Esame non superato. ");
+				if (c.promosso()){
+					output.println(" ");
+					String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
+					output.println(nominativo);
+					if (esito>=31){
+						output.println("Esito teoria: "+c.getEsitoTeoria());
+						output.println("Esito progetto: "+progetto);
+						output.println("Esame superato con 30 e lode");
+					} else if (esito>=18) {
+						output.println("Esito teoria: "+c.getEsitoTeoria());
+						output.println("Esito progetto: "+progetto);
+						output.println("Esame superato con "+esito);
+					}
+				}
+				else {
+					output1.println(" ");
+					String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
+					output1.println(nominativo);
+					output1.println("Esito teoria: "+c.getEsitoTeoria());
+					output1.println("Esito progetto: "+progetto);
+					output1.println("Esame non superato. ");
 				}
 			}
 			output.flush();
 			output.close();
+			output1.flush();
+			output1.close();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
