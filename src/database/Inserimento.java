@@ -106,14 +106,14 @@ public class Inserimento {
 	}
 		
 	/**
-	 * Inserisci nel database l'esito del progetto 
+	 * Inserisci nel database l'esito del primo progetto 
 	 * svolto da un candidato
 	 * @param c
 	 * @param p
 	 * @throws NamingException 
 	 * @throws SQLException 
 	 */
-	public static void inserisciEsitoProgetto(
+	public static void inserisciEsitoPrimoProgetto(
 			String nome, String cognome, String libr, String test, String main
 			) throws SQLException{
 		Connection conn = null;
@@ -126,6 +126,47 @@ public class Inserimento {
 			st = (PreparedStatement) conn.prepareStatement(
 					"insert ignore into progetto values(?,?,?,?)"
 			);
+			st.setString(1, id);
+			st.setString(2, libr);
+			st.setString(3, test);
+			st.setString(4, main);
+			int res = st.executeUpdate();
+			Logger.getLogger(Integer.toString(res));
+			st.close();
+			conn.close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Impossibile inserire l'esito del progetto");
+		} finally {
+			try {
+				st.close();
+				conn.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null,"Impossibile chiudere la connessione");
+			}
+		}			
+	}
+	
+	/**
+	 * Inserisci nel database l'esito del secondo progetto 
+	 * svolto da un candidato
+	 * @param c
+	 * @param p
+	 * @throws NamingException 
+	 * @throws SQLException 
+	 */
+	public static void inserisciEsitoSecondoProgetto(
+			String nome, String cognome, String libr, String test, String main
+			) throws SQLException{
+		Connection conn = null;
+		PreparedStatement st = null;
+		try {
+			String id = Integer.toString(Lettura.id(nome,cognome));
+			conn = DriverManager.getConnection(
+					URL+DBNAME,Utility.user(),Utility.pass()
+			);
+			st = (PreparedStatement) conn.prepareStatement(
+					"insert ignore into progetto values(?,?,?,?)"
+					);
 			st.setString(1, id);
 			st.setString(2, libr);
 			st.setString(3, test);

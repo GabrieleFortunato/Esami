@@ -20,7 +20,7 @@ import java.sql.SQLException;
  *
  */
 @SuppressWarnings("serial")
-public class InsVotoProg extends JFrame {
+public class InsVotoPrimoProg extends JFrame {
 
 	private JTextField nomecandidato;
 	private JTextField libreria;
@@ -34,7 +34,7 @@ public class InsVotoProg extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				InsVotoProg frame = new InsVotoProg();
+				InsVotoPrimoProg frame = new InsVotoPrimoProg();
 				frame.setVisible(true);
 			}
 		});
@@ -43,7 +43,7 @@ public class InsVotoProg extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InsVotoProg() {
+	public InsVotoPrimoProg() {
 
 		final int cinque = 5;
 		final int dieci = 10;
@@ -136,7 +136,7 @@ public class InsVotoProg extends JFrame {
 				String text = test.getText();
 				String fmain = votoMain.getText();
 				try {
-					Inserimento.inserisciEsitoProgetto(nome,cognome, libr,text,fmain);
+					Inserimento.inserisciEsitoPrimoProgetto(nome,cognome, libr,text,fmain);
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(
 							null, "Problemi di connessione con il database"

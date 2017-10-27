@@ -1,7 +1,6 @@
 package candidati;
 
 import eccezioni.EsitoTeoriaException;
-import utility.Utility;
 
 /**
  * Classe Candidato
@@ -14,7 +13,8 @@ public class Candidato implements Comparable<Candidato>{
 	private String nome;
 	private String cognome;
 	private String esitoTeoria;
-	private Progetto progetto;
+	private Progetto primo;
+	private Progetto secondo;
 	
 	/**
 	 * Verifica che l'esito della teoria è corretto
@@ -65,10 +65,11 @@ public class Candidato implements Comparable<Candidato>{
 	 * @param progetto
 	 * @throws EsitoTeoriaException 
 	 */
-	public Candidato(String nome, String cognome, String esitoTeoria, Progetto progetto) 
+	public Candidato(String nome, String cognome, String esitoTeoria, Progetto primo, Progetto secondo) 
 			throws EsitoTeoriaException {
 		this(nome, cognome,esitoTeoria);
-		this.setProgetto(progetto);
+		this.setPrimo(primo);
+		this.setSecondo(secondo);
 	}
 
 	/**
@@ -144,16 +145,24 @@ public class Candidato implements Comparable<Candidato>{
 	 * Imposta il progetto svolto dal candidato
 	 * @param progetto
 	 */
-	private void setProgetto(Progetto progetto) {
-		this.progetto = progetto;
+	private void setPrimo(Progetto progetto) {
+		this.primo = progetto;
 	}
 	
 	/**
 	 * Restituisce il progetto svolto dal candidato
 	 * @return
 	 */
-	public Progetto getProgetto() {
-		return progetto;
+	public Progetto getPrimo() {
+		return primo;
+	}
+
+	public Progetto getSecondo() {
+		return secondo;
+	}
+
+	private void setSecondo(Progetto secondo) {
+		this.secondo = secondo;
 	}
 
 	/**
@@ -213,39 +222,10 @@ public class Candidato implements Comparable<Candidato>{
 	 * @return
 	 */
 	public double esito(){
-		double esito = ((3*teoria()+(7/3.0)*progetto.esito())/5.0);
+		double esito = ((2*teoria()+(7/6.0)*primo.esito()+(7/6.0)*secondo.esito())/4.0);
 		return esito;
 	}
 
-	@Override
-	/**
-	 * Restituisce le informazioni sotto forma di stringa
-	 */
-	public String toString() {
-		int esito = (int) Utility.arrotonda(esito(),2.0);
-		if (esito>30){
-			return 
-					"\n"+
-					cognome.toUpperCase()+" "+nome.toUpperCase()+
-					"\n\nEsito teoria: "+teoria()+
-					"\n\nEsito progetto: "+progetto+
-					"\n\nEsame superato con 30 e lode";
-		} else if (esito<18){
-			return 
-					"\n"+
-					cognome.toUpperCase()+" "+nome.toUpperCase()+
-					"\n\nEsito teoria: "+teoria()+
-					"\n\nEsito progetto: "+progetto.esito()+
-					"\n\nEsame non superato";
-		} else {
-			return 
-					"\n"+
-					cognome.toUpperCase()+" "+nome.toUpperCase()+
-					"\n\nEsito teoria: "+teoria()+
-					"\n\nEsito progetto: "+progetto.esito()+
-					"\n\nEsame superato con "+esito;
-		}
-	}
 
 	@Override
 	/**

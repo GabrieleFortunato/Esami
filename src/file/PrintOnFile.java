@@ -37,18 +37,21 @@ public class PrintOnFile {
 					new File("Candidati non promossi.txt"));
 			for (Candidato c: candidati){
 				int esito = (int)Utility.arrotonda(c.esito(), 2.0);
-				int progetto = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
+				int primo = (int) Utility.arrotonda(c.getPrimo().esito(),2.0);
+				int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
 				if (c.promosso()){
 					output.println(" ");
 					String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
 					output.println(nominativo);
 					if (esito>=31){
 						output.println("Esito teoria: "+c.getEsitoTeoria());
-						output.println("Esito progetto: "+progetto);
+						output.println("Esito primo progetto: "+primo);
+						output.println("Esito secondo progetto: "+secondo);
 						output.println("Esame superato con 30 e lode");
 					} else if (esito>=18) {
 						output.println("Esito teoria: "+c.getEsitoTeoria());
-						output.println("Esito progetto: "+progetto);
+						output.println("Esito primo progetto: "+primo);
+						output.println("Esito secondo progetto: "+secondo);
 						output.println("Esame superato con "+esito);
 					}
 				}
@@ -57,7 +60,8 @@ public class PrintOnFile {
 					String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
 					output1.println(nominativo);
 					output1.println("Esito teoria: "+c.getEsitoTeoria());
-					output1.println("Esito progetto: "+progetto);
+					output1.println("Esito primo progetto: "+primo);
+					output1.println("Esito secondo progetto: "+secondo);
 					output1.println("Esame non superato. ");
 				}
 			}
