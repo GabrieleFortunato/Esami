@@ -124,7 +124,7 @@ public class Inserimento {
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement(
-					"insert ignore into progetto values(?,?,?,?)"
+					"insert ignore into primoprogetto values(?,?,?,?)"
 			);
 			st.setString(1, id);
 			st.setString(2, libr);
@@ -165,7 +165,7 @@ public class Inserimento {
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement(
-					"insert ignore into progetto values(?,?,?,?)"
+					"insert ignore into secondoprogetto values(?,?,?,?)"
 					);
 			st.setString(1, id);
 			st.setString(2, libr);

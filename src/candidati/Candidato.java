@@ -237,7 +237,11 @@ public class Candidato implements Comparable<Candidato>{
 		} else if (this.esito()>c.esito()){
 			return 1;
 		} else {
-			return 0;
+			if (this.nome!=c.getNome()) {
+				return this.nome.compareTo(c.getNome());
+			} else {
+				return this.nome.compareTo(c.getNome());
+			}
 		}
  	}
 	

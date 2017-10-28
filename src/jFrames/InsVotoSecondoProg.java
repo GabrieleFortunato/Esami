@@ -136,7 +136,7 @@ public class InsVotoSecondoProg extends JFrame {
 				String text = test.getText();
 				String fmain = votoMain.getText();
 				try {
-					Inserimento.inserisciEsitoPrimoProgetto(nome,cognome, libr,text,fmain);
+					Inserimento.inserisciEsitoSecondoProgetto(nome,cognome, libr,text,fmain);
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(
 							null, "Problemi di connessione con il database"
