@@ -118,17 +118,12 @@ public class Lettura {
 		Connection conn = null;
 		PreparedStatement st = null;
 		ResultSet res = null;
-		String a = Utility.stringForQuery(nome);
-		String b = Utility.stringForQuery(cognome);
 		int ris = 0;
-		String sql = "select id from candidato where (nome='"+a+"' and cognome='"+b+"')";
 		try {
 			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
-			st = (PreparedStatement) conn.prepareStatement(
-					sql
-			);
+			st = (PreparedStatement) conn.createStatement();
 			res = st.executeQuery();
 			boolean flag = res.next();
 			while (flag) {
