@@ -64,7 +64,8 @@ public class Lettura {
 					+ "secondoprogetto.libreria as libr,secondoprogetto.test as text,secondoprogetto.main "
 					+ "as prmain from candidato inner join teoria on candidato.id=teoria.candidato "
 					+ "inner join primoprogetto on candidato.id=primoprogetto.candidato "
-					+ "inner join secondoprogetto on candidato.id=secondoprogetto.candidato"
+					+ "inner join secondoprogetto on candidato.id=secondoprogetto.candidato "
+					+ "order by cognome,nome"
 			);
 			res = st.executeQuery();
 			Progetto primo = null;

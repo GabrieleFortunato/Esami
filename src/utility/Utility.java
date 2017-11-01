@@ -33,7 +33,7 @@ public class Utility {
 	 * @return
 	 */
 	public static double arrotonda(double a, double b){
-		return Math.ceil(a*Math.pow(DIECI, b))/Math.pow(DIECI, b);
+		return Math.floor(a*Math.pow(DIECI, b))/Math.pow(DIECI, b);
 	}
 	
 }

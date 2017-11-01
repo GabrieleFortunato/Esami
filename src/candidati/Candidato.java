@@ -1,6 +1,7 @@
 package candidati;
 
 import eccezioni.EsitoTeoriaException;
+import utility.Utility;
 
 /**
  * Classe Candidato
@@ -221,9 +222,9 @@ public class Candidato implements Comparable<Candidato>{
 	 * Restituisce l'esito finale del candidato
 	 * @return
 	 */
-	public double esito(){
-		double esito = ((2*teoria()+(7/6.0)*primo.esito()+(7/6.0)*secondo.esito())/4.0);
-		return esito;
+	public int esito(){
+		double esito = ((2*teoria()+(7/4.0)*primo.esito()+(7/4.0)*secondo.esito())/5.0);
+		return (int) Utility.arrotonda(esito, 0);
 	}
 
 

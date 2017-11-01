@@ -30,10 +30,9 @@ public class PrintOnFile {
 			PrintStream output = new PrintStream(
 					new File("Candidati promossi.txt"));
 			for (Candidato c:candidati) {
-				int esito = (int)Utility.arrotonda(c.esito(), 2.0);
+				int esito = c.esito();
 				int primo = (int) Utility.arrotonda(c.getPrimo().esito(),2.0);
 				int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
-				output.println(" ");
 				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
 				output.println(nominativo);
 				if (esito>=31){
@@ -63,14 +62,11 @@ public class PrintOnFile {
 			for (Candidato c:candidati) {
 				int primo = (int) Utility.arrotonda(c.getPrimo().esito(),2.0);
 				int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
-				output.println(" ");
 				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
 				output.println(nominativo);
 				output.println("Esito teoria: "+c.getEsitoTeoria());
 				output.println("Esito primo progetto: "+primo);
 				output.println("Esito secondo progetto: "+secondo);
-				output.println("Esame non superato. ");
-				
 			}
 			output.flush();
 			output.close();
@@ -87,10 +83,18 @@ public class PrintOnFile {
 		ArrayList<Candidato> nonPromossi = new ArrayList<>();
 		TreeSet<Candidato> promossi = new TreeSet<>();
 		for (Candidato c:candidati) {
-			if (c.promosso()) {
-				promossi.add(c);
-			} else {
-				nonPromossi.add(c);
+			try {
+				Thread.sleep(100);
+				System.out.print(c.getCognome().toUpperCase()+" "+c.getNome());
+				if (c.promosso()) {
+					System.out.println("--->Esame superato");
+					promossi.add(c);
+				} else {
+					System.out.println("--->Esame non superato");
+					nonPromossi.add(c);
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 		if (!promossi.isEmpty()) {
