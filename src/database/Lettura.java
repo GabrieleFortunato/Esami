@@ -121,12 +121,13 @@ public class Lettura {
 		String a = Utility.stringForQuery(nome);
 		String b = Utility.stringForQuery(cognome);
 		int ris = 0;
+		String sql = "select id from candidato where (nome='"+a+"' and cognome='"+b+"')";
 		try {
 			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement(
-					"select id from candidato where (nome='"+a+"' and cognome='"+b+"')"
+					sql
 			);
 			res = st.executeQuery();
 			boolean flag = res.next();
