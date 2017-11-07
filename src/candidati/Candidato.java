@@ -202,11 +202,11 @@ public class Candidato implements Comparable<Candidato>{
 		result = prime * result + idCandidato;
 		return result;
 	}	
-
+	
+	@Override
 	/**
 	 * Verifica l'uguaglianza con un altro candidato in base all'id
 	 */
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -223,7 +223,7 @@ public class Candidato implements Comparable<Candidato>{
 	 * @return
 	 */
 	public int esito(){
-		double esito = ((2*teoria()+(7/4.0)*primo.esito()+(7/4.0)*secondo.esito())/5.0);
+		double esito = ((teoria()+(7/12.0)*primo.esito()+(7/12.0)*secondo.esito())/.0);
 		return (int) Utility.arrotonda(esito, 0);
 	}
 
@@ -238,8 +238,8 @@ public class Candidato implements Comparable<Candidato>{
 		} else if (this.esito()>c.esito()){
 			return 1;
 		} else {
-			if (this.nome!=c.getNome()) {
-				return this.nome.compareTo(c.getNome());
+			if (this.cognome!=c.getCognome()) {
+				return this.cognome.compareTo(c.getCognome());
 			} else {
 				return this.nome.compareTo(c.getNome());
 			}

@@ -5,7 +5,6 @@ import utility.Utility;
 
 /**
  * Classe Progetto
- * 
  * @author Gabriele Fortunato
  *
  */
