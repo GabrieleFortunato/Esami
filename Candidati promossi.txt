@@ -1,9 +1,18 @@
 
+
+D'ANDREA Nicoletta
+Esito teoria: più che buono
+Esito primo progetto: 10
+Esito secondo progetto: 10
+Esame superato con 18
+
+
 EREDE Sergio
 Esito teoria: sufficiente
 Esito primo progetto: 16
 Esito secondo progetto: 16
 Esame superato con 18
+
 
 PARSI Maria Rita
 Esito teoria: sufficiente
@@ -11,74 +20,79 @@ Esito primo progetto: 16
 Esito secondo progetto: 16
 Esame superato con 18
 
-D'ANDREA Nicoletta
-Esito teoria: più che buono
-Esito primo progetto: 10
-Esito secondo progetto: 10
-Esame superato con 20
-
-BARINA Antonella
-Esito teoria: quasi sufficiente
-Esito primo progetto: 30
-Esito secondo progetto: 30
-Esame superato con 23
-
-SOZZINI Serena
-Esito teoria: quasi sufficiente
-Esito primo progetto: 30
-Esito secondo progetto: 30
-Esame superato con 23
 
 VENCO Elisa
 Esito teoria: quasi sufficiente
 Esito primo progetto: 29
 Esito secondo progetto: 29
-Esame superato con 23
+Esame superato con 24
+
+
+BARINA Antonella
+Esito teoria: quasi sufficiente
+Esito primo progetto: 30
+Esito secondo progetto: 30
+Esame superato con 25
+
 
 FOSSATI Maddalena
 Esito teoria: più che sufficiente
 Esito primo progetto: 27
 Esito secondo progetto: 27
-Esame superato con 24
+Esame superato con 25
+
 
 LAMANNA Paola
 Esito teoria: più che sufficiente
 Esito primo progetto: 27
 Esito secondo progetto: 27
-Esame superato con 24
+Esame superato con 25
+
 
 PEREGO Lara
 Esito teoria: più che sufficiente
 Esito primo progetto: 27
 Esito secondo progetto: 27
-Esame superato con 24
+Esame superato con 25
+
+
+SOZZINI Serena
+Esito teoria: quasi sufficiente
+Esito primo progetto: 30
+Esito secondo progetto: 30
+Esame superato con 25
+
 
 MANIERO Luca
 Esito teoria: più che sufficiente
 Esito primo progetto: 28
 Esito secondo progetto: 28
-Esame superato con 25
+Esame superato con 26
+
 
 CAMARDO Giovanna
 Esito teoria: più che sufficiente
 Esito primo progetto: 30
 Esito secondo progetto: 30
-Esame superato con 26
+Esame superato con 27
+
 
 TUNESI Marialuisa
 Esito teoria: più che sufficiente
 Esito primo progetto: 30
 Esito secondo progetto: 30
-Esame superato con 26
+Esame superato con 27
 
-TRIVELLINI Marina
-Esito teoria: quasi ottimo
-Esito primo progetto: 28
-Esito secondo progetto: 28
-Esame superato con 29
 
 FUMAGALLI Donatella
 Esito teoria: quasi ottimo
 Esito primo progetto: 29
 Esito secondo progetto: 29
+Esame superato con 30
+
+
+TRIVELLINI Marina
+Esito teoria: quasi ottimo
+Esito primo progetto: 28
+Esito secondo progetto: 28
 Esame superato con 30

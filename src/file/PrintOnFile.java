@@ -34,6 +34,7 @@ public class PrintOnFile {
 				int primo = (int) Utility.arrotonda(c.getPrimo().esito(),2.0);
 				int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
 				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
+				output.println("");
 				output.println(nominativo);
 				if (esito>=31){
 					output.println("Esito teoria: "+c.getEsitoTeoria());
@@ -63,6 +64,7 @@ public class PrintOnFile {
 				int primo = (int) Utility.arrotonda(c.getPrimo().esito(),2.0);
 				int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
 				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
+				output.println("");
 				output.println(nominativo);
 				output.println("Esito teoria: "+c.getEsitoTeoria());
 				output.println("Esito primo progetto: "+primo);
