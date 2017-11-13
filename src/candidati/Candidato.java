@@ -162,6 +162,10 @@ public class Candidato implements Comparable<Candidato>{
 		return secondo;
 	}
 
+	/**
+	 * Imposta il secondo progetto
+	 * @param secondo
+	 */
 	private void setSecondo(Progetto secondo) {
 		this.secondo = secondo;
 	}
@@ -226,7 +230,6 @@ public class Candidato implements Comparable<Candidato>{
 		double esito = (teoria()+(7/12.0)*primo.esito()+(7/12.0)*secondo.esito())/2.0;
 		return (int) Utility.arrotonda(esito,0);
 	}
-
 
 	@Override
 	/**
