@@ -14,8 +14,7 @@ public class Candidato implements Comparable<Candidato>{
 	private String nome;
 	private String cognome;
 	private String esitoTeoria;
-	private Progetto primo;
-	private Progetto secondo;
+	private Progetto progetto;
 	
 	/**
 	 * Verifica che l'esito della teoria è corretto
@@ -66,11 +65,10 @@ public class Candidato implements Comparable<Candidato>{
 	 * @param progetto
 	 * @throws EsitoTeoriaException 
 	 */
-	public Candidato(String nome, String cognome, String esitoTeoria, Progetto primo, Progetto secondo) 
+	public Candidato(String nome, String cognome, String esitoTeoria, Progetto primo) 
 			throws EsitoTeoriaException {
 		this(nome, cognome,esitoTeoria);
 		this.setPrimo(primo);
-		this.setSecondo(secondo);
 	}
 
 	/**
@@ -147,27 +145,15 @@ public class Candidato implements Comparable<Candidato>{
 	 * @param progetto
 	 */
 	private void setPrimo(Progetto progetto) {
-		this.primo = progetto;
+		this.progetto = progetto;
 	}
 	
 	/**
 	 * Restituisce il progetto svolto dal candidato
 	 * @return
 	 */
-	public Progetto getPrimo() {
-		return primo;
-	}
-
-	public Progetto getSecondo() {
-		return secondo;
-	}
-
-	/**
-	 * Imposta il secondo progetto
-	 * @param secondo
-	 */
-	private void setSecondo(Progetto secondo) {
-		this.secondo = secondo;
+	public Progetto getProgetto() {
+		return progetto;
 	}
 
 	/**
@@ -227,7 +213,7 @@ public class Candidato implements Comparable<Candidato>{
 	 * @return
 	 */
 	public int esito(){
-		double esito = (teoria()+(7/12.0)*primo.esito()+(7/12.0)*secondo.esito())/2.0;
+		double esito = (teoria()+(7/6.0)*progetto.esito())/2.0;
 		return (int) Utility.arrotonda(esito,0);
 	}
 

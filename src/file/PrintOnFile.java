@@ -31,23 +31,19 @@ public class PrintOnFile {
 					new File("Candidati promossi.txt"));
 			for (Candidato c:candidati) {
 				int esito = c.esito();
-				int primo = (int) Utility.arrotonda(c.getPrimo().esito(),2.0);
-				int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
+				int primo = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
 				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
 				output.println("");
 				output.println(nominativo);
 				if (esito>=31){
 					output.println("Esito teoria: "+c.getEsitoTeoria());
-					output.println("Esito primo progetto: "+primo);
-					output.println("Esito secondo progetto: "+secondo);
+					output.println("Esito progetto: "+primo);
 					output.println("Esame superato con 30 e lode");
 				} else {
 					output.println("Esito teoria: "+c.getEsitoTeoria());
-					output.println("Esito primo progetto: "+primo);
-					output.println("Esito secondo progetto: "+secondo);
+					output.println("Esito primo progetto: "+primo);					
 					output.println("Esame superato con "+esito);
 				}
-					
 			}
 			output.flush();
 			output.close();
@@ -61,14 +57,12 @@ public class PrintOnFile {
 			PrintStream  output = new PrintStream(
 					new File("Candidati non promossi.txt"));
 			for (Candidato c:candidati) {
-				int primo = (int) Utility.arrotonda(c.getPrimo().esito(),2.0);
-				int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
+				int primo = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
 				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
 				output.println("");
 				output.println(nominativo);
 				output.println("Esito teoria: "+c.getEsitoTeoria());
 				output.println("Esito primo progetto: "+primo);
-				output.println("Esito secondo progetto: "+secondo);
 			}
 			output.flush();
 			output.close();

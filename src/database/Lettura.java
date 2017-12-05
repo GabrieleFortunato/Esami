@@ -60,16 +60,12 @@ public class Lettura {
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement( 
-					"select nome,cognome,esito,primoprogetto.libreria,primoprogetto.test,primoprogetto.main,"
-					+ "secondoprogetto.libreria as libr,secondoprogetto.test as text,secondoprogetto.main "
-					+ "as prmain from candidato inner join teoria on candidato.id=teoria.candidato "
-					+ "inner join primoprogetto on candidato.id=primoprogetto.candidato "
-					+ "inner join secondoprogetto on candidato.id=secondoprogetto.candidato "
-					+ "order by cognome,nome"
+					"select nome,cognome,esito,libreria,test,main from candidato "
+					+ "inner join teoria on candidato.id=teoria.candidato "
+					+ "inner join progetto on candidato.id=progetto.candidato;"
 			);
 			res = st.executeQuery();
-			Progetto primo = null;
-			Progetto secondo = null;
+			Progetto progetto = null;
 			Candidato candidato = null;
 			boolean flag = res.next();
 			while (flag) {
@@ -79,12 +75,8 @@ public class Lettura {
 				int libreria = res.getInt("libreria");
 				int test = res.getInt("test");
 				int fmain = res.getInt("main");
-				primo = new Progetto(libreria,test,fmain);
-				int libr = res.getInt("libr");
-				int text = res.getInt("text");
-				int fmain1 = res.getInt("prmain");
-				secondo = new Progetto(libr,text,fmain1);
-				candidato = new Candidato(nome,cognome,teoria,primo,secondo);
+				progetto = new Progetto(libreria,test,fmain);
+				candidato = new Candidato(nome,cognome,teoria,progetto);
 				list.add(candidato);
 				flag = res.next();
 			};
