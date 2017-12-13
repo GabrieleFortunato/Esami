@@ -1,84 +1,78 @@
 
 
-D'ANDREA Nicoletta
-Esito teoria: più che buono
-Esito primo progetto: 10
-Esame superato con 18
-
-
 EREDE Sergio
 Esito teoria: sufficiente
-Esito primo progetto: 16
+Esito progetto: 16
 Esame superato con 18
 
 
 PARSI Maria Rita
 Esito teoria: sufficiente
-Esito primo progetto: 16
+Esito progetto: 16
 Esame superato con 18
-
-
-VENCO Elisa
-Esito teoria: quasi sufficiente
-Esito primo progetto: 29
-Esame superato con 24
-
-
-BARINA Antonella
-Esito teoria: quasi sufficiente
-Esito primo progetto: 30
-Esame superato con 25
 
 
 FOSSATI Maddalena
 Esito teoria: più che sufficiente
-Esito primo progetto: 27
-Esame superato con 25
+Esito progetto: 27
+Esame superato con 26
 
 
 LAMANNA Paola
 Esito teoria: più che sufficiente
-Esito primo progetto: 27
-Esame superato con 25
+Esito progetto: 27
+Esame superato con 26
 
 
 PEREGO Lara
 Esito teoria: più che sufficiente
-Esito primo progetto: 27
-Esame superato con 25
+Esito progetto: 27
+Esame superato con 26
 
 
-SOZZINI Serena
+VENCO Elisa
 Esito teoria: quasi sufficiente
-Esito primo progetto: 30
-Esame superato con 25
+Esito progetto: 29
+Esame superato con 26
+
+
+BARINA Antonella
+Esito teoria: quasi sufficiente
+Esito progetto: 30
+Esame superato con 27
 
 
 MANIERO Luca
 Esito teoria: più che sufficiente
-Esito primo progetto: 28
-Esame superato con 26
+Esito progetto: 28
+Esame superato con 27
+
+
+SOZZINI Serena
+Esito teoria: quasi sufficiente
+Esito progetto: 30
+Esame superato con 27
 
 
 CAMARDO Giovanna
 Esito teoria: più che sufficiente
-Esito primo progetto: 30
-Esame superato con 27
+Esito progetto: 30
+Esame superato con 29
 
 
 TUNESI Marialuisa
 Esito teoria: più che sufficiente
-Esito primo progetto: 30
-Esame superato con 27
-
-
-FUMAGALLI Donatella
-Esito teoria: quasi ottimo
-Esito primo progetto: 29
-Esame superato con 30
+Esito progetto: 30
+Esame superato con 29
 
 
 TRIVELLINI Marina
 Esito teoria: quasi ottimo
-Esito primo progetto: 28
+Esito progetto: 28
 Esame superato con 30
+
+
+FUMAGALLI Donatella
+Esito teoria: quasi ottimo
+Esito progetto: 29
+Esame superato con 30 e lode

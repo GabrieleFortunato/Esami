@@ -41,7 +41,7 @@ public class PrintOnFile {
 					output.println("Esame superato con 30 e lode");
 				} else {
 					output.println("Esito teoria: "+c.getEsitoTeoria());
-					output.println("Esito primo progetto: "+primo);					
+					output.println("Esito progetto: "+primo);					
 					output.println("Esame superato con "+esito);
 				}
 			}
