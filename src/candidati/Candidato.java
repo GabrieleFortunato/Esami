@@ -14,7 +14,8 @@ public class Candidato implements Comparable<Candidato>{
 	private String nome;
 	private String cognome;
 	private String esitoTeoria;
-	private Progetto progetto;
+	private Progetto primo;
+	private Progetto secondo;
 	
 	/**
 	 * Verifica che l'esito della teoria è corretto
@@ -65,10 +66,11 @@ public class Candidato implements Comparable<Candidato>{
 	 * @param progetto
 	 * @throws EsitoTeoriaException 
 	 */
-	public Candidato(String nome, String cognome, String esitoTeoria, Progetto primo) 
+	public Candidato(String nome, String cognome, String esitoTeoria, Progetto primo, Progetto secondo) 
 			throws EsitoTeoriaException {
 		this(nome, cognome,esitoTeoria);
 		this.setPrimo(primo);
+		this.setSecondo(secondo);
 	}
 
 	/**
@@ -141,21 +143,37 @@ public class Candidato implements Comparable<Candidato>{
 	}
 
 	/**
-	 * Imposta il progetto svolto dal candidato
+	 * Imposta il primo progetto svolto dal candidato
 	 * @param progetto
 	 */
-	private void setPrimo(Progetto progetto) {
-		this.progetto = progetto;
+	private void setPrimo(Progetto primo) {
+		this.primo = primo;
 	}
 	
 	/**
-	 * Restituisce il progetto svolto dal candidato
+	 * Restituisce il primo progetto svolto dal candidato
 	 * @return
 	 */
-	public Progetto getProgetto() {
-		return progetto;
+	public Progetto getPrimoProgetto() {
+		return primo;
 	}
 
+	/**
+	 * Imposta il secondo progetto svolto dal candidato
+	 * @param progetto
+	 */
+	public Progetto getSecondo() {
+		return secondo;
+	}
+
+	/**
+	 * Restituisce il secondo progetto svolto dal candidato
+	 * @return
+	 */
+	public void setSecondo(Progetto secondo) {
+		this.secondo = secondo;
+	}
+	
 	/**
 	 * Restituisce il voto in numero della prova teorica
 	 * @return
@@ -213,7 +231,7 @@ public class Candidato implements Comparable<Candidato>{
 	 * @return
 	 */
 	public int esito(){
-		double esito = (2*teoria()+(7/2.0)*progetto.esito())/5.0;
+		double esito = teoria()*19/30.0+primo.esito()*7/30.0+secondo.esito()*7/30.0;
 		return (int) Utility.arrotonda(esito,0);
 	}
 

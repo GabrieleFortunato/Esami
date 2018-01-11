@@ -6,7 +6,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeSet;
-import java.util.logging.Logger;
 import candidati.Candidato;
 import utility.Utility;
 
@@ -25,51 +24,65 @@ public class PrintOnFile {
 		
 	}
 	
-	private static void stampaPromossi(TreeSet<Candidato> candidati) {
+	private static void stampaCandidatoPromosso(Candidato c) {
+		PrintStream output;
 		try {
-			PrintStream output = new PrintStream(
-					new File("Candidati promossi.txt"));
-			for (Candidato c:candidati) {
-				int esito = c.esito();
-				int primo = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
-				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
-				output.println("");
-				output.println(nominativo);
-				if (esito>=31){
-					output.println("Esito teoria: "+c.getEsitoTeoria());
-					output.println("Esito progetto: "+primo);
-					output.println("Esame superato con 30 e lode");
-				} else {
-					output.println("Esito teoria: "+c.getEsitoTeoria());
-					output.println("Esito progetto: "+primo);					
-					output.println("Esame superato con "+esito);
-				}
+			String nominativo = c.getCognome().toUpperCase()+" "+c.getNome();
+			output = new PrintStream(new File("Candidati promossi\\"+nominativo+".txt"));
+			int esito = c.esito();
+			int primo = (int) Utility.arrotonda(c.getPrimoProgetto().esito(),2.0);
+			int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
+			if (esito>=31){
+				output.println("Esito teoria: "+c.getEsitoTeoria());
+				output.println("Esito primo progetto: "+primo);
+				output.println("Esito secondo progetto: "+secondo);
+				output.println("Esame superato con 30 e lode");
+			} else {
+				output.println("Esito teoria: "+c.getEsitoTeoria());
+				output.println("Esito primo progetto: "+primo);
+				output.println("Esito secondo progetto: "+secondo);		
+				output.println("Esame superato con "+esito);
 			}
-			output.flush();
-			output.close();
+		output.flush();
+		output.close();
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+	}
+	
+	private static void stampaPromossi(TreeSet<Candidato> candidati) {
+			for (Candidato c:candidati) {
+				stampaCandidatoPromosso(c);
 		}
 	}
 
-	private static void stampaNonPromossi(ArrayList<Candidato> candidati) {
+	private static void stampaCandidatoNonPromosso(Candidato c) {
+		int primo = (int) Utility.arrotonda(c.getPrimoProgetto().esito(),2.0);
+		int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
+		PrintStream output;
 		try {
-			PrintStream  output = new PrintStream(
-					new File("Candidati non promossi.txt"));
-			for (Candidato c:candidati) {
-				int primo = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
-				String nominativo = "\n"+c.getCognome().toUpperCase()+" "+c.getNome();
-				output.println("");
-				output.println(nominativo);
-				output.println("Esito teoria: "+c.getEsitoTeoria());
-				output.println("Esito primo progetto: "+primo);
-			}
+			String nominativo = c.getCognome().toUpperCase()+" "+c.getNome();
+			output = new PrintStream(new File("Candidati non promossi\\"+nominativo+".txt"));
+			output.println("Esito teoria: "+c.getEsitoTeoria());
+			output.println("Esito primo progetto: "+primo);
+			output.println("Esito secondo progetto: "+secondo);
 			output.flush();
-			output.close();
-		} catch (FileNotFoundException e) {
+			output.close();		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+
 	}
+	
+	private static void stampaNonPromossi(ArrayList<Candidato> candidati) {
+			for (Candidato c:candidati) {
+				stampaCandidatoNonPromosso(c);		
+			}
+		} 
+	
 	
 	/**
 	 * Stampa su files gli esiti finali dei candidati
@@ -79,8 +92,6 @@ public class PrintOnFile {
 		ArrayList<Candidato> nonPromossi = new ArrayList<>();
 		TreeSet<Candidato> promossi = new TreeSet<>();
 		for (Candidato c:candidati) {
-			try {
-				Thread.sleep(100);
 				System.out.print(c.getCognome().toUpperCase()+" "+c.getNome());
 				if (c.promosso()) {
 					System.out.println("--->Esame superato");
@@ -89,42 +100,17 @@ public class PrintOnFile {
 					System.out.println("--->Esame non superato");
 					nonPromossi.add(c);
 				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 		if (!promossi.isEmpty()) {
+			File pr = new File("Candidati promossi");
+			pr.mkdir();
 			stampaPromossi(promossi);
 		}
 		if (!nonPromossi.isEmpty()) {
+			File nopr = new File("Candidati non promossi");
+			nopr.mkdir();
 			stampaNonPromossi(nonPromossi);
-		}
+		} 
 	} 
-	
-	public static void daInserireTeoria(HashSet<Candidato> candidati){
-		PrintStream output = null;
-		if (candidati.size()>0){
-			try {
-				output=new PrintStream(new File("Inserire teoria.txt"));
-				output.println("\nCANDIDATI DI CUI INSERIRE L'ESITO DELLA TEORIA\n");
-				for (Candidato c: candidati){
-					output.println(c.getCognome()+" "+c.getNome());
-				}
-			} catch (FileNotFoundException e) {
-				Logger.getLogger("Il file non può essere aperto");
-			} 
-		} else {
-			try {
-				output=new PrintStream(new File("Inserire teoria.txt"));
-				output.println("Non ci sono candidati di cui inserire l'esito della prate teorica");
-			} catch (FileNotFoundException e) {
-				Logger.getLogger("Il file non può essere aperto");
-			}
-		}
-		if (output!=null){
-			output.flush();
-			output.close();
-		}
-	}
 	
 }
