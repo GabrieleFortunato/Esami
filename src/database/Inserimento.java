@@ -83,6 +83,7 @@ public class Inserimento {
 		PreparedStatement st = null;
 		try {
 			String id = Integer.toString(Lettura.id(nome, cognome));
+			System.out.println(nome+" "+cognome+" "+teoria);
 			conn = DriverManager.getConnection(
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);

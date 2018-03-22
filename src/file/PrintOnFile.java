@@ -30,23 +30,19 @@ public class PrintOnFile {
 			String nominativo = c.getCognome().toUpperCase()+" "+c.getNome();
 			output = new PrintStream(new File("Candidati promossi\\"+nominativo+".txt"));
 			int esito = c.esito();
-			int primo = (int) Utility.arrotonda(c.getPrimoProgetto().esito(),2.0);
-			int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
+			int progetto = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
 			if (esito>=31){
 				output.println("Esito teoria: "+c.getEsitoTeoria());
-				output.println("Esito primo progetto: "+primo);
-				output.println("Esito secondo progetto: "+secondo);
+				output.println("Esito progetto: "+progetto);
 				output.println("Esame superato con 30 e lode");
 			} else {
 				output.println("Esito teoria: "+c.getEsitoTeoria());
-				output.println("Esito primo progetto: "+primo);
-				output.println("Esito secondo progetto: "+secondo);		
+				output.println("Esito progetto: "+progetto);		
 				output.println("Esame superato con "+esito);
 			}
 		output.flush();
 		output.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -59,22 +55,17 @@ public class PrintOnFile {
 	}
 
 	private static void stampaCandidatoNonPromosso(Candidato c) {
-		int primo = (int) Utility.arrotonda(c.getPrimoProgetto().esito(),2.0);
-		int secondo = (int) Utility.arrotonda(c.getSecondo().esito(),2.0);
+		int progetto = (int) Utility.arrotonda(c.getProgetto().esito(),2.0);
 		PrintStream output;
 		try {
 			String nominativo = c.getCognome().toUpperCase()+" "+c.getNome();
 			output = new PrintStream(new File("Candidati non promossi\\"+nominativo+".txt"));
 			output.println("Esito teoria: "+c.getEsitoTeoria());
-			output.println("Esito primo progetto: "+primo);
-			output.println("Esito secondo progetto: "+secondo);
+			output.println("Esito progetto: "+progetto);
 			output.flush();
 			output.close();		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
 	}
 	
 	private static void stampaNonPromossi(ArrayList<Candidato> candidati) {

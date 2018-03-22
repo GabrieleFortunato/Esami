@@ -14,8 +14,7 @@ public class Candidato implements Comparable<Candidato>{
 	private String nome;
 	private String cognome;
 	private String esitoTeoria;
-	private Progetto primo;
-	private Progetto secondo;
+	private Progetto progetto;
 	
 	/**
 	 * Verifica che l'esito della teoria è corretto
@@ -66,11 +65,10 @@ public class Candidato implements Comparable<Candidato>{
 	 * @param progetto
 	 * @throws EsitoTeoriaException 
 	 */
-	public Candidato(String nome, String cognome, String esitoTeoria, Progetto primo, Progetto secondo) 
+	public Candidato(String nome, String cognome, String esitoTeoria, Progetto progetto) 
 			throws EsitoTeoriaException {
 		this(nome, cognome,esitoTeoria);
-		this.setPrimo(primo);
-		this.setSecondo(secondo);
+		this.setProgetto(progetto);
 	}
 
 	/**
@@ -146,34 +144,18 @@ public class Candidato implements Comparable<Candidato>{
 	 * Imposta il primo progetto svolto dal candidato
 	 * @param progetto
 	 */
-	private void setPrimo(Progetto primo) {
-		this.primo = primo;
+	private void setProgetto(Progetto progetto) {
+		this.progetto = progetto;
 	}
 	
 	/**
 	 * Restituisce il primo progetto svolto dal candidato
 	 * @return
 	 */
-	public Progetto getPrimoProgetto() {
-		return primo;
+	public Progetto getProgetto() {
+		return progetto;
 	}
 
-	/**
-	 * Imposta il secondo progetto svolto dal candidato
-	 * @param progetto
-	 */
-	public Progetto getSecondo() {
-		return secondo;
-	}
-
-	/**
-	 * Restituisce il secondo progetto svolto dal candidato
-	 * @return
-	 */
-	public void setSecondo(Progetto secondo) {
-		this.secondo = secondo;
-	}
-	
 	/**
 	 * Restituisce il voto in numero della prova teorica
 	 * @return
@@ -231,7 +213,7 @@ public class Candidato implements Comparable<Candidato>{
 	 * @return
 	 */
 	public int esito(){
-		double esito = teoria()*19/30.0+primo.esito()*7/30.0+secondo.esito()*7/30.0;
+		double esito = (teoria()+progetto.esito()*7/6.0)/2.0;
 		return (int) Utility.arrotonda(esito,0);
 	}
 
@@ -258,7 +240,7 @@ public class Candidato implements Comparable<Candidato>{
 	 * @return
 	 */
 	public boolean promosso(){
-		return esito()>=18;
+		return (esito()>=18&&progetto.esito()>=16&&teoria()>=16);
 	}
 
 }

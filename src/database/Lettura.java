@@ -60,31 +60,23 @@ public class Lettura {
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.prepareStatement( 
-				"select cognome,nome,esito,primoprogetto.libreria as libr1,primoprogetto.test as test1,"
-				+ "secondoprogetto.main as main1, secondoprogetto.libreria as libr2,"
-				+ "secondoprogetto.test as test2,primoprogetto.main as main2 from candidato " 
-				+ "inner join teoria on candidato.id=teoria.candidato "
-				+ "inner join primoprogetto on candidato.id=primoprogetto.candidato " 
-				+ "inner join secondoprogetto on candidato.id=secondoprogetto.candidato order by cognome,nome" 
+					"select nome,cognome,esito,libreria,test,main from candidato " + 
+					"inner join teoria on candidato.id=teoria.candidato " + 
+					"inner join progetto on candidato.id=progetto.candidato" 
 			);
 			res = st.executeQuery();
-			Progetto primo = null;
-			Progetto secondo = null;
+			Progetto progetto = null;
 			Candidato candidato = null;
 			boolean flag = res.next();
 			while (flag) {
 				String nome = res.getString("nome");
 				String cognome = res.getString("cognome");
 				String teoria = res.getString("esito");
-				int libreria = res.getInt("libr1");
-				int test = res.getInt("test1");
-				int fmain = res.getInt("main1");
-				libreria = res.getInt("libr1");
-				test = res.getInt("test1");
-				fmain = res.getInt("main1");
-				primo = new Progetto(libreria,test,fmain);
-				secondo = new Progetto(libreria,test,fmain);
-				candidato = new Candidato(nome,cognome,teoria,primo,secondo);
+				int libreria = res.getInt("libreria");
+				int test = res.getInt("test");
+				int fmain = res.getInt("main");
+				progetto = new Progetto(libreria,test,fmain);
+				candidato = new Candidato(nome,cognome,teoria,progetto);
 				list.add(candidato);
 				flag = res.next();
 			};
@@ -124,23 +116,21 @@ public class Lettura {
 					URL+DBNAME,Utility.user(),Utility.pass()
 			);
 			st = (PreparedStatement) conn.createStatement();
-			res = st.executeQuery();
+			String query = "select id from candidato where (nome="+nome+" and cognome="+cognome+")";
+			res = st.executeQuery(query);
 			boolean flag = res.next();
 			while (flag) {
 				ris = res.getInt("id");
 				flag = res.next();
 			}
+			res.close();
+			st.close();
+			conn.close();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
-		} finally {
-			try {
-				res.close();
-				st.close();
-				conn.close();
-			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(null,"Impossibile cancellare la prenotazione");
-			}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		return ris;
 	}
 	

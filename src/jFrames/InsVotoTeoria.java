@@ -4,11 +4,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import candidati.Candidato;
 import database.Inserimento;
+import eccezioni.EsitoTeoriaException;
+import eccezioni.VotoException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 /**
@@ -19,9 +23,6 @@ import java.awt.event.ActionEvent;
  */
 @SuppressWarnings("serial")
 public class InsVotoTeoria extends JFrame {
-	
-	private JTextField cognome;
-	private JTextField nome;
 	private JTextField teoria;
 
 	/**
@@ -61,53 +62,44 @@ public class InsVotoTeoria extends JFrame {
 		final int trecento = 300;
 		final int quattrocentocinquanta = 450; 
 
-		JPanel contentPane;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(cento, cento, quattrocentocinquanta, trecento);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblCognomeCandidato = new JLabel("Cognome candidato: ");
-		lblCognomeCandidato.setBounds(ventiquattro, cinquantasei, centotrentaquattro, sedici);
-		contentPane.add(lblCognomeCandidato);
-		
-		JLabel lblNomeCandidato = new JLabel("Nome candidato: ");
-		lblNomeCandidato.setBounds(ventiquattro, ottantacinque, centotrentaquattro, sedici);
-		contentPane.add(lblNomeCandidato);
-		
-		JLabel lblEsitoTeoria = new JLabel("Esito teoria: ");
-		lblEsitoTeoria.setBounds(ventiquattro, centoquattordici, centotrentaquattro, sedici);
-		contentPane.add(lblEsitoTeoria);
-		
-		cognome = new JTextField();
-		cognome.setBounds(centottanta, cinquantatre, duecentoquaranta, ventidue);
-		contentPane.add(cognome);
-		cognome.setColumns(dieci);
-		
-		nome = new JTextField();
-		nome.setColumns(dieci);
-		nome.setBounds(centottanta, ottantadue, duecentoquaranta, ventidue);
-		contentPane.add(nome);
-		
-		teoria = new JTextField();
-		teoria.setColumns(dieci);
-		teoria.setBounds(centottanta, centoundici, duecentoquaranta, ventidue);
-		contentPane.add(teoria);
-		
-		JButton btnConferma = new JButton("CONFERMA");
-		btnConferma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String name = nome.getText();
-				String surname = cognome.getText();
-				String theory = teoria.getText();
-				Inserimento.inserisciEsitoTeoria(name,surname,theory);
-				dispose();
+		try {
+			JPanel contentPane;
+			ArrayList<Candidato> candidati  = new ArrayList<>(database.Lettura.candidatoInserireTeoria());
+			if (!candidati.isEmpty()) {
+				setTitle(candidati.get(0).getCognome()+" "+candidati.get(0).getNome());
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				setBounds(cento, cento, 411, 279);
+				contentPane = new JPanel();
+				contentPane.setBorder(new EmptyBorder(cinque, cinque, cinque, cinque));
+				setContentPane(contentPane);
+				contentPane.setLayout(null);
+				
+				JLabel lblEsitoTeoria = new JLabel("Esito teoria: ");
+				lblEsitoTeoria.setBounds(27, 79, centotrentaquattro, sedici);
+				contentPane.add(lblEsitoTeoria);
+				
+				teoria = new JTextField();
+				teoria.setColumns(dieci);
+				teoria.setBounds(158, 76, duecentoquaranta, ventidue);
+				contentPane.add(teoria);
+				JButton btnConferma = new JButton("CONFERMA");
+				btnConferma.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String theory = teoria.getText();
+						String name = candidati.get(0).getNome();
+						String surname = candidati.get(0).getCognome();
+						Inserimento.inserisciEsitoTeoria(name,surname,theory);
+						dispose();
+					}
+				});
+				btnConferma.setBounds(158, 139, 240, 25);
+				contentPane.add(btnConferma);
 			}
-		});
-		btnConferma.setBounds(centottanta, centottantasette, duecentoquaranta, venticinque);
-		contentPane.add(btnConferma);
+		} catch (VotoException | EsitoTeoriaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
 
 }
